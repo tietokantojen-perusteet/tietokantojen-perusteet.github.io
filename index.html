@@ -260,11 +260,11 @@
 		  <figcaption>Käsitteet kuvataan laatikkoina, joiden sisällä on käsitteen nimi. Yllä käsitteet Opiskelija ja Kurssisuoritus.</figcaption>
 		</figure>
 
-		<p>Jos haluamme ilmaista, että käsite liittyy toiseen käsitteeseen, piirrämme käsitteiden välille viivan. [todo: osallistumisrajoitteet]. Jos käsitteitä voi liittyä monia, lisäämme viivan päähän tähden. Alla olevassa kaaviossa on käsitteet Opiskelija ja Kurssisuoritus, sekä viiva käsitteiden välillä. Kun yhteyttä merkitsevän viivan päässä on tähti, se kertoo että tähden päässä olevia käsitteitä on useita.</p>
+		<p>Jos haluamme ilmaista, että käsite liittyy toiseen käsitteeseen, piirrämme käsitteiden välille viivan. Viivan kumpaankin päätyyn merkitään osallistumisrajoitteet, joilla kuvataan sitä, että kuinka monessa samantyyppisessä yhteydessä käsitteen ilmentymä voi olla. Jos ilmentymään voi liittyä tasan yksi toisen tyyppinen ilmentymä, lisäämme nuolen päähän numeron yksi. Toisaalta, jos ilmentymien määrä on rajoittamaton, lisäämme viivan päähän tähden. Alla olevassa kaaviossa on käsitteet Opiskelija ja Kurssisuoritus, sekä viiva käsitteiden välillä. Yhteen kurssisuoritukseen liittyy aina tasan yksi opiskelija, mutta yhdellä opiskelijalla voi olla useampia kurssisuorituksia.</p>
 
 		<figure>
 		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus-ei-attribuutteja.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti.">
-		  <figcaption>Opiskelijaan liittyy useita kurssisuorituksia.</figcaption>
+		  <figcaption>Opiskelijaan liittyy useita kurssisuorituksia, mutta jokaiseen kurssisuoritukseen liittyy tasan yksi opiskelija.</figcaption>
 		</figure>
 
 		<p>Käsitteisiin voidaan lisätä myös ominaisuuksia, jotka merkitään käsitteen erilliseen laatikkoon käsitteen nimen alle. Alla olevassa kuvassa Opiskelija-käsitteeseen liittyy ominaisuudet nimi, syntymävuosi ja pääaine.</p>
@@ -444,7 +444,7 @@
 		      <tr>
 			<th>Opiskelija</th>
 			<th>Kurssi</th>
-			<th>Kurssipäivämäärä</th>
+			<th>Päivämäärä</th>
 			<th>Arvosana</th>
 		      </tr>
 		    </thead>
@@ -493,7 +493,7 @@
 
 		<ul>
 		  <li>Opiskelija(<u>Opiskelijanumero</u>, Nimi, Syntymävuosi, Pääaine)</li>
-		  <li>Kurssisuoritus(Opiskelija->Opiskelija, Kurssi, Kurssipäivämäärä, Arvosana)</li>
+		  <li>Kurssisuoritus(Opiskelija->Opiskelija, Kurssi, Päivämäärä, Arvosana)</li>
 		</ul>
 
 		<p>Opiskelijaan liittyvä opiskelijanumero on alleviivattu, sillä se on yksittäisen opiskelijan yksilöivä avain. Kurssisuoritukseen liittyvä Opiskelija-kenttä viittaa Opiskelija-tauluun.</p>
