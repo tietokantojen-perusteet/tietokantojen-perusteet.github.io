@@ -383,7 +383,7 @@
 		<h1>Relaatiomalli ja relaatiotietokannat</h1>
 
 
-		<p>Relaatiomallin perusajatus on tallennettavan tiedon jakaminen käsitteisiin sekä käsitteiden välisiin yhteyksiin. Jokaista käsitettä vastaa relaatiotietokannassa taulu, ja jokaiselle käsitteen ominaisuudelle -- attribuutille -- on taulussa oma sarake. Jokainen taulun rivi vastaa yhtä käsitteen ilmentymää, ja käsitteiden väliset yhteydet ilmenevät käsitteen ilmentymän yksilöivän attribuutin tai attribuuttiyhdistelmän, eli avaimen perusteella.</p>
+		<p>Relaatiomallin perusajatus on tallennettavan tiedon jakaminen käsitteisiin sekä käsitteiden välisiin yhteyksiin. Jokaista käsitettä vastaa relaatiotietokannassa taulu, ja jokaiselle käsitteen ominaisuudelle eli attribuutille on taulussa oma sarake. Jokainen taulun rivi vastaa yhtä käsitteen ilmentymää, ja käsitteiden väliset yhteydet ilmenevät käsitteen ilmentymän yksilöivän attribuutin tai attribuuttiyhdistelmän, eli avaimen perusteella.</p>
 
 		<p>Kun pohdimme Opiskelija-käsitettä, jolla on nimi, syntymävuosi, ja pääaine, huomaamme, ettei yksikään edellämainituista attribuuteista tai niiden yhdistelmistä todellisuudessa yksilöi opiskelijaa. Esimerkiksi vuonna 1991 syntyneitä matematiikkaa opiskelevia Anna-nimisiä opiskelijoita löytyy useampia.</p>
 
@@ -489,12 +489,49 @@
 		  </table>
 		</div>
 
+		<p>Ylläolevat taulut voidaan määritellä myös tekstimuodossa seuraavasti: </p>
+
+		<ul>
+		  <li>Opiskelija(<u>Opiskelijanumero</u>, Nimi, Syntymävuosi, Pääaine)</li>
+		  <li>Kurssisuoritus(Opiskelija->Opiskelija, Kurssi, Kurssipäivämäärä, Arvosana)</li>
+		</ul>
+
+		<p>Opiskelijaan liittyvä opiskelijanumero on alleviivattu, sillä se on yksittäisen opiskelijan yksilöivä avain. Kurssisuoritukseen liittyvä Opiskelija-kenttä viittaa Opiskelija-tauluun.</p>
+
+		<p>Pohditaan seuraavaksi kyselyiden tekemistä näihin tauluihin.</p>
 
 		<h2>SQL-kyselykieli</h2>
 
+		<p></p>
+
+
+		<aside class="info">
+
+		  <br/>
+		  <h1>Ohjeita SQL-tehtävien tekemiseen</h1>
+
+		  <p>Verkkomateriaalissa on tästä kohdasta eteenpäin interaktiivisia SQL-tehtäviä, joiden avulla pääset harjoittelemaan SQL-kyselykielen käyttöä. Materiaali sisältää opiskelijoiden kurssisuorituksia kuvaavan tietokannan, ja lähes jokainen esimerkkikysely on "suoritettava", eli kysely suoritetaan ja tulos näytetään ruudulla nappia klikkaamalla.</p>
+
+		  <p>Useimpien esimerkkien jälkeen avauttu muutama tehtävä, jossa pääset harjoittelemaan esimerkkiä vastaavien kyselyjen tuottamista.</p>
+
+
+		</aside>
+
+
+		<h2>Tietokantakyselyiden tekeminen Java-kielellä</h2>
 
 
 <!--
+
+		<h2>Erilaiset yhteystyypit</h2>
+
+
+		<h2>Relaatiomallin formaali määritelmä</h2>
+
+		
+
+
+
 
  Tietokannat, tietokantamoottorit, tietokannanhallintajärjestelmät
  Tietokannanhallintajärjestelmä hallinnoi tietokantoja sekä tarjoaa kielen tietokannan käsittelyyn -- tähän olemassaolevia rajapintoja kuten SQL
