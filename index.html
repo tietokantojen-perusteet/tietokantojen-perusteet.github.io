@@ -201,9 +201,14 @@
 
                 <ul class="nav" id="material-toc"></ul>
 
-                <h1>Tehtävät</h1>
+                <h1>Materiaalin itseopiskelu- ja kertaustehtävät</h1>
 
                 <ul class="nav nav-pills nav-pills-fixed-width" id="tehtavat-toc"></ul>
+
+                <h1>Kurssin tehtävät</h1>
+
+		<p>tänne viikoittaiset laskarit..</p>
+
 
             </section>
             <!-- END INDEX -->
@@ -227,7 +232,11 @@
 
 		<p>Puhekielessä termillä tietokanta tarkoitetaan yleisesti ottaen tiedon tallentamiseen tarkoitettua paikkaa, josta tietoa voi myös hakea. Esimerkiksi kirkonkirjat voidaan nähdä eräänlaisena sukujen historiaa dokumentoivana tietokantana, jonka kautta sukututkija pääsee käsiksi sukunsa historiaan. Vaikka tietokannat ovat digitalisaation myötä siirtymässä paperisesta muodosta sähköiseen muotoon, on niiden tavoite pysynyt pitkälti samana: <em>haluamme säilöä tietoa, ja haluamme päästä tähän tietoon käsiksi</em>. Tällä kurssilla käsittelemme elektronisia tietokantoja, joiden kehittyminen on johtanut tilanteeseen, missä tietoa tallennetaan yhä enemmän ja sitä halutaan hyödyntää yhä monipuolisemmin.</p>
 
+		<p>[tehtävä: hae tietoa jostain olemassaolevasta tietokannasta ei-triviaalia käyttöliittymää käyttäen, esim. Hiski -- http://hiski.genealogia.fi/hiski/ ja http://digi.kansalliskirjasto.fi/?language=fi]</p>
+
 		<p>Nykyään tietokantoja on kaikkialla. Tämä kurssimateriaali sijaitsee tietokannassa, kurssitehtäviin liittyvät pisteet kirjataan tietokantaan, ja tehdessäsi kurssilla tarpeeksi töitä kurssiin liittyvien oppimistavoitteiden saavuttamiseksi kurssista kirjataan suoritusmerkintä tietokantaan. Jo pelkästään nykyaikaisessa kännykässäsi on kymmeniä erilaisia tietokantoja; yhteystiedot, kalenteri, herätyskello, aikavyöhykkeet, karttapalvelut, suosikkiverkkosivut, jonka lisäksi moni kännykkäsovellus hyödyntää yhtä tai useampaa tietokantaa. Tietokannat voivat olla paikallisia, eli ne voivat sijaita samalla koneella tietokantaa käyttävän ohjelmiston kautta, esimerkiksi kännykässä, tai ne voivat sijaita erillisellä palvelimella, johon otetaan tarvittaessa yhteyttä. Loppukäyttäjän näkökulmastasi tällä ei kuitenkaan ole juurikaan merkitystä. Näet tietokannasta haetun tiedon käyttämäsi sovelluksen tarjoaman näkymän kautta.</p>
+
+		<p>[tehtävä: pohdi järjestelmiä mihin olet kirjannut tietosi, paljonko näitä on? Toisaalta, kuinka monessa näistä tiedot ovat melko samat -- esimerkiksi nimi jne -- voisiko näitä jotenkin yhdistää?]</p>
 
 		<p>Käytämme tällä kurssilla yhtenä esimerkkinä opiskelun ja oppimisen seuraamiseen tarkoitettua järjestelmää, joka kehittyy materiaalin edetessä. Järjestelmä pitää kirjaa kursseista, opiskelijoista, kurssiharjoituksista, arvosanoista, kurssipalautteista, sekä muista oleellisista asioista, joita kurssin edetessä tulee esille. Jotta tämä onnistuisi, tarvitsemme jonkinlaisen jäsentelytavan eli rakenteen tallennettavalle tiedolle, tapoja tiedon tallentamiseen tässä sovitussa muodossa, sekä tapoja erilaisten raporttien luomiseen. Katsotaan miten käy..</p>
 
@@ -244,14 +253,14 @@
 
 		<p>Tietokantojen rakennetta ja jäsentelyä suunniteltaessa ongelmaa lähestytään tavoitteeseen liittyvien käsitteiden kautta, joiden avulla pyritään ymmärtämään mikä tiedosta on epäoleellista, ja mikä tulee säilöä. Samalla mietitään myös säilöttävien käsitteiden ominaisuuksia sekä käsitteiden suhteita. Esimerkiksi opiskelijan opintomenestyksen seurannassa oleellisia ovat ainakin käsitteet <em>Opiskelija</em> ja <em>Kurssisuoritus</em>, joilla on yhteys: opiskelijalla on kurssisuorituksia.</p>
 
-		<p>Tällä kurssilla tiedon mallintamiseen käytetään <a href="http://www.uml.org/" target="_blank">UML</a>-kieltä, johon syvennytään tarkemmin kurssilla <em>Ohjelmistotekniikan menetelmät</em>. Käytämme <a href="https://fi.wikipedia.org/wiki/Luokkakaavio" target="_blank">luokkakaavioita</a> käsitteiden ominaisuuksien ja suhteiden mallintamiseen, mutta, emme kuitenkaan seuraa määritelmää pilkuntarkasti.</p>
+		<p>Tällä kurssilla tiedon mallintamiseen käytetään <a href="http://www.uml.org/" target="_blank">UML</a>-kieltä, johon syvennytään tarkemmin kurssilla <em>Ohjelmistotekniikan menetelmät</em>. Käytämme <a href="https://fi.wikipedia.org/wiki/Luokkakaavio" target="_blank">luokkakaavioita</a> käsitteiden ominaisuuksien ja suhteiden mallintamiseen, mutta, emme kuitenkaan seuraa kuvaustapaa pilkuntarkasti.</p>
 
 		<figure>
 		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus-erilliset-kasitteet.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna.">
 		  <figcaption>Käsitteet kuvataan laatikkoina, joiden sisällä on käsitteen nimi. Yllä käsitteet Opiskelija ja Kurssisuoritus.</figcaption>
 		</figure>
 
-		<p>Jos haluamme ilmaista, että käsite liittyy toiseen käsitteeseen, piirrämme käsitteiden välille viivan. Jos käsitteitä voi liittyä monia, lisäämme viivan päähän tähden. Alla olevassa kaaviossa on käsitteet Opiskelija ja Kurssisuoritus, sekä viiva käsitteiden välillä. Kun yhteyttä merkitsevän viivan päässä on tähti, se kertoo että tähden päässä olevia käsitteitä on useita.</p>
+		<p>Jos haluamme ilmaista, että käsite liittyy toiseen käsitteeseen, piirrämme käsitteiden välille viivan. [todo: osallistumisrajoitteet]. Jos käsitteitä voi liittyä monia, lisäämme viivan päähän tähden. Alla olevassa kaaviossa on käsitteet Opiskelija ja Kurssisuoritus, sekä viiva käsitteiden välillä. Kun yhteyttä merkitsevän viivan päässä on tähti, se kertoo että tähden päässä olevia käsitteitä on useita.</p>
 
 		<figure>
 		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus-ei-attribuutteja.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti.">
@@ -262,13 +271,13 @@
 
 		<figure>
 		  <img src="img/johdanto/opiskelija-ja-ominaisuudet.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, suunnikkaan alalaidassa kiinni toinen suunnikas, jossa tekstit 'nimi', 'syntymävuosi' ja 'pääaine' omilla riveillään. ">
-		  <figcaption>Käsittteillä voi olla ominaisuuksia. Yllä Opiskelija-käsitteeseen liittyy nimi, syntymävuosi, ja pääaine.</figcaption>
+		  <figcaption>Käsitteillä voi olla ominaisuuksia. Yllä Opiskelija-käsitteeseen liittyy nimi, syntymävuosi, ja pääaine.</figcaption>
 		</figure>
 
 		<p>Vastaavasti myös käsitteelle Kurssisuoritus voi merkitä ominaisuuksia. Alla kuvataan tieto siitä, että opiskelijaan liittyy useita kurssisuorituksia, jonka lisäksi käsitteisiin liittyvät ominaisuudet on myös merkitty.</p>
 
 		<figure>
-		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti.">
+		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti. Käsitteiden alla on myös niiden ominaisuudet kuten edellisessä kuvassa.">
 		  <figcaption>Opiskelijaan liittyy useita kurssisuorituksia. Käsitteille on merkitty myös ominaisuudet.</figcaption>
 		</figure>
 
@@ -323,9 +332,9 @@
 		  </table>
 		</div>
 
-		<br/>
+		<p>Vastaavasti myös kurssisuorituksia kuvaamaan voisi tehdä oman erillisen taulun. Kysymykseksi nouseekin "Miten yhdistämme Opiskelijaa kuvaavan taulun ja Kurssisuoritusta kuvaavan taulun tietoja?". </p>
 
-		<p>Vastaavasti myös kurssisuorituksia kuvaamaan voisi tehdä oman erillisen taulun. Huomaamme kuitenkin, että opiskelijoiden yhdistäminen kurssisuorituksiin ei ole täysin triviaalia. Palaamme tähän myöhemmin kurssilla.</p>
+		<p>[tehtävä: ideointia yhdistämistapoihin, johdattelua relaatiomalliin?]</p>
 
 
 		<h2>Tietokannanhallintajärjestelmä</h2>
@@ -364,17 +373,125 @@
 
 		</aside>
 
-
-		<h1>Relaatiotietokannat</h1>
-
-		<p>relaatio</p>
-
-		<p>vahva kytkös olio-ohjelmoinnin kehitykseen, "siinä on käsite"</p>
-
-		<p>asidena historiaa</p>
+		<h2>Tiedon käsittely ohjelmallisesti</h2>
 
 
-		<h2>Tiedon hakeminen relaatiotietokannasta: SQL</h2>
+		<p>TODO: halutaanko case?</p>
+
+
+
+		<h1>Relaatiomalli ja relaatiotietokannat</h1>
+
+
+		<p>Relaatiomallin perusajatus on tallennettavan tiedon jakaminen käsitteisiin sekä käsitteiden välisiin yhteyksiin. Jokaista käsitettä vastaa relaatiotietokannassa taulu, ja jokaiselle käsitteen ominaisuudelle -- attribuutille -- on taulussa oma sarake. Jokainen taulun rivi vastaa yhtä käsitteen ilmentymää, ja käsitteiden väliset yhteydet ilmenevät käsitteen ilmentymän yksilöivän attribuutin tai attribuuttiyhdistelmän, eli avaimen perusteella.</p>
+
+		<p>Kun pohdimme Opiskelija-käsitettä, jolla on nimi, syntymävuosi, ja pääaine, huomaamme, ettei yksikään edellämainituista attribuuteista tai niiden yhdistelmistä todellisuudessa yksilöi opiskelijaa. Esimerkiksi vuonna 1991 syntyneitä matematiikkaa opiskelevia Anna-nimisiä opiskelijoita löytyy useampia.</p>
+
+		<p>Ratkaistaan ongelma lisäämällä Opiskelija-käsitteeseen opiskelijan yksilöivä opiskelijanumero.</p>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-ja-opiskelijanumero.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, suunnikkaan alalaidassa kiinni toinen suunnikas, jossa tekstit 'opiskelijanumero', 'nimi', 'syntymävuosi' ja 'pääaine' omilla riveillään. ">
+		  <figcaption>Opiskelija-käsitteeseen on lisätty nimen, syntymävuoden ja pääaineen lisäksi opiskelijanumero. Opiskelija-käsitteeseen liittyvä opiskelijanumero on alleviivattu sen selkeyttämiseksi, että se on jokaiselle Opiskelijalle uniikki.</figcaption>
+		</figure>
+
+		<p>Nyt jokaisella Opiskelijalla on opiskelijanumero. Käsitteen yksilöivä attribuutti, eli avain, alleviivataan kaaviossa. Opiskelijaa kuvaavassa taulussa jokaiseen opiskelijaan tulee nyt myös lisätä opiskelijanumero.</p>
+		
+		<div class="data-table">
+		  <h4>Opiskelija</h4>
+		  <table class="table">
+		    <thead>
+		      <tr>
+			<th>Opiskelijanumero</th>
+			<th>Nimi</th>
+			<th>Syntymävuosi</th>
+			<th>Pääaine</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>9999999</td>
+			<td>Pihla</td>
+			<td>1997</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		      <tr>
+ 			<td>9999998</td>
+			<td>Joni</td>
+			<td>1993</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		      <tr>
+			<td>...</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-opiskelijanumerolla-ja-kurssisuoritus.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti. Käsitteillä myös ominaisuudet. ">
+		  <figcaption>Opiskelijaan liittyy yksi tai useampi kurssisuoritus.</figcaption>
+		</figure>
+
+		<p>Opiskelijanumeron lisäämisen takia käsitteiden Opiskelija ja Kurssisuoritus yhdistäminen on mahdollista. Koska opiskelijaan liittyy yksi tai useampi kurssisuoritus, määrittelemme Kurssisuoritus-käsitettä kuvaavaan tauluun Opiskelija-sarakkeen, jossa on aina kyseiseen riviin liittyvään kurssisuoritukseen liittyvän opiskelijan opiskelijanumero.</p>
+
+		<div class="data-table">
+		  <h4>Kurssisuoritus</h4>
+		  <table class="table">
+		    <thead>
+		      <tr>
+			<th>Opiskelija</th>
+			<th>Kurssi</th>
+			<th>Kurssipäivämäärä</th>
+			<th>Arvosana</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>9999999</td>
+			<td>Ohjelmoinnin perusteet</td>
+			<td>1.8.2014</td>
+			<td>5</td>
+		      </tr>
+		      <tr>
+			<td>9999999</td>
+			<td>Ohjelmoinnin jatkokurssi</td>
+			<td>1.8.2014</td>
+			<td>5</td>
+		      </tr>		      
+		      <tr>
+			<td>9999999</td>
+			<td>Tietokantojen perusteet</td>
+			<td>20.10.2014</td>
+			<td>3</td>
+		      </tr>
+		      <tr>
+			<td>...</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		      </tr>		      
+		      <tr>
+ 			<td>9999998</td>
+			<td>Ohjelmoinnin perusteet</td>
+			<td>1.8.2013</td>
+			<td>4</td>
+		      </tr>
+		      <tr>
+			<td>...</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+
+
+		<h2>SQL-kyselykieli</h2>
+
 
 
 <!--
