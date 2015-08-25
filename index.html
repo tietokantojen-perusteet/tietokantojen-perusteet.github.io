@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tietokantojen perusteet</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="js/libs/syntaxhighlight/css/sh_style.css"/>
+	<link rel="stylesheet" href="css/tikape.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    </head>
+    <body>
+
+        <!-- BEGIN NAV -->
+        <header role="navigation">
+            <h1>
+                <button type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="http://www.cs.helsinki.fi"><img src="img/header_tktl.png" alt="CS Dept. Univ. Helsinki"></a>
+            </h1>
+            <nav class="collapse bs-navbar-collapse" role="navigation">
+                <ul>
+                    <li>
+                        <a href="#viikko1">Viikko 1</a>
+                    </li>
+<!--
+                    <li>
+                        <a href="#viikko2">Viikko 2</a>
+                    </li>
+                    <li>
+                        <a href="#viikko3">Viikko 3</a>
+                    </li>
+                    <li>
+                        <a href="#viikko4">Viikko 4</a>
+                    </li>
+                    <li>
+                        <a href="#viikko5">Viikko 5</a>
+                    </li>
+                    <li>
+                        <a href="#viikko6">Viikko 6</a>
+                    </li>
+                    <li>
+                        <a href="#viikko7">Viikko 7</a>
+                    </li>
+-->
+                </ul>
+            </nav>
+        </header>
+        <!-- // END NAV -->
+        <article>
+
+            <!-- BEGIN INDEX -->
+            <section id="intro" class="no-toc weeklimit" data-week-id="0">
+                
+                <header>
+
+                    <div class="intro-header-img"></div>
+
+                    <h1>Tietokantojen perusteet</h1>
+
+                    <p><em>"miten tietoa sekä siihen liittyviä yhteyksiä mallinnetaan ja hallinnoidaan?" </em></p>
+
+<!--
+                    <a class="call-to-action" href="#start" role="button">No todellakin!</a>
+-->
+                </header>
+
+                <h1 id="start">Sisältö, aikataulu, arvostelu</h1>
+
+                <p><em>"Kurssilla tutustutaan tiedon esitysmuotoihin ja tiedon hakuun suurista tietomääristä. Erityisenä painopisteenä ovat relaatiotietokannat, joiden kohdalla perehdytään toisaalta teoreettiseen perustaan ja toisaalta tietokannan käytännön käsittelyyn SQL-kielen avulla. Kurssilla opitaan myös perustiedot relaatiotietokantojen suunnittelusta."</em></p>
+
+                <p>Kurssi sisältää seitsemän tehtäväsarjaa, joista ensimmäinen julkaistaan heti kurssin alussa. Tehtävät tulee tehdä ennen viikoittaisia harjoitustilaisuuksia, joissa hyödynnetään tehtävien tekemisessä kertynyttä paikan päällä pohdittavissa suunnittelu- ja toteutustehtävissä.</p>
+
+                <p>Kurssin arvostelu perustuu kurssikokeeseen, harjoitustehtäviin, sekä läsnäoloon harjoitustilaisuuksissa:</p>
+
+                <ul>
+                  <li>Kurssikokeessa on kolme tehtävää, joista jokainen on viiden pisteen arvoinen. Kokeesta voi saada yhteensä 15 pistettä.</li>
+		  <li>Tekemällä kaikki viikon harjoitustehtävät saa kolme pistettä. Harjoitustehtävistä voi saada yhteensä 21 pistettä.</li>
+		  <li>Harjoitustilaisuuksissa läsnäolosta saa kaksi pistettä. Läsnäoloista voi saada yhteensä 14 pistettä.</li>
+		</ul>
+
+		<p>Koko kurssista voi saada 50 pistettä. Alustavat arvosanarajat ovat seuraavat:</p>
+
+		<ul>
+		  <li>30p -> 1</li>
+		  <li>34p -> 2</li>
+		  <li>38p -> 3</li>
+		  <li>42p -> 4</li>
+		  <li>46p -> 5</li>
+		</ul>
+
+                <p><a class="jump" href="#viikoittaiset-teemat" role="button">Viikoittaiset teemat &raquo;</a></p>
+
+                <h1>Esitietovaatimukset</h1>
+
+                <p>Kurssilla ei ole esitietovaatimuksia.</p>
+
+                <h1>Muiden auttaminen ja kunniasääntö</h1>
+
+                <p>Vaikka helpoin vastaus avunpyyntöön on usein valmiiden ratkaisujen jakaminen, on se sekä toisen että oman oppimisen kannalta erittäin huono lähestymistapa. Opit parhaiten tutkimalla apua kysyvän ongelmaa ja tarjoamalla sellaista tukea, minkä avulla toinen ymmärtää ongelman ja pystyy etenemään. <strong>Osallistumalla kurssille sitoudut siihen, että et vie oppimisen iloa muilta esimerkiksi laittamalla tehtävien mallivastauksia verkkoon tai jakamalla niitä muille.</strong> Autat muita kurssilaisia parhaiten tekemällä tehtäviä yhdessä muiden kanssa, tarjoamalla apua harjoitustilaisuuksissa sekä osallistumalla teemaan liittyviin keskusteluihin vaikkapa kurssin IRC-kanavalla.</p>
+
+                <div class="two-column">
+                    <div class="column">
+
+                        <h1>Luennot ja harjoitustilaisuudet</h1>
+
+                        <p>Kurssin aloitusluento pidetään tiistaina 1.9. kello 12-14 Exactumin salissa CK112.</p>
+
+			<p>Aloitusluennon lisäksi kurssilla on viikoittaiset harjoitusryhmät, jotka järjestetään salissa B221 seuraavina aikoina.</p>
+
+			<ul>
+			  <li>Ke 9-12 -- B221, Arto Vihavainen</li>
+			  <li>To 9-12 -- B221, Petri Myllys</li>
+			  <li>To 14-17 -- B221, Matti Luukkainen</li>
+			  <li>Pe 9-12 -- B221, Petri Myllys</li>
+			</ul>
+
+			<p>Harjoitusryhmiin ilmoittautuminen tapahtuu kurssi-ilmoittautumisen yhteydessä <a href="https://ilmo.cs.helsinki.fi/ilmo/Ilmo" target="_blank">tietojenkäsittelytieteen laitoksen ilmoittautumisjärjestelmän kautta.</a></p>
+
+			<p>Huom! Harjoitukset alkavat heti kurssin ensimmäisellä viikolla.</p>
+
+                    </div>
+
+                    <div class="column">
+
+                        <h1 id="irc-ohjeet">IRC-ohjeet</h1>
+
+                        <p>Kurssilla on käytössä IRC-kanava #tikape -- ohjeita IRC:n käyttöön löytyy muunmuassa <a href="http://fuksiwiki.tko-aly.fi/IRC-ohjeet" target="_blank">Fuksiwikistä</a> sekä <a href="http://mooc.cs.helsinki.fi/content/irc-ohjeet" target="_blank">mooc.fi:stä</a>.</p>
+
+                    </div>
+                </div>
+
+
+                <h1 id="viikoittaiset-teemat">Alustavat teemat</h1>
+
+
+		<div id="week-toc" class="nav">
+		  <table class="table table-striped">
+		    <thead>
+		      <tr>
+			<th>Viikko</th>
+			<th>Yleinen</th>
+			<th>Suunnittelu</th>
+			<th>SQL</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>1</td>
+			<td>Johdanto, jäsennelty ja jäsentelemätön tieto</td>
+			<td>Yhden taulun käsittely</td>
+			<td>Relaatiot, tiedon hakeminen yhdestä taulusta</td>
+		      </tr>
+		      <tr>
+			<td>2</td>
+			<td>Tiedon yhdistäminen</td>
+			<td>Yhdestä moneen -yhteydet</td>
+			<td>Tiedon hakeminen, erilaisten tietojen yhdistäminen</td>
+		      </tr>
+		      <tr>
+			<td>3</td>
+			<td></td>
+			<td>Käsiteanalyysi, Monesta moneen -yhteydet</td>
+			<td>Tiedon lisääminen ja poistaminen</td>
+		      </tr>
+		      <tr>
+			<td>4</td>
+			<td></td>
+			<td>Käsitteistä tietokannaksi</td>
+			<td>Tiedon määrittely (DDL) ja tiedon muokkaaminen (DDM)</td>
+		      </tr>
+		      <tr>
+			<td>5</td>
+			<td></td>
+			<td>Tiedon normalisointi</td>
+			<td>Aggregaattikyselyt ja tilastojen luominen</td>
+		      </tr>
+		      <tr>
+			<td>6</td>
+			<td>Tehokkuus</td>
+			<td>Indeksit ja hakurakenteet</td>
+			<td></td>
+		      </tr>
+		      <tr>
+			<td>7</td>
+			<td>Muita datan esitysmuotoja</td>
+			<td>Tietokantatransaktiot ja tiedon eheys</td>
+			<td></td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+
+
+                <h1>Sisällysluettelo</h1>
+
+                <ul class="nav" id="material-toc"></ul>
+
+                <h1>Tehtävät</h1>
+
+                <ul class="nav nav-pills nav-pills-fixed-width" id="tehtavat-toc"></ul>
+
+            </section>
+            <!-- END INDEX -->
+
+            <!-- BEGIN WEEK1 -->
+            <section class="weeklimit" data-week-id="1">
+
+
+                <header>
+                    <h1 id="viikko1">Viikko 1</h1>
+                </header>
+
+                <h1>Johdanto</h1>
+
+
+		<p>Kävellessäsi Helsingin keskustassa näet ihmisvilinän, kuulet puheensorinan, huomaat uutisotsikoita, mainostauluja ja erilaisia laitteita, jotka tarjoavat monipuolista tietoa sinua ympäröivästä maailmasta. Vaikka tämä toiminta voi tuntua satunnaiselta, voit havaita siitä erilaisia sääntöjä ja hahmoja. Ihmiset kulkevat paikasta toiseen tietoisten tai tiedostamattomien tavoitteiden ohjaamina. Puhe tapahtuu tietyllä kielellä, jolla on oma kielioppi. Uutisotsikoilla on tietynlainen tekstityyli. Mainostaulut hakevat näytettävän mainoksen verkon yli, ja laitteet -- esimerkiksi kännykkäsi -- seuraavat niihin ohjelmoituja sääntöjä, osittain antamiesi komentojen ohjaamana.</p>
+
+		<p>Nämä säännöt ja hahmot kuvaavat tiedon rakennetta. Osa tiedosta on jäsentelemätöntä, eli sille ei ole tarkasti määriteltyä muotoa. Esimerkiksi puheensorina voi poukkoilla teemasta toiseen, ja vastaavasti [todo: esimerkki].</p>
+
+		<p>Toisaalta, voit lukea saman uutisen lähes sanasta sanaan lehdestä, kännykästäsi tai netistä, olettaen että uutispalvelun tarjoaja on sama. Uutinen on jäsennelty otsikkoon, johdantoon, ja tekstikappaleisiin sekä niihin liittyviin väliotsikkoihin. Eri järjestelmät näyttävät tämän tiedon eri tavalla, ja samalla tarjoavat uutistietoon erilaisen pääsyn. Toimittaja muokkaa ja katsoo uutista sen kirjoittamiseen tarkoitetun sisällönhallintajärjestelmän kautta, kännykällä uutista lukeva saattaa nähdä uutisen kännykän ominaisuuksiin mukautuvan web-sivuston kautta, ja uutisia listaava uutissivusto saattaa listata uutisesta vain sen otsikon.</p>
+
+		<p>Puhekielessä termillä tietokanta tarkoitetaan yleisesti ottaen tiedon tallentamiseen tarkoitettua paikkaa, josta tietoa voi myös hakea. Esimerkiksi kirkonkirjat voidaan nähdä eräänlaisena sukujen historiaa dokumentoivana tietokantana, jonka kautta sukututkija pääsee käsiksi sukunsa historiaan. Vaikka tietokannat ovat digitalisaation myötä siirtymässä paperisesta muodosta sähköiseen muotoon, on niiden tavoite pysynyt pitkälti samana: <em>haluamme säilöä tietoa, ja haluamme päästä tähän tietoon käsiksi</em>. Tällä kurssilla käsittelemme elektronisia tietokantoja, joiden kehittyminen on johtanut tilanteeseen, missä tietoa tallennetaan yhä enemmän ja sitä halutaan hyödyntää yhä monipuolisemmin.</p>
+
+		<p>Nykyään tietokantoja on kaikkialla. Tämä kurssimateriaali sijaitsee tietokannassa, kurssitehtäviin liittyvät pisteet kirjataan tietokantaan, ja tehdessäsi kurssilla tarpeeksi töitä kurssiin liittyvien oppimistavoitteiden saavuttamiseksi kurssista kirjataan suoritusmerkintä tietokantaan. Jo pelkästään nykyaikaisessa kännykässäsi on kymmeniä erilaisia tietokantoja; yhteystiedot, kalenteri, herätyskello, aikavyöhykkeet, karttapalvelut, suosikkiverkkosivut, jonka lisäksi moni kännykkäsovellus hyödyntää yhtä tai useampaa tietokantaa. Tietokannat voivat olla paikallisia, eli ne voivat sijaita samalla koneella tietokantaa käyttävän ohjelmiston kautta, esimerkiksi kännykässä, tai ne voivat sijaita erillisellä palvelimella, johon otetaan tarvittaessa yhteyttä. Loppukäyttäjän näkökulmastasi tällä ei kuitenkaan ole juurikaan merkitystä. Näet tietokannasta haetun tiedon käyttämäsi sovelluksen tarjoaman näkymän kautta.</p>
+
+		<p>Käytämme tällä kurssilla yhtenä esimerkkinä opiskelun ja oppimisen seuraamiseen tarkoitettua järjestelmää, joka kehittyy materiaalin edetessä. Järjestelmä pitää kirjaa kursseista, opiskelijoista, kurssiharjoituksista, arvosanoista, kurssipalautteista, sekä muista oleellisista asioista, joita kurssin edetessä tulee esille. Jotta tämä onnistuisi, tarvitsemme jonkinlaisen jäsentelytavan eli rakenteen tallennettavalle tiedolle, tapoja tiedon tallentamiseen tässä sovitussa muodossa, sekä tapoja erilaisten raporttien luomiseen. Katsotaan miten käy..</p>
+
+		<!--
+		    Tilanteeseen luonnollisesti vaikuttaa myös se, kun järjestelmää alkaa käyttämään useampi käyttäjä...
+		  -->
+
+
+		<h2>Tietokanta ja tiedon mallintaminen</h2>
+
+		<p>Tietokanta on kokoelma tiettyyn aihepiiriin liittyviä säilytettäviä tietoja. Tietokannan luominen liittyy usein jonkinlaisen organisaation, yrityksen tai muun yhteisön tarpeeseen säilöä ja hakea tietoa. Esimerkiksi yliopisto haluaa pitää kirjaa opiskelijoistaan ja heidän opintomenestystään, hotelli haluaa pitää kirjaa hotellin huoneiden varauksista, ja kauppaketju haluaa pitää kirjaa asiakkaistaan ja asiakkaiden ostoksista.</p>
+
+		<p>Tallennettava tieto liittyy tyypillisesti johonkin tavoitteeseen. Yliopisto haluaa seurata opintojen etenemistä esimerkiksi valtionhallinnolle raportointia varten, huoneiden varaustilannetta seuraava hotelli taas haluaa tietää milloin huoneita on paljon tarjolla, ja milloin huoneet ovat lopussa. Kauppaketjun ensisijaisena tavoitteena on asiakkaiden ostosten seuranta myynnin optimoimiseksi.</p>
+
+		<p>Tietokantojen rakennetta ja jäsentelyä suunniteltaessa ongelmaa lähestytään tavoitteeseen liittyvien käsitteiden kautta, joiden avulla pyritään ymmärtämään mikä tiedosta on epäoleellista, ja mikä tulee säilöä. Samalla mietitään myös säilöttävien käsitteiden ominaisuuksia sekä niihin liittyviä suhteita. Esimerkiksi opiskelijan opintomenestyksen seurannassa oleellisia ovat ainakin käsitteet <em>Opiskelija</em> ja <em>Kurssisuoritus</em>, joilla on yhteys: opiskelijalla on kurssisuorituksia.</p>
+
+		<p>Tällä kurssilla tiedon mallintamiseen käytetään <a href="http://www.uml.org/" target="_blank">UML</a>-kieltä, johon syvennytään tarkemmin kurssilla <em>Ohjelmistotekniikan menetelmät</em>. Käytämme <a href="https://fi.wikipedia.org/wiki/Luokkakaavio" target="_blank">luokkakaavioita</a> käsitteiden ominaisuuksien ja suhteiden mallintamiseen, mutta, emme kuitenkaan seuraa määritelmää pilkuntarkasti.</p>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus-erilliset-kasitteet.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna.">
+		  <figcaption>Käsitteet kuvataan laatikkoina, joiden sisällä on käsitteen nimi. Yllä käsitteet Opiskelija ja Kurssisuoritus.</figcaption>
+		</figure>
+
+		<p>Jos haluamme ilmaista, että käsite liittyy toiseen käsitteeseen, piirrämme käsitteiden välille viivan. Jos käsitteitä voi liittyä monia, lisäämme viivan päähän tähden. Alla olevassa kaaviossa on käsitteet Opiskelija ja Kurssisuoritus, sekä viiva käsitteiden välillä. Kun yhteyttä merkitsevän viivan päässä on tähti, se kertoo että tähden päässä olevia käsitteitä on useita.</p>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus-ei-attribuutteja.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti.">
+		  <figcaption>Opiskelijaan liittyy useita kurssisuorituksia.</figcaption>
+		</figure>
+
+		<p>Käsitteisiin voidaan lisätä myös ominaisuuksia, jotka merkitään käsitteen erilliseen laatikkoon käsitteen nimen alle. Alla olevassa kuvassa Opiskelija-käsitteeseen liittyy ominaisuudet nimi, syntymävuosi ja pääaine.</p>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-ja-ominaisuudet.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, suunnikkaan alalaidassa kiinni toinen suunnikas, jossa tekstit 'nimi', 'syntymävuosi' ja 'pääaine' omilla riveillään. ">
+		  <figcaption>Käsittteillä voi olla ominaisuuksia. Yllä Opiskelija-käsitteeseen liittyy nimi, syntymävuosi, ja pääaine.</figcaption>
+		</figure>
+
+		<p>Vastaavasti myös käsitteelle Kurssisuoritus voi merkitä ominaisuuksia. Alla kuvataan tieto siitä, että opiskelijaan liittyy useita kurssisuorituksia, jonka lisäksi käsitteisiin liittyvät ominaisuudet on myös merkitty.</p>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti.">
+		  <figcaption>Opiskelijaan liittyy useita kurssisuorituksia. Käsitteille on merkitty myös ominaisuudet.</figcaption>
+		</figure>
+
+		<p>Kun piirrät kaavioita, älä käytä piirtämiseen liikaa aikaa. Oleellisinta on se, että tärkeät asiat ovat paperilla. Jos huomaat, että käytät liikaa aikaa, heitä paperi roskiin, ja aloita alusta.</p>
+
+		<p>[Tehtävä: yksittäisiä piirtotehtäviä]</p>
+
+
+		<h2>Tietokantajärjestelmä ja tietokannanhallintajärjestelmä</h2>
+
+		<p>Tietokannahallintajärjestelmä sisältää kokoelman tietoa, tietokantojen tietokantoja, tietokantoihin   tieto ensi pitää yllä tietokantaan liittyvä</p>
+
+		<p>tietokanta jemmassa järjestelmän sisällä</p>
+
+
+		<h2>Historian siipien havinaa?</h2>
+
+		<p>..</p>
+
+		<p>Keskitymme tällä kurssilla ensisijaisesti relaatiotietokantoihin.</p>
+
+
+		<h1>Relaatiotietokannat</h1>
+
+		<p>relaatio</p>
+
+		<p>vahva kytkös olio-ohjelmoinnin kehitykseen, "siinä on käsite"</p>
+
+		<p>asidena historiaa</p>
+
+
+		<h2>Tiedon hakeminen relaatiotietokannasta: SQL</h2>
+
+
+<!--
+
+ Tietokannat, tietokantamoottorit, tietokannanhallintajärjestelmät
+ Tietokannanhallintajärjestelmä hallinnoi tietokantoja sekä tarjoaa kielen tietokannan käsittelyyn -- tähän olemassaolevia rajapintoja kuten SQL
+ Yksittäinen tietokannanhallintajärjestelmä voi sisältää useamman tietokannan -- pitää huolta myös oikeuksista dataan (eri käyttäjillä pääsy erilaiseen dataan)
+ Tietokannat ym Tietokantamoottorit hyviä, ei kande rakentaa omaa → käytetään olemassaolevia
+ mitä tietokantamoottorit tekevät
+
+ Tietokannan käyttö, kyselyt -- yhden taulun SELECT
+
+ Konkreettinen esimerkki tietokantaa käyttävästä sovelluksesta
+		
+
+
+		<h1>Tietokannat ja tietokannanhallintajärjestelmät</h1>
+
+ 
+johdanto
+ Mitä on tieto, strukturoimaton ja strukturoitu tieto
+ näkökulmat
+  “normaali ihminen”
+  “ohjelmistokehittäjä”
+  esimerkkejä strukturoimattomasta ja strukturoidusta tiedosta
+  “miten haetaan esim. kaikki hlöt, joiden syntymävuosi on bla”
+  mistä näistä dokumenteista on helpoin hakea tietoa?
+
+-->
+
+<!--
+		<p>Eräs kännykän suhteellisesti vähenevissä määrin käytetty ominaisuus on puheluiden soittaminen. Saat soitettua tavoittelemallesi henkilölle kirjoittamalla ehkä muutaman kirjaimen hänen nimestä, tai sanomalla nimen ääneen kännykälle. Voit toisaalta lähettää myös tavoittelemallesi henkilölle viestin vaikkapa WhatsAppissa, tai, halutessasi muokata kännykän yhteystietoja vaikkapa tietokoneella netin välityksellä.</p>
+
+-->
+<!--
+
+
+. Kirjoitat ehkä muutaman kirjaimen hänen nimestään, tai sanot nimen ääneen, ja kännykkäsi soittaa kaverillesi. Hetken kuluttua olettekin jo tekemässä kurssitehtäviä yhdessä. "Tuo yksi mainostaulu oli ihan hauska, etsin eilen kumiankkoja googlella, ja nyt tuo taulu näytti kumiankkoihin liittyvän mainoksen" toteaa kaverisi. Itse näit kurssikirjoihin liittyvän mainoksen, ja muistat etsineesi kurssimateriaalia netistä kännykälläsi. Päätätte kumpikin hakea tietoa avainsanalla "foliohattu" ja kävelette takaisin mainostaulun luo. Foliohattuja ei kuitenkaan näy, oliko arvauksenne mainosjärjestelmästä väärä? </p>
+
+		<p>Strukturoitu tieto tarkoittaa tietoa, jonka muoto on määritelty etukäteen tarkasti. Tietoa tallennetaan ennalta määriteltyihin kenttiin.. 
+
+		<p></p>
+
+		<p>osa tästä tiedosta on strukturoitua, ...</p>
+
+		<p>näissä monessa on taustalla tietokanta...</p>
+
+		<p>ohjelmisto muodostaa tietynlaisen näkymän datan pohjalta.</p>
+
+		<p>
+
+		<p>
+
+kenttä järjes  edellisenä päivänä 
+
+Lehtiotsikot ovat ovat tyypillisesti 
+
+seuraa kielioppia paikasta 
+
+  strukturoimattomalta -
+
+hyvin momonipuolista   -- jopa tunkevat --   aistit näet ja kuulet Helsingin keskustassa kävellessäsi Kävellessäsi kadulla kohtaa 
+
+		<p>Tietoa kerääntyy katsot  Kävellessäsi kadulla, näet mainoksia, kuunnellessasi musiikkia  Ihminen ei pääse tietoa pakoon.</p>
+
+		<p>Tietoa ..</p>
+-->
+
+	      <!--
+johdanto
+ Mitä on tieto, strukturoimaton ja strukturoitu tieto
+ näkökulmat
+  “normaali ihminen”
+  “ohjelmistokehittäjä”
+  esimerkkejä strukturoimattomasta ja strukturoidusta tiedosta
+  “miten haetaan esim. kaikki hlöt, joiden syntymävuosi on bla”
+  mistä näistä dokumenteista on helpoin hakea tietoa?
+
+ Tietokannat osana jokapäiväistä elämää (bussiaikataulut, uutiset, mobiililaitteet, ym)
+ Tietokanta sovelluksen komponenttina (sisällä)
+ Sovelluskohtainen tietokanta
+ Tietokannat erillisinä sovelluksina
+ Useampi sovellus voi käyttää samaa tietokantaa
+ Yksittäinen sovellus voi käyttää myös useampaa tietokantaa
+
+ Tietokannat, tietokantamoottorit, tietokannanhallintajärjestelmät
+ Tietokannanhallintajärjestelmä hallinnoi tietokantoja sekä tarjoaa kielen tietokannan käsittelyyn -- tähän olemassaolevia rajapintoja kuten SQL
+ Yksittäinen tietokannanhallintajärjestelmä voi sisältää useamman tietokannan -- pitää huolta myös oikeuksista dataan (eri käyttäjillä pääsy erilaiseen dataan)
+ Tietokannat ym Tietokantamoottorit hyviä, ei kande rakentaa omaa → käytetään olemassaolevia
+ mitä tietokantamoottorit tekevät
+
+ Tietokannan käyttö, kyselyt -- yhden taulun SELECT
+
+ Konkreettinen esimerkki tietokantaa käyttävästä sovelluksesta
+
+ Opiskelupäiväkirja 
+ halutaan lisätä omia opiskelutapahtumia (SQL)
+ halutaan listata omat opiskelutapahtumat (SQL)
+
+ halutaan muokata olemassaolevia opiskelutapahtumia
+ halutaan poistaa opiskelutapahtumia
+ halutaan tulostaa viikoittaiset yhteenvedot omista opiskelutapahtumista
+
+		-->
+
+
+
+            </section>
+            <!-- END WEEK1 -->
+
+            <!-- BEGIN WEEK2 -->
+            <section class="weeklimit" data-week-id="2">
+                <header>
+                    <h1 id="viikko2">Viikko 2</h1>
+                </header>
+
+		<p><em>To be announced</em></p>
+            </section>
+            <!-- END WEEK2 -->
+
+            <!-- BEGIN WEEK3 -->
+            <section class="weeklimit" data-week-id="3">
+                <header>
+                    <h1 id="viikko3">Viikko 3</h1>
+                </header>
+
+		<p><em>To be announced</em></p>
+	    </section>
+            <!-- END WEEK3 -->
+
+            <!-- BEGIN WEEK4 -->
+            <section class="weeklimit" data-week-id="4">
+                <header>
+                    <h1 id="viikko4">Viikko 4</h1>
+                </header>
+		
+		<p><em>To be announced</em></p>
+	    </section>
+            <!-- END WEEK4 -->
+
+            <!-- BEGIN WEEK5 -->
+            <section class="weeklimit" data-week-id="5">
+                <header>
+                    <h1 id="viikko5">Viikko 5</h1>
+                </header>
+
+		<p><em>To be announced</em></p>
+	    </section>
+            <!-- END WEEK5 -->
+
+            <!-- BEGIN WEEK6 -->
+            <section class="weeklimit" data-week-id="6">
+                <header>
+                    <h1 id="viikko6">Viikko 6</h1>
+                </header>
+
+		<p><em>To be announced</em></p>
+	    </section>
+            <!-- END WEEK6 -->
+
+            <!-- BEGIN WEEK7 -->
+            <section class="weeklimit" data-week-id="7">
+                <header>
+                    <h1 id="viikko7">Viikko 7</h1>
+                </header>
+
+		<p><em>To be announced</em></p>
+
+
+		<!-- helppereitä: -->
+
+
+		<!--
+                <aside class="extra">
+                    <h1>Muutama sana sovelluksen logikonfiguraatiosta</h1>
+
+                    <p>Sovelluksen sisäisen sielunelämän näkeminen vaatii sovelluksen logikonfiguraation muuttamista. Oma konfiguraatiotiedosto <code>application.properties</code> lisätään kansioon <code>src/main/resources</code>. Tällä tiedostolla voidaan ohjata muunmuassa minkälaisia viestejä sovelluksen logeissa näytetään, sekä rajata viestien saapumista.</p>
+
+                    <p>Allaoleva konfiguraatio määrittelee käyttöömme DEBUG-tason pyyntöjä vastaanottavalle Spring-komponentille ja asettaa Hibernate-komponentin tekemät tietokantakyselyt näkyviksi. Komento <code>logging.file=</code> ohjaa viestit konsoliin.</p>
+
+                    <pre>
+logging.level.org.springframework.web.servlet.DispatcherServlet=DEBUG
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type=TRACE
+logging.file=</pre>
+
+                    <p>Jos haluat nähdä kaiken mitä sovelluksessa tapahtuu, aseta konfiguraatio seuraavanlaiseksi:</p>
+
+                    <pre>
+logging.level.=TRACE
+logging.file=</pre>
+
+                </aside>
+
+
+
+
+
+                <aside class="extra">
+
+                    <h1>Riippuvuuksien lataamisen manuaalinen käynnistäminen NetBeansissa</h1>
+
+                    <p>Jos NetBeans-projektin kuvakkeessa on keltainen kolmio sekä lähdekoodikansioissa mahdollinen punainen pallo, saat lisätietoa ongelmasta viemällä hiiren projektin nimen päälle.</p>
+
+                    <p>Jos ongelmana näkyy teksti "Some dependency artifacts are not in the local repository.", eli osaa riippuvuuksista ei ole ladattu paikalliselle koneelle, voit valita oikealla hiirennäppäimellä Dependencies ja "Download Declared Dependencies". Nyt NetBeans pyytää Mavenia lataamaan riippuvuudet.</p>
+
+                    <p>Riippuvuudet ladataan käyttäjän kotihakemiston alla olevaan kansioon ".m2".</p>
+
+                </aside>
+
+
+                <h1>Webin peruskomponentit</h1>
+
+
+                <aside class="pohdi">
+                    <h1>Osoitteen osat</h1>
+
+                    <p>Tutki osoitetta <a href="http://www.googlefight.com/index.php?lang=en_GB&word1=Batman&word2=Superman" target="_blank">http://www.googlefight.com/index.php?lang=en_GB&word1=Batman&word2=Superman</a>. Mitkä tai mikä ovat/on osoitteen:</p>
+
+                    <ul>
+                        <li>protokolla</li>
+                        <li>isäntäkone</li>
+                        <li>portti</li>
+                        <li>polku</li>
+                        <li>kohdedokumentti</li>
+                        <li>kyselyparametrit</li>
+                        <li>ankkuri</li>
+                    </ul>
+
+                    <p>Mitkä näistä puuttuvat?</p>
+                </aside>
+
+
+                <h2>HTTP</h2>
+
+                <aside class="extra">
+                    <p><strong>Google Dev Tools</strong></p>
+
+                    <p>Google Chromen DevTools-apuvälineet löytää Tools-valikosta tai painamalla F12 (Linux). Apuvälineillä voi esimerkiksi tarkastella verkkoliikennettä ja lähetettyjä ja vastaanotettuja paketteja. Valitsemalla työvälineistä Network-välilehden, ja lataamalla sivun uudestaan, näet kaikki sivua varten ladattavat osat sekä kunkin osan lataamiseen kuluneen ajan.</p>
+
+                </aside>
+		
+		<h2>Tehtavien nayttaminen</h2>
+
+                <div class="tehtavat">
+
+                    <p>Tästä eteenpäin materiaalissa on myös ohjelmointitehtäviä. Tehtävien tekeminen ja palautus tapahtuu NetBeans-ympäristössä Test My Code-liitännäisen avulla. Test My Code lataa tehtäväpohjat sinulle valmiiksi, eli et tarvitse <code>start.spring.io</code>-osoitteen projektipohjia tehtävien tekemiseen. Muistathan palauttaa jokaisen tehtävän (<em>submit solution</em>). Tehtävät avataan tehtävän otsikkoa klikkaamalla.</p>
+
+                    <p>Huomaat, että tehtävien lisäksi TMC lataa käyttöösi myös projektin nimeltä Hiekkalaatikko. Voit käyttää sitä omiin kokeiluihin.</p>
+
+                    <div class="tehtava" id="t-helloweb-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-helloweb">
+                                    Hello World!
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-helloweb" class="collapse">
+
+                            <p>Kuten huomattava osa ohjelmointikursseista, tämäkin kurssi alkaa tehtävällä, jossa toteutettava ohjelma kirjoittaa tekstin <code>Hello World!</code>.</p>
+
+                            <p>Toteuta pakkauksessa <code>wad.controller</code> olevaan luokkaan <code>HelloWorldController</code> kontrollerimetodi, joka kuuntelee kaikkia osoitteita. Kun palvelin vastaanottaa pyynnön, tulee palvelimen palauttaa merkkijono "Hello World!".</p>
+
+                            <p>Käynnistä palvelin painamalla NetBeansin play-nappia tai suorittamalla <code>Application</code>-luokan <code>main</code>-metodi. Avaa nettiselain, mene osoitteeseen <a href="http://localhost:8080/" target="_blank">http://localhost:8080/</a>, ja näet selaimessasi tekstin "Hello World!".</p>
+
+                            <p><img class="browser-img" src="img/exercises/w1e01.png"/></p>
+
+                            <p>Palvelin sammutetaan NetBeansissa punaista nappia painamalla -- vain yksi sovellus voi olla kerrallaan päällä samassa osoitteessa. Palauta tehtävä lopuksi Test My Code:n submit-napilla.</p>
+                        </div>
+                    </div>
+
+                    <div class="tehtava" id="t-vieraslaskuri">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-vieraslaskuri">
+                                    Vieraslaskuri
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-vieraslaskuri" class="collapse">
+                            <p>Vieraslaskuri kertoo kävijälle kuinka monta kävijää sivulla on käynyt tähän mennessä. Ensimmäinen kävijä näkee luvun 1, toinen kävijä luvun 2, jne.</p>
+
+                            <p>Toteuta pakkauksessa <code>wad.controller</code> olevaan luokkaan <code>VisitCountController</code> polkua <code>/visits</code> kuunteleva metodi, joka toteuttaa toivotun toiminnallisuuden. Vinkki! Kontrolleriluokka luodaan vain kerran palvelimen käynnistyksen yhteydessä, joten voinet hyödyntää jotain sopivaa oliomuuttujaa.</p>
+
+                            <p>Testaa sovellustasi. Ensimmäisellä pyynnöllä osoitteeseen <code>http://localhost:8080/visits</code> sinun pitäisi nähdä numero 1, toisella pyynnöllä numero 2 jne. Kun käynnistät palvelimen uudelleen, laskuri alkaa taas yhdestä.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+		<p>Ja toinen tehtävä</h2>
+
+                <div class="tehtavat">
+
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-kaikupalvelu">
+                                    Papukaija Bob
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-kaikupalvelu" class="collapse">
+
+                            <p>Papukaija <a href="https://www.youtube.com/watch?v=6NG37huf2dU" target="_blank">Bob</a> on netti-ilmiö, joka on oppinut sanoja, joita se toistaa. Tässä tehdään Bobille vastine, joka osaa toistaa sille sanottavia asioita.</p>
+
+                            <p>Toteuta luokkaan <code>ParrotController</code> kontrollerimetodi, joka kuuntelee pyyntöjä <code>/bob</code>-osoitteessa. Jos pyynnön mukana ei ole <code>message</code>-nimistä parametria, on vastaus <code>"Krraaa"</code>. Muuten, vastaus on <code>"Krraaa"</code>, jota seuraa välilyönti ja <code>message</code>-parametrin arvo.</p>
+
+                            <p>Kun testaat sovellusta, pyyntö osoitteeseen <code>http://localhost:8080/bob</code> näyttää sivun, jossa on merkkijono <code>"Krraaa"</code>, kun taas esimerkiksi pyyntö <code>http://localhost:8080/bob?message=keksii</code> palauttaa merkkijonon <code>"Krraaa keksii"</code>.</p>
+                        </div>
+                    </div>
+
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-laskin">
+                                    Laskin
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-laskin" class="collapse">
+
+                            <p>Toteuta luokkaan <code>CalculatorController</code> kontrollerimetodi, joka kuuntelee pyyntöjä <code>/calculate</code>-osoitteessa. Pyynnön mukana voi olla kolme parametria. Parametri <code>"op"</code> kertoo laskuoperaation, <code>"first"</code> kertoo ensimmäisen laskettavan luvun, ja <code>"second"</code> kertoo toisen laskettavan luvun.</p>
+
+                            <p>Jos parametria <code>"op"</code> ei ole pyynnössä mukana, tulee sen saada oletusarvoksi <code>"plus"</code>. Jos parametri <code>"first"</code> puuttuu, saa se oletuksena arvon 0. Myös parametri <code>"second"</code> saa puuttuessaan arvon 0.</p>
+
+                            <p>Laskimen tulee toteuttaa seuraavat operaatiot:</p>
+
+                            <ul>
+                                <li>Kun operaatio (op) on <code>"plus"</code> laskin palauttaa lukujen <code>"first"</code> ja <code>"second"</code> summan. Esim. pyyntö osoitteeseen <code>http://localhost:8080/calculate?op=plus&first=3&second=1</code> palauttaa arvon <code>4</code>.</li>
+                                <li>Kun operaatio (op) on <code>"minus"</code> laskin palauttaa lukujen <code>"first"</code> ja <code>"second"</code> erotuksen. Esim. pyyntö osoitteeseen <code>http://localhost:8080/calculate?op=minus&first=7&second=2</code> palauttaa arvon <code>5</code>.</li>
+                                <li>Kun operaatio (op) on <code>"multiply"</code> laskin palauttaa lukujen <code>"first"</code> ja <code>"second"</code> tulon. Esim. pyyntö osoitteeseen <code>http://localhost:8080/calculate?op=multiply&first=11&second=3</code> palauttaa arvon <code>33</code>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+		<p>Moniosainen tehtävä</p>
+
+                <div class="tehtava">
+                    <header>
+                        <h1>
+                            <a data-toggle="collapse" class="collapsed" href="#t-tehtavalista">
+                                Tehtävälista
+                            </a>
+                        </h1>
+                    </header>
+                    <div id="t-tehtavalista" class="collapse">
+                        <p>Tässä tehtävässä toteutetaan tehtävälistatoiminnallisuutta. Tehtäväpohjassa on valmis tietokantakonfiguraatio, missä käytetään muistiin ladattavaa tietokantaa -- tietokanta tyhjenee palvelimen sammuessa.</p>
+
+                        <h1>Tehtävien listaaminen</h1>
+
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks</code>-osoitteeseen tulevia GET-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Pyynnön tulee lisätä <code>model</code>-parametriin <code>tasks</code> kaikki tietokannasta löytyvät tehtävät. Tässä <code>taskRepository</code>-olion <code>findAll</code>-metodi on hyödyksi. Palauta käyttäjälle kansiossa <code>/WEB-INF/views</code> oleva <code>page.jsp</code>-sivu.</p>
+
+                        <h1>Tehtävän lisääminen</h1>
+
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks</code>-osoitteeseen tulevia POST-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Pyynnön mukana tulee <code>name</code> ja <code>done</code>-parametrit, joiden pohjalta luodaan uusi tehtävä. Jos tehtävän nimi (<em>name</em>) ei ole tyhjä ja se ei ole null, tulee tehtävä tallentaa tietokantaan. Tässä <code>taskRepository</code>-olion <code>save</code>-metodi on hyödyksi.</p>
+
+                        <p>Kun uusi tehtävä on lisätty, uudelleenohjaa pyyntö aiemmin toteuttamallesi tehtävät listaavalle kontrollerimetodille.</p>
+
+                        <h1>Tehtävän poistaminen</h1>
+
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks/{id}/delete</code>-osoitteeseen POST-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Poistettavan tehtävän <code>id</code> on osana osoitetta. Tässä <code>taskRepository</code>-olion <code>delete</code>-metodi on hyödyksi.</p>
+
+                        <p>Kun tehtävä on poistettu, uudelleenohjaa pyyntö aiemmin toteuttamallesi tehtävät listaavalle kontrollerimetodille.</p>
+
+                        <h1>Tehtävän muuttaminen tehdyksi</h1>
+
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks/{id}/done</code>-osoitteeseen POST-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Tehtävän, joka tulee asettaa tehdyksi, <code>id</code> on osana osoitetta. Tässä <code>taskRepository</code>-olion <code>findOne</code>-metodi on hyödyksi.</p>
+
+                        <p>Kun tehtävä on on asetettu tehdyksi, uudelleenohjaa pyyntö aiemmin toteuttamallesi tehtävät listaavalle kontrollerimetodille. Huom! Jotta tietokannasta hakemaasi olioon tehdyt muutokset päivittyvät, sinun tulee joko käyttää <code>@Transactional</code>-annotaatiota, tai tallentaa olio muutosten jälkeen.</p>
+                    </div>
+                </div>
+
+
+
+-->
+
+
+	    </section>
+            <!-- END WEEK7 -->
+
+        </article>
+
+        <footer>
+            <p>
+                <a id="license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.0/"><img alt="Creative Commons License" style="border-width:0; float:left; padding:15px" src="http://i.creativecommons.org/l/by-nc-sa/2.0/88x31.png" /></a>
+                <small>T&auml;m&auml; materiaali on lisensoitu Creative Commons BY-NC-SA-lisenssill&auml;, joten voit k&auml;ytt&auml;&auml; ja levitt&auml;&auml; sit&auml; vapaasti, kunhan alkuper&auml;isten tekij&ouml;iden nimi&auml; ei poisteta. Jos teet muutoksia materiaaliin ja haluat levitt&auml;&auml; muunneltua versiota, se t&auml;ytyy lisensoida samanlaisella vapaalla lisenssill&auml;. Materiaalien k&auml;ytt&ouml; kaupalliseen tarkoitukseen on ilman erillist&auml; lupaa kielletty. Tekij&auml;(t): <a href="http://www.cs.helsinki.fi/en/people/avihavai" target="_blank">Arto Vihavainen</a> ja <a href="http://www.cs.helsinki.fi/en/people/mluukkai" target="_blank">Matti Luukkainen</a> (<a href="http://www.cs.helsinki.fi/en/rage" target="_blank">Agile Education Research</a> -tutkimusryhm&auml;).
+            </p>
+        </footer>
+
+        <div class="hidden">
+            <p>the end.</p>
+        </div>
+
+
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jqueryui/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+        <script src="js/libs/syntaxhighlight/sh_main.min.js"></script>
+        <script src="js/tikape.js"></script>
+    </body>
+</html>
