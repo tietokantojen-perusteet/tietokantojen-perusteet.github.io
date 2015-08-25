@@ -236,13 +236,13 @@
 		  -->
 
 
-		<h2>Tietokanta ja tiedon mallintaminen</h2>
+		<h2>Tietokanta ja tiedon rakenteen kuvaaminen</h2>
 
 		<p>Tietokanta on kokoelma tiettyyn aihepiiriin liittyviä säilytettäviä tietoja. Tietokannan luominen liittyy usein jonkinlaisen organisaation, yrityksen tai muun yhteisön tarpeeseen säilöä ja hakea tietoa. Esimerkiksi yliopisto haluaa pitää kirjaa opiskelijoistaan ja heidän opintomenestystään, hotelli haluaa pitää kirjaa hotellin huoneiden varauksista, ja kauppaketju haluaa pitää kirjaa asiakkaistaan ja asiakkaiden ostoksista.</p>
 
 		<p>Tallennettava tieto liittyy tyypillisesti johonkin tavoitteeseen. Yliopisto haluaa seurata opintojen etenemistä esimerkiksi valtionhallinnolle raportointia varten, huoneiden varaustilannetta seuraava hotelli taas haluaa tietää milloin huoneita on paljon tarjolla, ja milloin huoneet ovat lopussa. Kauppaketjun ensisijaisena tavoitteena on asiakkaiden ostosten seuranta myynnin optimoimiseksi.</p>
 
-		<p>Tietokantojen rakennetta ja jäsentelyä suunniteltaessa ongelmaa lähestytään tavoitteeseen liittyvien käsitteiden kautta, joiden avulla pyritään ymmärtämään mikä tiedosta on epäoleellista, ja mikä tulee säilöä. Samalla mietitään myös säilöttävien käsitteiden ominaisuuksia sekä niihin liittyviä suhteita. Esimerkiksi opiskelijan opintomenestyksen seurannassa oleellisia ovat ainakin käsitteet <em>Opiskelija</em> ja <em>Kurssisuoritus</em>, joilla on yhteys: opiskelijalla on kurssisuorituksia.</p>
+		<p>Tietokantojen rakennetta ja jäsentelyä suunniteltaessa ongelmaa lähestytään tavoitteeseen liittyvien käsitteiden kautta, joiden avulla pyritään ymmärtämään mikä tiedosta on epäoleellista, ja mikä tulee säilöä. Samalla mietitään myös säilöttävien käsitteiden ominaisuuksia sekä käsitteiden suhteita. Esimerkiksi opiskelijan opintomenestyksen seurannassa oleellisia ovat ainakin käsitteet <em>Opiskelija</em> ja <em>Kurssisuoritus</em>, joilla on yhteys: opiskelijalla on kurssisuorituksia.</p>
 
 		<p>Tällä kurssilla tiedon mallintamiseen käytetään <a href="http://www.uml.org/" target="_blank">UML</a>-kieltä, johon syvennytään tarkemmin kurssilla <em>Ohjelmistotekniikan menetelmät</em>. Käytämme <a href="https://fi.wikipedia.org/wiki/Luokkakaavio" target="_blank">luokkakaavioita</a> käsitteiden ominaisuuksien ja suhteiden mallintamiseen, mutta, emme kuitenkaan seuraa määritelmää pilkuntarkasti.</p>
 
@@ -275,6 +275,47 @@
 		<p>Kun piirrät kaavioita, älä käytä piirtämiseen liikaa aikaa. Oleellisinta on se, että tärkeät asiat ovat paperilla. Jos huomaat, että käytät liikaa aikaa, heitä paperi roskiin, ja aloita alusta.</p>
 
 		<p>[Tehtävä: yksittäisiä piirtotehtäviä]</p>
+
+		<p>Käsitteitä ja niiden sisältämää tietoa voidaan ajatella tauluna, jossa jokainen rivi kuvaa yksittäistä käsitteen ilmentymää. Alla lista opiskelijoita.</p>
+		
+		<div class="data-table">
+		  <h4>Opiskelija</h4>
+		  <table class="table">
+		    <thead>
+		      <tr>
+			<th>Nimi</th>
+			<th>Syntymävuosi</th>
+			<th>Pääaine</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>Pihla</td>
+			<td>1997</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		      <tr>
+			<td>Joni</td>
+			<td>1993</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		      <tr>
+			<td>Krista</td>
+			<td>1990</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		      <tr>
+			<td>Matti</td>
+			<td>1970</td>
+			<td>Matematiikka</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+
+		<br/>
+
+		<p>Vastaavasti myös kurssisuorituksia kuvaamaan voisi tehdä oman erillisen taulun. Huomaamme kuitenkin, että opiskelijoiden yhdistäminen kurssisuorituksiin ei ole täysin triviaalia. Palaamme tähän myöhemmin kurssilla.</p>
 
 
 		<h2>Tietokantajärjestelmä ja tietokannanhallintajärjestelmä</h2>

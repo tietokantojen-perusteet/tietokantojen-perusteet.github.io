@@ -3403,3 +3403,9 @@ aside h1:before {
   .tehtava > div h2 {
     font-weight: normal;
     text-transform: uppercase; }
+
+div.data-table {
+  width: 80%;
+  padding: 1em;
+  outline: 1px solid #ececec;
+}
