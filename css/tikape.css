@@ -3406,6 +3406,7 @@ aside h1:before {
 
 div.data-table {
   width: 80%;
-  padding: 1em;
+  padding: 1em 1em 0em 1em;
   outline: 1px solid #ececec;
+  margin-bottom: 1em;
 }
