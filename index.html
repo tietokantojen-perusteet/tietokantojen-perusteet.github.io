@@ -152,26 +152,26 @@
 		    <tbody>
 		      <tr>
 			<td>1</td>
-			<td>Johdanto, jäsennelty ja jäsentelemätön tieto</td>
-			<td>Yhden taulun käsittely</td>
+			<td>Johdanto, jäsennelty ja jäsentelemätön tieto, tiedon yhdistäminen</td>
+			<td>Yhden taulun käsittely, yhdestä moneen yhteydet</td>
 			<td>Relaatiot, tiedon hakeminen yhdestä taulusta</td>
 		      </tr>
 		      <tr>
 			<td>2</td>
-			<td>Tiedon yhdistäminen</td>
-			<td>Yhdestä moneen -yhteydet</td>
-			<td>Tiedon hakeminen, erilaisten tietojen yhdistäminen</td>
+			<td>Käsitekaaviosta tauluiksi</td>
+			<td>Monesta moneen yhteydet</td>
+			<td>Tiedon hakeminen, tiedon yhdistäminen useammasta taulusta</td>
 		      </tr>
 		      <tr>
 			<td>3</td>
 			<td></td>
-			<td>Käsiteanalyysi, Monesta moneen -yhteydet</td>
+			<td>Käsitekaavion luominen käsiteanalyysin avulla</td>
 			<td>Tiedon lisääminen ja poistaminen</td>
 		      </tr>
 		      <tr>
 			<td>4</td>
 			<td></td>
-			<td>Käsitteistä tietokannaksi</td>
+			<td>Taulujen määrittely, rajoitteet</td>
 			<td>Tiedon määrittely (DDL) ja tiedon muokkaaminen (DDM)</td>
 		      </tr>
 		      <tr>
@@ -500,26 +500,35 @@
 
 		<p>Pohditaan seuraavaksi kyselyiden tekemistä näihin tauluihin.</p>
 
+
 		<h2>SQL-kyselykieli</h2>
 
-		<p></p>
+		<p>SQL on kyselykieli relaatiotietokantojen käsittelyyn. Sen avulla voidaan hakea tietoa tietokannasta, päivittää tietokannassa olevaa tietoa, sekä muokata ja luoda tietokannassa olevia tauluja, eli muokata tietokannan rakennnetta. Käytännössä kaikki relaatiotietokantoja tukevat tietokannanhallintajärjesltemät tukevat myös SQL-kieltä. </p>
 
+		<p>Parhaiten kyselykieltä ymmärtää sitä harjoittelemalla. Sitä teemme paljon.</p>
 
 		<aside class="info">
 
 		  <br/>
 		  <h1>Ohjeita SQL-tehtävien tekemiseen</h1>
 
-		  <p>Verkkomateriaalissa on tästä kohdasta eteenpäin interaktiivisia SQL-tehtäviä, joiden avulla pääset harjoittelemaan SQL-kyselykielen käyttöä. Materiaali sisältää opiskelijoiden kurssisuorituksia kuvaavan tietokannan, ja lähes jokainen esimerkkikysely on "suoritettava", eli kysely suoritetaan ja tulos näytetään ruudulla nappia klikkaamalla.</p>
+		  <p>Kurssimateriaalissa on tästä kohdasta eteenpäin interaktiivisia SQL-tehtäviä, joiden avulla pääset harjoittelemaan SQL-kyselykielen käyttöä. Materiaali sisältää materiaalin edetessä täydentyvän opiskelijoiden kurssisuorituksia kuvaavan tietokannan, jota käytetään ellei toisin mainita. Lähes jokainen esimerkkikysely on "suoritettava", eli kysely suoritetaan ja tulos näytetään ruudulla nappia klikkaamalla.</p>
 
 		  <p>Useimpien esimerkkien jälkeen avautuu muutama tehtävä, jossa pääset harjoittelemaan esimerkkiä vastaavien kyselyjen tuottamista.</p>
-
 
 		</aside>
 
 		<!-- viikon 1 SQL-tehtävät alkaa -->
 		<div ng-controller="weekOneSqlController">
 
+
+		  <h4>SELECT * FROM <em>Taulu</em></h4>
+		  
+		  <p>Avainsanalla <code>SELECT</code> valitaan tietyt sarakkeet kyselyn kohteena olevasta taulusta. Sarakkeet määritellään <code>SELECT</code>-avainsanan jälkeen. Jos ohjelmoija haluaa käyttöönsä kaikki taulussa olevat sarakkeet, käytetään sarakkeiden merkkinä tähteä (<code>*</code>). Sarakkeiden määrittelyä seuraa avainsana <code>FROM</code>, jonka jälkeen kerrotaan kyselyn kohteena oleva taulu.</p>
+		  
+		  <p>Alla voit kokeilla kyselyn tekemistä aiemmin määriteltyihin <code>Opiskelija</code> ja <code>Kurssisuoritus</code>-tauluihin.</p>
+		  
+		  
 		  <query
 		     db="db"
 		     query="SELECT * FROM Opiskelija"
@@ -528,25 +537,86 @@
 		  </query>
 		  
 		  <div ng-show="listAllStudentsDone">
-		    <strong>Tehtävät</strong>
 		    
-		    <p>
-                      Tee nyt kysely, jolla saat listattua kaikki kurssit.
-		    </p>
+		    <h4>Tehtävät</h4>
+		    
+		    <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulussa olevat rivit.</p>
 		    
 		    <togglable content="taulut">
                       <table-info></table-info>
 		    </togglable>
 		    
 		    <query db="db"></query>
-		    
 		  </div>
 		  
+		  
+		  <h4>SELECT <em>sarake, toinen</em> FROM <em>Taulu</em></h4>
+		  
+		  <p>Avainsanan <code>SELECT</code> jälkeen voidaan määritellä sarakkeet. Tähteä käyttämällä valitaan kaikki sarakkeet, mutta ohjelmoija voi valita myös yksittäisiä sarakkeita. Valitut sarakkeet erotellaan pilkulla.</p>
+		  
+		  
+		  <query
+		     db="db"
+		     query="SELECT nimi, syntymävuosi FROM Opiskelija"
+		     editable="false"
+		     done="listAllStudentsWithAttributesDone">
+		  </query>
+		  
+		  <div ng-show="listAllStudentsWithAttributesDone">
+		    
+		    <h4>Tehtävät</h4>
+		    
+		    <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulussa olevat kurssit.</p>
+		    
+		    <togglable content="taulut">
+                      <table-info></table-info>
+		    </togglable>
+		    
+		    <query db="db"></query>
+		  </div>
+
+
+		  <h4>SELECT <em>DISTINCT</em> <em>sarake</em> FROM <em>Taulu</em></h4>
+		  
+		  <p>Kun haimme Kurssisuoritus-taulussa olevien kurssien nimiä, huomasimme, että muutamat kurssien nimet näkyivät useampaan otteeseen. Tämä johtuu siitä, että kysely hakee taulun rivit, ja taulussa yksinkertaisesti oli useampia rivejä, joilla esiintyi samat kurssit.</p>
+
+		  <p>Avainsanalla <code>DISTINCT</code> voidaan valita vain uniikit vastausrivit. Avainsana <code>DISTINCT</code> tulee avainsanan <code>SELECT</code> jälkeen.</p>
+		  
+		  
+		  <query
+		     db="db"
+		     query="SELECT DISTINCT pääaine FROM Opiskelija"
+		     editable="false"
+		     done="listDistinctMajorsDone">
+		  </query>
+		  
+		  <div ng-show="listDistinctMajorsDone">
+		    
+		    <h4>Tehtävät</h4>
+		    
+		    <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulussa olevat <em>uniikit</em> kurssit.</p>
+		    
+		    <togglable content="taulut">
+                      <table-info></table-info>
+		    </togglable>
+		    
+		    <query db="db"></query>
+		  </div>
+
+		  <h4>SELECT * FROM <em>Taulu</em> <em>WHERE</em>...</h4>
+		  
+		  <p>jatkuu</p>
 		</div>
+		
+		
 		<!-- Viikon 1 SQL-tehtävät loppuu -->
-
+		
 		<h2>Tietokantakyselyiden tekeminen ohjelmallisesti</h2>
+		
 
+
+
+		<h2>Avaimet ja viiteavaimet</h2>
 
 
 

@@ -15,12 +15,11 @@ TABLES['Opiskelija'] = {
 TABLES['Kurssisuoritus'] = {
     schema: "opiskelija, kurssi, päivämäärä, arvosana",
     data: [
-	["999999", "Pihla", 1997, "Tietojenkäsittelytiede"],
-	["999998", "Joni", 1993, "Tietojenkäsittelytiede"],
-	["999997", "Anna", 1991, "Matematiikka"],
-	["999996", "Krista", 1990, "Tietojenkäsittelytiede"],
-	["999995", "Matti", 1970, "Matematiikka"],
-	["999994", "Gandhi", 1869, "Oikeustiede"],
+	["999999", "Ohjelmoinnin perusteet", "2014-08-01", 5],
+	["999999", "Ohjelmoinnin jatkokurssi", "2014-08-01", 5],
+	["999999", "Tietokantojen perusteet", "2014-10-20", 3],
+
+	["999998", "Ohjelmoinnin perusteet", "2013-08-01", 4]
     ]
 }
 
