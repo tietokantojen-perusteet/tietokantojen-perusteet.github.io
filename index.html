@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="css/tikape.css"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
     </head>
-    <body>
+    <body ng-app='myApp'>
 
         <!-- BEGIN NAV -->
         <header role="navigation">
@@ -214,7 +214,7 @@
             <!-- END INDEX -->
 
             <!-- BEGIN WEEK1 -->
-            <section class="weeklimit" data-week-id="1">
+            <section class="weeklimit" data-week-id="1" ng-controller="appController">
 
 
                 <header>
@@ -516,6 +516,30 @@
 
 
 		</aside>
+
+
+
+		<query
+		   db="db"
+		   query="select * from students"
+		   editable="false"
+		   done="done">
+		</query>
+		
+		<div ng-show="done">
+		  <strong>Tehtävät</strong>
+		  
+		  <p>
+                    Tee nyt kysely, jolla saat listattua kaikki kurssit.
+		  </p>
+		  
+		  <togglable content="taulut">
+                    <table-info></table-info>
+		  </togglable>
+		  
+		  <query db="db"></query>
+		  
+		</div>
 
 
 		<h2>Tietokantakyselyiden tekeminen ohjelmallisesti</h2>
@@ -938,5 +962,15 @@ logging.file=</pre>
 
         <script src="js/libs/syntaxhighlight/sh_main.min.js"></script>
         <script src="js/tikape.js"></script>
+
+
+
+	<!-- angularjs -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<!-- tikape sqljs -- https://github.com/mluukkai/tikape-sqljs -->
+        <script src="js/libs/sql.js"></script>
+        <script src="js/table.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/directives.js"></script>
     </body>
 </html>

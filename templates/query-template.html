@@ -1,0 +1,36 @@
+<textarea rows="4" cols="80" ng-model="query" ng-readonly="editable">
+
+</textarea>
+
+<button ng-click="run_query(query)">suorita kysely</button>
+
+<div style="color: red;">
+    {{error}}
+</div>
+
+<div ng-show="columns">
+
+    <strong>kyselyn tulos</strong>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th ng-repeat="column in columns">
+                    {{column}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in rows">
+                <td ng-repeat="column in columns">
+                    {{row[ column ]}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button ng-hide="editable=='false'" ng-click="clear()">clear</button>
+
+    <br>
+
+</div>
