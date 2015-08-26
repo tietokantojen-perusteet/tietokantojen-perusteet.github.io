@@ -1,18 +1,31 @@
-<textarea rows="4" cols="80" ng-model="query" ng-readonly="editable">
 
-</textarea>
+<div class="data-table">
+  <h4 ng-show="editable">Esimerkkikysely</h4>
 
-<button ng-click="run_query(query)">suorita kysely</button>
-
-<div style="color: red;">
+  <textarea class="form-control" rows="4" cols="80" ng-model="query" ng-readonly="editable">
+    
+  </textarea>
+  
+  <br/>
+  
+  <button type="button" class="btn btn-default" ng-click="run_query(query)">
+    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Suorita
+  </button>
+  
+  <div class="alert alert-danger" role="alert" ng-show="error">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Virhe:</span>
     {{error}}
-</div>
-
-<div ng-show="columns">
-
-    <strong>kyselyn tulos</strong>
-
-    <table border="1">
+  </div>
+  
+  <br/>
+  <br/>
+  
+  <div ng-show="columns">
+    
+    <h4><em>Suoritetun kyselyn tulos</em></h4>
+    
+    <table class="table table-condensed">
         <thead>
             <tr>
                 <th ng-repeat="column in columns">
@@ -23,14 +36,15 @@
         <tbody>
             <tr ng-repeat="row in rows">
                 <td ng-repeat="column in columns">
-                    {{row[ column ]}}
+                    {{row[column]}}
                 </td>
             </tr>
         </tbody>
     </table>
-
-    <button ng-hide="editable=='false'" ng-click="clear()">clear</button>
-
-    <br>
-
+    
+    <button ng-hide="editable=='false'" ng-click="clear()">Tyhjennä tulokset</button>
+    
+    <br/>
+    
+  </div>
 </div>

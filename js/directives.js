@@ -70,7 +70,6 @@ myAppModule.directive('query', function() {
               $scope.rows = null;
               $scope.columns = null;
           };
-
       }
   };
 });

@@ -214,7 +214,7 @@
             <!-- END INDEX -->
 
             <!-- BEGIN WEEK1 -->
-            <section class="weeklimit" data-week-id="1" ng-controller="appController">
+            <section class="weeklimit" data-week-id="1">
 
 
                 <header>
@@ -512,35 +512,38 @@
 
 		  <p>Verkkomateriaalissa on tästä kohdasta eteenpäin interaktiivisia SQL-tehtäviä, joiden avulla pääset harjoittelemaan SQL-kyselykielen käyttöä. Materiaali sisältää opiskelijoiden kurssisuorituksia kuvaavan tietokannan, ja lähes jokainen esimerkkikysely on "suoritettava", eli kysely suoritetaan ja tulos näytetään ruudulla nappia klikkaamalla.</p>
 
-		  <p>Useimpien esimerkkien jälkeen avauttu muutama tehtävä, jossa pääset harjoittelemaan esimerkkiä vastaavien kyselyjen tuottamista.</p>
+		  <p>Useimpien esimerkkien jälkeen avautuu muutama tehtävä, jossa pääset harjoittelemaan esimerkkiä vastaavien kyselyjen tuottamista.</p>
 
 
 		</aside>
 
+		<!-- viikon 1 SQL-tehtävät alkaa -->
+		<div ng-controller="weekOneSqlController">
 
-
-		<query
-		   db="db"
-		   query="select * from students"
-		   editable="false"
-		   done="done">
-		</query>
-		
-		<div ng-show="done">
-		  <strong>Tehtävät</strong>
+		  <query
+		     db="db"
+		     query="SELECT * FROM Opiskelija"
+		     editable="false"
+		     done="listAllStudentsDone">
+		  </query>
 		  
-		  <p>
-                    Tee nyt kysely, jolla saat listattua kaikki kurssit.
-		  </p>
-		  
-		  <togglable content="taulut">
-                    <table-info></table-info>
-		  </togglable>
-		  
-		  <query db="db"></query>
+		  <div ng-show="listAllStudentsDone">
+		    <strong>Tehtävät</strong>
+		    
+		    <p>
+                      Tee nyt kysely, jolla saat listattua kaikki kurssit.
+		    </p>
+		    
+		    <togglable content="taulut">
+                      <table-info></table-info>
+		    </togglable>
+		    
+		    <query db="db"></query>
+		    
+		  </div>
 		  
 		</div>
-
+		<!-- Viikon 1 SQL-tehtävät loppuu -->
 
 		<h2>Tietokantakyselyiden tekeminen ohjelmallisesti</h2>
 

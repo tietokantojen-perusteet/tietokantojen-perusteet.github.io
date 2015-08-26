@@ -15,12 +15,27 @@ function initialize_table(table_name, db){
   } );
 }
 
-myAppModule.controller('appController', function($scope) {
+
+myAppModule.controller('weekOneSqlController', function($scope) {
+  var db = new SQL.Database();
+  $scope.db = db;
+
+  $scope.tables = ['Opiskelija', 'Kurssisuoritus'];
+
+  $scope.tables.forEach(function(table) {
+    initialize_table(table, db);
+  });
+});
+
+/*
+myAppModule.controller('weekOneSqlController', function($scope) {
   var db = new SQL.Database();
   $scope.db = db;
 
   $scope.tables = ['students', 'courses', 'participations'];
+
   $scope.tables.forEach( function(table){
       initialize_table(table, db);
   });
 });
+*/

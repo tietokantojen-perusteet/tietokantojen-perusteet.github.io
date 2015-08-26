@@ -1,5 +1,30 @@
-var TABLES = {}
+var TABLES = {};
 
+TABLES['Opiskelija'] = {
+    schema: "opiskelijanumero, nimi, syntymävuosi, pääaine",
+    data: [
+	["999999", "Pihla", 1997, "Tietojenkäsittelytiede"],
+	["999998", "Joni", 1993, "Tietojenkäsittelytiede"],
+	["999997", "Anna", 1991, "Matematiikka"],
+	["999996", "Krista", 1990, "Tietojenkäsittelytiede"],
+	["999995", "Matti", 1970, "Matematiikka"],
+	["999994", "Gandhi", 1869, "Oikeustiede"],
+    ]
+}
+
+TABLES['Kurssisuoritus'] = {
+    schema: "opiskelija, kurssi, päivämäärä, arvosana",
+    data: [
+	["999999", "Pihla", 1997, "Tietojenkäsittelytiede"],
+	["999998", "Joni", 1993, "Tietojenkäsittelytiede"],
+	["999997", "Anna", 1991, "Matematiikka"],
+	["999996", "Krista", 1990, "Tietojenkäsittelytiede"],
+	["999995", "Matti", 1970, "Matematiikka"],
+	["999994", "Gandhi", 1869, "Oikeustiede"],
+    ]
+}
+
+/*
 TABLES['students'] = {
   schema: "name, age, address, city, studentnumber",
   data: [
@@ -36,3 +61,4 @@ TABLES['participations'] = {
       [9, 4, "12345", 0]
   ]
 }
+*/
