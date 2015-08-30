@@ -79,8 +79,8 @@
                 <p>Kurssin arvostelu perustuu kurssikokeeseen, harjoitustehtäviin, sekä läsnäoloon harjoitustilaisuuksissa:</p>
 
                 <ul>
-                  <li>Kurssikokeessa on kolme tehtävää, joista jokainen on viiden pisteen arvoinen. Kokeesta voi saada yhteensä 15 pistettä.</li>
-		  <li>Tekemällä kaikki viikon harjoitustehtävät saa kolme pistettä. Harjoitustehtävistä voi saada yhteensä 21 pistettä.</li>
+                  <li>Kurssikokeessa on kolme tehtävää, joista jokainen on kuuden pisteen arvoinen. Kokeesta voi saada yhteensä 18 pistettä.</li>
+		  <li>Tekemällä kaikki ennalta tehtävät harjoitustehtävät, jotka alkavat kurssin toiselta viikolta, saa kolme pistettä. Harjoitustehtävistä voi saada yhteensä 18 pistettä.</li>
 		  <li>Harjoitustilaisuuksissa läsnäolosta saa kaksi pistettä. Läsnäoloista voi saada yhteensä 14 pistettä.</li>
 		</ul>
 
@@ -201,13 +201,37 @@
 
                 <ul class="nav" id="material-toc"></ul>
 
+<!--
                 <h1>Materiaalin itseopiskelu- ja kertaustehtävät</h1>
 
                 <ul class="nav nav-pills nav-pills-fixed-width" id="tehtavat-toc"></ul>
-
+-->
                 <h1>Kurssin tehtävät</h1>
 
-		<p>tänne viikoittaiset laskarit..</p>
+		<p>Kurssilla on viikosta 2 lähtien kotona tehtäviä tehtäviä sisältäviä tehtäväsarjoja, jonka lisäksi laskuharjoitustilaisuuksissa tehdään paikan päällä tehtäviä. Näiden lisäksi kurssimateriaalissa on erikseen merkittyjä pohdinta- ja SQL-ohjelmointitehtäviä.</p>
+
+		<h2>Kotona tehtävät tehtäväsarjat</h2>
+
+		<ul>
+		  <li>Viikko 2 (julkaistaan 4.9.)</li>
+		  <li>Viikko 3 (julkaistaan 11.9.)</li>
+		  <li>Viikko 4 (julkaistaan 18.9.)</li>
+		  <li>Viikko 5 (julkaistaan 25.9.)</li>
+		  <li>Viikko 6 (julkaistaan 2.10.)</li>
+		  <li>Viikko 7 (julkaistaan 9.10.)</li>
+		</ul>
+
+		<h2>Paikan päällä tehtävät tehtäväsarjat</h2>
+		
+		<ul>
+		  <li>Viikko 1 (julkaistaan 2.9.)</li>
+		  <li>Viikko 2 (julkaistaan 9.9.)</li>
+		  <li>Viikko 3 (julkaistaan 16.9.)</li>
+		  <li>Viikko 4 (julkaistaan 23.9.)</li>
+		  <li>Viikko 5 (julkaistaan 30.9.)</li>
+		  <li>Viikko 6 (julkaistaan 7.10.)</li>
+		  <li>Viikko 7 (julkaistaan 14.10.)</li>
+		</ul>
 
 
             </section>
@@ -232,11 +256,28 @@
 
 		<p>Puhekielessä termillä tietokanta tarkoitetaan yleisesti ottaen tiedon tallentamiseen tarkoitettua paikkaa, josta tietoa voi myös hakea. Esimerkiksi kirkonkirjat voidaan nähdä eräänlaisena sukujen historiaa dokumentoivana tietokantana, jonka kautta sukututkija pääsee käsiksi sukunsa historiaan. Vaikka tietokannat ovat digitalisaation myötä siirtymässä paperisesta muodosta sähköiseen muotoon, on niiden tavoite pysynyt pitkälti samana: <em>haluamme säilöä tietoa, ja haluamme päästä tähän tietoon käsiksi</em>. Tällä kurssilla käsittelemme elektronisia tietokantoja, joiden kehittyminen on johtanut tilanteeseen, missä tietoa tallennetaan yhä enemmän ja sitä halutaan hyödyntää yhä monipuolisemmin.</p>
 
-		<p>[tehtävä: hae tietoa jostain olemassaolevasta tietokannasta ei-triviaalia käyttöliittymää käyttäen, esim. Hiski -- http://hiski.genealogia.fi/hiski/ ja http://digi.kansalliskirjasto.fi/?language=fi]</p>
+		<aside class="info">
+		  <br/>
+		  <h1>Tutustu tietokantaan!</h1>
+
+		  <p>Tässä kohtaa on erittäin hyvä hetki käydä tutustumassa muutamaan tietokantapalveluun. Osoitteessa <a href="http://hiski.genealogia.fi/hiski/" target="_blank">http://hiski.genealogia.fi/hiski/</a> on Suomen Sukututkimusseuran ylläpitämä Historiakirjojen hakupalvelu. Käy sivulle, valitse kieli, etsi "Kaikista", ja valitse "Kastetut".</p>
+
+		  <p>Minkälaisia tuloksia löydät omalla etunimelläsi? Entä, minkälaisia tuloksia löydät nimillä Matti ja Maija? Palvelu pyrkii muunmuassa sisällyttämään läheiset nimien muunnokset hakutuloksiin, sillä nimet muuttuvat ajan myötä. </p>
+		</aside>
 
 		<p>Nykyään tietokantoja on kaikkialla. Tämä kurssimateriaali sijaitsee tietokannassa, kurssitehtäviin liittyvät pisteet kirjataan tietokantaan, ja tehdessäsi kurssilla tarpeeksi töitä kurssiin liittyvien oppimistavoitteiden saavuttamiseksi kurssista kirjataan suoritusmerkintä tietokantaan. Jo pelkästään nykyaikaisessa kännykässäsi on kymmeniä erilaisia tietokantoja; yhteystiedot, kalenteri, herätyskello, aikavyöhykkeet, karttapalvelut, suosikkiverkkosivut, jonka lisäksi moni kännykkäsovellus hyödyntää yhtä tai useampaa tietokantaa. Tietokannat voivat olla paikallisia, eli ne voivat sijaita samalla koneella tietokantaa käyttävän ohjelmiston kautta, esimerkiksi kännykässä, tai ne voivat sijaita erillisellä palvelimella, johon otetaan tarvittaessa yhteyttä. Loppukäyttäjän näkökulmastasi tällä ei kuitenkaan ole juurikaan merkitystä. Näet tietokannasta haetun tiedon käyttämäsi sovelluksen tarjoaman näkymän kautta.</p>
 
-		<p>[tehtävä: pohdi järjestelmiä mihin olet kirjannut tietosi, paljonko näitä on? Toisaalta, kuinka monessa näistä tiedot ovat melko samat -- esimerkiksi nimi jne -- voisiko näitä jotenkin yhdistää?]</p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>Tieto toistuu, monistuu, ja yhdistyy</h1>
+
+		  <p>Moni tietokantaa käyttävä palvelu käyttää henkilöihin liittyviä tietoja, kuten osoitetta, puhelinnumeroa tai sähköpostiosoitetta. Kun rekisteröidyt verkossa oleviin palveluihin, on tyypillistä, että ne pyytävät vähintään sähköpostiosoitteen. Nämä tiedot tallentuvat kuitenkin palvelu- tai yrityskohtaisiin tietokantoihin, josta niitä mahdollisesti yhdistellään.</p>
+
+		  <p>Pohdi, kuinka moneen palveluun olet syöttänyt sähköpostiosoitteesi? Entä nimesi tai syntymäpäiväsi? Tyypillisesti moni näistä palveluista on erillinen, mutta, tulevaisuudessa tätä tietoa tullaan yhdistämään yhä enemmän ja enemmän paremman yleiskuvan saamiseksi, sekä tilastoihin perustuvien päätösten tekemiseksi.</p>
+		  <p>Esimerkiksi sekä sähkö- että peliyhtiöt kummatkin hyötyvät merkittävästi saadessaan tietoa palvelun käyttöasteesta. Sähköyhtiöt voivat käyttää tätä tietoa sähkön tarpeen ennustamiseen, jonka avulla sähkön tuottoa voidaan säännöstellä -- peliyhtiöt taas voivat muunmuassa hyödyntää käyttötilastoja pelin toimivien ja ei-toimivien osa-alueiden kehittämiseen.</p>
+
+		</aside>
 
 		<p>Käytämme tällä kurssilla yhtenä esimerkkinä opiskelun ja oppimisen seuraamiseen tarkoitettua järjestelmää, joka kehittyy materiaalin edetessä. Järjestelmä pitää kirjaa kursseista, opiskelijoista, kurssiharjoituksista, arvosanoista, kurssipalautteista, sekä muista oleellisista asioista, joita kurssin edetessä tulee esille. Jotta tämä onnistuisi, tarvitsemme jonkinlaisen jäsentelytavan eli rakenteen tallennettavalle tiedolle, tapoja tiedon tallentamiseen tässä sovitussa muodossa, sekä tapoja erilaisten raporttien luomiseen. Katsotaan miten käy..</p>
 
@@ -283,7 +324,18 @@
 
 		<p>Kun piirrät kaavioita, älä käytä piirtämiseen liikaa aikaa. Oleellisinta on se, että tärkeät asiat ovat paperilla. Jos huomaat, että käytät liikaa aikaa, heitä paperi roskiin, ja aloita alusta.</p>
 
-		<p>[Tehtävä: yksittäisiä piirtotehtäviä]</p>
+		<aside class="info">
+		  <br/>
+
+		  <h1>Pientä pohdintaa!</h1>
+
+		  <p>Hahmottele paperille seuraavaan kuvaukseen liittyvä kaavio yllä esitetyllä tavalla. Mitkä ovat käsitteet, ja miten ne liittyvät toisiinsa?</p>
+
+		  <p><em>Opettajalla on useita kursseja, joita hän opettaa. Jokaiseen kurssiin liittyy ajankohta, jolloin kurssi järjestetään, sekä kurssin käyttämä sali.</em></p>
+
+		  <p>Mitä voimme sanoa opettajan kalenterista kuvauksen perusteella? Entä salien varaustilanteesta?</p>
+
+		</aside>
 
 		<p>Käsitteitä ja niiden sisältämää tietoa voidaan ajatella tauluna, jossa jokainen rivi kuvaa yksittäistä käsitteen ilmentymää.</p>
 		
@@ -332,10 +384,23 @@
 		  </table>
 		</div>
 
-		<p>Vastaavasti myös kurssisuorituksia kuvaamaan voisi tehdä oman erillisen taulun. Kysymykseksi nouseekin "Miten yhdistämme Opiskelijaa kuvaavan taulun ja Kurssisuoritusta kuvaavan taulun tietoja?". Palaamme tähän relaatiomallin ja relaatiotietokantojen yhteydessä.</p>
+		<p>Vastaavasti myös kurssisuorituksia kuvaamaan voisi tehdä oman erillisen taulun.</p>
 
+		<aside class="info">
+
+		  <br/>
+
+		  <h1>Ensiaskeleita tiedon yhdistämiseen</h1>
+
+		  <p>Kysymykseksi nousee "<em>Miten yhdistämme Opiskelijaa kuvaavan taulun ja Kurssisuoritusta kuvaavan taulun tietoja?</em>". Olio-ohjelmoinnissa Kurssisuoritusolio sisältäisi viitteen Opiskelijaolioon, tai mahdollisesti, jokainen Opiskelijaolio sisältäisi listan viitteitä Kurssisuoritusolioon.</p>
+
+		  <p>Olio-ohjelmoinnissa viite on oikeastaan osoite muistipaikkaan, missä olion tiedot ovat. Voisiko kurssisuoritukseen lisätä jonkinlaisen muistiviitteen opiskelijaan? Palaamme tähän relaatiomallin ja relaatiotietokantojen yhteydessä.</p>
+
+		</aside>
+
+<!--
 		<p>[tehtävä: ideointia yhdistämistapoihin, johdattelua relaatiomalliin?]</p>
-
+-->
 
 		<h2>Tietokannanhallintajärjestelmä</h2>
 
@@ -373,11 +438,13 @@
 
 		</aside>
 
+
+<!--
 		<h2>Tiedon käsittely ohjelmallisesti</h2>
 
 
 		<p>TODO: halutaanko case?</p>
-
+-->
 
 
 		<h1>Relaatiomalli ja relaatiotietokannat</h1>
@@ -605,22 +672,86 @@
 
 		  <h4>SELECT * FROM <em>Taulu</em> <em>WHERE</em>...</h4>
 		  
-		  <p>jatkuu</p>
+		  <p>Avainsanan <code>WHERE</code> avulla kyselyille annetaan hakuehtoja. Hakuehtojen perusteella kyselyn tulokseen valitaan vain ne rivit, joissa hakuehdossa määritellyn sarakkeen arvot täyttävät hakuehdon. Hakuehto voi olla esimerkiksi muotoa <code>...WHERE nimi = 'Joni'</code>, jolloin valittaisiin vain ne rivit, joilla sarakkeen <code>nimi</code> arvo on <code>'Joni'</code>.</p>
+
+		  <query
+		     db="db"
+		     query="SELECT * FROM Opiskelija WHERE nimi = 'Joni'"
+		     editable="false"
+		     done="selectJoniDone">
+		  </query>
+		  
+		  <div ng-show="selectJoniDone">
+		    
+		    <h4>Tehtävät</h4>
+		    
+		    <p>Tee nyt kysely, jolla saat listattua <code>Opiskelija</code>-taulusta kaikki ne opiskelijat, joiden nimi on 'Anna'.</p>
+		    
+		    <togglable content="taulut">
+                      <table-info></table-info>
+		    </togglable>
+		    
+		    <query db="db" done="selectAnnaDone"></query>
+
+
+		    <div ng-show="selectAnnaDone">
+		    
+		      <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulusta kaikki Pihla-nimisen opiskelijan suoritukset. Voit olettaa, että Opiskelija-taulun sisältö on täsmälleen se, kuin mikä se tähän asti on ollut.</p>
+		    
+		      <togglable content="taulut">
+			<table-info></table-info>
+		      </togglable>
+		      
+		      <query db="db"></query>
+
+		    </div>
+		  </div>
+
+		  <p>Kyselyissä toimivat myös suurempi kuin <code>&gt;</code> ja pienempi kuin <code>&lt;</code> -operaatiot.</p>
+
+		  <p>Jos sarakkeen arvot ovat merkkijonoja, kuten kurssin nimi ja opiskelijan nimi, voi hakuehdossa käyttää myös <code>LIKE</code>-operaatiota. Tämän avulla hakutuloksia voi rajata myös osittaisen merkkijonon avulla. Esimerkiksi kysely <code>SELECT * FROM Opiskelija WHERE nimi LIKE '%a%'</code> hakee kaikki opiskelijat, joiden nimessä esiintyy pieni a-kirjain.</p>
+
+
+		  <query
+		     db="db"
+		     query="SELECT * FROM Opiskelija WHERE nimi LIKE '%a%'"
+		     editable="false"
+		     done="listOpiskelijatWithSmallAInName">
+		  </query>
+		  
+		  <div ng-show="listOpiskelijatWithSmallAInName">
+		    
+		    <h4>Tehtävät</h4>
+		    
+		    <p>Tee nyt kysely, jolla saat listattua kaikki Opiskelija-taulussa olevat pääaineet, joissa esiintyy sana "tiede".</p>
+
+		    <p>Huom! Tee kysely siten, että näet vain uniikit vastaukset. Kyselyn vastauksessa pitäisi olla vain 2 riviä.</p>
+		    
+		    <togglable content="taulut">
+                      <table-info></table-info>
+		    </togglable>
+		    
+		    <query db="db"></query>
+		  </div>
+
 		</div>
-		
+
 		
 		<!-- Viikon 1 SQL-tehtävät loppuu -->
 		
 		<h2>Tietokantakyselyiden tekeminen ohjelmallisesti</h2>
 		
+		<p>Vaikka edelliset esimerkit tehtiin osana kurssimateriaalia, tehdään tietokantakyselyjä usein ohjelmallisesti tai suoraan tietokannanhallintajärjestelmässä.</p>
 
-
-
-		<h2>Avaimet ja viiteavaimet</h2>
+		<p><em>tutustumme teemaan ensimmäisen viikon läsnä tehtävissä harjoituksissa.</em></p>
 
 
 
 <!--
+		<h2>Avaimet ja viiteavaimet</h2>
+
+
+
 
 		<h2>Erilaiset yhteystyypit</h2>
 
@@ -739,7 +870,7 @@ johdanto
             <!-- END WEEK1 -->
 
             <!-- BEGIN WEEK2 -->
-            <section class="weeklimit" data-week-id="2">
+            <section class="weeklimit hidden" data-week-id="2">
                 <header>
                     <h1 id="viikko2">Viikko 2</h1>
                 </header>
@@ -749,7 +880,7 @@ johdanto
             <!-- END WEEK2 -->
 
             <!-- BEGIN WEEK3 -->
-            <section class="weeklimit" data-week-id="3">
+            <section class="weeklimit hidden" data-week-id="3">
                 <header>
                     <h1 id="viikko3">Viikko 3</h1>
                 </header>
@@ -759,7 +890,7 @@ johdanto
             <!-- END WEEK3 -->
 
             <!-- BEGIN WEEK4 -->
-            <section class="weeklimit" data-week-id="4">
+            <section class="weeklimit hidden" data-week-id="4">
                 <header>
                     <h1 id="viikko4">Viikko 4</h1>
                 </header>
@@ -769,7 +900,7 @@ johdanto
             <!-- END WEEK4 -->
 
             <!-- BEGIN WEEK5 -->
-            <section class="weeklimit" data-week-id="5">
+            <section class="weeklimit hidden" data-week-id="5">
                 <header>
                     <h1 id="viikko5">Viikko 5</h1>
                 </header>
@@ -779,7 +910,7 @@ johdanto
             <!-- END WEEK5 -->
 
             <!-- BEGIN WEEK6 -->
-            <section class="weeklimit" data-week-id="6">
+            <section class="weeklimit hidden" data-week-id="6">
                 <header>
                     <h1 id="viikko6">Viikko 6</h1>
                 </header>
@@ -789,7 +920,7 @@ johdanto
             <!-- END WEEK6 -->
 
             <!-- BEGIN WEEK7 -->
-            <section class="weeklimit" data-week-id="7">
+            <section class="weeklimit hidden" data-week-id="7">
                 <header>
                     <h1 id="viikko7">Viikko 7</h1>
                 </header>
