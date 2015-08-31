@@ -406,13 +406,8 @@
 
 		<p>Tietokanta sijaitsee tyypillisesti tietokannanhallintajärjestelmässä, jonka kautta tietokantaan pääsee käsiksi. Tietokannanhallintajärjestelmän vastuulla on tietokantaan kohdistuvien haku-, muokkaus- ja lisäystoimintojen toiminnan lisäksi käyttöoikeuksien valvominen. Yksittäisessä tietokannanhallintajärjestelmässä voi kustannus- ja tehokkuussyistä sijaita useisiin erilaisiin sovelluksiin ja käyttötarkoituksiin liittyviä tietokantoja, joita jokaista käyttää eri käyttäjät tai eri yritys.</p>
 
-		<p>[kuva: sovellus, tietokannanhallintajärjestelmä, useampi tietokanta]</p>
-
-
 		<p>Yksittäinen sovellus voi käyttää myös useampaa tietokantaa, jotka sijaitsevat eri tietokannanhallintajärjestelmissä. Tyypillinen esimerkki tällaisesta sovelluksesta on analytiikkapalvelu, joka yhdistää eri palveluiden tallentamaa tietoa yhteenvetoraporttien luomiseksi.</p>
 
-		<p>[kuva: sovellus, useampi tietokannanhallintajärjestelmä, useampi tietokanta]</p>
-		
 
 		<p>Tietokannanhallintajärjestelmän vastuulla on myös tiedon eheyteen liittyvien sääntöjen noudattamisen valvonta. Tietokannassa voi olla esimerkiksi sääntö "Opiskelijan syntymävuoden tulee sisältää neljä numeroa", jolloin uusien opiskelijoiden lisääminen ilman oikein määriteltyä syntymävuotta ei voida lisätä tietokantaan. Vastaavia sääntöjä voidaan lisätä muunmuassa varausjärjestelmiin, esimerkiksi lentokoneiden paikkavarausjärjestelmissä halutaan varmistaa, että jokaisella istuimella on korkeintaan yksi varaus. Vastaavasti, tietokannanhallintajärjestelmän vastuulla on varmistaa, että tietoa ei tuhoudu, vaikka tietokantaa käyttävä järjestelmä hajoaisi -- erilaiset varmuuskopiotoiminnallisuudet ovat tyypillisiä.</p>
 
@@ -426,15 +421,14 @@
 		  <h1>Historian siipien havinaa</h1>
 
 
-		  <p>Tiedon tallentamiseen käytettiin alunperin tekstitiedostoja, joiden välillä tietoa pyrittiin yhdistämään joko manuaalisesti tai ohjelmallisesti. Ensimmäisten tietokannanhallintajärjestelmien yhteydessä siirryttiin tiedon todellisen tallennusmuodon abstrahointiin käyttäjältä, ja tietoa käsiteltiin erillisen ohjelmointirajapinnan kautta. Tiedon linkittäminen tapahtui käytännössä muistiviitteiden avulla, jolloin tiedon hakemiseen liittyi näiden muistiviitteiden kautta navigoiminen, johon tarvittiin tyypillisesti asiaan erikoistunut ohjelmoija.</p>
+		  <p>Tiedon tallentamiseen käytettiin alunperin tekstitiedostoja, joiden välillä tietoa pyrittiin yhdistämään joko manuaalisesti tai ohjelmallisesti. Ensimmäisten tietokannanhallintajärjestelmien yhteydessä siirryttiin tiedon todellisen tallennusmuodon abstrahointiin käyttäjältä, ja tietoa käsiteltiin erillisen ohjelmointirajapinnan kautta. Tiedon linkittäminen tapahtui käytännössä muistiviitteiden avulla, jolloin tiedon hakemiseen liittyi näiden muistiviitteiden kautta navigoiminen, johon tarvittiin asiaan erikoistunut ohjelmoija.</p>
 
-		  <p>[kuva?]</p>
 		  
-		  <p>Navigointiin perustuvissa järjestelmissä yhtenä ongelmana oli kuitenkin se, että ohjelmoijan tuli korjata järjestelmän navigointirakenne kun rakenne muuttui esimerkiksi tiedon poistamisen yhteydessä. Alla olevassa esimerkissä tietoa poistetaan, ja samalla menetetään tietoon liittyvä linkki seuraaviin tietueihin.</p>
+		  <p>Navigointiin perustuvissa järjestelmissä yhtenä ongelmana oli kuitenkin se, että ohjelmoijan tuli korjata järjestelmän navigointirakenne kun rakenne muuttui. Jos tietokannasta poistettiin yksittäinen tietue, saattoi huonoimmassa tapauksessa tietueen kautta löydettävät asiat kadota poiston yhteydessä.</p>
 		  
-		  <p>[kuva, missä verkko -- leikataan lapsi jolla lapsenlapsia pois, huomataan, että yhteen osaan ei enää päästä käsiksi]</p>
-		  
-		  <p>Koska tietokoneet ja tiedon hakeminen oli tyypillisesti hidasta, tietoa tallennettiin useampaan paikkaan navigoimisen vähentämiseksi. Kun tietokoneet kehittyivät, toistetun tiedon käyttämistä voitiin vähentää, ja samalla yksittäistä tietokannanhallintajärjestelmää pystyi käyttämään useampi ohjelmoija ja ohjelma. Suurin viimeaikainen kehitysaskel tapahtui kuitenkin relaatiotietomallin esittelyn yhteydessä, missä vastuu navigointiin liittyvien polkujen tekemisestä jätetään täysin ohjelmoijan vastuulle.</p>
+		  <p>Koska tiedon hakeminen oli tyypillisesti hidasta, tietoa tallennettiin useampaan paikkaan navigoimisen vähentämiseksi. Kun tietokoneet kehittyivät, toistetun tiedon käyttämistä voitiin vähentää, ja samalla yksittäistä tietokannanhallintajärjestelmää pystyi käyttämään useampi ohjelmoija ja ohjelma. Suurin viimeaikainen kehitysaskel tapahtui kuitenkin relaatiotietomallin esittelyn yhteydessä, missä vastuu navigointiin liittyvien polkujen tekemisestä jätetään täysin ohjelmoijan vastuulle.</p>
+
+		  <p>Lue osoitteessa <a href="http://www.tomandmaria.com/Tom/Writing/HowThe%20DataGotItsBase.pdf" target="_blank">http://www.tomandmaria.com/Tom/Writing/HowThe%20DataGotItsBase.pdf</a> oleva Thomas Haighin kirjoittama katsaus tietokantojen historiaan.</p>
 
 		</aside>
 
