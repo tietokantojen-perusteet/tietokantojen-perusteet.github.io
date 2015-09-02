@@ -448,7 +448,7 @@
 -->
 
 
-		<h1>Relaatiomalli ja relaatiotietokannat</h1>
+		<h1>Johdanto relaatiomalliin ja relaatiotietokantoihin</h1>
 
 
 		<p>Relaatiomallin perusajatus on tallennettavan tiedon jakaminen käsitteisiin sekä käsitteiden välisiin yhteyksiin. Jokaista käsitettä vastaa relaatiotietokannassa taulu, ja jokaiselle käsitteen ominaisuudelle eli attribuutille on taulussa oma sarake. Jokainen taulun rivi vastaa yhtä käsitteen ilmentymää, ja käsitteiden väliset yhteydet ilmenevät käsitteen ilmentymän yksilöivän attribuutin tai attribuuttiyhdistelmän, eli avaimen perusteella.</p>
@@ -724,9 +724,9 @@
 		    
 		    <h4>Tehtävät</h4>
 		    
-		    <p>Tee nyt kysely, jolla saat listattua kaikki Opiskelija-taulussa olevat pääaineet, joissa esiintyy sana "tiede".</p>
-
-		    <p>Huom! Tee kysely siten, että näet vain uniikit vastaukset. Kyselyn vastauksessa pitäisi olla vain 2 riviä.</p>
+		    <p>Tee nyt kysely, jolla saat listattua kaikki Opiskelija-taulussa olevat pääaineet, joissa esiintyy sana "tiede". </p>
+		    
+		    <p>Huom! Tee kysely siten, että näet vain uniikit vastaukset. Kyselyn vastauksessa pitäisi olla vain 2 riviä. Kun saat kyselyn toimimaan, kokeile mitä tapahtuu jos muutat 'LIKE'-operaation muotoon 'NOT LIKE'.</p>
 		    
 		    <togglable content="taulut">
                       <table-info></table-info>
@@ -734,17 +734,191 @@
 		    
 		    <query db="db"></query>
 		  </div>
+		  
+		  
+		  
+		</div>
+		
 
+		<figure>
+		  <img src="img/paivitysraja.jpg" alt="päivitysraja"/> 
+		  <figcaption>Päivitysraja, tähän on hyvä lopettaa lukeminen.</figcaption>
+		</figure>
+		
+
+
+		<!-- Viikko 1 loppuu -->
+
+<!--
+		<h2>Erilaiset yhteydet käsitteiden välillä</h2>
+
+		<p>Huomaamme, että käsite Kurssisuoritus oikeastaan liittyy kahteen eri asiaan; kurssiin ja kurssin suoritukseen. Eriytetään nämä kaksi käsitettä toisistaan.</p>
+
+		<p>Kurssiin liittyy kurssin yleiset tiedot kuten kurssin nimi, kurssikoodi, sekä kurssin kuvaus. Kurssisuoritus taas liittyy tiettyyn kurssiin, opikelijaan, päivämäärään, arvosanaan, sekä opintopistemäärään. Opintopistemäärä pidetään osana kurssisuoritusta, sillä joillain kursseilla opintopistemäärä vaihtelee työmäärästä riippuen. Käsite Opiskelija säilyy sellaisenaan.</p>
+
+		<p>Yhteen kurssisuoritukseen liittyy aina yksi kurssi, mutta yhteen kurssiin voi liittyä monta kurssisuoritusta.</p>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-kurssisuoritus-kurssi.png" alt="Opiskelija 1-* Kurssisuoritus *-1 Kurssi"/> 
+		  <figcaption>Jokaisella opiskelijalla voi olla useita kurssisuorituksia, ja jokaiseen kurssisuoritukseen liittyy tasan yksi opiskelija. Jokaiseen kurssisuoritukseen liittyy myös tasan yksi kurssi, ja jokaisella kurssilla voi olla useita kurssisuorituksia.</figcaption>
+		</figure>
+
+		<p>Pohditaan ensin ylläolevan kaavion osaa, missä Kurssisuoritukseen liittyy Kurssi. Emme hetkeen välitä Opiskelija-käsitteen olemassaolosta. Sekä kurssisuoritukselle että kurssille on määritelty niihin liittyvät attribuutit.</p>
+
+
+		<figure>
+		  <img src="img/johdanto/kurssisuoritus-kurssi-attrs.png" alt="[Kurssisuoritus|päivämäärä;arvosana;opintopistemäärä]*-1[Kurssi|nimi;kuvaus]"/> 
+		  <figcaption>Jokaiseen kurssisuoritukseen liittyy yksi kurssi, mutta kurssilla voi olla useampia kurssisuorituksia.</figcaption>
+		</figure>
+
+		
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>Yhteystyyppi yhden suhde moneen</h1>
+
+		  <p>Kahden käsitteen välillä on yhden suhde moneen (<code>1-N</code>) -yhteys, jos ensimmäisen käsitteen ilmentymään voi liittyä monta toisen käsitteen ilmentymää, mutta yhteen toisen käsitteen ilmentymään voi liittyä vain yksi ensimmäisen käsitteen ilmentymä.</p>
+
+		  <p>Esimerkiksi <em>Olli Opiskelijaan</em> voi liittyä monta erilaista kurssisuoritusta, mutta tiettyyn kurssisuoritukseen voi liittyä aina vain yksi opiskelija.</p>
+
+		  <p>Saman yhteystyypin voi ajatella myös tietokantataulujen välillä. Kahden taulun välillä on yhteys yhden suhde moneen, jos yhteen ensimmäisen taulun riviin voi liittyä useita toisen taulun rivejä, mutta yhteen toisen taulun riviin voi liittyä vain yksi ensimmäisen taulun rivi.</p>
+
+		  <p>Yhden suhde moneen yhteyden toteuttaminen tietokantatauluihin toteutetaan seuraavasti. Tauluun, jossa voi olla monta toiseen tauluun viittaavaa riviä määritellään ylimääräinen sarake, johon asetetaan toisessa taulussa olevaan rivin avaimeen viittaava arvo, eli <em>viiteavain</em>.</p>
+
+		</aside>
+
+		<p>Voimme muuttaa Kurssisuoritusta ja Kurssia kuvaavan <em>käsitemallin</em> tietokantatauluksi määrittelemällä ensin tauluille avaimet, jonka jälkeen kurssisuoritus-tauluun lisätään viiteavain kurssi-tauluun.</p>
+
+		<figure>
+		  <img src="img/johdanto/kurssisuoritus-kurssi-attrs-keys.png" alt="[Kurssisuoritus|_tunnus_;_kurssi_;päivämäärä;arvosana;opintopistemäärä]*-1[Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
+		  <figcaption>Jokaisella kurssisuoritus-taulun rivillä on tieto kurssista, johon kyseinen kurssisuoritus viittaa.</figcaption>
+		</figure>
+
+
+		<p>Toimimme samoin myös käsitteiden Opiskelija ja Kurssisuoritus välillä. Koska opiskelijaan liittyy useampi kurssisuoritus, tulee tietokantatauluja rakennettaessa yhteys opiskelijaan määrittää kurssisuoritus-tauluun.</p>
+
+		<p>Kokonaisuudessaan käsitteistä <code>Opiskelija</code>, <code>Kurssisuoritus</code> ja <code>Kurssi</code> saadaan seuraavanlaiset tietokantataulut:</p>
+
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-kurssisuoritus-kurssi-attribuuteilla.png" alt="[Opiskelija|_opiskelijanumero_;nimi;syntymävuosi;pääaine] 1-* [Kurssisuoritus|_opiskelija_;_kurssi_;päivämäärä;arvosana;opintopistemäärä]
+[Kurssisuoritus] *-1 [Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
+		  <figcaption>Jokaisella opiskelijalla voi olla useita kurssisuorituksia, ja jokaiseen kurssisuoritukseen liittyy tasan yksi opiskelija. Jokaiseen kurssisuoritukseen liittyy myös tasan yksi kurssi, ja jokaisella kurssilla voi olla useita kurssisuorituksia.</figcaption>
+		</figure>
+
+
+
+		<p><strong><em>Kursseihin liittyvien tehtävien hahmottelua</em></strong></p>
+
+		<p>Tämän lisäksi, jokaiseen kurssiin liittyy tehtäviä, joita opiskelija voi suorittaa. Koska kurssiin liittyvien tehtävien määrä voi vaihdella, määritellään yhteys siten, että yhteen kurssiin voi liittyä useita tehtäviä. Koska haluamme lisäksi mahdollistaa tilanteen, missä tehtäviä voi käyttää myös esimerkiksi muiden kurssien kertaustehtävinä, määritellään yhteys siten, että yhteen tehtävään liittyä useampi kurssi.</p>
+
+
+		<figure>
+		  <img src="img/johdanto/tehtava-kurssi.png" alt="[Tehtävä] *-* [Kurssi]"/> 
+		  <figcaption>Tehtävä voi liittyä useampaan kurssiin, ja kurssi voi liittyä useampaan tehtävään.</figcaption>
+		</figure>
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>Yhteystyyppi monen suhden moneen</h1>
+
+		  <p>Kahden käsitteen välillä on monen suhde moneen (<code>N-N</code>) -yhteys, jos ensimmäisen käsitteen ilmentymään voi liittyä monta toisen käsitteen ilmentymää, ja toisen käsitteen ilmentymään voi liittyä monta ensimmäisen käsitteen ilmentymä.</p>
+
+		  <p>Esimerkiksi yhteen kurssiin voi liittyä monta tehtävää, ja yksi tehtävä voi liittyä useampaan kurssiin.</p>
+
+		  <p>Saman yhteystyypin voi ajatella myös tietokantataulujen välillä. Kahden taulun välillä on yhteys monen suhde moneen, jos yhteen ensimmäisen taulun riviin voi liittyä useita toisen taulun rivejä, ja yhteen toisen taulun riviin voi liittyä useita ensimmäisen taulun rivejä.</p>
+
+		<p>Monen suhde moneen -yhteyden luominen kahden tietokantataulun välille on kuitenkin monimutkaista, jonka takia yhteys toteutetaan luomalla erillinen liitostaulu, jonka vastuulla on kahden muun taulun rivien yhdistäminen.</p>
+
+		</aside>
+		
+
+		<p>Monen suhteen moneen -tyyppisen yhteyden muunnos tietokantatauluiksi tapahtuu siten, että käsitteitä kuvaaville tietokantatauluille määritellään avaimet, jonka jälkeen niiden välille luodaan liitostaulu, joka on yhden suhde moneen -yhteydessä kummankin taulun kanssa.
+
+		<figure>
+		  <img src="img/johdanto/tehtava-kurssi-liitostaulu.png" alt="[Tehtävä|_tunnus_;nimi;kuvaus]1-*[Kurssitehtävä|_tehtävä_;_kurssi_]
+[Kurssitehtävä]*-1[Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
+		  <figcaption>Nyt jos tehtävä on tietyllä kurssilla, on taulussa kurssitehtävä rivi, missä on tehtävän ja kurssin yksilöivä tunnus.</figcaption>
+		</figure>
+
+		<p>TODO: Yllä esitetty taulu <code>Kurssitehtävä</code> on hyvä esimerkki taulusta, missä taulun jokainen rivi on yksilöity useamman sarakkeen yhdistelmän kautta.</p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>Yhteystyyppi yhden suhde yhteen</h1>
+
+		  <p>Yhteystyyppien yhden suhde moneen ja monen suhde moneen lisäksi on myös yhteystyyppi yhden suhde yhteen. Kahden käsitteen välillä on yhden suhde yhteen (<code>1-1</code>) -yhteys, jos ensimmäisen käsitteen ilmentymään voi liittyä vain yksi toisen käsitteen ilmentymä, ja toisen käsitteen ilmentymään voi liittyä vain yksi ensimmäisen käsitteen ilmentymä.</p>
+
+		  <p>Esimerkiksi yhdellä opiskelijalla voi olla vain yksi laite lainassa ylläpidolta, ja ylläpito voi lainata tietyn laitteen vain yhdelle opiskelijalle.</p>
+
+		  <p>Tämänkin yhteystyypin voi ajatella myös tietokantataulujen välillä. Kahden taulun välillä on yhteys yhden suhde yhteen, jos yhteen ensimmäisen taulun riviin voi liittyä vain yksi toisen taulun rivi, ja yhteen toisen taulun riviin voi liittyä vain yksi ensimmäisen taulun rivi.</p>
+
+		<p>Yhden suhde yhteen yhteys toteutetaan lisäämällä viittaus jommastakummasta taulusta toiseen. </p>
+
+		</aside>
+
+
+		<h2>Useammassa taulussa olevan tiedon yhdistäminen</h2>
+
+		<p>TODO: motivaatiosanat</p>
+
+		<p>Avainsanaa <code>FROM</code> seuraa taulu, josta tietoa haetaan. Voimme määritellä haun kohteeksi useampia tauluja listaamalla ne FROM-avainsanan jälkeen pilkulla eroteltuna seuraavasti <code>SELECT * FROM Opiskelija, Kurssisuoritus</code>. Jos emme kerro miten taulujen rivit yhdistetään, on lopputuloksessa kaikki rivit yhdistettynä kaikkiin riveihin.</p>
+		
+		<p>Taulujen välisten tietojen yhdistäminen tapahtuu käsitteen yksilöivän attribuutin, eli avaimen avulla. Esimerkkitauluissamme Opiskelijalla on attribuutti opiskelijanumero ja Kurssisuorituksella attribuutti Opiskelija, joiden avulla rivit voidaan kytkeä toisiinsa.</p>
+		
+		<p>Kytkeminen tapahtuu kyselyä rajaavan <code>WHERE</code>-ehdon avulla seuraavasti: <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code>, eli "Anna kaikki riviyhdistelmät tauluista Opiskelija ja Kurssisuoritus, joissa attribuuttien opiskelijanumero ja opiskelija arvot ovat samat".</p>
+		
+		
+		<div ng-controller="weekOneSqlController">
+		  
+		  <query
+		     db="db"
+		     query="SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija"
+		     editable="false"
+		     done="listOpiskelijatJaKurssisuoritukset">
+		  </query>
+		  
+		  <div ng-show="listOpiskelijatJaKurssisuoritukset">
+		    
+		    <h4>Tehtävät</h4>
+		    
+		    <p>Tee nyt kysely, joka tulostaa jokaisen opiskelijan nimen, kurssisuorituksen, sekä kurssisuoritukseen liittyvän arvosanan.</p>
+		    
+		    
+		    <togglable content="taulut">
+                      <table-info></table-info>
+		    </togglable>
+		    
+		    <query db="db"></query>
+		  </div>
 		</div>
 
-		
-		<!-- Viikon 1 SQL-tehtävät loppuu -->
-		
+
+		<aside class="info">
+		  <br/>
+
+		  <h1>Käsitekaaviot ja tietokantataulut</h1>
+
+		  <p>TODO: Olemme käsitelleet samankaltaisia asioita...</p>
+
+		  <p>termistöä</p>
+
+		  <p>....</p>
+
+		</aside>
+
 		<h2>Tietokantakyselyiden tekeminen ohjelmallisesti</h2>
 		
 		<p>Vaikka edelliset esimerkit tehtiin osana kurssimateriaalia, tehdään tietokantakyselyjä usein ohjelmallisesti tai suoraan tietokannanhallintajärjestelmässä.</p>
 
 		<p>Ensimmäisen viikon läsnä tehtävät harjoitukset liittyvät tähän teemaan -- materiaali päivittyy kurssin edetessä.</p>
+
+		<!-- esimerkkikoodia viikon 1 tehtävistä -->
+		<!-- JDBC -->
+
+
 
 
 
@@ -753,26 +927,8 @@
 
 
 
-
-		<h2>Erilaiset yhteystyypit</h2>
-
-
 		<h2>Relaatiomallin formaali määritelmä</h2>
 
-		
-
-
-
-
- Tietokannat, tietokantamoottorit, tietokannanhallintajärjestelmät
- Tietokannanhallintajärjestelmä hallinnoi tietokantoja sekä tarjoaa kielen tietokannan käsittelyyn -- tähän olemassaolevia rajapintoja kuten SQL
- Yksittäinen tietokannanhallintajärjestelmä voi sisältää useamman tietokannan -- pitää huolta myös oikeuksista dataan (eri käyttäjillä pääsy erilaiseen dataan)
- Tietokannat ym Tietokantamoottorit hyviä, ei kande rakentaa omaa → käytetään olemassaolevia
- mitä tietokantamoottorit tekevät
-
- Tietokannan käyttö, kyselyt -- yhden taulun SELECT
-
- Konkreettinen esimerkki tietokantaa käyttävästä sovelluksesta
 		
 
 
