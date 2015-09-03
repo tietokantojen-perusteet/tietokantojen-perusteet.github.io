@@ -25,7 +25,7 @@ myAppModule.directive('tableInfo', function() {
       templateUrl: 'templates/table-template.html',
       controller: function($scope){
         $scope.table_details = function (table_name) {
-            return TABLES[table_name].schema;
+            return $scope.tabledata[table_name].schema;
         }
       }
   };

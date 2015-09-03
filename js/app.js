@@ -1,17 +1,18 @@
 var myAppModule = angular.module('myApp', []);
 
-function initialize_table(table_name, db){
-  db.run("CREATE TABLE "+table_name+" ("+TABLES[table_name].schema+");");
+function initialize_table(tabledata, table_name, db){
+  var insertQuery = "CREATE TABLE " + table_name + " (" + tabledata[table_name].schema + ");";
+  db.run(insertQuery);
 
-  values = TABLES[table_name].data[0].length
+  values = tabledata[table_name].data[0].length
 
   qmarks = "?"
   for (var i=1; i<values; i++) {
       qmarks += ",?"
   }
 
-  TABLES[table_name].data.forEach( function( item ){
-      db.run("INSERT INTO "+table_name+" VALUES ("+qmarks+")", item);
+  tabledata[table_name].data.forEach( function( item ){
+      db.run("INSERT INTO " + table_name + " VALUES (" + qmarks + ")", item);
   } );
 }
 
@@ -20,10 +21,23 @@ myAppModule.controller('weekOneSqlController', function($scope) {
   var db = new SQL.Database();
   $scope.db = db;
 
+  $scope.tabledata = TABLES;
   $scope.tables = ['Opiskelija', 'Kurssisuoritus'];
 
   $scope.tables.forEach(function(table) {
-    initialize_table(table, db);
+    initialize_table($scope.tabledata, table, db);
+  });
+});
+
+myAppModule.controller('weekTwoSqlController', function($scope) {
+  var db = new SQL.Database();
+  $scope.db = db;
+
+  $scope.tabledata = WK2TABLES;
+  $scope.tables = ['Opiskelija', 'Kurssi', 'Kurssisuoritus', 'Tehtävä', 'Kurssitehtävä'];
+
+  $scope.tables.forEach(function(table) {
+    initialize_table($scope.tabledata, table, db);
   });
 });
 

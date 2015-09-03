@@ -735,9 +735,21 @@
 		    <query db="db"></query>
 		  </div>
 		  
-		  
-		  
 		</div>
+
+
+		<aside class="info">
+		  <br/>
+
+		  <h1>Loogiset operaatiot 'ja' ja 'tai'</h1>
+
+		  <p>Rajausehtoihin voi myös lisätä loogisia operaatioita kyselyjen tulosten tajaamiseksi. Operaatio 'ja', eli kahden rajausehdon yhdistäminen, toimii avainsanalla <code>AND</code>. Esimerkiksi kysely <code>SELECT * FROM Kurssisuoritus WHERE Kurssi = 'Ohjelmoinnin perusteet' AND Arvosana = 5</code> listaisi vain ne Ohjelmoinnnin perusteet -kurssin suoritukset, missä arvosana on 5.</p>
+
+		  <p>Operaation 'tai' lisääminen on myös mahdollista. Esimerkiksi kysely <code>SELECT * FROM Kurssisuoritus WHERE Kurssi = 'Ohjelmoinnin perusteet' OR Kurssi = 'Ohjelmoinnin jatkokurssi'</code> listaisi kaikki ne kurssisuoritukset, joissa kurssi on joko ohjelmoinnin perusteet tai ohjelmoinnin jatkokurssi.</p>
+
+		  <p>Ehtoja voi myös yhdistää, jonka lisäksi suluilla voi rajata suoritusjärjestystä. Ota selvää mitä kysely <code>SELECT * FROM Kurssisuoritus WHERE (Kurssi = 'Ohjelmoinnin perusteet' OR Kurssi = 'Ohjelmoinnin jatkokurssi') AND Arvosana = 3</code> tekee.</p>
+
+		</aside>
 		
 
 		<figure>
@@ -749,7 +761,6 @@
 
 		<!-- Viikko 1 loppuu -->
 
-<!--
 		<h2>Erilaiset yhteydet käsitteiden välillä</h2>
 
 		<p>Huomaamme, että käsite Kurssisuoritus oikeastaan liittyy kahteen eri asiaan; kurssiin ja kurssin suoritukseen. Eriytetään nämä kaksi käsitettä toisistaan.</p>
@@ -802,7 +813,7 @@
 
 
 		<figure>
-		  <img src="img/johdanto/opiskelija-kurssisuoritus-kurssi-attribuuteilla.png" alt="[Opiskelija|_opiskelijanumero_;nimi;syntymävuosi;pääaine] 1-* [Kurssisuoritus|_opiskelija_;_kurssi_;päivämäärä;arvosana;opintopistemäärä]
+		  <img src="img/johdanto/opiskelija-kurssisuoritus-kurssi-attribuuteilla.png" alt="[Opiskelija|_opiskelijanumero_;nimi;syntymävuosi;pääaine] 1-* [Kurssisuoritus|_tunnus_;_opiskelija_;_kurssi_;päivämäärä;arvosana;opintopistemäärä]
 [Kurssisuoritus] *-1 [Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
 		  <figcaption>Jokaisella opiskelijalla voi olla useita kurssisuorituksia, ja jokaiseen kurssisuoritukseen liittyy tasan yksi opiskelija. Jokaiseen kurssisuoritukseen liittyy myös tasan yksi kurssi, ja jokaisella kurssilla voi olla useita kurssisuorituksia.</figcaption>
 		</figure>
@@ -843,7 +854,10 @@
 		  <figcaption>Nyt jos tehtävä on tietyllä kurssilla, on taulussa kurssitehtävä rivi, missä on tehtävän ja kurssin yksilöivä tunnus.</figcaption>
 		</figure>
 
+<!--
 		<p>TODO: Yllä esitetty taulu <code>Kurssitehtävä</code> on hyvä esimerkki taulusta, missä taulun jokainen rivi on yksilöity useamman sarakkeen yhdistelmän kautta.</p>
+-->
+
 
 		<aside class="info">
 		  <br/>
@@ -862,16 +876,41 @@
 
 		<h2>Useammassa taulussa olevan tiedon yhdistäminen</h2>
 
-		<p>TODO: motivaatiosanat</p>
 
-		<p>Avainsanaa <code>FROM</code> seuraa taulu, josta tietoa haetaan. Voimme määritellä haun kohteeksi useampia tauluja listaamalla ne FROM-avainsanan jälkeen pilkulla eroteltuna seuraavasti <code>SELECT * FROM Opiskelija, Kurssisuoritus</code>. Jos emme kerro miten taulujen rivit yhdistetään, on lopputuloksessa kaikki rivit yhdistettynä kaikkiin riveihin.</p>
+		<p>Hahmottelimme edellisessä kappaleessa opiskelun ja oppimisen seuraamiseen tarkoitetun järjestelmämme tietokantaa. Käytetään jatkossa seuraavaa tietokannan määrittelyä, missä edellä hahmoteltuja osia on yhdistetty:</p>
+
+		<figure>
+		  <img src="img/viikko2/tietokantakaavio.png" alt="[Tehtävä|_tunnus_;nimi;kuvaus]1-*[Kurssitehtävä|_tehtävä_;_kurssi_]
+[Kurssitehtävä]*-1[Kurssi|_kurssikoodi_;nimi;kuvaus]
+[Opiskelija|_opiskelijanumero_;nimi;syntymävuosi;pääaine] 1-* [Kurssisuoritus|_tunnus_;_opiskelija_;_kurssi_;päivämäärä;arvosana;opintopistemäärä]
+[Kurssisuoritus] *-1 [Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
+		  <figcaption>Nyt jos tehtävä on tietyllä kurssilla, on taulussa kurssitehtävä rivi, missä on tehtävän ja kurssin yksilöivä tunnus.</figcaption>
+		</figure>
+
+		<p>Voit tutkia uudessa esimerkkitietokannassa olevaa tietoa allaolevan SQL-komentotulkin avulla.</p>
+
+		
+		<div ng-controller="weekTwoSqlController">
+		  
+		    <togglable content="taulut">
+                      <table-info></table-info>
+		    </togglable>
+		    
+		    <query db="db"></query>		    
+		</div>
+
+
+
+		<p>Tutustuimme aiemmin SQL-kyselyihin, joiden avulla teimme erilaisia kyselyitä yksittäisiin tietokantatauluihin. Tutustutaan seuraavaksi erääseen tapaan useammassa taulussa olevan tiedon yhdistämiseen.</p>
+
+		<p>Aiempaa materiaalia kertaamalla muistamme, että avainsanaa <code>FROM</code> seuraa taulu, josta tietoa haetaan. Voimme määritellä haun kohteeksi useampia tauluja listaamalla ne FROM-avainsanan jälkeen pilkulla eroteltuna seuraavasti <code>SELECT * FROM Opiskelija, Kurssisuoritus</code>. Jos emme kerro miten taulujen rivit yhdistetään, on lopputuloksessa kaikki rivit yhdistettynä kaikkiin riveihin.</p>
 		
 		<p>Taulujen välisten tietojen yhdistäminen tapahtuu käsitteen yksilöivän attribuutin, eli avaimen avulla. Esimerkkitauluissamme Opiskelijalla on attribuutti opiskelijanumero ja Kurssisuorituksella attribuutti Opiskelija, joiden avulla rivit voidaan kytkeä toisiinsa.</p>
 		
 		<p>Kytkeminen tapahtuu kyselyä rajaavan <code>WHERE</code>-ehdon avulla seuraavasti: <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code>, eli "Anna kaikki riviyhdistelmät tauluista Opiskelija ja Kurssisuoritus, joissa attribuuttien opiskelijanumero ja opiskelija arvot ovat samat".</p>
 		
 		
-		<div ng-controller="weekOneSqlController">
+		<div ng-controller="weekTwoSqlController">
 		  
 		  <query
 		     db="db"
@@ -884,7 +923,7 @@
 		    
 		    <h4>Tehtävät</h4>
 		    
-		    <p>Tee nyt kysely, joka tulostaa jokaisen opiskelijan nimen, kurssisuorituksen, sekä kurssisuoritukseen liittyvän arvosanan.</p>
+		    <p>Tee nyt kysely, joka tulostaa jokaisen opiskelijan nimen, kurssisuorituksen päivämäärän, ja kurssisuorituksen arvosanan.</p>
 		    
 		    
 		    <togglable content="taulut">
@@ -895,6 +934,116 @@
 		  </div>
 		</div>
 
+
+		<p><strong><em>Useamman taulun yhdistäminen</em></strong></p>
+
+		<p>Useamman taulun yhdistäminen onnistuu samalla tavalla. Kaikki taulut, jotka haluamme lisätä kyselyyn, tulevat FROM-avainsanan jälkeen. Jos tauluja on useampi, on hyvä varmistaa, että kaikki taulut yhdistetään avainkenttien perusteella, sillä muuten haun vastaus voi olla iso.</p>
+
+		<p>Kun yhdistämme useampia tauluja, päädymme helposti tilanteeseen, missä tuloksessa on myös useampia samannimisiä kenttiä. Esimerkiksi omassa tietokantamäärittelyssämme kenttä nimi löytyy tauluista Tehtävä, Kurssi ja Opiskelija. Voimme määritellä taulun, mihin haettava kenttä liittyy, pisteoperaattorin avulla. Kyselyn <code>SELECT nimi FROM Opiskelija</code> voi siis kirjoittaa myös muodossa <code>SELECT Opiskelija.nimi FROM Opiskelija</code>.</p>
+
+		<p>Voimme toisaalta myös nimetä kentän tulostusmuodon seuraavasti <code>SELECT Opiskelija.nimi AS opiskelija FROM Opiskelija</code>. Edelläoleva kysely hakee Opiskelija-taulusta opiskelijan nimen, mutta tulostaa nimet otsikolla 'opiskelija'. </p>
+
+		<p>Allaoleva kysely listaa jokaiselta opiskelijalta opiskelijan nimen sekä opiskelijan suorittamat kurssit.</p>
+
+		<div ng-controller="weekTwoSqlController">
+		  
+		  <query
+		     db="db"
+		     query="SELECT Opiskelija.nimi AS opiskelija, Kurssi.nimi AS kurssi FROM Opiskelija, Kurssisuoritus, Kurssi WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija AND Kurssisuoritus.kurssi = Kurssi.kurssikoodi"
+		     editable="false"
+		     done="listOpiskelijanSuorittamatKurssit">
+		  </query>
+		  
+		  <div ng-show="listOpiskelijanSuorittamatKurssit">
+		    
+		    <h4>Tehtävät</h4>
+		    
+		    <p>Tee nyt kysely, joka tulostaa jokaiseen kurssiin liittyvän tehtävän. Tulostuksen otsikoiden nimien tulee olla 'kurssi' ja 'tehtävä'.</p>
+		    
+		    
+		    <togglable content="taulut">
+                      <table-info></table-info>
+		    </togglable>
+		    
+		    <query db="db"></query>
+		  </div>
+		</div>
+
+
+		<aside class="info">
+
+		  <br/>
+		  <h1>Taulujen yhdistämisestä</h1>
+
+		  <p>Yksi tapa taulujen yhdistämiseen tarvittujen kyselyjen hahmottamiseen on tietokantakaavion katsominen. Jos tavoitteena olisi esimerkiksi etsiä kaikki tehtävät, mitä Joni-niminen opiskelija on saattanut tehdä, ensimmäinen askel on etsiä polku taulusta <code>Tehtävä</code> tauluun <code>Opiskelija</code>.</p>
+
+		  <p>Aloitamme siis taulusta <code>Tehtävä</code>, ja etsimme polun tauluun <code>Opiskelija</code>. Jotta pääsemme taulusta Tehtävä tauluun Opiskelija, tulee meidän vierailla tauluissa <code>Kurssitehtävä</code>, <code>Kurssi</code> ja <code>Kurssisuoritus</code>, jota seuraa taulu <code>Opiskelija</code>.</p>
+		  <p>Kyselyä muodostaessa on hyvä yhdistää taulu kerrallaan toisiinsa.</p>
+
+		  <ol>
+		    <li>Yhdistämme ensin taulut Tehtävä ja Kurssitehtävä:
+		      <pre class="sh_sql">
+SELECT Tehtävä.nimi AS tehtävä 
+    FROM Tehtävä, Kurssitehtävä 
+    WHERE Tehtävä.tunnus = Kurssitehtava.tehtävä</pre></li>
+		    
+		    <li>Yhdistämme seuraavaksi edellisiin tauluihin taulun Kurssi:
+		      <pre class="sh_sql">
+SELECT Tehtävä.nimi AS tehtävä 
+    FROM Tehtävä, Kurssitehtävä, Kurssi 
+    WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
+        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi</pre></li>
+
+		    <li>Seuraavaksi, yhdistämme kurssin kurssisuoritukseen:
+		      <pre class="sh_sql">
+SELECT Tehtävä.nimi as tehtävä 
+    FROM Tehtävä, Kurssitehtävä, Kurssi, Kurssisuoritus
+    WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
+        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi
+        AND Kurssi.kurssikoodi = Kurssisuoritus.kurssi</pre></li>
+
+		    <li>Ja viimeinkin, saamme yhdistettyä polun opiskelijaan:
+		      <pre class="sh_sql">
+SELECT Tehtävä.nimi AS tehtävä 
+    FROM Tehtävä, Kurssitehtävä, Kurssi, Kurssisuoritus, Opiskelija
+    WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
+        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi
+        AND Kurssi.kurssikoodi = Kurssisuoritus.kurssi
+        AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero</pre></li>
+
+		    <li>Koska halusimme saada Joniin mahdollisesti liittyvät tehtävät, lisätään haettaviin kenttiin vielä opiskelijan nimi:
+		      <pre class="sh_sql">
+SELECT Tehtävä.nimi AS tehtävä
+    FROM Tehtävä, Kurssitehtävä, Kurssi, Kurssisuoritus, Opiskelija
+    WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
+        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi
+        AND Kurssi.kurssikoodi = Kurssisuoritus.kurssi
+        AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero
+        AND Opiskelija.nimi = 'Joni'</pre></li>
+
+		  </ol>
+
+		
+		</aside>
+
+		<p>Voit kokeilla juuri rakennettua kyselyä alla.</p>
+
+		
+		<div ng-controller="weekTwoSqlController">
+		  
+		  <query
+		     db="db"
+		     query="SELECT Tehtävä.nimi AS tehtävä
+    FROM Tehtävä, Kurssitehtävä, Kurssi, Kurssisuoritus, Opiskelija
+    WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
+        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi
+        AND Kurssi.kurssikoodi = Kurssisuoritus.kurssi
+        AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero
+        AND Opiskelija.nimi = 'Joni'">
+		  </query>
+		</div>
+
+<!--
 
 		<aside class="info">
 		  <br/>
@@ -908,6 +1057,8 @@
 		  <p>....</p>
 
 		</aside>
+-->
+
 
 		<h2>Tietokantakyselyiden tekeminen ohjelmallisesti</h2>
 		
