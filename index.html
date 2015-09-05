@@ -617,6 +617,7 @@
 		    <query db="db"></query>
 		  </div>
 		  
+
 		  
 		  <h4>SELECT <em>sarake, toinen</em> FROM <em>Taulu</em></h4>
 		  
@@ -671,6 +672,8 @@
 		    <query db="db"></query>
 		  </div>
 
+
+
 		  <h4>SELECT * FROM <em>Taulu</em> <em>WHERE</em>...</h4>
 		  
 		  <p>Avainsanan <code>WHERE</code> avulla kyselyille annetaan hakuehtoja. Hakuehtojen perusteella kyselyn tulokseen valitaan vain ne rivit, joissa hakuehdossa määritellyn sarakkeen arvot täyttävät hakuehdon. Hakuehto voi olla esimerkiksi muotoa <code>...WHERE nimi = 'Joni'</code>, jolloin valittaisiin vain ne rivit, joilla sarakkeen <code>nimi</code> arvo on <code>'Joni'</code>.</p>
@@ -707,6 +710,25 @@
 
 		    </div>
 		  </div>
+
+		  <aside class="info">
+		    <br/>
+		    <h1>SQL-kyselyiden kirjainkoko</h1>
+		    
+		    <p>SQL on "case insensitive", eli sillä, että onko kysely kirjoitettu isolla vai pienelle ei ole kyselyn suoritukselle merkitystä. Voimme kirjoittaa komennon <code>SELECT</code> yhtä hyvin muodossa <code>select</code> tai <code>Select</code> -- sama pätee myös taulujen nimille ja attribuuteille.</p>
+
+		    <p>Taulussa olevaa dataa tarkasteltaessa kirjainkoolla on kuitenkin merkitystä. Kun temme esimerkiksi vertailuoperaatioita merkkijonoille, on merkkijonon kirjoitusasu tärkeä. Kysely <code>SELECT * FROM Opiskelija WHERE nimi = 'Joni'</code> palauttaa vain ne opiskelijat, joiden nimi-kentän arvo on <em>täsmälleen</em> 'Joni'. Jos rivillä olevan nimi-kentän arvo olisi vaikkapa 'joni', ei edellinen kysely sisällyttäisi kyseistä riviä vastaukseen.</p>
+
+		    <p>Noudatamme tällä kurssilla seuraavaa käytäntöä:</p>
+
+		    <ol>
+		      <li>Kaikki SQL-kielen komennot, kuten <code>SELECT</code>, <code>FROM</code> ja <code>WHERE</code>, kirjoitetaan isolla.</li>
+		      <li>Taulujen nimet kirjoitetaan isolla alkukirjaimella. Esimerkiksi <code>Opiskelija</code> ja <code>Kurssisuoritus</code>.</li>
+		      <li>Taulujen attribuutit kirjoitetaan pienellä. Esimerkiksi <code>nimi</code> ja <code>kurssikoodi</code>.</li>
+		    </ol>
+
+		  </aside>
+
 
 		  <p>Kyselyissä toimivat myös suurempi kuin <code>&gt;</code> ja pienempi kuin <code>&lt;</code> -operaatiot.</p>
 
