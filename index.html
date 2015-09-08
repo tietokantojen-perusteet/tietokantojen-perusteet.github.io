@@ -848,72 +848,153 @@
 		  <p>Saman yhteystyypin voi ajatella myös tietokantataulujen välillä. Kahden taulun välillä on yhteys yhden suhde moneen, jos yhteen ensimmäisen taulun riviin voi liittyä useita toisen taulun rivejä, mutta yhteen toisen taulun riviin voi liittyä vain yksi ensimmäisen taulun rivi.</p>
 
 		  <p><em>Tietokantataulujen luominen</em></p>
-
-		<figure>
-		  <img src="img/viikko2/yhdesta-moneen-kasitteet.png" alt="[A]1-*[B]"/> 
-		  <figcaption>Yhden suhde moneen. Yhteen A-käsitteeseen voi liittyä monta B-käsitettä, mutta yhteen B-käsitteeseen liittyy aina tasan yksi A-käsite.</figcaption>
-		</figure>
-
-
+		  
+		  <figure>
+		    <img src="img/viikko2/yhdesta-moneen-kasitteet.png" alt="[A]1-*[B]"/> 
+		    <figcaption>Yhden suhde moneen. Yhteen A-käsitteeseen voi liittyä monta B-käsitettä, mutta yhteen B-käsitteeseen liittyy aina tasan yksi A-käsite.</figcaption>
+		  </figure>
+		  
+		  
 		  <p>Kun kahden käsitteen välillä on yhden suhde moneen -yhteys, luodaan niiden perusteella tietokantataulut seuraavasti. Luodaan ensin käsitteestä, jonka "viivan päässä" on numero 1, tietokantataulu, ja määritellään sille käsitteen ilmentymät yksilöivä pääavain. Jos käsitteeseen liittyy muita ominaisuuksia tai attribuutteja, asetetaan ne tietokantataulun sarakkeiksi.</p>
-
-		<figure>
-		  <img src="img/viikko2/kasite-a-paaavain.png" alt="[A|(pk) id]"/> 
-		  <figcaption>Käsitteen A perusteella luotu tietokantataulu, jolle on määritelty pääavain <em>id</em>. </figcaption>
-		</figure>
 		  
-		<p>Tämän jälkeen luodaan käsitteestä, jonka "viivan päässä" on tähti, tietokantataulu, ja määritellään sille <em>viiteavain</em>, jonka avulla voimme viitata aiemmin luotuun tauluun.</p>
-
-		<figure>
-		  <img src="img/viikko2/kasite-b-viiteavain.png" alt="[B|(fk) a_id: A]"/> 
-		  <figcaption>Käsitteen B perusteella luotu tietokantataulu, jolle on määritelty viiteavain <em>a_id</em>, joka viittaa tauluun A. </figcaption>
-		</figure>
+		  <figure>
+		    <img src="img/viikko2/kasite-a-paaavain.png" alt="[A|(pk) id]"/> 
+		    <figcaption>Käsitteen A perusteella luotu tietokantataulu, jolle on määritelty pääavain <em>id</em>. </figcaption>
+		  </figure>
 		  
-		
-		<p>Tämän jälkeen piirretään viiva tietokantataulujen välille.</p>
-
-
-		<figure>
-		  <img src="img/viikko2/taulut-a-b.png" alt="[A|(pk) id]1-*[B|(fk) a_id: A]"/> 
-		  <figcaption>Tietokantataulussa A on pääavain <em>id</em>. Tietokantataulussa B on viiteavain <code>a_id</code>, joka viittaa tietokantatauluun A.</figcaption>
-		</figure>
-
+		  <p>Tämän jälkeen luodaan käsitteestä, jonka "viivan päässä" on tähti, tietokantataulu, ja määritellään sille <em>viiteavain</em>, jonka avulla voimme viitata aiemmin luotuun tauluun.</p>
+		  
+		  <figure>
+		    <img src="img/viikko2/kasite-b-viiteavain.png" alt="[B|(fk) a_id: A]"/> 
+		    <figcaption>Käsitteen B perusteella luotu tietokantataulu, jolle on määritelty viiteavain <em>a_id</em>, joka viittaa tauluun A. </figcaption>
+		  </figure>
+		  
+		  
+		  <p>Tämän jälkeen piirretään viiva tietokantataulujen välille.</p>
+		  
+		  
+		  <figure>
+		    <img src="img/viikko2/taulut-a-b.png" alt="[A|(pk) id]1-*[B|(fk) a_id: A]"/> 
+		    <figcaption>Tietokantataulussa A on pääavain <em>id</em>. Tietokantataulussa B on viiteavain <code>a_id</code>, joka viittaa tietokantatauluun A.</figcaption>
+		  </figure>
+		  
 		  <p>Yllä kuvattiin, miten yhden suhde moneen -yhteystyypin tapauksessa luodaan luokkakaaviosta tietokantataulut.</p>
+		  
+		</aside>
+		
+
+		<p>Luodaan seuraavaksi Kurssisuorituksesta ja Kurssista tietokantataulut.</p>
+
+
+		<figure>
+		  <img src="img/johdanto/kurssisuoritus-kurssi-attrs.png" alt="[Kurssisuoritus|päivämäärä;arvosana;opintopistemäärä]*-1[Kurssi|nimi;kuvaus]"/> 
+		  <figcaption>Jokaiseen kurssisuoritukseen liittyy yksi kurssi, mutta kurssilla voi olla useampia kurssisuorituksia.</figcaption>
+		</figure>
+
+
+		<p>Ensimmäinen askel on tietokantataulun Kurssi luominen sekä sen pääavaimen määrittely. Kurssin nimi ei ole hyvä avain, sillä esimerkiksi kurssi "Tietokone työvälineenä" toistuu eri tiedekunnissa ja laitoksissa. Toisaalta, avaimen on hyvä olla sellainen, että se ei muutu -- (jos avain muuttuisi, kaikki viiteavaimet tulisi myös päivittää) -- kuvauskaan ei ole hyvä avain. Luodaan avainta varten uusi attribuutti, <em>kurssitunnus</em>, ja lisätään se tauluun muiden kurssikäsitteeseen liittyvien attribuuttien kanssa.</p>
+
+
+		<figure>
+		  <img src="img/viikko2/kurssi-paaavaimella.png" alt="[Kurssi|(pk) kurssitunnus;nimi;kuvaus]"/> 
+		</figure>
+
+		<p>Luodaan tämän jälkeen taulu Kurssisuoritus. Koska jokaiseen kurssisuoritukseen liittyy yksi kurssi, luodaan tauluun viiteavain <em>kurssi</em>, joka viittaa Kurssi-tauluun. Muut attribuutit lisätään tauluun viiteavaimen lisäksi.</p>
+
+
+		<figure>
+		  <img src="img/viikko2/kurssisuoritus-viiteavaimella.png" alt="[Kurssi|(pk) kurssitunnus;nimi;kuvaus]"/> 
+		</figure>
+
+		<p>Yhdistetään tietokantataulut vielä viivalla.</p>
+
+
+		<figure>
+		  <img src="img/viikko2/kurssisuoritus-ja-kurssi-tietokantataulut.png" alt="[Kurssisuoritus|(fk) kurssi: Kurssi;päivämäärä;arvosana;opintopistemäärä]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]"/> 
+		</figure>		
+
+		<p>&nbsp;</p>
+
+		<p><em><strong>Kolmannen tietokantakaulun lisääminen tietokantakaavioon</strong></em></p>
+
+		<p>Tarkastellaan seuraavaa luokkakaaviota, ja tehdään siitä seuraavaksi tietokantakaavio.</p>
+
+		<figure>
+		  <img src="img/viikko2/opiskelija-kurssisuoritus-kurssi-luokkakaavio.png" alt="[Opiskelija|opiskelijanumero;nimi;syntymävuosi;pääaine] 1-* [Kurssisuoritus|päivämäärä;arvosana;opintopistemäärä]
+[Kurssisuoritus] *-1 [Kurssi|nimi;kuvaus]"/> 
+		</figure>		
+
+		<p>Teimme edellä jo käsitteistä Kurssi ja Kurssisuoritus tietokantakaavion, joten voimme keskittyä nyt käsitteiden Opiskelija ja Kurssisuoritus väliseen suhteeseen.</p>
+
+
+		<p>Aloitamme taas käsitteestä, jonka viivan päässä on 1, eli tässä tapauksessa opiskelijasta. Kuten aiemmin, käytämme tietokantataululle Opiskelija avaimena opiskelijanumeroa, sillä se yksilöi jokaisen opiskelijan.</p>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-ja-opiskelijanumero.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]">
+		</figure>
+
+		<p>Keskitytään tämän jälkeen viivan toiseen päähän, eli tässä tapauksessa käsitteeseen Kurssisuoritus. Koska yhteen kurssisuoritukseen liittyy tasan yksi opiskelija, lisätään Tauluun Kurssisuoritus viiteavain <em>opiskelija</em>, joka viittaa opiskelijaan. Muuten taulu pysyy samana kuten aiemminkin.</p>
+
+		<p>Voimme nyt yhdistää kaikki taulut yhteen, jolloin tietokantakaavio on seuraavanlainen:</p>
+
+		<figure>
+		  <img src="img/viikko2/opiskelija-kurssisuoritus-kurssi-tietokantakaavio.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]1-*[Kurssisuoritus|(fk) opiskelija: Opiskelija;(fk) kurssi: Kurssi;päivämäärä;arvosana;opintopistemäärä]
+[Kurssisuoritus]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]"/> 
+		</figure>
+
+		
+		
+		<aside class="info">
+		  <br/>
+		  <h1>Yhdistelyharjoittelua SQL:llä</h1>
+
+		  <p>Käytössämme on nyt edellä luodut tietokantataulut sekä muutamia muita tauluja, mitä luomme kohta. Harjoitellaan tässä välissä hieman kyselyiden tekemistä edellä luotuihin kolmeen tauluun.</p>
+
+		  <p>Useamman taulun yhdistäminen tapahtuu <code>WHERE</code>-ehdon avulla esimerkiksi seuraavasti: <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code>, eli "Anna kaikki riviyhdistelmät tauluista Opiskelija ja Kurssisuoritus, joissa attribuuttien opiskelijanumero ja opiskelija arvot ovat samat".</p>
+
+		  <p>Edellä ehto <code>WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> luo ehdon, missä kyselyn tulokseen valitaan mukaan vain ne rivit, missä Opiskelija-taulun opiskelijanumero on sama kuin Kurssisuoritus-taulun opiskelija. Käytännössä tämä kysely kytkee Opiskelija-taulun pääavaimen ja Kurssisuoritustaulun Opiskelija-tauluun viittaavan viiteavaimen.</p>
+
+		  <div ng-controller="weekTwoSqlController">
+		    <query
+		       db="db"
+		       query="SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija"
+		       editable="false"
+		       done="listOpiskelijatAndKurssisuoritukset">
+		    </query>
+		    
+		    <div ng-show="listOpiskelijatAndKurssisuoritukset">
+		      
+		      <h4>Tehtävät</h4>
+		      
+		      <p>Tee nyt kysely, jolla saat listattua kaikki Kurssit ja niihin liittyvät kurssisuoritukset. Valitse näytettäviksi sarakkeiksi vain kurssin <code>nimi</code> ja kurssisuorituksen <code>päivämäärä</code> ja <code>arvosana</code>.</p>
+
+		      <p>Kyselyn tuloksessa pitäisi olla 4 riviä ja 3 saraketta.</p>
+		      
+		      <togglable content="taulut">
+			<table-info></table-info>
+		      </togglable>
+		      
+		      <query db="db"></query>
+		    </div>
+		  </div>
 
 		</aside>
+		
 
 
 
-		<p>Voimme muuttaa Kurssisuoritusta ja Kurssia kuvaavan <em>käsitemallin</em> tietokantatauluksi määrittelemällä ensin tauluille avaimet, jonka jälkeen kurssisuoritus-tauluun lisätään viiteavain kurssi-tauluun.</p>
+		<p><strong><em>Yhteystyypit jatkuu: kursseihin liittyy tehtäviä</em></strong></p>
+		
 
-		<figure>
-		  <img src="img/johdanto/kurssisuoritus-kurssi-attrs-keys.png" alt="[Kurssisuoritus|_tunnus_;_kurssi_;päivämäärä;arvosana;opintopistemäärä]*-1[Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
-		  <figcaption>Jokaisella kurssisuoritus-taulun rivillä on tieto kurssista, johon kyseinen kurssisuoritus viittaa.</figcaption>
-		</figure>
-
-
-		<p>Toimimme samoin myös käsitteiden Opiskelija ja Kurssisuoritus välillä. Koska opiskelijaan liittyy useampi kurssisuoritus, tulee tietokantatauluja rakennettaessa yhteys opiskelijaan määrittää kurssisuoritus-tauluun.</p>
-
-		<p>Kokonaisuudessaan käsitteistä <code>Opiskelija</code>, <code>Kurssisuoritus</code> ja <code>Kurssi</code> saadaan seuraavanlaiset tietokantataulut:</p>
-
-
-		<figure>
-		  <img src="img/johdanto/opiskelija-kurssisuoritus-kurssi-attribuuteilla.png" alt="[Opiskelija|_opiskelijanumero_;nimi;syntymävuosi;pääaine] 1-* [Kurssisuoritus|_tunnus_;_opiskelija_;_kurssi_;päivämäärä;arvosana;opintopistemäärä]
-[Kurssisuoritus] *-1 [Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
-		  <figcaption>Jokaisella opiskelijalla voi olla useita kurssisuorituksia, ja jokaiseen kurssisuoritukseen liittyy tasan yksi opiskelija. Jokaiseen kurssisuoritukseen liittyy myös tasan yksi kurssi, ja jokaisella kurssilla voi olla useita kurssisuorituksia.</figcaption>
-		</figure>
-
-
-
-		<p><strong><em>Kursseihin liittyvien tehtävien hahmottelua</em></strong></p>
-
-		<p>Tämän lisäksi, jokaiseen kurssiin liittyy tehtäviä, joita opiskelija voi suorittaa. Koska kurssiin liittyvien tehtävien määrä voi vaihdella, määritellään yhteys siten, että yhteen kurssiin voi liittyä useita tehtäviä. Koska haluamme lisäksi mahdollistaa tilanteen, missä tehtäviä voi käyttää myös esimerkiksi muiden kurssien kertaustehtävinä, määritellään yhteys siten, että yhteen tehtävään liittyä useampi kurssi.</p>
+		<p>Haluamme, että järjestelmämme voi pitää kirjaa myös kursseihin liittyvistä tehtävistä, joita opiskelija voi suorittaa. Koska kurssiin liittyvien tehtävien määrä voi vaihdella, määritellään yhteys siten, että yhteen kurssiin voi liittyä useita tehtäviä. Toisaalta, koska sama tehtävä voi esiintyä useammalla kurssilla, määritellään yhteys siten, että yhteen tehtävään liittyä useampi kurssi.</p>
 
 
 		<figure>
 		  <img src="img/johdanto/tehtava-kurssi.png" alt="[Tehtävä] *-* [Kurssi]"/> 
 		  <figcaption>Tehtävä voi liittyä useampaan kurssiin, ja kurssi voi liittyä useampaan tehtävään.</figcaption>
 		</figure>
+
+		<p>Yllä kuvattu yhteystyyppi on <em>monen suhde moneen</em>.</p>
 
 
 		<aside class="info">
@@ -925,23 +1006,76 @@
 		  <p>Esimerkiksi yhteen kurssiin voi liittyä monta tehtävää, ja yksi tehtävä voi liittyä useampaan kurssiin.</p>
 
 		  <p>Saman yhteystyypin voi ajatella myös tietokantataulujen välillä. Kahden taulun välillä on yhteys monen suhde moneen, jos yhteen ensimmäisen taulun riviin voi liittyä useita toisen taulun rivejä, ja yhteen toisen taulun riviin voi liittyä useita ensimmäisen taulun rivejä.</p>
+		  
 
-		<p>Monen suhde moneen -yhteyden luominen kahden tietokantataulun välille on kuitenkin monimutkaista, jonka takia yhteys toteutetaan luomalla erillinen liitostaulu, jonka vastuulla on kahden muun taulun rivien yhdistäminen.</p>
+		  <p><em>Tietokantataulujen luominen</em></p>
+
+		  <figure>
+		    <img src="img/viikko2/monesta-moneen-a-b.png" alt="[A]*-*[B]"/> 
+		    <figcaption>Monen suhde moneen. Yhteen A-käsitteeseen voi liittyä monta B-käsitettä, ja yhteen B-käsitteeseen voi liittyä monta A-käsitettä.</figcaption>
+		  </figure>
+
+
+		  <p>Jos käsitteiden välillä on monen suhde moneen -yhteys, luodaan niistä tietokantataulut seuraavasti. Määritellään ensin kummallekin käsitteelle <em>pääavain</em>.
+
+		  <figure>
+		    <img src="img/viikko2/monesta-moneen-a-b-paaavaimilla.png" alt="[A|(pk) id]
+[B|(pk) id]"/> 
+		    <figcaption>Tietokantataulut A ja B. Kummallekin tietokantataululle on määritelty oma taulussa olevan tiedon yksilöivä avain.</figcaption>
+		  </figure>
+		 
+		  <p>Kun tietokantatauluille on määritelty pääavaimet, luodaan uusi tietokantataulu, jonka jokainen rivi yhdistää yhden rivin taulusta A yhden taulun B rivin kanssa. Tällaista taulua kutsutaan nimellä <em>liitostaulu</em>, ja se sisältää kaksi viiteavainta: yhden kumpaankin viitattavaan tauluun.</p>
+
+		  <figure>
+		    <img src="img/viikko2/monesta-moneen-liitostaulu.png" alt="[Liitostaulu|(fk) a_id: A;(fk) b_id: B]"/> 
+		    <figcaption>Liitostaulu sisältää kaksi viiteavainta. Yhden, joka viittaa tauluun A, ja toisen, joka viittaa tauluun B.</figcaption>
+		  </figure>
+
+		  <p>Yhdistetään seuraavaksi taulut liitostaululla. Liitostaulun jokainen rivi voi viitata vain yhteen taulun A riviin ja yhteen taulun B riviin, joten liitostaulusta lähtevässä yhteydessä taulujen A ja B päätyihin tulee numerot yksi. Toisaalta, liitostaulussa voi olla monta riviä, missä esiintyy viite tiettyyn taulun A riviin -- samoin myös taulun B riviin, joten liitostaulun päähän tulee tähti.</p>
+
+
+
+		  <figure>
+		    <img src="img/viikko2/monesta-moneen-liitostaulu-yhteydet.png" alt="[A|(pk) id]1-*[Liitostaulu|(fk) a_id: A;(fk) b_id: B]
+[Liitostaulu]*-1[B|(pk) id]"/> 
+		    <figcaption>Liitostaulun avulla monesta moneen suhde saadaan muutettua kahdeksi yhdestä moneen suhteeksi.</figcaption>
+		  </figure>
 
 		</aside>
 		
-
-		<p>Monen suhteen moneen -tyyppisen yhteyden muunnos tietokantatauluiksi tapahtuu siten, että käsitteitä kuvaaville tietokantatauluille määritellään avaimet, jonka jälkeen niiden välille luodaan liitostaulu, joka on yhden suhde moneen -yhteydessä kummankin taulun kanssa.
+		<p>Tarkastellaan uudestaan käsitteiden tehtävä ja kurssi yhteyttä, ja muunnetaan luokkakaavio tietokantakaavioksi.</p> 
 
 		<figure>
-		  <img src="img/johdanto/tehtava-kurssi-liitostaulu.png" alt="[Tehtävä|_tunnus_;nimi;kuvaus]1-*[Kurssitehtävä|_tehtävä_;_kurssi_]
-[Kurssitehtävä]*-1[Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
-		  <figcaption>Nyt jos tehtävä on tietyllä kurssilla, on taulussa kurssitehtävä rivi, missä on tehtävän ja kurssin yksilöivä tunnus.</figcaption>
+		  <img src="img/johdanto/tehtava-kurssi.png" alt="[Tehtävä] *-* [Kurssi]"/> 
 		</figure>
 
-<!--
-		<p>TODO: Yllä esitetty taulu <code>Kurssitehtävä</code> on hyvä esimerkki taulusta, missä taulun jokainen rivi on yksilöity useamman sarakkeen yhdistelmän kautta.</p>
--->
+
+		<p>Ensimmäinen askel on taulujen luominen sekä niihin liittyvien avainten määrittely. Olemme aiemmin luoneet taulun käsitteestä kurssi, sekä määritelleet sille pääavaimen, joten keskitymme vain taulun Tehtävä luomiseen.</p>
+
+		<p>Määritellään, että tehtävään liittyy <em>nimi</em> ja <em>kuvaus</em>. Kumpikaan niistä ei sovellu tehtävän avaimeksi, joten luodaan tehtävälle avain <em>tunnus</em>, joka yksilöi jokaisen tehtävän. Käsitteestä Tehtävä luotu tietokantataulu on seuraavanlainen:</p>
+
+		<figure>
+		  <img src="img/viikko2/tehtava-tietokantataulu.png" alt="[Tehtävä|(pk) tunnus;nimi;kuvaus]"/> 
+		  <figcaption>Tehtävä-taulussa on pääavaimena tunnus, jonka lisäksi sillä on attribuutit nimi ja kuvaus.</figcaption>
+		</figure>
+
+
+		<p>Luodaan seuraavaksi liitostaulu, jonka tehtävänä on yhdistää taulut Tehtävä ja Kurssi. Kutsutaan liitostaulua nimellä Kurssitehtävä. Kurssitehtävä-taululla on kaksi viiteavainta, joista toinen osoittaa tauluun Tehtävä, ja toinen tauluun Kurssi.</p>
+
+		<figure>
+		  <img src="img/viikko2/kurssitehtava-liitostaulu.png" alt="[Kurssitehtävä|(fk) tehtävä: Tehtävä; (fk) kurssi: Kurssi]"/> 
+		  <figcaption>Kurssitehtävä-liitostaulussa on kaksi viiteavainta, jotka osoittavat tauluihin Tehtävä ja Kurssi.</figcaption>
+		</figure>
+
+		<p>Lisätään seuraavaksi yhteydet käsitteiden välille -- tämä tapahtuu lähinnä visualisoinnin takia, viitteet ovat todellisuudessa olemassa jo viiteavainten muodossa. Yhteen Kurssitehtävä-taulun riviin liittyy tasan yksi Kurssi-taulun rivi ja Tehtävä-taulun rivi, mutta yksi Kurssi-taulun rivi voi liittyä moneen Kurssitehtävä-taulun riviin -- samoin kuin yksi Tehtävä-taulun rivi voi liittyä moneen Kurssitehtävä-taulun riviin.</p>
+
+		<p>Tietokantakaavio on lopulta seuraavanlainen:</p>
+
+		<figure>
+		  <img src="img/viikko2/monesta-moneen-tehtava-kurssitehtava-kurssi.png" alt="[Tehtävä|(pk) tunnus;nimi;kuvaus]1-*[Kurssitehtävä|(fk) tehtävä: Tehtävä; (fk) kurssi: Kurssi]
+[Kurssitehtävä]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]"/> 
+		  <figcaption>Nyt jos tehtävä on tietyllä kurssilla, on taulussa kurssitehtävä rivi, missä on tehtävän ja kurssin yksilöivä tunnus.</figcaption>
+		</figure>
 
 
 		<aside class="info">
@@ -954,7 +1088,24 @@
 
 		  <p>Tämänkin yhteystyypin voi ajatella myös tietokantataulujen välillä. Kahden taulun välillä on yhteys yhden suhde yhteen, jos yhteen ensimmäisen taulun riviin voi liittyä vain yksi toisen taulun rivi, ja yhteen toisen taulun riviin voi liittyä vain yksi ensimmäisen taulun rivi.</p>
 
-		<p>Yhden suhde yhteen yhteys toteutetaan lisäämällä viittaus jommastakummasta taulusta toiseen. </p>
+		  <p><em>Tietokantataulujen luominen</em></p>
+
+		  <figure>
+		    <img src="img/viikko2/yhden-suhde-yhteen-a-b.png" alt="[A]1-1[B]"/> 
+		    <figcaption>Yhden suhde yhteen. Yhteen A-käsitteeseen voi liittyä vain yksi B-käsite, ja yhteen B-käsitteeseen voi liittyä vain yksi A-käsite.</figcaption>
+		  </figure>
+
+
+		  <p>Jos käsitteiden välillä on yhden suhde yhteen -yhteys, tyypillisin tapa tietokantataulujen luomiseen on se, että yhdelle käsitteistä määritellään pääavain, ja toiselle viiteavain, jolla viitataan toiseen käsitteeseen.</p>
+
+
+
+		  <figure>
+		    <img src="img/viikko2/yhden-suhde-yhteen-viitteet.png" alt="[A|(pk) id]1-*[B|(fk) a_id: A]"/> 
+		    <figcaption>Yhden suhde yhteen tietokantakaaviona. Käsitteestä B viitataan käsitteeseen A. </figcaption>
+		  </figure>
+
+		  <p>Kun pohdimme ylläolevaa tarkemmin, huomaamme, että yllä suoritettiin käytännössä samat askeleet kuin yhden suhde moneen -tapauksessa. Tämä on täysin totta -- käytännössä tietokantaan tulee määritellä viittaavan taulun määrittelyn yhteydessä lisäksi <em>uniikkiusrajoite</em> viiteavaimelle. Palaamme erilaisiin rajoitteisiin myöhemmin kurssilla.</p>
 
 		</aside>
 
@@ -962,14 +1113,30 @@
 		<h2>Useammassa taulussa olevan tiedon yhdistäminen</h2>
 
 
-		<p>Hahmottelimme edellisessä kappaleessa opiskelun ja oppimisen seuraamiseen tarkoitetun järjestelmämme tietokantaa. Käytetään jatkossa seuraavaa tietokannan määrittelyä, missä edellä hahmoteltuja osia on yhdistetty:</p>
+		<p>Hahmottelimme edellisessä kappaleessa opiskelun ja oppimisen seuraamiseen tarkoitetun järjestelmämme tietokantaa. Päädyimme yhteystyyppien käsittelyssä kahteen tietokantakaavioon, jotka ovat seuraavat:</p>
+
 
 		<figure>
-		  <img src="img/viikko2/tietokantakaavio.png" alt="[Tehtävä|_tunnus_;nimi;kuvaus]1-*[Kurssitehtävä|_tehtävä_;_kurssi_]
-[Kurssitehtävä]*-1[Kurssi|_kurssikoodi_;nimi;kuvaus]
-[Opiskelija|_opiskelijanumero_;nimi;syntymävuosi;pääaine] 1-* [Kurssisuoritus|_tunnus_;_opiskelija_;_kurssi_;päivämäärä;arvosana;opintopistemäärä]
-[Kurssisuoritus] *-1 [Kurssi|_kurssikoodi_;nimi;kuvaus]"/> 
-		  <figcaption>Nyt jos tehtävä on tietyllä kurssilla, on taulussa kurssitehtävä rivi, missä on tehtävän ja kurssin yksilöivä tunnus.</figcaption>
+		  <img src="img/viikko2/opiskelija-kurssisuoritus-kurssi-tietokantakaavio.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]1-*[Kurssisuoritus|(fk) opiskelija: Opiskelija;(fk) kurssi: Kurssi;päivämäärä;arvosana;opintopistemäärä]
+[Kurssisuoritus]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]"/> 
+		</figure>
+
+
+		<figure>
+		  <img src="img/viikko2/monesta-moneen-tehtava-kurssitehtava-kurssi.png" alt="[Tehtävä|(pk) tunnus;nimi;kuvaus]1-*[Kurssitehtävä|(fk) tehtävä: Tehtävä; (fk) kurssi: Kurssi]
+[Kurssitehtävä]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]"/> 
+		</figure>
+
+
+		<p>Voimme yhdistää tietokantakaaviot suoraan, sillä kumpikin kaavio sisältää taulun Kurssi. Tietokantakaavio, missä kaikki taulut ovat yhdessä, näyttää seuraavalta:</p>
+
+
+		<figure>
+		  <img src="img/viikko2/tietokantakaavio.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]1-*[Kurssisuoritus|(fk) opiskelija: Opiskelija;(fk) kurssi: Kurssi;päivämäärä;arvosana;opintopistemäärä]
+[Kurssisuoritus]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]
+[Tehtävä|(pk) tunnus;nimi;kuvaus]1-*[Kurssitehtävä|(fk) tehtävä: Tehtävä; (fk) kurssi: Kurssi]
+[Kurssitehtävä]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]"/> 
+
 		</figure>
 
 		<p>Voit tutkia uudessa esimerkkitietokannassa olevaa tietoa allaolevan SQL-komentotulkin avulla.</p>
@@ -988,12 +1155,22 @@
 
 		<p>Tutustuimme aiemmin SQL-kyselyihin, joiden avulla teimme erilaisia kyselyitä yksittäisiin tietokantatauluihin. Tutustutaan seuraavaksi erääseen tapaan useammassa taulussa olevan tiedon yhdistämiseen.</p>
 
-		<p>Aiempaa materiaalia kertaamalla muistamme, että avainsanaa <code>FROM</code> seuraa taulu, josta tietoa haetaan. Voimme määritellä haun kohteeksi useampia tauluja listaamalla ne FROM-avainsanan jälkeen pilkulla eroteltuna seuraavasti <code>SELECT * FROM Opiskelija, Kurssisuoritus</code>. Jos emme kerro miten taulujen rivit yhdistetään, on lopputuloksessa kaikki rivit yhdistettynä kaikkiin riveihin.</p>
+		<p>Aiempaa materiaalia kertaamalla muistamme, että avainsanaa <code>FROM</code> seuraa taulu, josta tietoa haetaan. Voimme määritellä haun kohteeksi useampia tauluja listaamalla ne FROM-avainsanan jälkeen pilkulla eroteltuna seuraavasti <code>SELECT * FROM Opiskelija, Kurssisuoritus</code>. Jos emme kerro miten taulujen rivit yhdistetään, on lopputuloksessa kaikki rivit yhdistettynä kaikkiin riveihin -- esimerkiksi jokainen taulun Opiskelija rivi yhdistettynä jokaiseen taulun Kurssisuoritus riviin.</p>
+
+
+		<div ng-controller="weekTwoSqlController">
+		  <query
+		     db="db"
+		     query="SELECT * FROM Opiskelija, Kurssisuoritus"
+		     editable="false">
+		  </query>
+		</div>
+
+		<p>Yllä esitetyn kyselyn tuottama lopputulos ei ole tyypillisesti tavoiteltu -- jokaiseen opiskelijaan on kytketty jokainen kurssisuoritus, eli kaikilla on kaikki kurssisuoritukset.</p>
+
+		<p>Taulujen yhdistäminen tapahtuu kyselyä rajaavan <code>WHERE</code>-ehdon avulla siten, että taulun pääavainta verrataan siihen viittaavan taulun viiteavaimeen. Esimerkiksi, jos haluamme vain kurssisuoritukset ja niihin liittyvät opiskelijat, hyödynnämme Opiskelija-taulun avainta opiskelijanumero sekä Kurssisuoritus-taulun viiteavainta opiskelija, joka viittaa Opiskelija-taulun pääavaimeen. Käytännössä tämä tapahtuu ehdolla <code>WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code>.</p>
 		
-		<p>Taulujen välisten tietojen yhdistäminen tapahtuu käsitteen yksilöivän attribuutin, eli avaimen avulla. Esimerkkitauluissamme Opiskelijalla on attribuutti opiskelijanumero ja Kurssisuorituksella attribuutti Opiskelija, joiden avulla rivit voidaan kytkeä toisiinsa.</p>
-		
-		<p>Kytkeminen tapahtuu kyselyä rajaavan <code>WHERE</code>-ehdon avulla seuraavasti: <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code>, eli "Anna kaikki riviyhdistelmät tauluista Opiskelija ja Kurssisuoritus, joissa attribuuttien opiskelijanumero ja opiskelija arvot ovat samat".</p>
-		
+		<p>Kokonaisuudessaan lause "Anna kaikki riviyhdistelmät tauluista Opiskelija ja Kurssisuoritus, joissa attribuuttien opiskelijanumero ja opiskelija arvot ovat samat" kirjoitetaan seuraavasti: <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code>.</p>
 		
 		<div ng-controller="weekTwoSqlController">
 		  
@@ -1034,7 +1211,10 @@
 		  
 		  <query
 		     db="db"
-		     query="SELECT Opiskelija.nimi AS opiskelija, Kurssi.nimi AS kurssi FROM Opiskelija, Kurssisuoritus, Kurssi WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija AND Kurssisuoritus.kurssi = Kurssi.kurssikoodi"
+		     query="SELECT Opiskelija.nimi AS opiskelija, Kurssi.nimi AS kurssi 
+    FROM Opiskelija, Kurssisuoritus, Kurssi 
+    WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija 
+        AND Kurssisuoritus.kurssi = Kurssi.kurssitunnus"
 		     editable="false"
 		     done="listOpiskelijanSuorittamatKurssit">
 		  </query>
@@ -1077,23 +1257,23 @@ SELECT Tehtävä.nimi AS tehtävä
 SELECT Tehtävä.nimi AS tehtävä 
     FROM Tehtävä, Kurssitehtävä, Kurssi 
     WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
-        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi</pre></li>
+        AND Kurssitehtävä.kurssi = Kurssi.kurssitunnus</pre></li>
 
 		    <li>Seuraavaksi, yhdistämme kurssin kurssisuoritukseen:
 		      <pre class="sh_sql">
 SELECT Tehtävä.nimi as tehtävä 
     FROM Tehtävä, Kurssitehtävä, Kurssi, Kurssisuoritus
     WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
-        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi
-        AND Kurssi.kurssikoodi = Kurssisuoritus.kurssi</pre></li>
+        AND Kurssitehtävä.kurssi = Kurssi.kurssitunnus
+        AND Kurssi.kurssitunnus = Kurssisuoritus.kurssi</pre></li>
 
 		    <li>Ja viimeinkin, saamme yhdistettyä polun opiskelijaan:
 		      <pre class="sh_sql">
 SELECT Tehtävä.nimi AS tehtävä 
     FROM Tehtävä, Kurssitehtävä, Kurssi, Kurssisuoritus, Opiskelija
     WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
-        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi
-        AND Kurssi.kurssikoodi = Kurssisuoritus.kurssi
+        AND Kurssitehtävä.kurssi = Kurssi.kurssitunnus
+        AND Kurssi.kurssitunnus = Kurssisuoritus.kurssi
         AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero</pre></li>
 
 		    <li>Koska halusimme saada Joniin mahdollisesti liittyvät tehtävät, lisätään haettaviin kenttiin vielä opiskelijan nimi:
@@ -1101,8 +1281,8 @@ SELECT Tehtävä.nimi AS tehtävä
 SELECT Tehtävä.nimi AS tehtävä
     FROM Tehtävä, Kurssitehtävä, Kurssi, Kurssisuoritus, Opiskelija
     WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
-        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi
-        AND Kurssi.kurssikoodi = Kurssisuoritus.kurssi
+        AND Kurssitehtävä.kurssi = Kurssi.kurssitunnus
+        AND Kurssi.kurssitunnus = Kurssisuoritus.kurssi
         AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero
         AND Opiskelija.nimi = 'Joni'</pre></li>
 
@@ -1121,8 +1301,8 @@ SELECT Tehtävä.nimi AS tehtävä
 		     query="SELECT Tehtävä.nimi AS tehtävä
     FROM Tehtävä, Kurssitehtävä, Kurssi, Kurssisuoritus, Opiskelija
     WHERE Tehtävä.tunnus = Kurssitehtävä.tehtävä
-        AND Kurssitehtävä.kurssi = Kurssi.kurssikoodi
-        AND Kurssi.kurssikoodi = Kurssisuoritus.kurssi
+        AND Kurssitehtävä.kurssi = Kurssi.kurssitunnus
+        AND Kurssi.kurssitunnus = Kurssisuoritus.kurssi
         AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero
         AND Opiskelija.nimi = 'Joni'">
 		  </query>

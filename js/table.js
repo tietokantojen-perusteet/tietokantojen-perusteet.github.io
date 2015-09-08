@@ -37,7 +37,7 @@ WK2TABLES['Opiskelija'] = {
 };
 
 WK2TABLES['Kurssi'] = {
-    schema: "kurssikoodi, nimi, kuvaus",
+    schema: "kurssitunnus, nimi, kuvaus",
     data: [
 	["581325", "Ohjelmoinnin perusteet", "Kurssilla perehdytään nykyaikaisen ohjelmoinnin perusideoihin sekä algoritmien laatimiseen."],
 	["582103", "Ohjelmoinnin jatkokurssi", "Kurssilla perehdytään olio-ohjelmoinnin perustekniikoihin."],
@@ -46,12 +46,12 @@ WK2TABLES['Kurssi'] = {
 };
 
 WK2TABLES['Kurssisuoritus'] = {
-    schema: "tunnus, opiskelija, kurssi, päivämäärä, arvosana, opintopistemäärä",
+    schema: "opiskelija, kurssi, päivämäärä, arvosana, opintopistemäärä",
     data: [
-	["1", "999999", "581325", "2014-08-01", 5, 5],
-	["2", "999999", "582103", "2014-08-01", 5, 5],
-	["3", "999999", "581328", "2014-10-20", 3, 5],
-	["4", "999998", "581325", "2013-08-01", 4, 5]
+	["999999", "581325", "2014-08-01", 5, 5],
+	["999999", "582103", "2014-08-01", 5, 5],
+	["999999", "581328", "2014-10-20", 3, 5],
+	["999998", "581325", "2013-08-01", 4, 5]
     ]
 };
 
