@@ -204,6 +204,26 @@
 		</div>
 
 
+                <h1 id="kasitteisto">Kurssin käsitteistöä</h1>
+
+
+		<div id="week-toc" class="nav">
+		  <table class="table table-striped">
+		    <thead>
+		      <tr>
+			<th>Käsite</th>
+			<th>Selitys</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>wip</td>
+			<td>work in progress, työn alla</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+
                 <h1>Sisällysluettelo</h1>
 
                 <ul class="nav" id="material-toc"></ul>
@@ -351,9 +371,9 @@
 		  <table class="table">
 		    <thead>
 		      <tr>
-			<th>Nimi</th>
-			<th>Syntymävuosi</th>
-			<th>Pääaine</th>
+			<th>nimi</th>
+			<th>syntymävuosi</th>
+			<th>pääaine</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -451,28 +471,29 @@
 		<h1>Johdanto relaatiomalliin ja relaatiotietokantoihin</h1>
 
 
-		<p>Relaatiomallin perusajatus on tallennettavan tiedon jakaminen käsitteisiin sekä käsitteiden välisiin yhteyksiin. Jokaista käsitettä vastaa relaatiotietokannassa taulu, ja jokaiselle käsitteen ominaisuudelle eli attribuutille on taulussa oma sarake. Jokainen taulun rivi vastaa yhtä käsitteen ilmentymää, ja käsitteiden väliset yhteydet ilmenevät käsitteen ilmentymän yksilöivän attribuutin tai attribuuttiyhdistelmän, eli avaimen perusteella.</p>
+		<p>Relaatiomallin perusajatus on tallennettavan tiedon jakaminen käsitteisiin sekä käsitteiden välisiin yhteyksiin. Jokaista käsitettä vastaa relaatiotietokannassa taulu, ja jokaiselle käsitteen ominaisuudelle eli attribuutille on taulussa oma sarake. Jokainen taulun rivi vastaa yhtä käsitteen ilmentymää, ja tietokantatauluja määriteltäessä taululle määritellään tyypillisesti myös <em>avain</em>, jonka perusteella kukin rivi -- eli käsitteen ilmentymä -- voidaan yksilöidä.
 
-		<p>Kun pohdimme Opiskelija-käsitettä, jolla on nimi, syntymävuosi, ja pääaine, huomaamme, ettei yksikään edellämainituista attribuuteista tai niiden yhdistelmistä todellisuudessa yksilöi opiskelijaa. Esimerkiksi vuonna 1991 syntyneitä matematiikkaa opiskelevia Anna-nimisiä opiskelijoita löytyy useampia.</p>
+		<p>Kun pohdimme Opiskelija-käsitettä, jolla on nimi, syntymävuosi, ja pääaine, huomaamme, että opiskelijan yksilöinti olemassaolevien tietojen perusteella on lähes mahdotonta. Esimerkiksi vuonna 1991 syntyneitä matematiikkaa opiskelevia Anna-nimisiä opiskelijoita löytyy useampia.</p>
 
-		<p>Ratkaistaan ongelma lisäämällä Opiskelija-käsitteeseen opiskelijan yksilöivä opiskelijanumero.</p>
+		<p>Luodaan Opiskelija-käsitteestä tietokantataulu. Tietokantataulussa opiskelija-käsitteelle määritellään opiskelijan yksilöivä avain, jonka lisäksi muut käsitteeseen liittyvät attribuutit lisätään tietokantataulun sarakkeiksi. Tietokantataulun voi piirtää kaaviona kuten alla -- yksilöivän avaimen voi merkitä joko alleviivaamalla käsitteen, tai merkitsemällä käsitteen eteen merkki <em>(pk)</em>, eli <em>primary key</em>.</p>
 
 		<figure>
-		  <img src="img/johdanto/opiskelija-ja-opiskelijanumero.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, suunnikkaan alalaidassa kiinni toinen suunnikas, jossa tekstit 'opiskelijanumero', 'nimi', 'syntymävuosi' ja 'pääaine' omilla riveillään. ">
-		  <figcaption>Opiskelija-käsitteeseen on lisätty nimen, syntymävuoden ja pääaineen lisäksi opiskelijanumero. Opiskelija-käsitteeseen liittyvä opiskelijanumero on alleviivattu sen selkeyttämiseksi, että se on jokaiselle Opiskelijalle uniikki.</figcaption>
+		  <img src="img/johdanto/opiskelija-ja-opiskelijanumero.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]">
+		  <figcaption>Opiskelija-taulua luodessa opiskelijaan on lisätty jokaisen opiskelijan yksilöivä avain, tässä tapauksessa opiskelijanumero. Avain on merkitty tekstillä (pk) sen selkeyttämiseksi.</figcaption>
 		</figure>
 
-		<p>Nyt jokaisella Opiskelijalla on opiskelijanumero. Käsitteen yksilöivä attribuutti, eli avain, alleviivataan kaaviossa. Opiskelijaa kuvaavassa taulussa jokaiseen opiskelijaan tulee nyt myös lisätä opiskelijanumero.</p>
+
+		<p>Tietokantataulussa oleva data voi näyttää esimerkiksi seuraavalta:</p>
 		
 		<div class="data-table">
 		  <h4>Opiskelija</h4>
 		  <table class="table">
 		    <thead>
 		      <tr>
-			<th>Opiskelijanumero</th>
-			<th>Nimi</th>
-			<th>Syntymävuosi</th>
-			<th>Pääaine</th>
+			<th>opiskelijanumero</th>
+			<th>nimi</th>
+			<th>syntymävuosi</th>
+			<th>pääaine</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -498,22 +519,33 @@
 		  </table>
 		</div>
 
+		<p>Opiskelija-käsitteeseen liittyy useampi Kurssisuoritus, mikä näyttää luokkakaaviona seuraavalta -- allaolevassa luokkakaaviossa Opiskelijaan on lisätty opiskelijanumero:</p>
+
 		<figure>
 		  <img src="img/johdanto/opiskelija-opiskelijanumerolla-ja-kurssisuoritus.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti. Käsitteillä myös ominaisuudet. ">
 		  <figcaption>Opiskelijaan liittyy yksi tai useampi kurssisuoritus.</figcaption>
 		</figure>
 
-		<p>Opiskelijanumeron lisäämisen takia käsitteiden Opiskelija ja Kurssisuoritus yhdistäminen on mahdollista. Koska opiskelijaan liittyy yksi tai useampi kurssisuoritus, määrittelemme Kurssisuoritus-käsitettä kuvaavaan tauluun Opiskelija-sarakkeen, jossa on aina kyseiseen riviin liittyvään kurssisuoritukseen liittyvän opiskelijan opiskelijanumero.</p>
+
+		<p>Relaatiotietokannoissa käsitteiden yhdistäminen tapahtuu avainten avulla. Tietokantatauluun Opiskelija on määritelty jokaisen opiskelijan yksilöivä avain <em>opiskelijanumero</em>. Koska jokaiseen opiskelijaan voi liittyä useampi kurssisuoritus, mutta jokaiseen kurssisuoritukseen vain yksi opiskelija, voimme lisätä kurssisuoritustaulua luodessa siihen <em>viiteavaimen</em> (foreign key), joka viittaa opiskelijaan. Kurssisuoritus-tauluun lisätään siis sarake nimeltä opiskelija, joka sisältää aina kurssisuoritukseen liittyvän opiskelijan opiskelijanumeron. Viiteavain merkitään tekstillä <em>(fk)</em>, eli <em>foreign key</em>, ja viiteavaimen nimen jälkeen tulee Taulun nimi, johon viiteavain viittaa.</p>
+
+		<figure>
+		  <img src="img/johdanto/opiskelija-opiskelijanumerolla-ja-kurssisuoritus-taulut.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]1-*[Kurssisuoritus|(fk) opiskelija: Opiskelija;kurssi;päivämäärä;arvosana]">
+		  <figcaption>Opiskelijaan liittyy yksi tai useampi kurssisuoritus.</figcaption>
+		</figure>
+
+
+		<p>Tietokantataulussa Kurssisuoritus oleva data näyttää esimerkiksi seuraavalta:</p>
 
 		<div class="data-table">
 		  <h4>Kurssisuoritus</h4>
 		  <table class="table">
 		    <thead>
 		      <tr>
-			<th>Opiskelija</th>
-			<th>Kurssi</th>
-			<th>Päivämäärä</th>
-			<th>Arvosana</th>
+			<th>opiskelija</th>
+			<th>kurssi</th>
+			<th>päivämäärä</th>
+			<th>arvosana</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -560,18 +592,19 @@
 		<p>Ylläolevat taulut voidaan määritellä myös tekstimuodossa seuraavasti: </p>
 
 		<ul>
-		  <li>Opiskelija(<u>Opiskelijanumero</u>, Nimi, Syntymävuosi, Pääaine)</li>
-		  <li>Kurssisuoritus(Opiskelija->Opiskelija, Kurssi, Päivämäärä, Arvosana)</li>
+		  <li>Opiskelija(<u>opiskelijanumero</u>, nimi, syntymävuosi, pääaine)</li>
+		  <li>Kurssisuoritus(opiskelija->Opiskelija, kurssi, päivämäärä, arvosana)</li>
 		</ul>
 
-		<p>Opiskelijaan liittyvä opiskelijanumero on alleviivattu, sillä se on yksittäisen opiskelijan yksilöivä avain. Kurssisuoritukseen liittyvä Opiskelija-kenttä viittaa Opiskelija-tauluun.</p>
+		<p>Opiskelijaan liittyvä opiskelijanumero on alleviivattu, sillä se on Opiskelija-taulun avain. Kurssisuoritustaulun merkintä <code>opiskelija->Opiskelija</code> taas tarkoittaa, että opiskelija on viiteavain, ja viittaa Opiskelija-taulun avaimeen.</p>
+
 
 		<p>Pohditaan seuraavaksi kyselyiden tekemistä näihin tauluihin.</p>
 
 
 		<h2>SQL-kyselykieli</h2>
 
-		<p>SQL on kyselykieli relaatiotietokantojen käsittelyyn. Sen avulla voidaan hakea tietoa tietokannasta, päivittää tietokannassa olevaa tietoa, sekä muokata ja luoda tietokannassa olevia tauluja, eli muokata tietokannan rakennnetta. Käytännössä kaikki relaatiotietokantoja tukevat tietokannanhallintajärjesltemät tukevat myös SQL-kieltä. </p>
+		<p>SQL on kyselykieli relaatiotietokantojen käsittelyyn. Sen avulla voidaan hakea tietoa tietokannasta, päivittää tietokannassa olevaa tietoa, sekä muokata ja luoda tietokannan rakennetta. Käytännössä kaikki relaatiotietokantoja tukevat tietokannanhallintajärjestelmät käyttävät myös SQL-kieltä. </p>
 
 		<p>Parhaiten kyselykieltä ymmärtää sitä harjoittelemalla. Sitä teemme paljon.</p>
 
@@ -580,9 +613,9 @@
 		  <br/>
 		  <h1>Ohjeita SQL-tehtävien tekemiseen</h1>
 
-		  <p>Kurssimateriaalissa on tästä kohdasta eteenpäin interaktiivisia SQL-tehtäviä, joiden avulla pääset harjoittelemaan SQL-kyselykielen käyttöä. Materiaali sisältää materiaalin edetessä täydentyvän opiskelijoiden kurssisuorituksia kuvaavan tietokannan, jota käytetään ellei toisin mainita. Lähes jokainen esimerkkikysely on "suoritettava", eli kysely suoritetaan ja tulos näytetään ruudulla nappia klikkaamalla.</p>
+		  <p>Kurssimateriaalissa on tästä kohdasta eteenpäin interaktiivisia SQL-tehtäviä, joiden avulla pääset harjoittelemaan SQL-kyselykielen käyttöä. Materiaali sisältää materiaalin edetessä täydentyvän opiskelijoiden kurssisuorituksia kuvaavan tietokannan, jota käytetään ellei toisin mainita. Lähes jokaisen esimerkkikyselyn voi suorittaa, jolloin kysely ajetaan tietokannassa ja kyselyn tulos näytetään ruudulla. Kyselyn suorittaminen tapahtuu <em>Suorita</em>-nappia painamalla.</p>
 
-		  <p>Useimpien esimerkkien jälkeen avautuu muutama tehtävä, jossa pääset harjoittelemaan esimerkkiä vastaavien kyselyjen tuottamista.</p>
+		  <p>Useimpien suoritettavien esimerkkien jälkeen avautuu muutama tehtävä, jossa pääset harjoittelemaan esimerkkiä vastaavien kyselyjen tuottamista.</p>
 
 		</aside>
 
@@ -592,7 +625,7 @@
 
 		  <h4>SELECT * FROM <em>Taulu</em></h4>
 		  
-		  <p>Avainsanalla <code>SELECT</code> valitaan tietyt sarakkeet kyselyn kohteena olevasta taulusta. Sarakkeet määritellään <code>SELECT</code>-avainsanan jälkeen. Jos ohjelmoija haluaa käyttöönsä kaikki taulussa olevat sarakkeet, käytetään sarakkeiden merkkinä tähteä (<code>*</code>). Sarakkeiden määrittelyä seuraa avainsana <code>FROM</code>, jonka jälkeen kerrotaan kyselyn kohteena oleva taulu.</p>
+		  <p>Avainsanalla <code>SELECT</code> valitaan tietyt sarakkeet kyselyn kohteena olevasta taulusta. Sarakkeet määritellään <code>SELECT</code>-avainsanan jälkeen. Jos ohjelmoija haluaa valita kaikki taulussa olevat sarakkeet, käytetään sarakkeiden valinnassa tähteä (<code>*</code>). Sarakkeiden määrittelyä seuraa avainsana <code>FROM</code>, jonka jälkeen kerrotaan kyselyn kohteena oleva taulu.</p>
 		  
 		  <p>Alla voit kokeilla kyselyn tekemistä aiemmin määriteltyihin <code>Opiskelija</code> ja <code>Kurssisuoritus</code>-tauluihin.</p>
 		  
@@ -621,7 +654,7 @@
 		  
 		  <h4>SELECT <em>sarake, toinen</em> FROM <em>Taulu</em></h4>
 		  
-		  <p>Avainsanan <code>SELECT</code> jälkeen voidaan määritellä sarakkeet. Tähteä käyttämällä valitaan kaikki sarakkeet, mutta ohjelmoija voi valita myös yksittäisiä sarakkeita. Valitut sarakkeet erotellaan pilkulla.</p>
+		  <p>Avainsanan <code>SELECT</code> jälkeen voidaan määritellä valittavat sarakkeet. Tähteä käyttämällä valitaan kaikki sarakkeet, mutta ohjelmoija voi valita myös yksittäisiä sarakkeita. Jos tähteä ei käytetä, ja halutaan valita useampia sarakkeita, valittavat sarakkeet erotellaan pilkulla.</p>
 		  
 		  
 		  <query
@@ -647,7 +680,7 @@
 
 		  <h4>SELECT <em>DISTINCT</em> <em>sarake</em> FROM <em>Taulu</em></h4>
 		  
-		  <p>Kun haimme Kurssisuoritus-taulussa olevien kurssien nimiä, huomasimme, että muutamat kurssien nimet näkyivät useampaan otteeseen. Tämä johtuu siitä, että kysely hakee taulun rivit, ja taulussa yksinkertaisesti oli useampia rivejä, joilla esiintyi samat kurssit.</p>
+		  <p>Kun haimme edellisessä harjoitteluosiossa Kurssisuoritus-taulussa olevien kurssien nimiä, huomasimme, että muutamat kurssien nimet näkyivät useampaan otteeseen. Tämä johtuu siitä, että kysely valitsee taulun rivit, ja taulussa yksinkertaisesti oli useampia rivejä, joilla esiintyi samat kurssit.</p>
 
 		  <p>Avainsanalla <code>DISTINCT</code> voidaan valita vain uniikit vastausrivit. Avainsana <code>DISTINCT</code> tulee avainsanan <code>SELECT</code> jälkeen.</p>
 		  
@@ -676,7 +709,7 @@
 
 		  <h4>SELECT * FROM <em>Taulu</em> <em>WHERE</em>...</h4>
 		  
-		  <p>Avainsanan <code>WHERE</code> avulla kyselyille annetaan hakuehtoja. Hakuehtojen perusteella kyselyn tulokseen valitaan vain ne rivit, joissa hakuehdossa määritellyn sarakkeen arvot täyttävät hakuehdon. Hakuehto voi olla esimerkiksi muotoa <code>...WHERE nimi = 'Joni'</code>, jolloin valittaisiin vain ne rivit, joilla sarakkeen <code>nimi</code> arvo on <code>'Joni'</code>.</p>
+		  <p>Emme tyypillisesti kuitenkaan halua valita kaikkea taulussa olevaa dataa, vaan vain tietyt hakuehdot täyttävän osajoukon. Avainsanan <code>WHERE</code> avulla kyselyille annetaan hakuehtoja. Hakuehtojen perusteella kyselyn tulokseen valitaan vain ne rivit, joissa hakuehdossa määritellyn sarakkeen arvot täyttävät hakuehdon. Hakuehto voi olla esimerkiksi muotoa <code>...WHERE nimi = 'Joni'</code>, jolloin valittaisiin vain ne rivit, joissa sarakkeen <code>nimi</code> arvo on <code>'Joni'</code>.</p>
 
 		  <query
 		     db="db"
@@ -715,16 +748,16 @@
 		    <br/>
 		    <h1>SQL-kyselyiden kirjainkoko</h1>
 		    
-		    <p>SQL on "case insensitive", eli sillä, että onko kysely kirjoitettu isolla vai pienelle ei ole kyselyn suoritukselle merkitystä. Voimme kirjoittaa komennon <code>SELECT</code> yhtä hyvin muodossa <code>select</code> tai <code>Select</code> -- sama pätee myös taulujen nimille ja attribuuteille.</p>
+		    <p>SQL on "case insensitive", eli sillä, että onko kysely kirjoitettu isolla vai pienellä ei ole kyselyn suorituksen kannalta merkitystä. Voimme kirjoittaa komennon <code>SELECT</code> yhtä hyvin muodossa <code>select</code> tai <code>Select</code> -- sama pätee myös taulujen nimille ja attribuuteille.</p>
 
-		    <p>Taulussa olevaa dataa tarkasteltaessa kirjainkoolla on kuitenkin merkitystä. Kun temme esimerkiksi vertailuoperaatioita merkkijonoille, on merkkijonon kirjoitusasu tärkeä. Kysely <code>SELECT * FROM Opiskelija WHERE nimi = 'Joni'</code> palauttaa vain ne opiskelijat, joiden nimi-kentän arvo on <em>täsmälleen</em> 'Joni'. Jos rivillä olevan nimi-kentän arvo olisi vaikkapa 'joni', ei edellinen kysely sisällyttäisi kyseistä riviä vastaukseen.</p>
+		    <p>Taulussa olevaa dataa tarkasteltaessa kirjainkoolla on kuitenkin merkitystä. Kun teemme esimerkiksi vertailuoperaatioita merkkijonoille, on merkkijonon kirjoitusasu tärkeä. Kysely <code>SELECT * FROM Opiskelija WHERE nimi = 'Joni'</code> palauttaa vain ne opiskelijat, joiden nimi-kentän arvo on <em>täsmälleen</em> 'Joni'. Jos rivillä olevan nimi-kentän arvo olisi vaikkapa 'joni', ei edellinen kysely valitsisi kyseistä riviä.</p>
 
 		    <p>Noudatamme tällä kurssilla seuraavaa käytäntöä:</p>
 
 		    <ol>
 		      <li>Kaikki SQL-kielen komennot, kuten <code>SELECT</code>, <code>FROM</code> ja <code>WHERE</code>, kirjoitetaan isolla.</li>
 		      <li>Taulujen nimet kirjoitetaan isolla alkukirjaimella. Esimerkiksi <code>Opiskelija</code> ja <code>Kurssisuoritus</code>.</li>
-		      <li>Taulujen attribuutit kirjoitetaan pienellä. Esimerkiksi <code>nimi</code> ja <code>kurssikoodi</code>.</li>
+		      <li>Taulujen sarakkeet eli attribuutit kirjoitetaan pienellä. Esimerkiksi <code>nimi</code> ja <code>kurssikoodi</code>.</li>
 		    </ol>
 
 		  </aside>
@@ -732,7 +765,7 @@
 
 		  <p>Kyselyissä toimivat myös suurempi kuin <code>&gt;</code> ja pienempi kuin <code>&lt;</code> -operaatiot.</p>
 
-		  <p>Jos sarakkeen arvot ovat merkkijonoja, kuten kurssin nimi ja opiskelijan nimi, voi hakuehdossa käyttää myös <code>LIKE</code>-operaatiota. Tämän avulla hakutuloksia voi rajata myös osittaisen merkkijonon avulla. Esimerkiksi kysely <code>SELECT * FROM Opiskelija WHERE nimi LIKE '%a%'</code> hakee kaikki opiskelijat, joiden nimessä esiintyy pieni a-kirjain.</p>
+		  <p>Jos sarakkeen arvot ovat merkkijonoja, kuten kurssin nimi ja opiskelijan nimi, voi hakuehdossa käyttää myös <code>LIKE</code>-operaatiota. Tämän avulla hakutuloksia voi rajata osittaisen merkkijonon avulla. Esimerkiksi kysely <code>SELECT * FROM Opiskelija WHERE nimi LIKE '%a%'</code> hakee kaikki opiskelijat, joiden nimessä esiintyy pieni a-kirjain.</p>
 
 
 		  <query
@@ -780,7 +813,7 @@
 		</header>
 
 
-		<h2>Erilaiset yhteydet käsitteiden välillä</h2>
+		<h2>Erilaiset yhteystyypit</h2>
 
 		<p>Huomaamme, että käsite Kurssisuoritus oikeastaan liittyy kahteen eri asiaan; kurssiin ja kurssin suoritukseen. Eriytetään nämä kaksi käsitettä toisistaan.</p>
 
