@@ -819,14 +819,14 @@
 
 		<p>Kurssiin liittyy kurssin yleiset tiedot kuten kurssin nimi, kurssikoodi, sekä kurssin kuvaus. Kurssisuoritus taas liittyy tiettyyn kurssiin, opikelijaan, päivämäärään, arvosanaan, sekä opintopistemäärään. Opintopistemäärä pidetään osana kurssisuoritusta, sillä joillain kursseilla opintopistemäärä vaihtelee työmäärästä riippuen. Käsite Opiskelija säilyy sellaisenaan.</p>
 
-		<p>Yhteen kurssisuoritukseen liittyy aina yksi kurssi, mutta yhteen kurssiin voi liittyä monta kurssisuoritusta.</p>
+		<p>Yhteen kurssisuoritukseen liittyy aina yksi kurssi, mutta yhteen kurssiin voi liittyä monta kurssisuoritusta. Luokkakaaviona tämä näyttää seuraavalta:</p>
 
 		<figure>
 		  <img src="img/johdanto/opiskelija-kurssisuoritus-kurssi.png" alt="Opiskelija 1-* Kurssisuoritus *-1 Kurssi"/> 
 		  <figcaption>Jokaisella opiskelijalla voi olla useita kurssisuorituksia, ja jokaiseen kurssisuoritukseen liittyy tasan yksi opiskelija. Jokaiseen kurssisuoritukseen liittyy myös tasan yksi kurssi, ja jokaisella kurssilla voi olla useita kurssisuorituksia.</figcaption>
 		</figure>
 
-		<p>Pohditaan ensin ylläolevan kaavion osaa, missä Kurssisuoritukseen liittyy Kurssi. Emme hetkeen välitä Opiskelija-käsitteen olemassaolosta. Sekä kurssisuoritukselle että kurssille on määritelty niihin liittyvät attribuutit.</p>
+		<p>Tutkitaan ensin ylläolevan kaavion osaa, missä kurssisuoritukseen liittyy yksi kurssi ja yhteen Kurssiin monta kurssisuoritusta. Emme hetkeen välitä Opiskelija-käsitteen olemassaolosta. Sekä kurssisuoritukselle että kurssille on määritelty niihin liittyvät attribuutit.</p>
 
 
 		<figure>
@@ -843,13 +843,46 @@
 
 		  <p>Kahden käsitteen välillä on yhden suhde moneen (<code>1-N</code>) -yhteys, jos ensimmäisen käsitteen ilmentymään voi liittyä monta toisen käsitteen ilmentymää, mutta yhteen toisen käsitteen ilmentymään voi liittyä vain yksi ensimmäisen käsitteen ilmentymä.</p>
 
-		  <p>Esimerkiksi <em>Olli Opiskelijaan</em> voi liittyä monta erilaista kurssisuoritusta, mutta tiettyyn kurssisuoritukseen voi liittyä aina vain yksi opiskelija.</p>
+		  <p>Esimerkiksi <em>Olli Opiskelijaan</em> voi liittyä monta erilaista kurssisuoritusta, mutta tiettyyn kurssisuoritukseen voi liittyä aina vain yksi opiskelija, joka jossain tapauksessa <em>voi</em> olla Olli Opiskelija.</p>
 
 		  <p>Saman yhteystyypin voi ajatella myös tietokantataulujen välillä. Kahden taulun välillä on yhteys yhden suhde moneen, jos yhteen ensimmäisen taulun riviin voi liittyä useita toisen taulun rivejä, mutta yhteen toisen taulun riviin voi liittyä vain yksi ensimmäisen taulun rivi.</p>
 
-		  <p>Yhden suhde moneen -yhteyden toteuttaminen tietokantatauluihin toteutetaan seuraavasti. Tauluun, jossa voi olla monta toiseen tauluun viittaavaa riviä määritellään ylimääräinen sarake, johon asetetaan toisessa taulussa olevaan rivin avaimeen viittaava arvo, eli <em>viiteavain</em>.</p>
+		  <p><em>Tietokantataulujen luominen</em></p>
+
+		<figure>
+		  <img src="img/viikko2/yhdesta-moneen-kasitteet.png" alt="[A]1-*[B]"/> 
+		  <figcaption>Yhden suhde moneen. Yhteen A-käsitteeseen voi liittyä monta B-käsitettä, mutta yhteen B-käsitteeseen liittyy aina tasan yksi A-käsite.</figcaption>
+		</figure>
+
+
+		  <p>Kun kahden käsitteen välillä on yhden suhde moneen -yhteys, luodaan niiden perusteella tietokantataulut seuraavasti. Luodaan ensin käsitteestä, jonka "viivan päässä" on numero 1, tietokantataulu, ja määritellään sille käsitteen ilmentymät yksilöivä pääavain. Jos käsitteeseen liittyy muita ominaisuuksia tai attribuutteja, asetetaan ne tietokantataulun sarakkeiksi.</p>
+
+		<figure>
+		  <img src="img/viikko2/kasite-a-paaavain.png" alt="[A|(pk) id]"/> 
+		  <figcaption>Käsitteen A perusteella luotu tietokantataulu, jolle on määritelty pääavain <em>id</em>. </figcaption>
+		</figure>
+		  
+		<p>Tämän jälkeen luodaan käsitteestä, jonka "viivan päässä" on tähti, tietokantataulu, ja määritellään sille <em>viiteavain</em>, jonka avulla voimme viitata aiemmin luotuun tauluun.</p>
+
+		<figure>
+		  <img src="img/viikko2/kasite-b-viiteavain.png" alt="[B|(fk) a_id: A]"/> 
+		  <figcaption>Käsitteen B perusteella luotu tietokantataulu, jolle on määritelty viiteavain <em>a_id</em>, joka viittaa tauluun A. </figcaption>
+		</figure>
+		  
+		
+		<p>Tämän jälkeen piirretään viiva tietokantataulujen välille.</p>
+
+
+		<figure>
+		  <img src="img/viikko2/taulut-a-b.png" alt="[A|(pk) id]1-*[B|(fk) a_id: A]"/> 
+		  <figcaption>Tietokantataulussa A on pääavain <em>id</em>. Tietokantataulussa B on viiteavain <code>a_id</code>, joka viittaa tietokantatauluun A.</figcaption>
+		</figure>
+
+		  <p>Yllä kuvattiin, miten yhden suhde moneen -yhteystyypin tapauksessa luodaan luokkakaaviosta tietokantataulut.</p>
 
 		</aside>
+
+
 
 		<p>Voimme muuttaa Kurssisuoritusta ja Kurssia kuvaavan <em>käsitemallin</em> tietokantatauluksi määrittelemällä ensin tauluille avaimet, jonka jälkeen kurssisuoritus-tauluun lisätään viiteavain kurssi-tauluun.</p>
 
