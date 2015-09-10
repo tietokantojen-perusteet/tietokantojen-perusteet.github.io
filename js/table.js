@@ -77,7 +77,78 @@ WK2TABLES['Kurssitehtävä'] = {
 };
 
 
+var WK3TABLES = {};
 
+WK3TABLES['Opiskelija'] = {
+    schema: "opiskelijanumero, nimi, syntymävuosi, pääaine",
+    data: [
+	["999999", "Pihla", 1997, "Tietojenkäsittelytiede"],
+	["999998", "Joni", 1993, "Tietojenkäsittelytiede"],
+	["999997", "Anna", 1991, "Matematiikka"],
+	["999996", "Krista", 1990, "Tietojenkäsittelytiede"],
+	["999995", "Matti", 1970, "Matematiikka"],
+	["999994", "Gandhi", 1869, "Oikeustiede"],
+    ]    
+};
+
+WK3TABLES['Kurssi'] = {
+    schema: "kurssitunnus, nimi, kuvaus",
+    data: [
+	["581325", "Ohjelmoinnin perusteet", "Kurssilla perehdytään nykyaikaisen ohjelmoinnin perusideoihin sekä algoritmien laatimiseen."],
+	["582103", "Ohjelmoinnin jatkokurssi", "Kurssilla perehdytään olio-ohjelmoinnin perustekniikoihin."],
+	["581328", "Tietokantojen perusteet", "Kurssilla tutustutaan tiedon esitysmuotoihin ja tiedon hakuun suurista tietomääristä."],
+	["581999", "Tietokantojen perusteet, osa2", "Tutustutaan LEFT JOIN -komentoon, jonka avulla saadaan esille myös FROM ehtoa seuraavasta taulusta rivejä, joihin LEFT JOIN komennon ON ehto ei osu."]
+
+    ]
+};
+
+WK3TABLES['Kurssisuoritus'] = {
+    schema: "opiskelija, kurssi, päivämäärä, arvosana, opintopistemäärä",
+    data: [
+	["999999", "581325", "2014-08-01", 5, 5],
+	["999999", "582103", "2014-08-01", 5, 5],
+	["999999", "581328", "2014-10-20", 3, 5],
+	["999998", "581325", "2013-08-01", 4, 5]
+    ]
+};
+
+WK3TABLES['Tehtävä'] = {
+    schema: "tunnus, nimi, kuvaus",
+    data: [
+	["1", "Fotari", "-"],
+	["2", "Onko tässä rekursio?", "-"],
+	["3", "Keksi tehtävä", "-"],
+	["4", "Koetus", "-"]
+    ]
+};
+
+WK3TABLES['Kurssitehtävä'] = {
+    schema: "tunnus, tehtävä, kurssi",
+    data: [
+	["1001", "1", "581325"],
+	["1002", "2", "582103"],
+	["1003", "2", "581328"],
+	["1004", "3", "581328"],
+	["1005", "4", "581328"]
+    ]
+};
+
+WK3TABLES['Tehtäväsuoritus'] = {
+    schema: "opiskelija, tehtävä, suoritusaika",
+    data: [
+	["999999", "1001", "2014-07-22"],
+	["999999", "1002", "2014-07-24"],
+	["999999", "1003", "2013-09-14"],
+	["999999", "1004", "2014-10-11"],
+	["999998", "1001", "2013-07-21"],
+	["999998", "1002", "2013-09-14"],
+	["999997", "1001", "2014-06-15"],
+	["999997", "1004", "2014-06-23"],
+	["999995", "1004", "1987-04-01"],
+	["999995", "1002", "1987-04-01"],
+	["999994", "1004", "1880-01-01"]
+    ]
+};
 
 /*
 TABLES['students'] = {

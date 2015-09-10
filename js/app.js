@@ -41,6 +41,19 @@ myAppModule.controller('weekTwoSqlController', function($scope) {
   });
 });
 
+
+myAppModule.controller('weekThreeSqlController', function($scope) {
+  var db = new SQL.Database();
+  $scope.db = db;
+
+  $scope.tabledata = WK3TABLES;
+  $scope.tables = ['Opiskelija', 'Kurssi', 'Kurssisuoritus', 'Tehtävä', 'Kurssitehtävä', 'Tehtäväsuoritus'];
+
+  $scope.tables.forEach(function(table) {
+    initialize_table($scope.tabledata, table, db);
+  });
+});
+
 /*
 myAppModule.controller('weekOneSqlController', function($scope) {
   var db = new SQL.Database();

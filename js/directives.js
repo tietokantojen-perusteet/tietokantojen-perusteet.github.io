@@ -46,6 +46,14 @@ myAppModule.directive('query', function() {
               try {
                   $scope.error = null
 
+
+		  if (query.toUpperCase().indexOf("DELETE") > -1 || 
+		      query.toUpperCase().indexOf("INSERT") > -1) {
+		      $scope.db.run(query);
+		      $scope.done = true;
+		      return;		      
+		  }
+
                   var stmt = $scope.db.prepare(query);
 
                   stmt.getAsObject();
