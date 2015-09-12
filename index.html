@@ -1294,7 +1294,6 @@ SELECT Tehtävä.nimi AS tehtävä
 		<p>Voit kokeilla juuri rakennettua kyselyä alla.</p>
 
 		<div ng-controller="weekTwoSqlController">
-		  
 		  <query
 		     db="db"
 		     query="SELECT Tehtävä.nimi AS Tehtävä
@@ -1305,8 +1304,8 @@ SELECT Tehtävä.nimi AS tehtävä
         AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero
         AND Opiskelija.nimi = 'Joni'">
 		  </query>
-		</div>
 
+		</div>
 
 		<header>
 		  <h1 id="viikko3">Viikko 3</h1>
@@ -1493,7 +1492,7 @@ SELECT Opiskelija.nimi AS Opiskelija, Tehtävä.nimi AS Tehtävä
     WHERE Kurssi.kurssitunnus = Kurssisuoritus.kurssi
         AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero">
 		  </query>
-		  </div>
+		</div>
 
 		<p>Entä jos haluaisimme nähdä myös ne kurssit, joita kukaan ei ole suorittanut? Tämä ei ratkea, ainakaan suoraviivaisesti.</p>
 
@@ -2934,7 +2933,7 @@ logging.file=</pre>
 
 
 	<!-- angularjs -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 	<!-- tikape sqljs -- https://github.com/mluukkai/tikape-sqljs -->
         <script src="js/libs/sql.js"></script>
         <script src="js/table.js"></script>

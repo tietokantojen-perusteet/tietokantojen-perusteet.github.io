@@ -8,6 +8,7 @@ myAppModule.directive('togglable', function() {
       },
       transclude: true,
       templateUrl: 'templates/togglable-template.html',
+
       controller: function($scope){
         $scope.visible = false;
         $scope.command = "näytä";
@@ -39,13 +40,16 @@ myAppModule.directive('query', function() {
           db: '=',
           query: '@',
           editable: '@',
-          done: '='
+          done: '=?' // done should be optional
       },
       controller: function($scope){
           $scope.run_query = function(query) {
               try {
                   $scope.error = null
 
+		  if(!query || query.length == 0) {
+		      return;
+		  }
 
 		  if (query.toUpperCase().indexOf("DELETE") > -1 || 
 		      query.toUpperCase().indexOf("INSERT") > -1) {
@@ -61,11 +65,13 @@ myAppModule.directive('query', function() {
                   stmt.bind();
 
                   $scope.rows = [];
-                  while(stmt.step()) {
+                  
+		  while(stmt.step()) {
                       var row = stmt.getAsObject();
                       $scope.rows.push(row);
                   }
-                  $scope.columns = Object.keys($scope.rows[0]);
+                  
+		  $scope.columns = Object.keys($scope.rows[0]);
                   $scope.done = true
               }
               catch(err) {
