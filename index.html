@@ -1666,7 +1666,7 @@ INSERT INTO Kurssi VALUES ('582354',
 
 		<h1>Tietokantakyselyiden tekeminen ohjelmallisesti</h1>
 		
-		<p>Vaikka edelliset esimerkit tehtiin osana kurssimateriaalia, tehdään tietokantakyselyjä usein ohjelmallisesti tai suoraan tietokannanhallintajärjestelmässä, vaikkapa konsolin kautta.</p>
+		<p>Vaikka edelliset esimerkit tehtiin osana kurssimateriaalia, tehdään tietokantakyselyjä usein ohjelmallisesti tai suoraan tietokannanhallintajärjestelmässä, esimerkiksi konsolin kautta.</p>
 
 
 		<!-- tähän kuva siitä, miten tietokanta on erillinen sovelluksesta --> 
@@ -1792,7 +1792,7 @@ String kysely = "SELECT * FROM User WHERE username = '"
 
 		  <p>Vaikka kysely toimii siinä mielessä oikein, että se ei palauta yhtäkään riviä, jos tietokannasta ei löydy annetulla käyttäjätunnuksella ja salasanalla tunnettua henkilöä, on se kuitenkin hieman ongelmallinen. Jos käyttäjä antaa käyttäjänimen <code>' OR '1' = '1' OR '1' = '1</code>, tulee tietokannassa suoritettava kysely olemaan <code>SELECT * FROM User WHERE username = 'nimi' OR '1' = '1' OR '1' = '1' AND password = 'salasana'</code>. Koska '1' on '1', palautuu vastauksessa kaikki rivit.</p>
 
-		  <p>SQL-injektioita voi luonnollisesti tehdä myös muunlaisiin kyselyihin. Web-sarjakuva xkcd kuvastaa tätä ilmiötä hyvin <em>Exploits of a Mom</em>-sarjakuvastripissään.</p>
+		  <p>SQL-injektioita voi luonnollisesti tehdä myös muunlaisiin kyselyihin. Web-sarjakuva <a href="http://xkcd.com/" target="_blank">xkcd</a> kuvastaa tätä ilmiötä hyvin <em>Exploits of a Mom</em>-sarjakuvallaan.</p>
 
 		  <figure>
 		    <img src="http://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="School: Hi, this is your son's school. We're having some computer trouble.
@@ -1813,27 +1813,473 @@ Mom: And I hope you've learned to sanitize your database inputs."/>
 
 		<h2>Java-projekti ja JDBC-ajurin noutaminen</h2>
 
+		<p>Jotta Javalla tehtävään projektiin saa tietokannan käyttöön, tulee ohjelmoijan noutaa tietokanta-ajuri. Ajurien noutaminen kannattaa hoitaa ns. riippuvuuksia hallinnoivan projektinhallintatyökalun, kuten Mavenin, avulla.</p>
 
-		<!-- tietokantayhteydet tyypillisesti ohjelmointikielen rajapinnan yli, esimerkiksi javalla JDBC-speksi, minkä eri tietokantalafkat toteuttaa  --> 
+		<p>Oletamme tässä, että käytössäsi on <a href="http://www.oracle.com/technetwork/articles/javase/jdk-netbeans-jsp-142931.html" target="_blank">NetBeans-ohjelmointiympäristö sekä Java 8</a>  (tietojenkäsittelytieteen laitoksella käytössä oleva TMCBeans käy myös mainiosti).</p>
 
-		<!-- esimerkiksi sqlitellä voidaan käyttää ajuria bla -->
+		<p><strong><em>Maven-projektin luominen NetBeansissa</em></strong></p>
+		
+		<p>Uuden Mavenia käyttävän projektin luominen NetBeansissa tapahtuu valitsemalla <em>File</em> -> <em>New Project</em> -> Kategoriaksi <em>Maven</em> ja projektiksi <em>Java Application</em>. Tämän jälkeen valitaan <em>Next</em>, ja täytetään projektin tiedot. Alla on esimerkki projektin tiedoista, projektin sijainti (Project location) on konekohtainen.</p>
 
-		<!-- maven-projekti -->
+		  <figure>
+		    <img src="img/viikko3/nb-maven.png" alt="Project Name: tikape
 
-		<!-- maven-projektiin riippuvuudeksi sqlite -->
+Project Location: (omasta koneesta riippuva)
 
-		<!-- yhteyden ottaminen tietokantaan -->
+Group Id: tikape
 
-		<!-- tietokantakyselyn tekeminen -->
+Version: (saa olla kuten on aluksi)
 
-		<!-- vastaukseksi resultset-olioita -->
+Package: tikape"
+/>
+		    <figcaption>Maven-projektin asetukset</figcaption>
+		  </figure>
 
-		<!-- resultset-olioiden läpikäynti -->
+		  <p>Tämän jälkeen painetaan Finish, ja projekti ilmestyy NetBeansin vasemmassa laidassa olevalle listalle. Etsi nyt projektin <em>Project Files</em> sisältä <code>pom.xml</code>-tiedosto -- se näyttää esimerkiksi seuraavalta:</p>
 
-		<!-- miten yksittäiset sarakkeet resultsetissä -->
+<pre class="sh_xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;tikape&lt;/groupId&gt;
+    &lt;artifactId&gt;tikape&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;
+    &lt;/properties&gt;
+&lt;/project&gt;
+</pre>
 
-		<!-- pari esimerkkikyselyä -->
 
+		<p>Koska käytössämme on Java 8, vaihdetaan sekä <code>maven.compiler.source</code> että <code>maven.compiler.source</code> -arvot muotoon <code>1.8</code>.</p>
+
+<pre class="sh_xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;tikape&lt;/groupId&gt;
+    &lt;artifactId&gt;tikape&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;<strong>1.8</strong>&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;<strong>1.8</strong>&lt;/maven.compiler.target&gt;
+    &lt;/properties&gt;
+&lt;/project&gt;
+</pre>
+
+		<p><strong><em>SQLite-ajurin lisäämien Maven-projektin riippuvuuksiin</em></strong></p>
+
+		<p>Lisätään <em>riippuvuus</em> (dependency) SQLite-ajuriin osaksi sovellusta.</p>
+
+<pre class="sh_xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;tikape&lt;/groupId&gt;
+    &lt;artifactId&gt;tikape&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;<strong>1.8</strong>&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;<strong>1.8</strong>&lt;/maven.compiler.target&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.xerial&lt;/groupId&gt;
+            &lt;artifactId&gt;sqlite-jdbc&lt;/artifactId&gt;
+            &lt;version&gt;3.8.11.1&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+&lt;/project&gt;
+</pre>		
+
+		<p>Nyt kun NetBeans-projektista valitsee oikealla hiirennapilla <em>Dependencies</em> ja klikkaa <em>Download Declared Dependencies</em>, latautuu JDBC-ajuri projektin käyttöön.</p>
+
+
+		<p><strong><em>Ensimmäinen tietokantaa käyttävä Maven-ohjelma</em></strong></p>
+
+		<p>Avaa projektiin liittyvä <em>Source Packages</em>, ja klikkaa <em>tikape</em>-pakkausta oikealle hiirennapilla. Valitse tämän jälkeen <em>New</em> -> <em>Java Class</em>, jonka jälkeen avautuu valikko, missä voit antaa luokalle nimen. Anna luokan nimeksi <code>Main</code>.</p>
+		
+		<p>Avaa tiedosto tuplaklikkaamalla sitä. Muokkaa tiedostoa vielä siten, että se on seuraavan näköinen:</p>
+
+<pre class="sh_java">
+package tikape;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        
+    }
+}</pre>
+
+
+
+		<figure>
+		  <img src="img/viikko3/nb-main.png" alt="Projektin lähdekooditiedosto Main.java on avattuna."/>
+		  <figcaption>Avattu projekti NetBeansissa</figcaption>
+		</figure>
+
+
+		<p>Lisää projektiin <em>import</em>-komento <code>import java.sql.*;</code>, joka hakee kaikki SQL-kyselyihin liittyvät Javan kirjastot.</p>
+
+
+<pre class="sh_java">
+package tikape;
+
+import java.sql.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        
+    }
+}</pre>
+
+
+		<p>Avataan seuraavaksi tietokantayhteys tietokantaan <em>testi.db</em>, ja tehdään siellä kysely "SELECT 1", jolla pyydetään tietokantaa palauttamaan luku 1 -- käytämme tätä yhteyden testaamiseksi. Jos yhteyden luominen onnistuu, tulostetaan "Hei tietokantamaailma!", muulloin "Yhteyden muodostaminen epäonnistui".</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.sql.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Class.forName("org.sqlite.JDBC");
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:testi.db");
+        
+        Statement statement = connection.createStatement();
+
+        ResultSet resultSet = statement.executeQuery("SELECT 1");
+        
+        if(resultSet.next()) {
+            System.out.println("Hei tietokantamaailma!");
+        } else {
+            System.out.println("Yhteyden muodostaminen epäonnistui.");
+        }
+    }
+}</pre>
+
+<pre>
+Hei tietokantamaailma!</pre>
+
+		<p>Kun suoritamme ohjelman ensimmäistä kertaa valitsemalla <em>Run</em> -> <em>Run Project</em>, SQLite luo puuttuvan tietokannan paikalle uuden tietokannan. Projektin kansiossa on nyt tiedosto <code>testi.db</code>, joka on tietokantamme.</p>
+
+
+		<figure>
+		  <img src="img/viikko3/nb-testidb.png" alt="Kun ohjelma on suoritettu ensimmäistä kertaa, tiedosto testi.db luodaan projektiin."/>
+		  <figcaption>Tietokantatiedosto <em>testi.db</em> löytyy projektin kansiosta. Tiedostot löytyvät <em>Files</em>-välilehdeltä.</figcaption>
+		</figure>
+		
+
+		<p><strong><em>Tietokantakyselyiden tekeminen</em></strong></p>
+	
+		<p>Osoitteessa <a href="dbs/vuokraamo.db">vuokraamo.db</a> löytyy kuvitteellisen moottoripyörävuokraamon tietokanta. Lataa se edellä tehdyn projektin juureen ja kokeile kyselyn tekemistä kyseiseen tietokantaan.</p>
+
+		<p>Tietokannassa on tietokantataulu <code>Pyora</code>, jolla on sarakkeet <code>rekisterinumero</code> ja <code>merkki</code>. Jokaisen pyörän rekisterinumeron ja merkin tulostaminen tapahtuu seuraavasti -- huomaa myös, että olemme vaihtaneet käytössä olevaa tietokantaa.<p>
+
+<pre class="sh_java">
+Class.forName("org.sqlite.JDBC");
+Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");
+
+Statement stmt = connection.createStatement();
+ResultSet rs = stmt.executeQuery("SELECT * FROM Pyora;");
+
+while (rs.next()) {
+    String rekisterinumero = rs.getString("rekisterinumero");
+    String merkki = rs.getString("merkki");
+
+    System.out.println(rekisterinumero + " " + merkki);
+}
+
+stmt.close();
+rs.close();
+
+connection.close();</pre>
+
+		<p>Käydään ylläoleva ohjelmakoodi läpi askeleittain.</p>
+		
+		<ol>
+		  <li><p>Haemme ensin käyttöömme tietokanta-ajurin komennolla <code>Class.forName("org.sqlite.JDBC");</code>, jonka jälkeen otamme SQLiten avulla JDBC-yhteyden tietokantaan <em>vuokraamo.db</em>.
+<pre class="sh_java">
+Class.forName("org.sqlite.JDBC");
+Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");</pre>
+</p>
+		  </li>
+
+		  <li><p>Kyselyn tekeminen tapahtuu pyytämällä yhteydeltä <em>Statement</em>-oliota, jota käytetään kyselyn tekemiseen ja tulosten pyytämiseen. Metodi <em>executeQuery</em> suorittaa parametrina annettavan SQL-kyselyn, ja palauttaa tulokset sisältävän <em>ResultSet</em>-olion.
+
+<pre class="sh_java">
+Statement statement = connection.createStatement();
+ResultSet resultSet = statement.executeQuery("SELECT * FROM Pyora;");</pre>
+</p></li>
+		    <li><p>Tämän jälkeen ResultSet-oliossa olevat tulokset käydään läpi. Metodia next() kutsumalla siirrytään kyselyn palauttamissa tulosriveissä eteenpäin. Kultakin riviltä voi kysyä sarakeotsikon perusteella solun arvoa. Esimerkiksi kutsu getString("rekisterinumero") palauttaa kyseisellä rivillä olevan sarakkeen "rekisterinumero" arvon String-tyyppisenä.
+
+<pre class="sh_java">
+while(resultSet.next()) {
+    String rekisterinumero = rs.getString("rekisterinumero");
+    String merkki = rs.getString("merkki");
+
+    System.out.println(rekisterinumero + " " + merkki);
+}</pre>
+</p></li>
+		    <li><p>Kun kyselyn vastauksena saadut rivit on käyty läpi, eikä niitä enää tarvita, vapautetaan niihin liittyvät resurssit.
+
+<pre class="sh_java">
+stmt.close();
+rs.close();
+</pre></p></li>
+
+
+		    <li><p>Lopulta tietokantayhteys suljetaan.
+
+<pre class="sh_java">
+connection.close();</pre>
+</p></li>
+		</ol>
+
+
+		<p><strong><em>Päivityskyselyiden tekeminen</em></strong></p>
+
+		<p>Kyselyt kuten rivien lisääminen ja poistaminen onnistuu myös ohjelmallisesti. Tällöin tuloksessa ei kuitenkaan ole erillistä ResultSet-oliota, vaan luku, joka kertoo kyselyn muuttaneiden rivien määrän. Allaoleva ohjelmakoodi lisää tietokantaan uuden pyörän.</p>
+
+<pre class="sh_java">
+Class.forName("org.sqlite.JDBC");
+Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");
+
+Statement stmt = connection.createStatement();
+int changes = stmt.executeUpdate("INSERT INTO Pyora (rekisterinumero, merkki) VALUES ('RIP-34', 'Jopo');");
+
+System.out.println("Kyselyn vaikuttamia rivejä: " + changes);
+stmt.close();
+
+connection.close();</pre>
+
+
+
+		<h2>Vastuiden eriyttäminen ja debug-viestien tulostaminen</h2>
+
+		<p>Käytännössä tietokantaa käytettäessä on hyvä eriyttää osa tietokantalogiikasta ja sovelluslogiikasta toisistaan. Esimerkiksi tietokanta-ajurin hakeminen ja yhteyden luominen sopii hyvin erillisen tietokantaluokan vastuulle, ja sovelluskehittäjän työtä helpottaa, jos ohjelma mahdollistaa viestien tulostuksen. Samalla myös tietokannassa olevia käsitteitä on kätevä esittää luokkien avulla.</p>
+
+		<p><strong><em>Luodaan käsitteelle luokka</em></strong></p>
+
+		<p>Hahmotellaan ensin luokka käsitteelle <code>Pyora</code>, jolla on rekisterinumero ja merkki.</p>
+
+<pre class="sh_java">
+package tikape;
+
+public class Pyora {
+
+    private String rekisterinumero;
+    private String merkki;
+
+    public Pyora(String rekisterinumero, String merkki) {
+        this.rekisterinumero = rekisterinumero;
+        this.merkki = merkki;
+    }
+
+    public String getRekisterinumero() {
+        return rekisterinumero;
+    }
+
+    public void setRekisterinumero(String rekisterinumero) {
+        this.rekisterinumero = rekisterinumero;
+    }
+
+    public String getMerkki() {
+        return merkki;
+    }
+
+    public void setMerkki(String merkki) {
+        this.merkki = merkki;
+    }
+}</pre>
+
+		<p>Luokasta <em>Pyora</em> voi tehdä uusia ilmentymiä konstruktorin avulla, joka saa ensimmäiseksi parametrikseen rekisterinumeron, ja toiseksi parametriksi merkin.</p>
+
+		<p><strong><em>Luodaan mahdollisuus olioiden luomiselle ResultSetissä olevista riveistä</em></strong></p>
+
+		<p>Luodaan rajapinta <em>Collector</em>, jonka tehtävänä on muuttaa tulosrivi olioksi. Teemme rajapinnasta geneerisen, eli sille voi määritellä rajapinnan luovan tyypin rajapinnan toteuttavan olion luonnin yhteydessä.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.sql.*;
+
+public interface Collector&lt;T&gt; {
+
+    T collect(ResultSet rs) throws SQLException;
+
+}</pre>
+
+		<p>Esimerkiksi pyörien luominen kyselyrivistä onnistuisi nyt seuraavanlaisen <em>Collector</em>-rajapinnan toteuttavan olion avulla.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.sql.*;
+
+public class Pyorakeraaja implements Collector&lt;Pyora&gt; {
+
+    @Override
+    public Pyora collect(ResultSet rs) throws SQLException {
+        String reknro = rs.getString("rekisterinumero");
+        String merkki = rs.getString("merkki");
+
+        return new Pyora(reknro, merkki);
+    }
+}</pre>
+
+
+
+
+		<p><strong><em>Tietokantaluokan luominen</em></strong></p>
+
+		<p>Luodaan seuraavaksi konkreettinen tietokantaluokka, joka ottaa yhteyden tietokantaan, sekä käyttää aiemmin luomaamme Collector-rajapintaa kyselyn tulosten hakemiseksi.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.sql.*;
+import java.util.*;
+
+public class Database {
+
+    private boolean debug;
+    private Connection connection;
+
+    public Database(String driver, String address) throws Exception {
+        Class.forName(driver);
+        this.connection = DriverManager.getConnection(address);
+    }
+
+    public void setDebugMode(boolean d) {
+        debug = d;
+    }
+
+    public &lt;T&gt; List&lt;T&gt; queryAndCollect(String query, Collector&lt;T&gt; col) throws SQLException {
+        List&lt;T&gt; rows = new ArrayList&lt;&gt;();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        
+        while (rs.next()) {
+            if (debug) {
+                System.out.println("---");
+                System.out.println(query);
+                debug(rs);
+                System.out.println("---");
+            }
+            
+            rows.add(col.collect(rs));
+        }
+        
+        rs.close();
+        stmt.close();
+        return rows;
+    }
+
+    private void debug(ResultSet rs) throws SQLException {
+        int columns = rs.getMetaData().getColumnCount();
+        for (int i = 0; i &lt; columns; i++) {
+            System.out.print(
+                    rs.getObject(i + 1) + ":"
+                    + rs.getMetaData().getColumnName(i + 1) + "  ");
+        }
+
+        System.out.println();
+    }
+}</pre>
+
+		<p>Tietokannan konkreettinen käyttö tapahtuu seuraavasti:</p>
+
+<pre class="sh_java">
+Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:vuokraamo.db");
+List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", new Pyorakeraaja());
+
+for (Pyora pyora : pyorat) {
+    System.out.println(pyora.getMerkki());
+}</pre>
+
+
+		<p>Tärkeää on myös debug-viestien hyödyntäminen ongelmatapauksissa sekä sovellusta kehitettäessä. Debug-viestit saa tietokantaan päälle metodilla <code>database.setDebugMode(true);</code>.</p>
+<pre class="sh_java">
+Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:vuokraamo.db");
+database.setDebugMode(true);
+
+List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", new Pyorakeraaja());
+
+for (Pyora pyora : pyorat) {
+    System.out.println(pyora.getMerkki());
+}</pre>
+
+		<p><strong><em>Päivityskyselyiden lisääminen</em></strong></p>
+
+		<p>Edellä luotu tietokantaluokkamme ei vielä kuitenkaan osaa thedä päivityskyselyitä. Lisätään mahdollisuus päivityskyselyiden tekemiseen.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.sql.*;
+import java.util.*;
+
+public class Database {
+
+// ...
+
+    public int update(String updateQuery) throws SQLException {
+        Statement stmt = connection.createStatement();
+        int changes = stmt.executeUpdate(updateQuery);
+
+        if(debug) {
+            System.out.println("---");
+            System.out.println(updateQuery);
+            System.out.println("Changed rows: " + changes);
+            System.out.println("---");
+        }
+        stmt.close();
+
+        return changes;
+    }
+
+// ... 
+}</pre>
+
+
+		<p>Nyt myös päivityskyselyt onnistuvat.</p>
+
+<pre class="sh_java">
+Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:vuokraamo.db");
+database.setDebugMode(true);
+
+database.update("INSERT INTO Pyora (rekisterinumero, merkki) VALUES ('AKU-313', 'Belchfire Runabout')");
+
+List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", new Pyorakeraaja());
+
+for (Pyora pyora : pyorat) {
+    System.out.println(pyora.getMerkki());
+}</pre>
+
+
+
+                <aside class="info">
+		  <br/>
+		  <h1>Esimerkkiprojekti Githubissa</h1>
+
+		  <p>Juuri rakennettu esimerkkiprojekti löytyy Githubista osoitteessa <a href="https://github.com/tietokantojen-perusteet/Vuokraamo" target="_blank">https://github.com/tietokantojen-perusteet/Vuokraamo</a></p>
+
+		</aside>
+
+
+<!--
 
 		<h2>Prepared Statement -kyselyt</h2>
 
@@ -1874,9 +2320,7 @@ statement.execute();
 
 		<p>Huom! Tietojenkäsittelytieteilijöille epätyypillisesti kyselyissä käytettävien parametrien indeksointi alkaa numerosta 1.</p>
 
-	
-
-		<h2>Tietokantakyselyiden eriyttäminen Main-metodista</h2>
+-->	
 
 
 
