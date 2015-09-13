@@ -74,6 +74,8 @@
 
                 <p><em>"Kurssilla tutustutaan tiedon esitysmuotoihin ja tiedon hakuun suurista tietomääristä. Erityisenä painopisteenä ovat relaatiotietokannat, joiden kohdalla perehdytään toisaalta teoreettiseen perustaan ja toisaalta tietokannan käytännön käsittelyyn SQL-kielen avulla. Kurssilla opitaan myös perustiedot relaatiotietokantojen suunnittelusta."</em></p>
 
+		<p><strong>Huom! Sisältö, aikataulu ja arvostelu koskee Helsingin yliopiston tietojenkäsittelytieteen laitoksen syksyn 2015 kurssia.</strong></p>
+
                 <p>Kurssi sisältää seitsemän tehtäväsarjaa, joista ensimmäinen julkaistaan heti kurssin alussa. Tehtävät tulee tehdä ennen viikoittaisia harjoitustilaisuuksia, joissa hyödynnetään tehtävien tekemisessä kertynyttä paikan päällä pohdittavissa suunnittelu- ja toteutustehtävissä.</p>
 
                 <p>Kurssin arvostelu perustuu kurssikokeeseen, harjoitustehtäviin, sekä läsnäoloon harjoitustilaisuuksissa:</p>
@@ -99,7 +101,9 @@
 
 		<h2>Lisämateriaali</h2>
 
-		<p>Tämän materiaalin lisäksi täydentävänä materiaalina voi käyttää Harri Laineen Tietokantojen perusteet -kurssin oppimateriaalia (<a href="http://www.cs.helsinki.fi/u/laine/tikape/k00/osa1.pdf" target="_blank">osa 1</a>, <a href="http://www.cs.helsinki.fi/u/laine/tikape/k00/osa2.pdf" target="_blank">osa 2</a> ja <a href="http://www.cs.helsinki.fi/u/laine/tikape/k00/osa3.pdf" target="_blank">osa 3</a>), sekä kirjoja "Fundamentals of database systems" (Elmasri &amp; Navathe) ja "Database management systems" (Ramakrishnan &amp; Gehrke). Molemmat löytyvät opiskelijakirjastosta.</p>
+		<p>Tämän materiaalin lisäksi täydentävänä materiaalina voi käyttää Harri Laineen Tietokantojen perusteet -kurssin oppimateriaalia (<a href="ext/laine-tikape-osa1.pdf" target="_blank">osa 1</a>, <a href="ext/laine-tikape-osa2.pdf" target="_blank">osa 2</a> ja <a href="ext/laine-tikape-osa3.pdf" target="_blank">osa 3</a>), sekä kirjoja "Fundamentals of database systems" (Elmasri &amp; Navathe) ja "Database management systems" (Ramakrishnan &amp; Gehrke). Molemmat löytyvät opiskelijakirjastosta.</p>
+
+		<p>Edellä mainittujen kirjojen ostaminen ei ole tätä kurssia varten suositeltavaa.</p> 
 
                 <h2>Esitietovaatimukset</h2>
 
@@ -641,13 +645,14 @@
 		    
 		    <h4>Tehtävät</h4>
 		    
-		    <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulussa olevat rivit.</p>
+		    <p>Tee nyt kysely, jolla saat listattua kaikki <code>Kurssisuoritus</code>-taulussa olevat rivit.</p>
 		    
 		    <togglable content="taulut">
                       <table-info></table-info>
 		    </togglable>
 		    
-		    <query db="db"></query>
+		    <query db="db"
+			   valid="SELECT * FROM Kurssisuoritus"></query>
 		  </div>
 		  
 
@@ -668,13 +673,14 @@
 		    
 		    <h4>Tehtävät</h4>
 		    
-		    <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulussa olevat kurssit.</p>
+		    <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulussa olevien kurssien nimet.</p>
 		    
 		    <togglable content="taulut">
                       <table-info></table-info>
 		    </togglable>
 		    
-		    <query db="db"></query>
+		    <query db="db"
+			   valid="SELECT kurssi FROM Kurssisuoritus"></query>
 		  </div>
 
 
@@ -702,7 +708,8 @@
                       <table-info></table-info>
 		    </togglable>
 		    
-		    <query db="db"></query>
+		    <query db="db"
+			   valid="SELECT DISTINCT kurssi FROM Kurssisuoritus"></query>
 		  </div>
 
 
@@ -728,7 +735,9 @@
                       <table-info></table-info>
 		    </togglable>
 		    
-		    <query db="db" done="selectAnnaDone"></query>
+		    <query db="db" 
+			   valid="SELECT * FROM Opiskelija WHERE nimi = 'Anna'"
+			   done="selectAnnaDone"></query>
 
 
 		    <div ng-show="selectAnnaDone">
@@ -739,7 +748,8 @@
 			<table-info></table-info>
 		      </togglable>
 		      
-		      <query db="db"></query>
+		      <query db="db"
+			     valid="SELECT * FROM Kurssisuoritus WHERE opiskelija = '999999'"></query>
 
 		    </div>
 		  </div>

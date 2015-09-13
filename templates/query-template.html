@@ -5,12 +5,19 @@
   <textarea class="form-control" rows="4" cols="80" ng-model="query" ng-readonly="editable">
     
   </textarea>
-  
+
   <br/>
   
   <button type="button" class="btn btn-default" ng-click="run_query(query)">
     <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Suorita
   </button>
+
+  <br/>
+  
+  <div ng-show="valid && done">
+    <br/>
+    <h3 class="glyphicon glyphicon-thumbs-up">&nbsp;Oikein meni!</h3>
+  </div>
   
   <div class="alert alert-danger" role="alert" ng-show="error">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -23,7 +30,21 @@
   
   <div ng-show="columns">
     
-    <h4><em>Suoritetun kyselyn tulos</em></h4>
+    <h4>
+      <em>Suoritetun kyselyn tulos</em> 
+    </h4>
+    
+    <div class="alert alert-danger" role="alert" ng-show="validMessage">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">&nbsp;Virhe:</span>
+      <br/>
+      <br/>
+<!--      <span class="sr-only">Virhe:</span> -->
+      <ul class="list-unstyled">
+	<li ng-repeat="msg in validMessage">
+	  {{msg}}
+	</li>
+      </ul>
+    </div>
     
     <table class="table table-condensed">
         <thead>

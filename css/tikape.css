@@ -3410,3 +3410,10 @@ div.data-table {
   outline: 1px solid #ececec;
   margin-bottom: 1em;
 }
+
+i.green:before {
+    color: green;
+}
+i.red:before {
+    color: red;
+}
