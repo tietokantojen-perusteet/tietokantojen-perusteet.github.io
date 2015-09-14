@@ -1579,7 +1579,7 @@ SELECT Kurssi.nimi AS Kurssi, Opiskelija.nimi AS Opiskelija
 		  <li><code>FULL JOIN</code> -- palauta kaikki FROM-komentoa seuraavan taulun rivit sekä kaikki RIGHT JOIN-komentoa seuraavan taulun rivit, ja liitä ne toisiinsa niiltä kohdin, kuin se on ON-liitosehdossa määritellyn ehdon mukaan mahdollista</li>
 		</ul>
 
-		<p>Valitettavasti tällä sivulla käytössä oleva kyselyiden harjoitteluun tarkoitettu apuväline ei tue RIGHT JOIN ja FULL JOIN -tyyppisiä kyselyitä.</p>
+		<p><em>Valitettavasti tällä sivulla käytössä oleva kyselyiden harjoitteluun tarkoitettu apuväline ei tue RIGHT JOIN ja FULL JOIN -tyyppisiä kyselyitä.</em></p>
 
 
 		<aside class="info">
@@ -1652,7 +1652,6 @@ INSERT INTO Kurssi (kurssitunnus, nimi, kuvaus)
 		</query>
 
 
-
 		<query
 		   db="db"
 		   editable="false"
@@ -1661,19 +1660,14 @@ INSERT INTO Kurssi (kurssitunnus, nimi, kuvaus)
 
 
 
-
-, jota taas seuraa taulun sarakkeet, joihin tietoa lisätään, sekä sarasekä attribuuteille annettavat arvot. Arvot annetaan taulujen sarakkeiden olemassaolevassa järjestyksessä. </p>
-
-
-
 		<aside class="info">
 		  <br/>
 
 		  <h1>Rivien poistamisesta ja lisäämisestä</h1>
 
-		  <p>Tietokannan käyttämiseen tarkoitetut rajapinnat -- kuten tällä sivulla käytettävä <a href="https://github.com/kripken/sql.js/" target="_blank">sql.js</a> -- tyypillisesti rajoittavat tietokantaan tehtäviä kyselyitä. Suoran kyselyn tekeminen muodossa <code>DELETE FROM Opiskelija WHERE nimi = 'Gandhi'</code> ei ole usein mahdollista, vaan kysely määritellään parametrin avulla -- esimerkiksi <code>DELETE FROM Opiskelija WHERE nimi = '?'</code>, missä parametri annetaan kyselylle erikseen.</p>
+		  <p>Tietokannan käyttämiseen tarkoitetut rajapinnat -- kuten tällä sivulla käytettävä <a href="https://github.com/kripken/sql.js/" target="_blank">sql.js</a> -- tyypillisesti rajoittavat tietokantaan tehtäviä kyselyitä. Suoran kyselyn tekeminen muodossa <code>DELETE FROM Opiskelija WHERE nimi = 'Gandhi'</code> ei ole aina mahdollista, vaan kysely määritellään parametrin avulla -- esimerkiksi <code>DELETE FROM Opiskelija WHERE nimi = '?'</code>, missä parametri annetaan kyselylle erikseen.</p>
 		 
-		  <p>Tutustutaan toisenlaiseen tapaan näiden kyselyiden tekemiseen...</p>
+		  <p>Tutustutaan toisenlaiseen tapaan näiden kyselyiden tekemiseen.</p>
 
 		</aside>
 
