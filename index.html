@@ -1624,22 +1624,33 @@ DELETE FROM Opiskelija WHERE nimi = 'Gandhi'
 
 		<p><strong><em>Rivien lisääminen tauluun</em></strong></p> 
 
-		<p>Rivien lisääminen tietokantatauluun tapahtuu komennon <code>INSERT INTO</code> avulla, mitä seuraa taulun nimi, mihin lisätään tietoa, sekä attribuuteille annettavat arvot. Arvot annetaan taulujen sarakkeiden olemassaolevassa järjestyksessä. </p>
+		<p>Rivien lisääminen tietokantatauluun tapahtuu komennon <code>INSERT INTO</code> avulla, mitä seuraa kohdetaulun nimi. Taulun jälkeen määritellään sarakkeet, joihin arvot asetetaan, jota seuraa uudelle riville lisättävät arvot.</p>
 
 		<p>Esimerkiksi, uusi Kurssi nimeltä 'Web-selainohjelmointi', jonka kurssitunnus on 582354 lisätään tauluun seuraavalla komennolla. Lisäyksen </p>
 
 <pre class="sh_sql">
-INSERT INTO Kurssi VALUES ('582354', 
+INSERT INTO Kurssi (kurssitunnus, nimi, kuvaus) 
+    VALUES (582354, 
             'Web-selainohjelmointi', 
             'Web-sovellusten selainpuolen toiminnallisuuden toteuttamisen perustekniikoita');
 </pre>
+
 
                 <p>Toisaalta, uuden opiskelijan -- Jack Bowerin -- lisääminen tapahtuu seuraavasti:</p>
 
 		<query
 		   db="db"
-		   query="INSERT INTO Opiskelija VALUES (123456, 'Jack Bower', 1962, 'e-Spinach')">
+		   query="INSERT INTO Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine) 
+    VALUES (123456, 'Jack Bower', 1962, 'e-Spinach')">
 		</query>
+
+		<p>Uusien rivien lisäämiseen on myös toinen merkintätapa. Jos jokaiseen taulun sarakkeeseen ollaan lisäämässä arvo, ei sarakkeiden nimiä tarvitse erikseen kertoa.</p>
+
+		<query
+		   db="db"
+		   query="INSERT INTO Opiskelija VALUES (123458, 'Maggie Simpson', 1988, 'Genetiikka')">
+		</query>
+
 
 
 		<query
@@ -1647,6 +1658,13 @@ INSERT INTO Kurssi VALUES ('582354',
 		   editable="false"
 		   query="SELECT * FROM Opiskelija">
 		</query>
+
+
+
+
+, jota taas seuraa taulun sarakkeet, joihin tietoa lisätään, sekä sarasekä attribuuteille annettavat arvot. Arvot annetaan taulujen sarakkeiden olemassaolevassa järjestyksessä. </p>
+
+
 
 		<aside class="info">
 		  <br/>
@@ -2328,7 +2346,7 @@ statement.execute();
 		<h1>Käsiteanalyysi</h1>
 
 
-		<p>Käsiteanalyysia (conceptual modeling) käytetään tutkittavaan aihepiiriin tai ongelma-alueeseen liittyvien käsitteiden sekä niiden välisten yhteyksien selvittämiseen. Käsite voidaan määritellä löyhästi jonkinlaisena asiana, jonka nykyinen olemassaolo ei vaadi jonkun muun asian olemassaoloa. Esimerkiksi <em>Henkilön nimi</em> ei ole tässä mielessä käsite, sillä henkilön nimi on riippuvainen henkilön olemassaolosta. Toisaalta, Henkilö taas on käsite, sillä sen olemassaolo ei vaadi jonkun muun asian olemassaoloa. Käsitteet voidaan tyypillisesti myös erottaa toisistaan jollain tavalla, tai niille tulee olla vähintäänkin mahdollista määritellä jonkunlainen yksilöivä tunnus.</p>
+		<p>Käsiteanalyysia (conceptual modeling) käytetään tutkittavaan aihepiiriin tai ongelma-alueeseen liittyvien käsitteiden sekä niiden välisten yhteyksien selvittämiseen. Käsite voidaan määritellä löyhästi jonkinlaisena asiana, jonka nykyinen olemassaolo ei vaadi jonkun muun asian olemassaoloa -- jos asia on olemassaoloriippuvainen, se on mahdollisesti hyvä attribuuttiehdokas. Esimerkiksi <em>Henkilön nimi</em> ei ole tässä mielessä käsite, sillä henkilön nimi on riippuvainen henkilön olemassaolosta. Toisaalta, Henkilö taas on käsite, sillä sen olemassaolo ei vaadi jonkun muun asian olemassaoloa. Käsitteet voidaan tyypillisesti myös erottaa toisistaan jollain tavalla, tai niille tulee olla vähintäänkin mahdollista määritellä jonkunlainen yksilöivä tunnus.</p>
 
 		<p>Käsitteiden välisillä yhteyksillä taas tarkoitetaan esimerkiksi käsitteiden välisiä suhteita, esimerkiksi Henkilöllä voi olla sisaruksia sekä vanhemmat, ja henkilö voi vaikkapa opiskella jossain opinahjossa.</p>
 
@@ -2371,7 +2389,7 @@ statement.execute();
 
 		  <li><em>Täsmennä käsitteitä määrittelemällä attribuutit</em>
 		    
-		    <p>Attribuutteja saattaa löytyä vapaamuotoisesta kuvauksesta, mutta yleensä niiden löytäminen edellyttää lisäselvityksiä kohdealueesta, esimerkiksi toiminnan osapuolten haastatteluja. Attribuuttien kohdalla pitäisi myös selvittää mihin niitä tarvitaan.</p>
+		    <p>Attribuutteja saattaa löytyä vapaamuotoisesta kuvauksesta, mutta yleensä niiden löytäminen edellyttää lisäselvityksiä kohdealueesta, esimerkiksi toiminnan osapuolten haastatteluja. Attribuuttien kohdalla tulee myös selvittää mihin niitä tarvitaan.</p>
 
 		  </li>
 
