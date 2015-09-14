@@ -523,7 +523,7 @@
 		  </table>
 		</div>
 
-		<p>Opiskelija-käsitteeseen liittyy useampi Kurssisuoritus, mikä näyttää luokkakaaviona seuraavalta -- allaolevassa luokkakaaviossa Opiskelijaan on lisätty opiskelijanumero:</p>
+		<p>Opiskelija-käsitteeseen liittyy useampi Kurssisuoritus, mikä näyttää käsitekaaviona seuraavalta -- allaolevassa käsitekaaviossa Opiskelijaan on lisätty opiskelijanumero:</p>
 
 		<figure>
 		  <img src="img/johdanto/opiskelija-opiskelijanumerolla-ja-kurssisuoritus.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna. Suunnikkaiden välille on piirretty viiva, jonka Kurssisuoritus-käsitteen päässä on tähti. Käsitteillä myös ominaisuudet. ">
@@ -829,7 +829,7 @@
 
 		<p>Kurssiin liittyy kurssin yleiset tiedot kuten kurssin nimi, kurssikoodi, sekä kurssin kuvaus. Kurssisuoritus taas liittyy tiettyyn kurssiin, opikelijaan, päivämäärään, arvosanaan, sekä opintopistemäärään. Opintopistemäärä pidetään osana kurssisuoritusta, sillä joillain kursseilla opintopistemäärä vaihtelee työmäärästä riippuen. Käsite Opiskelija säilyy sellaisenaan.</p>
 
-		<p>Yhteen kurssisuoritukseen liittyy aina yksi kurssi, mutta yhteen kurssiin voi liittyä monta kurssisuoritusta. Luokkakaaviona tämä näyttää seuraavalta:</p>
+		<p>Yhteen kurssisuoritukseen liittyy aina yksi kurssi, mutta yhteen kurssiin voi liittyä monta kurssisuoritusta. Käsitekaaviona tämä näyttää seuraavalta:</p>
 
 		<figure>
 		  <img src="img/johdanto/opiskelija-kurssisuoritus-kurssi.png" alt="Opiskelija 1-* Kurssisuoritus *-1 Kurssi"/> 
@@ -888,7 +888,7 @@
 		    <figcaption>Tietokantataulussa A on pääavain <em>id</em>. Tietokantataulussa B on viiteavain <code>a_id</code>, joka viittaa tietokantatauluun A.</figcaption>
 		  </figure>
 		  
-		  <p>Yllä kuvattiin, miten yhden suhde moneen -yhteystyypin tapauksessa luodaan luokkakaaviosta tietokantataulut.</p>
+		  <p>Yllä kuvattiin, miten yhden suhde moneen -yhteystyypin tapauksessa luodaan käsitekaaviosta tietokantataulut.</p>
 		  
 		</aside>
 		
@@ -927,7 +927,7 @@
 
 		<p><em><strong>Kolmannen tietokantakaulun lisääminen tietokantakaavioon</strong></em></p>
 
-		<p>Tarkastellaan seuraavaa luokkakaaviota, ja tehdään siitä seuraavaksi tietokantakaavio.</p>
+		<p>Tarkastellaan seuraavaa käsitekaaviota, ja tehdään siitä seuraavaksi tietokantakaavio.</p>
 
 		<figure>
 		  <img src="img/viikko2/opiskelija-kurssisuoritus-kurssi-luokkakaavio.png" alt="[Opiskelija|opiskelijanumero;nimi;syntymävuosi;pääaine] 1-* [Kurssisuoritus|päivämäärä;arvosana;opintopistemäärä]
@@ -1053,7 +1053,7 @@
 
 		</aside>
 		
-		<p>Tarkastellaan uudestaan käsitteiden tehtävä ja kurssi yhteyttä, ja muunnetaan luokkakaavio tietokantakaavioksi.</p> 
+		<p>Tarkastellaan uudestaan käsitteiden tehtävä ja kurssi yhteyttä, ja muunnetaan käsitekaavio tietokantakaavioksi.</p> 
 
 		<figure>
 		  <img src="img/johdanto/tehtava-kurssi.png" alt="[Tehtävä] *-* [Kurssi]"/> 
@@ -1317,6 +1317,8 @@ SELECT Tehtävä.nimi AS tehtävä
 
 		</div>
 
+		<div ng-controller="weekTwoSqlController">
+
 		<header>
 		  <h1 id="viikko3">Viikko 3</h1>
 		</header>
@@ -1431,42 +1433,40 @@ SELECT Tehtävä.nimi AS Tehtävä
 		<p>Lisätään lopulta kyselyyn vielä Opiskelija-taulu, ja haetaan sieltä opiskelijan nimi. Voit kokeilla tuloksena olevaa kyselyä alla.</p>
 
 
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-		     editable="false"
-		     done="listTikapeTehtavat"
-		     query="SELECT Opiskelija.nimi AS Opiskelija, Tehtävä.nimi AS Tehtävä
+		<query
+		   db="db"
+		   editable="false"
+		   done="listTikapeTehtavat"
+		   query="SELECT Opiskelija.nimi AS Opiskelija, Tehtävä.nimi AS Tehtävä
     FROM Kurssi, Kurssitehtävä, Tehtävä, Tehtäväsuoritus, Opiskelija
     WHERE Kurssi.nimi = 'Tietokantojen perusteet' 
         AND Kurssi.kurssitunnus = Kurssitehtävä.kurssi
         AND Tehtävä.tunnus = Kurssitehtävä.tehtävä
         AND Tehtäväsuoritus.tehtävä = Kurssitehtävä.tunnus
         AND Tehtäväsuoritus.opiskelija = Opiskelija.opiskelijanumero">
-		  </query>
+		</query>
 		  
-		  <div ng-show="listTikapeTehtavat">
-		    
-		    <h4>Tehtävät</h4>
-		    
-		    <p>Tee nyt kysely, joka tulostaa kaikki tehtävät, jotka opiskelija 'Anna' on suorittanut. Tee tulostuksesta sellainen, että yksi sarake sisältää kurssin nimen, ja toinen sarake tehtävän nimen.</p>
-		    
-		    
-		    <togglable content="taulut">
-                      <table-info></table-info>
-		    </togglable>
-		    
-		    <query db="db"></query>
-		  </div>
-
+		<div ng-show="listTikapeTehtavat">
+		  
+		  <h4>Tehtävät</h4>
+		  
+		  <p>Tee nyt kysely, joka tulostaa kaikki tehtävät, jotka opiskelija 'Anna' on suorittanut. Tee tulostuksesta sellainen, että yksi sarake sisältää kurssin nimen, ja toinen sarake tehtävän nimen.</p>
+		  
+		  
+		  <togglable content="taulut">
+                    <table-info></table-info>
+		  </togglable>
+		  
+		  <query db="db"></query>
 		</div>
+		
 
 		<aside class="info">
 		  <br/>
 		  <h1>Pohdi</h1>
-
+		  
 		  <p>Alla on kaksi vaihetta edellisessä esimerkissä rakennetusta kyselystä.</p>
-
+		  
 		  <pre class="sh_sql">
 SELECT Tehtävä.nimi AS Tehtävä
     FROM Kurssi, Kurssitehtävä, Tehtävä 
@@ -1474,7 +1474,7 @@ SELECT Tehtävä.nimi AS Tehtävä
         AND Kurssi.kurssitunnus = Kurssitehtävä.kurssi
         AND Tehtävä.tunnus = Kurssitehtävä.tehtävä;</pre>
 	
-		<pre class="sh_sql">
+		  <pre class="sh_sql">
 SELECT Opiskelija.nimi AS Opiskelija, Tehtävä.nimi AS Tehtävä
     FROM Kurssi, Kurssitehtävä, Tehtävä, Tehtäväsuoritus, Opiskelija
     WHERE Kurssi.nimi = 'Tietokantojen perusteet' 
@@ -1483,46 +1483,43 @@ SELECT Opiskelija.nimi AS Opiskelija, Tehtävä.nimi AS Tehtävä
         AND Tehtäväsuoritus.tehtävä = Kurssitehtävä.tunnus
         AND Tehtäväsuoritus.opiskelija = Opiskelija.opiskelijanumero;</pre>
 
-		<p>Ensimmäisen kyselyn tuloksena on kolme riviä, ja se listaa kaikki tehtävät jotka liittyvät kurssiin 'Tietokantojen perusteet'. Miksi kuitenkin toisen kyselyn tuloksena on neljä riviä? Jos kurssiin liittyviä tehtäviä on vain kolme, mistä tuo neljäs rivi tulee, ja miksi?</p> 
+		  <p>Ensimmäisen kyselyn tuloksena on kolme riviä, ja se listaa kaikki tehtävät jotka liittyvät kurssiin 'Tietokantojen perusteet'. Miksi kuitenkin toisen kyselyn tuloksena on neljä riviä? Jos kurssiin liittyviä tehtäviä on vain kolme, mistä tuo neljäs rivi tulee, ja miksi?</p> 
 
-
+		  
 		</aside>
 		
 
 		<h2>Useammassa taulussa olevan tiedon yhdistäminen JOIN-kyselyillä</h2>
-
+		
 		<p>Kyselyssä, missä taulujen rivit yhdistetään WHERE-ehdon ja avainten perusteella, valitaan näytettäväksi vain ne rivit, jotka täyttävät annetun ehdon. Esimerkiksi, voimme hakea kaikki kurssit ja ne tehneet opiskelijat seuraavasti:</p>
-
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-                     editable="false"
-		     query="SELECT Kurssi.nimi AS Kurssi, Opiskelija.nimi AS Opiskelija
+		
+		<query
+		   db="db"
+                   editable="false"
+		   query="SELECT Kurssi.nimi AS Kurssi, Opiskelija.nimi AS Opiskelija
     FROM Kurssi, Kurssisuoritus, Opiskelija
     WHERE Kurssi.kurssitunnus = Kurssisuoritus.kurssi
         AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero">
-		  </query>
-		</div>
+		</query>
+
 
 		<p>Entä jos haluaisimme nähdä myös ne kurssit, joita kukaan ei ole suorittanut? Tämä ei ratkea, ainakaan suoraviivaisesti.</p>
 
 		<p>Vuonna 1992 julkaistu SQL-standardin versio toi mukanaan JOIN-kyselyt, joiden avulla edellä määritelty ongelma ratkeaa -- pienen harjoittelun kautta. Tutustutaan seuraavaksi aiemmin oppimaamme taulujen yhdistämistapaa tukeviin erityyppisiin JOIN-kyselyihin.</p>
 
 		<p><strong><em>INNER JOIN</em></strong></p>
-
+		
 		<p>Aiemmin tutuksi tullut kysely <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> valitsee vastaukseen vain ne rivit, joiden kohdalla ehto <em>Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</em> pätee, eli missä Opiskelija-taulun opiskelijanumero-sarakkeen arvo on sama kuin Kurssisuoritus-taulun opiskelija-sarakkeen arvo.</p>
+		
+		<p>Edellinen kysely voidaan kirjoittaa myös muodossa <code>SELECT * FROM Opiskelija INNER JOIN Kurssisuoritus ON Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code>.</p>
 
-		<p>Edellinen kysely voidaan kirjoittaa myös muodossa <code>SELECT * FROM Opiskelija INNER JOIN Kurssisuoritus ON Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code>.
-
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-                     editable="false"
-		     query="SELECT * FROM Opiskelija
+		<query
+		   db="db"
+                   editable="false"
+		   query="SELECT * FROM Opiskelija
     INNER JOIN Kurssisuoritus
         ON Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija">
-		  </query>
-		</div>
+		</query>
 
 		<p>Jos haluamme kyselyyn useampia tauluja, lisätään ne INNER JOIN -komennon avulla kyselyn jatkoksi. Esimerkiksi kaksi seuraavaa kyselyä ovat toiminnallisuudeltaan samankaltaiset.</p>
 
@@ -1532,57 +1529,49 @@ SELECT Kurssi.nimi AS Kurssi, Opiskelija.nimi AS Opiskelija
     WHERE Kurssi.kurssitunnus = Kurssisuoritus.kurssi
         AND Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero;</pre>
 
-
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-                     editable="false"
-		     query="SELECT Kurssi.nimi AS Kurssi, Opiskelija.nimi AS Opiskelija
+		<query
+		   db="db"
+                   editable="false"
+		   query="SELECT Kurssi.nimi AS Kurssi, Opiskelija.nimi AS Opiskelija
     FROM Kurssi
     INNER JOIN Kurssisuoritus
         ON Kurssi.kurssitunnus = Kurssisuoritus.kurssi
     INNER JOIN Opiskelija
         ON Kurssisuoritus.opiskelija = Opiskelija.opiskelijanumero">
-		  </query>
-		</div>
-
+		</query>
 
 		<p>Kyselyn <em>INNER JOIN</em> avulla voimme siis tehdä kutakuinkin saman työn kuin aiemman WHERE-ehdon avulla, eli valita mukaan vain ne rivit, joiden kohdalla ehto pätee.</p>
 
 		<p><strong><em>LEFT JOIN</em></strong></p>
-
+		
 		<p>Mikä tekee taulujen liitoksesta JOIN-kyselyn avulla WHERE-ehtoa monipuolisemman, on se, että JOIN-kyselyn avulla voidaan määritellä kyselyehtoa täyttämättömille riveille toiminnallisuutta. Avainsanalla <code>LEFT JOIN</code> voidaan määritellä kyselyn tulos sellaiseksi, että ehdon täyttävien rivien lisäksi vastaukseen sisällytetään kaikki FROM-avainsanaa seuraavan taulun rivit, joille liitosehto ei täyttynyt.</p>
 
 		<p>Allaoleva kysely listaa kurssisuorituksia keränneiden opiskelijoiden lisäksi myös opiskelijat, joilla ei ole kurssisuorituksia. Tällöin kurssisuoritukseen liittyvä vastauksen osa jää tyhjäksi.</p>
 
-
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-                     editable="false"
-		     query="SELECT * FROM Opiskelija
+		<query
+		   db="db"
+                   editable="false"
+		   query="SELECT * FROM Opiskelija
     LEFT JOIN Kurssisuoritus
         ON Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija">
-		  </query>
-		</div>
+		</query>
 
 		<p>Niiden kurssien listaus, joilla on kävijöitä, tai joilla ei ole kävijöitä onnistuu myös esimerkiksi seuraavasti.</p>
 
 
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT * FROM Kurssi
+		<query
+		   db="db"
+		   editable="false"
+		   query="SELECT * FROM Kurssi
     LEFT JOIN Kurssisuoritus
         ON Kurssi.kurssitunnus = Kurssisuoritus.kurssi">
-		  </query>
-		</div>
+		</query>
+
 
 		<p><strong><em>Liitostyypit lyhyesti</em></strong></p>
 
 		<p>Kyselyn JOIN-tyypin voi muotoilla usealla eri tavalla:</p>
-
+		
 		<ul>
 		  <li><code>INNER JOIN</code> -- palauta vain ne rivit, joihin valintaehto kohdistuu.</li>
 		  <li><code>LEFT JOIN</code> -- palauta kaikki FROM-komentoa seuraavan taulun rivit, ja liitä niihin LEFT JOIN-komentoa seuraavan taulun rivit niiltä kohdin, kuin se on ON-liitosehdossa määritellyn ehdon mukaan mahdollista</li>
@@ -1633,7 +1622,6 @@ DELETE FROM Opiskelija WHERE nimi = 'Gandhi'
 </pre>
 
 
-
 		<p><strong><em>Rivien lisääminen tauluun</em></strong></p> 
 
 		<p>Rivien lisääminen tietokantatauluun tapahtuu komennon <code>INSERT INTO</code> avulla, mitä seuraa taulun nimi, mihin lisätään tietoa, sekä attribuuteille annettavat arvot. Arvot annetaan taulujen sarakkeiden olemassaolevassa järjestyksessä. </p>
@@ -1648,20 +1636,17 @@ INSERT INTO Kurssi VALUES ('582354',
 
                 <p>Toisaalta, uuden opiskelijan -- Jack Bowerin -- lisääminen tapahtuu seuraavasti:</p>
 
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-		     query="INSERT INTO Opiskelija VALUES ('123456', 'Jack Bower', '1962', 'e-Spinach')">
-		  </query>
-		</div>
+		<query
+		   db="db"
+		   query="INSERT INTO Opiskelija VALUES (123456, 'Jack Bower', 1962, 'e-Spinach')">
+		</query>
 
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT * FROM Opiskelija">
-		  </query>
-		</div>
+
+		<query
+		   db="db"
+		   editable="false"
+		   query="SELECT * FROM Opiskelija">
+		</query>
 
 		<aside class="info">
 		  <br/>
@@ -1673,6 +1658,8 @@ INSERT INTO Kurssi VALUES ('582354',
 		  <p>Tutustutaan toisenlaiseen tapaan näiden kyselyiden tekemiseen...</p>
 
 		</aside>
+
+		</div>
 
 
 
@@ -2358,7 +2345,7 @@ statement.execute();
 
 		  <li><em>Karsi ehdokkaita</em>
 
-		    <p>Luetteloon saadut ehdokkaat käydään läpi ja arvioidaan voisiko ehdokas tulla kyseeseen luokkana. Arvioinnissa tulisi tarkastella:</p>
+		    <p>Luetteloon saadut ehdokkaat käydään läpi ja arvioidaan voisiko ehdokas tulla kyseeseen käsitteenä. Arvioinnissa tulisi tarkastella:</p>
 		      
 		      <ul>
 			<li>Liittyykö ilmiöön tietosisältöä, joka on välttämätöntä järjestelmän kannalta.</li>

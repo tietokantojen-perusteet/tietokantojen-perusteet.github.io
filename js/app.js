@@ -36,6 +36,7 @@ myAppModule.controller('weekTwoSqlController', function($scope) {
   $scope.tabledata = WK2TABLES;
   $scope.tables = ['Opiskelija', 'Kurssi', 'Kurssisuoritus', 'Tehtävä', 'Kurssitehtävä'];
 
+    
   $scope.tables.forEach(function(table) {
     initialize_table($scope.tabledata, table, db);
   });
@@ -49,6 +50,7 @@ myAppModule.controller('weekThreeSqlController', function($scope) {
   $scope.tabledata = WK3TABLES;
   $scope.tables = ['Opiskelija', 'Kurssi', 'Kurssisuoritus', 'Tehtävä', 'Kurssitehtävä', 'Tehtäväsuoritus'];
 
+  
   $scope.tables.forEach(function(table) {
     initialize_table($scope.tabledata, table, db);
   });
