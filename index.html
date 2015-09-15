@@ -181,15 +181,15 @@
 		      </tr>
 		      <tr>
 			<td>4</td>
+			<td>Ohjelmallinen kysely ja koosteoliot</td>
 			<td></td>
-			<td>Taulujen määrittely, rajoitteet</td>
-			<td>Tiedon määrittely (DDL) ja tiedon muokkaaminen (DDM)</td>
+			<td>Ali- ja yhteenvetokyselyt sekä tilastojen luominen</td>
 		      </tr>
 		      <tr>
 			<td>5</td>
 			<td></td>
-			<td>Tiedon normalisointi</td>
-			<td>Aggregaattikyselyt ja tilastojen luominen</td>
+			<td>Tiedon normalisointi, Taulujen määrittely, rajoitteet</td>
+			<td>Tiedon määrittely (DDL) ja tiedon muokkaaminen (DDM)</td>
 		      </tr>
 		      <tr>
 			<td>6</td>
@@ -257,12 +257,16 @@
 		<ul>
 		  <li><a href="https://docs.google.com/document/d/18tYsgXU0u-6KFbuGft4yN3tkG0yxgE4DY0IdFx-C5Gg/edit?usp=sharing" target="_blank">Viikko 1</a></li>
 		  <li><a href="https://docs.google.com/document/d/1DtrbKBt8ZHMZe0fILtobXMItV20z2Nt3FNxDpg2X0q0/edit" target="_blank">Viikko 2</a></li>
-		  <li>Viikko 3 (julkaistaan 16.9.)</li>
+		  <li><a href="https://docs.google.com/document/d/1YqQlw3AhSQ1Lft0HlE5ANRewj5LsB3vpaNXjiHowj7g/edit" target="_blank">Viikko 3</a></li>
 		  <li>Viikko 4 (julkaistaan 23.9.)</li>
 		  <li>Viikko 5 (julkaistaan 30.9.)</li>
 		  <li>Viikko 6 (julkaistaan 7.10.)</li>
 		  <li>Viikko 7 (julkaistaan 14.10.)</li>
 		</ul>
+
+		<h2>Kurssikoe</h2>
+
+		<p>Kurssin koe järjestetään 19.10. klo 16:00 salissa A111 (huom! kokeet alkavat aina tasalta -- tule ajoissa paikalle).</p>
 
 
             </section>
@@ -325,7 +329,7 @@
 
 		<p>Tietokantojen rakennetta ja jäsentelyä suunniteltaessa ongelmaa lähestytään tavoitteeseen liittyvien käsitteiden kautta, joiden avulla pyritään ymmärtämään mikä tiedosta on epäoleellista, ja mikä tulee säilöä. Samalla mietitään myös säilöttävien käsitteiden ominaisuuksia sekä käsitteiden suhteita. Esimerkiksi opiskelijan opintomenestyksen seurannassa oleellisia ovat ainakin käsitteet <em>Opiskelija</em> ja <em>Kurssisuoritus</em>, joilla on yhteys: opiskelijalla on kurssisuorituksia.</p>
 
-		<p>Tällä kurssilla tiedon mallintamiseen käytetään <a href="http://www.uml.org/" target="_blank">UML</a>-kieltä, johon syvennytään tarkemmin kurssilla <em>Ohjelmistotekniikan menetelmät</em>. Käytämme <a href="https://fi.wikipedia.org/wiki/Luokkakaavio" target="_blank">luokkakaavioita</a> käsitteiden ominaisuuksien ja suhteiden mallintamiseen, mutta, emme kuitenkaan seuraa kuvaustapaa pilkuntarkasti.</p>
+		<p>Tällä kurssilla tiedon mallintamiseen käytetään <a href="http://www.uml.org/" target="_blank">UML</a>-kieltä, johon syvennytään tarkemmin kurssilla <em>Ohjelmistotekniikan menetelmät</em>. Käytämme <a href="https://fi.wikipedia.org/wiki/Luokkakaavio" target="_blank">luokkakaavioista</a> johdettua tapaa käsitteiden ominaisuuksien ja suhteiden mallintamiseen, mutta, emme kuitenkaan seuraa kuvaustapaa pilkuntarkasti. Esimerkiksi navigointisuuntaa sekä kooste- ja kompositiomerkintää ei käytetä lainkaan. </p>
 
 		<figure>
 		  <img src="img/johdanto/opiskelija-ja-kurssisuoritus-erilliset-kasitteet.png" alt="Teksti 'Opiskelija' suunnikkaan sisään kirjoitettuna, Teksti 'Kurssisuoritus' toisen suunnikkaan sisään kirjoitettuna.">
@@ -1317,7 +1321,7 @@ SELECT Tehtävä.nimi AS tehtävä
 
 		</div>
 
-<		<div ng-controller="weekThreeSqlController">
+		<div ng-controller="weekThreeSqlController">
 
 		<header>
 		  <h1 id="viikko3">Viikko 3</h1>
@@ -2291,11 +2295,9 @@ for (Pyora pyora : pyorat) {
 		</aside>
 
 
-<!--
-
 		<h2>Prepared Statement -kyselyt</h2>
 
-		<p>Prepared Statement-kyselyt ovat valmiiksi määriteltyjä kyselyitä, joissa kyselyissä käytettävät arvot annetaan parametreina. Valmiita kyselyitä käyttämällä pystytään estämään ainakin osa SQL-injektioista, sillä parametreja käytettäessä varmistetaan että parametrien arvot liittyvät aina vain tiettyyn kenttään -- kyselyparametrit eivät "vuoda yli". Prepared Statement-kyselyt mahdollistavat myös kyselyiden optimoinnin ohjelmointikielen puolelta, sillä kysely on aina samanmuotoinen.</p>
+		<p>Prepared Statement-kyselyt ovat valmiiksi määriteltyjä kyselyitä, joissa kyselyissä käytettävät arvot annetaan parametreina. Valmiita kyselyitä käyttämällä estetään merkittävä osa SQL-injektioista, sillä parametreja käytettäessä varmistetaan että parametrien arvot käsitellään tiettyyn kenttään liittyvänä datana -- parametrit eivät siis "vuoda yli".</p>
 
 		<p>Valmiit kyselyt määritellään Connection-olion prepareStatement-metodin avulla. Metodi palauttaa PreparedStatement-olion, johon kyselyn käyttämät arvot määritellään parametreina. Esimerkiksi SQL-injektioesimerkissä oleva kysely luodaan valmiiden kyselyiden avulla seuraavasti:</p>
 
@@ -2330,12 +2332,82 @@ statement.setString(2, password);
 statement.execute();
 // ...</pre>
 
-		<p>Huom! Tietojenkäsittelytieteilijöille epätyypillisesti kyselyissä käytettävien parametrien indeksointi alkaa numerosta 1.</p>
 
--->	
+                <aside class="info">
+		  <br/>
+		  <h1>Prepared Statement ja indeksien numerointi</h1>
+
+		  <p>Tietojenkäsittelytieteilijöille epätyypillisesti kyselyissä käytettävien parametrien indeksointi alkaa numerosta 1.</p>
+		  
+		</aside>
+
+		<p>Prepared Statement-kyselyiden käyttäminen edellisessä luvussa toteutetun tietokanta-abstraktion kautta on myös mahdollista. Toteutetaan tällöin päivitys- ja kyselymetodit sellaisina, että niille annetaan kysely merkkijonona sekä ennalta määrittelemätön määrä parametreja, jotka lisätään kyselyyn kyselyä muodostettaessa.</p>
+
+<pre class="sh_java">
+    public int update(String updateQuery, Object... params) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(updateQuery);
+
+        for (int i = 0; i &lt; params.length; i++) {
+            stmt.setObject(i + 1, params[i]);
+        }
+
+        int changes = stmt.executeUpdate();
+
+        if (debug) {
+            System.out.println("---");
+            System.out.println(updateQuery);
+            System.out.println("Changed rows: " + changes);
+            System.out.println("---");
+        }
+        stmt.close();
+
+        return changes;
+    }</pre>
+
+		<p>Vastaavasti myös olioita kyselystä muodostava olio voidaan toteuttaa PreparedStatement-kyselyn kautta.</p>
+
+<pre class="sh_java">
+    public &lt;T&gt; List&lt;T&gt; queryAndCollect(String query, Collector&lt;T&gt; col, Object... params) throws SQLException {
+        if (debug) {
+            System.out.println("---");
+            System.out.println("Executing: " + query);
+            System.out.println("---");
+        }
+
+        List&lt;T&gt; rows = new ArrayList&lt;&gt;();
+        PreparedStatement stmt = connection.prepareStatement(query);
+        for (int i = 0; i &lt; params.length; i++) {
+            stmt.setObject(i + 1, params[i]);
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            if (debug) {
+                System.out.println("---");
+                System.out.println(query);
+                debug(rs);
+                System.out.println("---");
+            }
+
+            rows.add(col.collect(rs));
+        }
+
+        rs.close();
+        stmt.close();
+        return rows;
+    }</pre>
 
 
+                <aside class="info">
+		  <br/>
+		  <h1>Viiteavainten käsittely ja koosteoliot</h1>
 
+		  <p>Edellä näkemämme esimerkki, missä tietokannasta haettu rivi muutetaan olioiksi on näppärää tilanteissa, missä yksittäinen tulosrivi voidaan käsitellä yhtenä oliona. Kohtaamme kuitenkin usein tilanteen, missä tietokantataulussa on viite toiseen tauluun. Miten tällainen tilanne kannattaisi käsitellä?</p>
+
+		  <p>Palaamme tähän myöhemmin kurssilla.</p>
+
+		</aside>
 
 		<h1>Käsiteanalyysi</h1>
 
@@ -2523,6 +2595,43 @@ C
 "/> 
 		  <figcaption>Päivitysraja, tähän on hyvä lopettaa lukeminen.</figcaption>
 		</figure>
+
+
+
+
+		<h1>Ali- ja yhteenvetokyselyt sekä tilastojen luominen</h1>
+
+
+		<p>Olemme tähän mennessä oppineet kirjoittamaan SQL-kyselyjä, joiden avulla voimme hakea yhdestä tai useammasta tietokantataulusta tietoa, sekä rajata kyselyiden palauttamia tuloksia erilaisilla ehdoilla. On kuitenkin kysymyksiä, joiden vastausten hakeminen nykyisillä työvälineillämme on melko hankalaa. Miten esimerkiksi ratkaisisit seuraavat ongelmat?</p>
+
+		<ul>
+		  <li>Mitkä opiskelijat ovat suorittaneet tietyn kurssijoukon -- vaikkapa sivuaineopintoihin vaadittavat kurssit?</li>
+		  <li>Mitkä tehtävät ovat sellaisia, joita kursseilla heikommin menestyneet opiskelijat -- esimerkiksi hylätyn arvosanan tai ykkösen saaneet -- eivät ole saaneet tehtyä?</li>
+		  <li>Miten haen opiskelijat, jotka eivät ole vielä ilmoittautuneet yhdellekään kurssille?</li>
+		  <li>Kuinka monta opiskelijaa pääsi tietyn kurssin läpi?</li>
+		  <li>Mikä on jokaisen kurssin keskiarvo?</li>
+		</ul>
+
+		<p>Yhteistä edellä olevilla kysymyksillä on se, että lähes kaikki niistä ovat oikeastaan yhteenvetokyselyjä. Tutustutaan kohta näiden käsittelyyn liittyviin menetelmiin.</p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>SQL-kyselyt lyhyemmiksi</h1>
+
+		  <p>Olemme tähän mennessä käyttäneet SQL-kyselykielestä melko verboosia kirjoitusasua, missä myös ei-pakollisia komentoja on kirjoitettu koodiin. Jos olet tykästynyt aiemmin käytettyyn verboosiin kirjoitusasuun, ei siitä tarvitse vaihtaa pois. Alla on kuitenkin esitelty vinkkejä SQL-kyselyiden lyhentämiseksi:</p>
+
+		  <ul>
+		    <li>todo</li>
+		  </ul>
+		</aside>
+
+
+		<h2>Alikyselyt</h2>
+
+
+		<h2>Yhteenvetokyselyt</h2>
+
+
 
 
 <!--
