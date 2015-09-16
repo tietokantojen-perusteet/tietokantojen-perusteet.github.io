@@ -2629,7 +2629,22 @@ SELECT * FROM Opiskelija o, Kurssisuoritus k WHERE o.opiskelijanumero = k.opiske
 		    <li><p>Sarakkeiden nimeäminen SQL-kyselyissä.</p><p>Olemme käyttäneet avainsanaa <code>AS</code> taulun sarakkeiden uudelleennimennässä. Kysely <code>SELECT nimi FROM Opiskelija</code> palauttaa sarakkeen, jonka nimi on 'nimi', ja jossa on kaikkien Opiskelija-taulussa olevien opiskelijoiden nimet. Toisaalta, kysely <code>SELECT nimi AS opiskelija FROM Opiskelija</code> nimeää sarakkeen 'nimi' tulostuksessa uudestaan, jolloin sarakkeen 'nimi' otsikoksi tulee 'opiskelija' -- rivit sisältävät opiskelijoiden nimet. Avainsanan <code>AS</code> voi myös jättää pois. Alla oleva kysely tulostaa Opiskelija-taulun nimi-sarakkeen sisällön, mutta siten, että sarakkeen otsikkona on 'opiskelija'.</p><br/>
 
 <pre class="sh_sql">
-SELECT nimi opiskelija FROM Opiskelija</pre></li>
+SELECT nimi opiskelija FROM Opiskelija</pre>
+
+		      <p>Sarakkeet erotellaan pilkulla kuten aiemminkin.</p>
+
+<pre class="sh_sql">
+SELECT nimi opiskelija, syntymävuosi vuosi FROM Opiskelija</pre>
+
+		      <p>Samassa kyselyssä voi lyhentää myös sekä taulun nimeä, että jättää <code>AS</code> avainsanan pois:</p>
+
+<pre class="sh_sql">
+SELECT o.nimi opiskelija, k.arvosana 
+    FROM Opiskelija o, Kurssisuoritus k 
+    WHERE o.opiskelijanumero = k.opiskelija</pre></li>
+
+
+		    
 
 		    <li>..</li>
 		  </ul>
