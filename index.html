@@ -2621,7 +2621,17 @@ C
 		  <p>Olemme tähän mennessä käyttäneet SQL-kyselykielestä melko verboosia kirjoitusasua, missä myös ei-pakollisia komentoja on kirjoitettu koodiin. Jos olet tykästynyt aiemmin käytettyyn verboosiin kirjoitusasuun, ei siitä tarvitse vaihtaa pois. Alla on kuitenkin esitelty vinkkejä SQL-kyselyiden lyhentämiseksi:</p>
 
 		  <ul>
-		    <li>todo</li>
+		    <li><p>Taulujen nimeäminen SQL-kyselyissä.</p> <p>Kirjoittaessamme useampia tauluja yhdisteleviä kysejä kuten <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> taulujen nimet toistuvat usein. Tauluja voidaan uudelleennimetä SQL-kyselyissä asettamalla taulun nimen jälkeen kyselyn aikana käytettävän nimen. Seuraavassa esimerkissä taulu Opiskelija on uudelleennimetty <code>o</code>:ksi, ja taulu Kurssisuoritus on uudelleennimetty <code>k</code>:ksi.</p>
+
+<pre class="sh_sql">
+SELECT * FROM Opiskelija o, Kurssisuoritus k WHERE o.opiskelijanumero = k.opiskelija</pre></li>
+
+		    <li><p>Sarakkeiden nimeäminen SQL-kyselyissä.</p><p>Olemme käyttäneet avainsanaa <code>AS</code> taulun sarakkeiden uudelleennimennässä. Kysely <code>SELECT nimi FROM Opiskelija</code> palauttaa sarakkeen, jonka nimi on 'nimi', ja jossa on kaikkien Opiskelija-taulussa olevien opiskelijoiden nimet. Toisaalta, kysely <code>SELECT nimi AS opiskelija FROM Opiskelija</code> nimeää sarakkeen 'nimi' tulostuksessa uudestaan, jolloin sarakkeen 'nimi' otsikoksi tulee 'opiskelija' -- rivit sisältävät opiskelijoiden nimet. Avainsanan <code>AS</code> voi myös jättää pois. Alla oleva kysely tulostaa Opiskelija-taulun nimi-sarakkeen sisällön, mutta siten, että sarakkeen otsikkona on 'opiskelija'.</p><br/>
+
+<pre class="sh_sql">
+SELECT nimi opiskelija FROM Opiskelija</pre></li>
+
+		    <li>..</li>
 		  </ul>
 		</aside>
 
