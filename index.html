@@ -2602,12 +2602,11 @@ C
 		<h1>Ali- ja yhteenvetokyselyt sekä tilastojen luominen</h1>
 
 
-		<p>Olemme tähän mennessä oppineet kirjoittamaan SQL-kyselyjä, joiden avulla voimme hakea yhdestä tai useammasta tietokantataulusta tietoa, sekä rajata kyselyiden palauttamia tuloksia erilaisilla ehdoilla. On kuitenkin kysymyksiä, joiden vastausten hakeminen nykyisillä työvälineillämme on melko hankalaa. Miten esimerkiksi ratkaisisit seuraavat ongelmat?</p>
+		<p>Osaamme hakea yhdestä tai useammasta tietokantataulusta tietoa, sekä rajata kyselyiden palauttamia tuloksia erilaisilla ehdoilla. On kuitenkin kysymyksiä, joihin vastaaminen nykyisillä työvälineillämme on melko hankalaa. Miten esimerkiksi ratkaisisit seuraavat ongelmat?</p>
 
 		<ul>
-		  <li>Mitkä opiskelijat ovat suorittaneet tietyn kurssijoukon -- vaikkapa sivuaineopintoihin vaadittavat kurssit?</li>
 		  <li>Mitkä tehtävät ovat sellaisia, joita kursseilla heikommin menestyneet opiskelijat -- esimerkiksi hylätyn arvosanan tai ykkösen saaneet -- eivät ole saaneet tehtyä?</li>
-		  <li>Miten haen opiskelijat, jotka eivät ole vielä ilmoittautuneet yhdellekään kurssille?</li>
+		  <li>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</li>
 		  <li>Kuinka monta opiskelijaa pääsi tietyn kurssin läpi?</li>
 		  <li>Mikä on jokaisen kurssin keskiarvo?</li>
 		</ul>
@@ -2618,10 +2617,10 @@ C
 		  <br/>
 		  <h1>SQL-kyselyt lyhyemmiksi</h1>
 
-		  <p>Olemme tähän mennessä käyttäneet SQL-kyselykielestä melko verboosia kirjoitusasua, missä myös ei-pakollisia komentoja on kirjoitettu koodiin. Jos olet tykästynyt aiemmin käytettyyn verboosiin kirjoitusasuun, ei siitä tarvitse vaihtaa pois. Alla on kuitenkin esitelty vinkkejä SQL-kyselyiden lyhentämiseksi:</p>
+		  <p>Olemme -- tarkoituksella -- käyttäneet SQL-kyselykielestä verboosia kirjoitusasua, missä myös ei-pakollisia komentoja on kirjoitettu kyselyihin niiden selkeyttämiseksi. Jos olet tykästynyt aiemmin käytettyyn verboosiin kirjoitusasuun, ei siitä tarvitse vaihtaa pois. Alla on kuitenkin esitelty vinkkejä SQL-kyselyiden lyhentämiseksi:</p>
 
 		  <ul>
-		    <li><p>Taulujen nimeäminen SQL-kyselyissä.</p> <p>Kirjoittaessamme useampia tauluja yhdisteleviä kysejä kuten <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> taulujen nimet toistuvat usein. Tauluja voidaan uudelleennimetä SQL-kyselyissä asettamalla taulun nimen jälkeen kyselyn aikana käytettävän nimen. Seuraavassa esimerkissä taulu Opiskelija on uudelleennimetty <code>o</code>:ksi, ja taulu Kurssisuoritus on uudelleennimetty <code>k</code>:ksi.</p>
+		    <li><p>Taulujen nimeäminen SQL-kyselyissä.</p> <p>Kirjoittaessamme tauluja yhdisteleviä kysejä kuten <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> taulujen nimet toistuvat. Tauluja voidaan uudelleennimetä SQL-kyselyissä asettamalla taulun nimen jälkeen kyselyn aikana käytettävän nimi. Seuraavassa esimerkissä taulu Opiskelija on uudelleennimetty <code>o</code>:ksi, ja taulu Kurssisuoritus on uudelleennimetty <code>k</code>:ksi.</p>
 
 <pre class="sh_sql">
 SELECT * FROM Opiskelija o, Kurssisuoritus k WHERE o.opiskelijanumero = k.opiskelija</pre></li>
@@ -2636,25 +2635,190 @@ SELECT nimi opiskelija FROM Opiskelija</pre>
 <pre class="sh_sql">
 SELECT nimi opiskelija, syntymävuosi vuosi FROM Opiskelija</pre>
 
-		      <p>Samassa kyselyssä voi lyhentää myös sekä taulun nimeä, että jättää <code>AS</code> avainsanan pois:</p>
+		      <p>Kyselyssä voi luonnollisesti sekä lyhentää taulun nimeä, että jättää <code>AS</code> avainsanan pois:</p>
 
 <pre class="sh_sql">
 SELECT o.nimi opiskelija, k.arvosana 
     FROM Opiskelija o, Kurssisuoritus k 
     WHERE o.opiskelijanumero = k.opiskelija</pre></li>
-
-
 		    
-
-		    <li>..</li>
+		    <li><p>INNER JOIN ja JOIN</p>
+		      
+		      <p>Liitoskyselyn INNER JOIN voi kirjoittaa muodossa JOIN.</p></li>
 		  </ul>
 		</aside>
-
+		
 
 		<h2>Alikyselyt</h2>
 
+		<p>Alikyselyt ovat nimensä mukaan kyselyn osana suoritettavia alikyselyitä, joiden tuloksia käytetään osana pääkyselyä. Pohditaan kysymystä <em>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</em>, ja käytetään siihen ensin aiemmin tutuksi tullutta tapaa, eli LEFT JOIN -kyselyä. Yhdistetään opiskelijaa ja kurssisuoritusta kuvaavat taulut LEFT JOIN-kyselyllä siten, että myös opiskelijat, joilla ei ole suorituksia tulevat mukaan vastaukseen. Tämän jälkeen, poistetaan vastauksesta ne rivit, joissa kurssisuoritusta ei ole löytynyt, eli kurssisuoritus-tauluun liittyvien sarakkeiden arvo on <em>null</em>. Tämä onnistuu seuraavasti:</p>
+
+
+		<div ng-controller="weekThreeSqlController">
+
+		<query
+		   db="db"
+		   editable="false"
+		   query="SELECT opiskelijanumero FROM Opiskelija o
+    LEFT JOIN Kurssisuoritus k
+    ON o.opiskelijanumero = k.opiskelija
+    WHERE k.kurssi IS null">
+		</query>
+
+		</div>
+
+		<p>Toinen vaihehtoehto edellisen kyselyn toteuttamiseen on toteuttaa kysely, joka hakee kaikki ne opiskelijat, jotka eivät ole kurssisuorituksia saaneiden opiskelijoiden joukossa. Tässä on oleellisesti kaksi kyselyä: (1) hae opiskelijat, joilla on kurssisuoritus, ja (2) hae opiskelijat, jotka eivät ole edellisen kyselyn palauttamassa joukossa.</p>
+
+		<p><strong><em>Alikyselyn toteuttaminen</em></strong></p>
+
+		<p>Alikyselyn toteuttamiseksi voimme määritellä kyselyn WHERE-osaan sarakkeen nimen, jota seuraa avainsana <em>NOT IN</em>, jota taas seuraa suluissa oleva kysely.</p>
+
+
+		<div ng-controller="weekThreeSqlController">
+
+		<query
+		   db="db"
+		   editable="false"
+		   query="SELECT opiskelijanumero FROM Opiskelija o
+    WHERE o.opiskelijanumero 
+        NOT IN (SELECT opiskelija FROM Kurssisuoritus)"
+		   done="unlockListCoursesWithNoAssignments">
+		</query>
+
+		<div ng-show="unlockListCoursesWithNoAssignments">
+
+		  <p>Tee nyt kysely, joka listaa kaikki kurssit, joilla ei ole yhtään tehtävää.</p>
+
+		  <query
+		     db="db"
+		     query="">
+		  </query>
+		</div>
+
+		</div>
+
+		<p>Käytännössä alikyselyt tuottavat kyselyn tuloksena taulun, josta pääkyselyssä tehtävä kysely tehdään. Ylläolevassa esimerkissä alikyselyn tuottamassa taulussa on vain yksi sarake, jossa on kurssisuorituksen saaneiden opiskelijoiden opiskelijanumerot.</p>
+
+		<p>Määreen <code>NOT IN</code>, joka tarkastaa että valitut arvot eivät ole alikyselyn tuottamassa taulussa, lisäksi käytössä on määre <code>IN</code>. Määreen <code>IN</code> avulla voidaan luoda ehto, jolla tarkastetaan, että valitut arvot ovat annetussa joukossa tai taulussa. Esimerkiksi alla haetaan kaikki kurssisuoritukset, joissa arvosana on kolme tai viisi.</p>
+		
+		<div ng-controller="weekThreeSqlController">
+		  
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT * FROM Kurssisuoritus WHERE arvosana IN (5, 3)">
+		  </query>
+		</div>
+		
+		<aside class="info">
+		  <br/>
+
+		  <h1>EXISTS ja NOT EXISTS</h1>
+		  
+		  <p>Määreiden IN ja NOT IN lisäksi alikyselyissä voidaan käyttää määreitä EXISTS ja NOT EXISTS, joiden avulla voidaan rajata hakujoukkoa alikyselyssä olevan ehdon perusteella. Voimme esimerkiksi kirjoittaa aiemmin kirjoitetun kursseja suorittamattomia opiskelijoita etsivän kyselyn siten, että jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla tarkistetaan, että sitä ei löydy taulusta Kurssisuoritus.</p>
+		  
+		  <div ng-controller="weekThreeSqlController">
+		    
+		    <query
+		       db="db"
+		       editable="false"
+		       query="SELECT opiskelijanumero FROM Opiskelija o
+    WHERE NOT EXISTS
+        (SELECT opiskelija FROM Kurssisuoritus k 
+            WHERE k.opiskelija = o.opiskelijanumero)"
+		    </query>
+                  </div>
+
+                  <p>Edellä oleva kysely tarkistaa jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla ettei sitä löydy Kurssisuoritus-taulun opiskelija-sarakkeesta. Käytännössä -- jos tietokantamoottori ei optimoi kyselyä -- jokainen opiskelija-taulun rivi aiheuttaa uuden kyselyn kurssisuoritus-tauluun, mikä tekee kyselystä tehottoman.</p>
+
+		</aside>
+<!--
+
+		<p>Jos alikysely palauttaa taulun, jossa on vain yksi sarake, voidaan sarakkeessa olevien arvojen perusteella tehdä myös hakujen rajausta. Esimerkiksi seuraavalla kyselyllä voimme hakea kaikista vanhimman opiskelijan:</p>
+
+		<div ng-controller="weekThreeSqlController">
+		    
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT * FROM Opiskelija
+    WHERE opiskelijanumero <= (SELECT opiskelijanumero FROM Opiskelija)">
+		  </query>
+		</div>
+
+		<p>...</p>
+
+-->
+
 
 		<h2>Yhteenvetokyselyt</h2>
+
+		<p>Yhteenvetokyselyiden avulla kyselyiden tuloksia ryhmitellään sarakkeissa olevien arvojen perusteella, jonka jälkeen ryhmille tehdään erilaisia kyselyitä. Voimme esimerkiksi haluta selvittää opiskelijoiden määrän pääaineittain ryhmiteltynä -- toisin sanoen, haluamme hakea opiskelijoiden pääaineet ja lukumäärät, pääaineen mukaan ryhmiteltynä. Kyselyn vastauksessa olevan rivien lukumäärän saa komennolla <code>COUNT(<em>sarake</em>)</code>, missä <em>sarake</em> on laskettavan sarakkeen nimi. Ryhmittely tapahtuu komennon <code>GROUP BY</code>-perusteella, jota seuraa sarakkeen nimi, jonka perusteella tulokset ryhmitellään.</p>
+
+
+		<div ng-controller="weekThreeSqlController">
+		  
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT pääaine, COUNT(*) AS lukumäärä
+    FROM Opiskelija GROUP BY pääaine"
+                     done="unlockListCountKurssisuorituksetByKurssi">
+		  </query>
+
+		  <div ng-show="unlockListCountKurssisuorituksetByKurssi">
+		    <p>Tee nyt kysely, jolla lasket kurssisuoritus-taulussa olevat kurssisuoritukset kurssin koodin perusteella. Käytä tulostuksessa sarekkeiden nimiä "kurssikoodi" ja "lukumäärä".</p>
+		      <query
+			 db="db"
+			 query=""
+			 done="unlockListCountKurssisuorituksetByKurssiWithName"
+			 valid="SELECT kurssi AS kurssikoodi, COUNT(*) lukumäärä FROM Kurssisuoritus GROUP BY kurssi">
+		      </query>
+		  </div>
+
+		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat kurssit kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen.</p>
+
+		  <div ng-show="unlockListCountKurssisuorituksetByKurssiWithName">
+		    <p>Tee nyt kysely, jossa lasket kurssisuoritus-taulussa olevien kurssien suoritukset -- taas koodin perusteella. Tällä kertaa tulostuksessa tulee kuitenkn tulostaa kurssikoodin sijaan kurssin nimi. Käytä sarakkeiden niminä "kurssi" ja "lukumäärä".</p>
+
+		    
+		    <query
+		       db="db"
+		       query=""
+		       valid="SELECT Kurssi.nimi AS kurssi, COUNT(*) lukumäärä FROM Kurssisuoritus, Kurssi WHERE Kurssisuoritus.kurssi = Kurssi.kurssitunnus GROUP BY kurssi">
+		    </query>
+		  </div>
+
+		  <p>Muistamme kuitenkin LEFT-JOIN harjoittelusta, että kurssitaulussa on yksi kurssi, jolla ei ole yhtäkään suoritusta. Tee edellinen kysely, mutta tällä kertaa siten, että kurssi "Tietokantojen perusteet, osa2" on mukana listauksessa -- sen kohdalla kurssien lukumäärän pitäisi olla 0. COUNT-komennon sarakkeeksi kannattanee valita joku Kurssisuoritus-taulun sarake.</p>
+
+		  <query
+		     db="db"
+		     query=""
+		     valid="SELECT Kurssi.nimi AS kurssi, COUNT(Kurssisuoritus.kurssi) lukumäärä FROM Kurssi LEFT JOIN Kurssisuoritus ON Kurssi.kurssitunnus = Kurssisuoritus.kurssi GROUP BY kurssi">
+		  </query>
+		  
+		</div>
+
+		<p>erilaiset funktiot yhteenvetokyselyyn</p>
+
+		<p>SUM, MAX, MIN, COUNT, AVG (esim. arvosana), ...</p>
+
+
+		<aside class="info">
+		  <br/>
+
+		  <h1>Voidaan myös yhdistää edellisiä</h1>
+
+		  <p>alikyselyt tuottavat taulun, johon voi viitata kyselyissä..</p>
+
+		  <p>hae kurssit, joilla eniten opintopisteitä.</p>
+
+		  <p></p>
+
+		</aside>
+
+		<p>TODO: missä järjestyksessä kyselyt pitäisi kirjoittaa?</p>
+
 
 
 
