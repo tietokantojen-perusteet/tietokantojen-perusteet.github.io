@@ -34,10 +34,10 @@
                     <li>
                         <a href="#viikko3">Viikko 3</a>
                     </li>
-<!--
                     <li>
                         <a href="#viikko4">Viikko 4</a>
                     </li>
+<!--
                     <li>
                         <a href="#viikko5">Viikko 5</a>
                     </li>
@@ -246,7 +246,7 @@
 		<ul>
 		  <li><a href="https://docs.google.com/document/d/18PXEYZGuLOO6p1F5HfjRLAZrsgqWuKcYhgnilHVtIrY/edit?usp=sharing" target="_blank">Viikko 2</a></li>
 		  <li><a href="https://docs.google.com/document/d/18bYt11F4HzWDX8RanKzl_6Vhb5rpJ1KirDWn1-dpVW4/edit" target="_blank">Viikko 3</a></li>
-		  <li>Viikko 4 (julkaistaan 18.9.)</li>
+		  <li><a href="https://docs.google.com/document/d/1gCpBSDbjn3NqT1_jeoQl2eOvwQS1WVHVYiH7xGtL6a4/edit?usp=sharing" target="_blank">Viikko 4</a></li>
 		  <li>Viikko 5 (julkaistaan 25.9.)</li>
 		  <li>Viikko 6 (julkaistaan 2.10.)</li>
 		  <li>Viikko 7 (julkaistaan 9.10.)</li>
@@ -2582,22 +2582,9 @@ statement.execute();
 
 
 
-
-                <figure>
-		  <img src="img/paivitysraja.jpg" alt="päivitysraja :: 
-C
- (\.   \      ,/)
-  \(   |\     )/
-  //\  | \   /\\
- (/ /\_#oo#_/\ \)
-  \/\  ####  /\/
-       `##'
-"/> 
-		  <figcaption>Päivitysraja, tähän on hyvä lopettaa lukeminen.</figcaption>
-		</figure>
-
-
-
+		<header>
+		  <h1 id="viikko4">Viikko 4</h1>
+		</header>
 
 		<h1>Ali- ja yhteenvetokyselyt sekä tilastojen luominen</h1>
 
@@ -2650,20 +2637,20 @@ SELECT o.nimi opiskelija, k.arvosana
 		
 
 		<h2>Alikyselyt</h2>
-
+		
 		<p>Alikyselyt ovat nimensä mukaan kyselyn osana suoritettavia alikyselyitä, joiden tuloksia käytetään osana pääkyselyä. Pohditaan kysymystä <em>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</em>, ja käytetään siihen ensin aiemmin tutuksi tullutta tapaa, eli LEFT JOIN -kyselyä. Yhdistetään opiskelijaa ja kurssisuoritusta kuvaavat taulut LEFT JOIN-kyselyllä siten, että myös opiskelijat, joilla ei ole suorituksia tulevat mukaan vastaukseen. Tämän jälkeen, poistetaan vastauksesta ne rivit, joissa kurssisuoritusta ei ole löytynyt, eli kurssisuoritus-tauluun liittyvien sarakkeiden arvo on <em>null</em>. Tämä onnistuu seuraavasti:</p>
 
 
 		<div ng-controller="weekThreeSqlController">
 
-		<query
-		   db="db"
-		   editable="false"
-		   query="SELECT opiskelijanumero FROM Opiskelija o
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT opiskelijanumero FROM Opiskelija o
     LEFT JOIN Kurssisuoritus k
     ON o.opiskelijanumero = k.opiskelija
     WHERE k.kurssi IS null">
-		</query>
+		  </query>
 
 		</div>
 
@@ -2673,27 +2660,27 @@ SELECT o.nimi opiskelija, k.arvosana
 
 		<p>Alikyselyn toteuttamiseksi voimme määritellä kyselyn WHERE-osaan sarakkeen nimen, jota seuraa avainsana <em>NOT IN</em>, jota taas seuraa suluissa oleva kysely.</p>
 
-
+		
 		<div ng-controller="weekThreeSqlController">
-
-		<query
-		   db="db"
-		   editable="false"
-		   query="SELECT opiskelijanumero FROM Opiskelija o
-    WHERE o.opiskelijanumero 
-        NOT IN (SELECT opiskelija FROM Kurssisuoritus)"
-		   done="unlockListCoursesWithNoAssignments">
-		</query>
-
-		<div ng-show="unlockListCoursesWithNoAssignments">
-
-		  <p>Tee nyt kysely, joka listaa kaikki kurssit, joilla ei ole yhtään tehtävää.</p>
 
 		  <query
 		     db="db"
-		     query="">
+		     editable="false"
+		     query="SELECT opiskelijanumero FROM Opiskelija o
+    WHERE o.opiskelijanumero 
+        NOT IN (SELECT opiskelija FROM Kurssisuoritus)"
+		     done="unlockListCoursesWithNoAssignments">
 		  </query>
-		</div>
+
+		  <div ng-show="unlockListCoursesWithNoAssignments">
+
+		    <p>Tee nyt kysely, joka listaa kaikki kurssit, joilla ei ole yhtään tehtävää.</p>
+
+		    <query
+		       db="db"
+		       query="">
+		    </query>
+		  </div>
 
 		</div>
 
@@ -2725,14 +2712,14 @@ SELECT o.nimi opiskelija, k.arvosana
 		       query="SELECT opiskelijanumero FROM Opiskelija o
     WHERE NOT EXISTS
         (SELECT opiskelija FROM Kurssisuoritus k 
-            WHERE k.opiskelija = o.opiskelijanumero)"
+        WHERE k.opiskelija = o.opiskelijanumero)">
 		    </query>
                   </div>
 
-                  <p>Edellä oleva kysely tarkistaa jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla ettei sitä löydy Kurssisuoritus-taulun opiskelija-sarakkeesta. Käytännössä -- jos tietokantamoottori ei optimoi kyselyä -- jokainen opiskelija-taulun rivi aiheuttaa uuden kyselyn kurssisuoritus-tauluun, mikä tekee kyselystä tehottoman.</p>
-
+		  <p>Edellä oleva kysely tarkistaa jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla ettei sitä löydy Kurssisuoritus-taulun opiskelija-sarakkeesta. Käytännössä -- jos tietokantamoottori ei optimoi kyselyä -- jokainen opiskelija-taulun rivi aiheuttaa uuden kyselyn kurssisuoritus-tauluun, mikä tekee kyselystä tehottoman.</p>
+		  
 		</aside>
-<!--
+		<!--
 
 		<p>Jos alikysely palauttaa taulun, jossa on vain yksi sarake, voidaan sarakkeessa olevien arvojen perusteella tehdä myös hakujen rajausta. Esimerkiksi seuraavalla kyselyllä voimme hakea kaikista vanhimman opiskelijan:</p>
 
@@ -2753,9 +2740,9 @@ SELECT o.nimi opiskelija, k.arvosana
 
 		<h2>Yhteenvetokyselyt</h2>
 
-		<p>Yhteenvetokyselyiden avulla kyselyiden tuloksia ryhmitellään sarakkeissa olevien arvojen perusteella, jonka jälkeen ryhmille tehdään erilaisia kyselyitä. Voimme esimerkiksi haluta selvittää opiskelijoiden määrän pääaineittain ryhmiteltynä -- toisin sanoen, haluamme hakea opiskelijoiden pääaineet ja lukumäärät, pääaineen mukaan ryhmiteltynä. Kyselyn vastauksessa olevan rivien lukumäärän saa komennolla <code>COUNT(<em>sarake</em>)</code>, missä <em>sarake</em> on laskettavan sarakkeen nimi. Ryhmittely tapahtuu komennon <code>GROUP BY</code>-perusteella, jota seuraa sarakkeen nimi, jonka perusteella tulokset ryhmitellään.</p>
+		<p>Yhteenvetokyselyiden avulla kyselyiden tuloksia ryhmitellään sarakkeissa olevien arvojen perusteella, jonka jälkeen luoduille ryhmille tehdään erilaisia yhteenvetokyselyitä. Voimme esimerkiksi haluta selvittää opiskelijoiden määrän pääaineittain ryhmiteltynä -- toisin sanoen, listata pääaineet ja opiskelijalukumäärät. Kyselyn vastauksessa olevan rivien lukumäärän saa komennolla <code>COUNT(<em>sarake</em>)</code>, missä <em>sarake</em> on laskettavan sarakkeen nimi. Ryhmittely tapahtuu komennon <code>GROUP BY</code>-perusteella, jota seuraa sarakkeen nimi, jonka perusteella tulokset ryhmitellään.</p>
 
-
+		
 		<div ng-controller="weekThreeSqlController">
 		  
 		  <query
@@ -2768,16 +2755,25 @@ SELECT o.nimi opiskelija, k.arvosana
 
 		  <div ng-show="unlockListCountKurssisuorituksetByKurssi">
 		    <p>Tee nyt kysely, jolla lasket kurssisuoritus-taulussa olevat kurssisuoritukset kurssin koodin perusteella. Käytä tulostuksessa sarekkeiden nimiä "kurssikoodi" ja "lukumäärä".</p>
-		      <query
-			 db="db"
-			 query=""
-			 done="unlockListCountKurssisuorituksetByKurssiWithName"
-			 valid="SELECT kurssi AS kurssikoodi, COUNT(*) lukumäärä FROM Kurssisuoritus GROUP BY kurssi">
-		      </query>
+		    <query
+		       db="db"
+		       query=""
+		       valid="SELECT kurssi AS kurssikoodi, COUNT(*) lukumäärä FROM Kurssisuoritus GROUP BY kurssi">
+		    </query>
 		  </div>
 
-		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat kurssit kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen.</p>
+		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat kurssit kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen. Alla olevassa esimerkissä lasketaan tehtävien määrä eri kursseilla siten, että tehtävän nimi haetaan taulusta Tehtävä, ja Kurssin nimi taulusta Kurssi.</p>
+		  
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT k.nimi AS kurssi, COUNT(kt.tunnus) AS tehtäviä FROM Kurssi k, Kurssitehtävä kt
+    WHERE k.kurssitunnus = kt.kurssi GROUP BY k.nimi"
+		     done="unlockListCountKurssisuorituksetByKurssiWithName">
+		  </query>
+		 
 
+		  
 		  <div ng-show="unlockListCountKurssisuorituksetByKurssiWithName">
 		    <p>Tee nyt kysely, jossa lasket kurssisuoritus-taulussa olevien kurssien suoritukset -- taas koodin perusteella. Tällä kertaa tulostuksessa tulee kuitenkn tulostaa kurssikoodin sijaan kurssin nimi. Käytä sarakkeiden niminä "kurssi" ja "lukumäärä".</p>
 
@@ -2789,36 +2785,825 @@ SELECT o.nimi opiskelija, k.arvosana
 		    </query>
 		  </div>
 
-		  <p>Muistamme kuitenkin LEFT-JOIN harjoittelusta, että kurssitaulussa on yksi kurssi, jolla ei ole yhtäkään suoritusta. Tee edellinen kysely, mutta tällä kertaa siten, että kurssi "Tietokantojen perusteet, osa2" on mukana listauksessa -- sen kohdalla kurssien lukumäärän pitäisi olla 0. COUNT-komennon sarakkeeksi kannattanee valita joku Kurssisuoritus-taulun sarake.</p>
 
+		  <p>Edellä olevia tuloksia tarkasteltaessamme, huomaamme, että luku nolla ei esiinny yhdelläkään rivillä. Tämä selittyy kyselyillämme -- olemme valinneet mukaan vain rivit, joilla hakuehdot täyttyvät. Hups. Kirjoitetaan edellinen kysely siten, että otamme huomioon kurssit vaikka niihin ei liittyisikään yhtäkään toisen taulun riviä -- käytämme siis <code>LEFT JOIN</code>-liitosoperaatiota.</p>
+		  
 		  <query
 		     db="db"
-		     query=""
-		     valid="SELECT Kurssi.nimi AS kurssi, COUNT(Kurssisuoritus.kurssi) lukumäärä FROM Kurssi LEFT JOIN Kurssisuoritus ON Kurssi.kurssitunnus = Kurssisuoritus.kurssi GROUP BY kurssi">
+		     editable="false"
+		     query="SELECT k.nimi AS kurssi, COUNT(kt.tunnus) as tehtäviä FROM Kurssi k LEFT JOIN Kurssitehtävä kt
+    ON k.kurssitunnus = kt.kurssi GROUP BY k.nimi"
+		     done="unlockLeftJoinKurssiAndKurssisuoritus">
 		  </query>
+		  
+		  
+		  <div ng-show="unlockLeftJoinKurssiAndKurssisuoritus">
+		    
+		    <p>Tee nyt LEFT JOIN -operaatiota käyttäen kysely, jolla listaat kurssikohtaiset suorituslukumäärät siten, että myös ne kurssit, joilla ei ole yhtäkään suoritusta otetaan huomioon. Käytä sarakkeiden niminä nimiä "kurssi" ja "lukumäärä".</p>
+		    
+		    <query
+		       db="db"
+		       query=""
+		       valid="SELECT Kurssi.nimi AS kurssi, COUNT(Kurssisuoritus.kurssi) lukumäärä FROM Kurssi LEFT JOIN Kurssisuoritus ON Kurssi.kurssitunnus = Kurssisuoritus.kurssi GROUP BY kurssi">
+		    </query>
+		    
+		  </div>
 		  
 		</div>
 
-		<p>erilaiset funktiot yhteenvetokyselyyn</p>
+		<p><strong><em>Ryhmittely useamman sarakkeen perusteella</em></strong></p>
+		
+		<p>Komennolle <code>GROUP BY</code> voi antaa myös useampia sarakkeita, jolloin se ryhmittelee ne annetussa järjestyksessä. Esimerkiksi ryhmittely <code>GROUP BY kurssi, arvosana</code> ryhmittelisi taulussa olevat rivit ensin kurssin perusteella, jonka jälkeen ne vielä ryhmiteltäisiin arvosanan perusteella. Tällöin jokaiselle kurssille tulisi erilliset arvosanaryhmät. Esimerkiksi kurssikohtaiset arvosanat saisi tulostettua seuraavalla kyselyllä:</p>
 
-		<p>SUM, MAX, MIN, COUNT, AVG (esim. arvosana), ...</p>
+		
+		<div ng-controller="weekThreeSqlController">
+		  
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT k.nimi AS kurssi, ks.arvosana AS arvosana, COUNT (ks.opiskelija) AS lukumäärä 
+    FROM Kurssi k, Kurssisuoritus ks WHERE k.kurssitunnus = ks.kurssi 
+        GROUP BY k.nimi, ks.arvosana">
+		  </query>
+		</div>
+
+		<p>Edellisessä kyselyssä on hieman tylsää se, että kurssien nimet ja arvosanat eivät ole järjestyksessä.</p>
+
+		<p><strong><em>Tulosten järjestäminen</em></strong></p>
+		
+		<p>Kyselyn tulokset voi järjestää komennolla <code>ORDER BY</code>, jota seuraa järjestettävät sarakkeet. Sarakkeelle voi antaa myös lisämääreen <code>ASC</code> (<em>ascending</em>), joka kertoo että tulokset tulee järjestää nousevaan järjestykseen, ja <code>DESC</code> (<em>descending</em>), joka kertoo että tulokset tulee järjestää laskevaan järjestykseen. Oletuksena järjestys on laskeva.</p>
+
+		<p>Komento <code>ORDER BY</code> tulee kyselyn loppuun. Järjestetään edellisen kyselyn tulokset.</p>
+
+		<div ng-controller="weekThreeSqlController">
+		  
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT k.nimi AS kurssi, ks.arvosana AS arvosana, COUNT (ks.opiskelija) AS lukumäärä 
+    FROM Kurssi k, Kurssisuoritus ks WHERE k.kurssitunnus = ks.kurssi 
+        GROUP BY k.nimi, ks.arvosana ORDER BY k.nimi, ks.arvosana DESC">
+		  </query>
+		</div>
+		
+
+		<p><strong><em>Yhteenvetokyselyissä käytettäviä funktioita</em></strong></p>
+		
+		<p>Komento <code>COUNT(<em>sarake</em>)</code> on funktio, jolle annetaan joukko arvoja, ja joka palauttaa niiden pohjalta luodun arvon -- annetun joukon koon eli arvojen lukumäärän. Yhteenvetokyselyiden käytössä on myös nippu muita funktioita, joista seuraavassa listataan muutamia.</p>
+
+
+		<ul>
+		  <li><p>Keskiarvon laskeminen <code>AVG</code></p>
+		    
+		    <p>Funktio <code>AVG</code> laskee sille annettujen arvojen keskiarvon. Esimerkiksi kurssikohtaiset arvosanojen keskiarvot saa laskettua seuraavalla kyselyllä:</p>
+
+		    <div ng-controller="weekThreeSqlController">
+		      
+		      <query
+			 db="db"
+			 editable="false"
+			 query="SELECT kurssi, AVG(arvosana) AS keskiarvo 
+    FROM Kurssisuoritus GROUP BY kurssi">
+		      </query>
+		    </div>
+
+		  </li>
+
+		  <li><p>Summan laskeminen <code>SUM</code></p>
+		    
+		    <p>Funktio <code>SUM</code> laskee sille annettujen arvojen summan. Esimerkiksi kysely seuraava kysely laskee opiskelijakohtaisen opintopistemäärän.</p>
+
+		    <div ng-controller="weekThreeSqlController">
+		      
+		      <query
+			 db="db"
+			 editable="false"
+			 query="SELECT o.nimi AS nimi, SUM(ks.opintopistemäärä) AS opintopisteitä 
+    FROM Opiskelija o LEFT JOIN Kurssisuoritus ks 
+        ON o.opiskelijanumero = ks.opiskelija 
+    WHERE ks.arvosana > 0 GROUP BY o.nimi">
+		      </query>
+		    </div>
+		    
+		    
+		    <p>Kuten ehkä huomaat, kysely ei toimi tapauksissa, missä opiskelija on korottanut kurssin arvosanaa, sillä hänellä on tällöin useampia hyväksyttyjä merkintöjä samasta kurssista.</p></li>
+		  
+		  <li><p>Pienimmän arvon valitseminen <code>MIN</code></p>
+		    
+		    <p>Funktio <code>MIN</code> valitsee sille annettujen arvojen joukosta pienimmän arvon.</p></li>
+		  
+		  <li><p>Suurimman arvon valitseminen <code>MAX</code></p>
+		    
+		    <p>Funktio <code>MIN</code> valitsee sille annettujen arvojen joukosta suurimman arvon.</p></li>
+		</ul>
+		
+		<aside class="info">
+		  <br/>
+		  
+		  <h1>Funktiot osana kyselyitä, joissa ryhmittelyä ei tehdä</h1>
+		  
+		  <p>Edellämainittuja funktioita voi käyttää osana käytännössä minkälaista kyselyä tahansa, jos kyselyn vastauksessa on selkeä yksittäinen sarake, jonka arvoja funktio käsittelee. Esimerkiksi kaikkien kurssien keskiarvon voi laskea seuraavasti:</p>
+
+		  <div ng-controller="weekThreeSqlController">
+		    
+		    <query
+		       db="db"
+		       editable="false"
+		       query="SELECT AVG(arvosana) FROM Kurssisuoritus">
+		    </query>
+		  </div>
+		  
+		  <p>Tässä on kuitenkin huomioitava se, että jos kyselyssä on useampia sarakkeita, tulee funktion pystyä laskemaan sarakekohtaisia tuloksia -- esimerkiksi ryhmittelyn kautta. Alla oleva kysely on esimerkki kyselystä, joka ei palauta oikeaa tulosta.</p>
+		  
+		  <div ng-controller="weekThreeSqlController">
+		    
+		    <query
+		       db="db"
+		       editable="false"
+		       query="SELECT kurssi, AVG(arvosana) FROM Kurssisuoritus">
+		    </query>
+		  </div>
+		  
+		</aside>
+		
+		
+		
+		<h2>Kyselyn tulos on taulu</h2>
+		
+		<p>Kaikki SQL-kyselyt tuottavat tuloksena taulun. Taulussa voi olla tasan yksi sarake ja rivi, tai vaikkapa tuhansia rivejä ja kymmeniä sarakkeita. Silloinkin, kun suoritamme yksinkertaisen haun, kuten vaikkapa "Hae kaikki kurssilla 'Tietokantojen perusteet' olevat opiskelijat", on haun tuloksena taulu.</p>
+		
+		<p>Kaikki tekemämme SQL-kyselyt ovat liittyneet tauluihin. Emmekö siis voisi tehdä kyselyjä myös vastauksiin? Vastaus on kyllä.</p>
+		
+		<p>Esimerkiksi vanhimman (tai vanhimmat, jos tämä ei ole yksikäsitteistä) opiskelijat löytää -- muunmuassa -- etsimällä kaikista pienimmän mahdollisimman syntymävuoden (kyselyn tulos on taulu), jonka jälkeen vastaustaulussa olevaa tulosta kaikkien opiskelijoiden syntymävuosiin.</p>
+
+		<div ng-controller="weekThreeSqlController">
+		  
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT * FROM Opiskelija 
+    WHERE syntymävuosi 
+        IN (SELECT MIN(syntymävuosi) FROM Opiskelija)">
+		  </query>
+		</div>
+		
+	
+		<p>Tätä harjoitellaan lisää kurssin tehtävissä.</p>
+
+		
+		<h1>Ohjelmalliset tietokantakyselyt ja viitteet taulujen välillä</h1>
+		
+		<p>Aiemmat, luvussa kolme näkemämme tietokantakyselyiden ohjelmalliseen suorittamiseen liittyvät esimerkit ovat olleet melko yksinkertaisia, sillä niissä on ladattu tietoa yhdestä taulusta kerrallaan. Todellisuudessa tietokannoissa on usein viitteitä taulujen välillä, ja ohjelmallista tietokanta-abstraktiota käyttävän ohjelmoijan näkökulmasta olisi hyvin kätevää, jos nämä viitteet toimisivat myös olioina.</p>
+
+		<p>Tässä luvussa tutustumme viitteiden käsittelyyn taulujen välillä, sekä tutustumme olemassaolevaan kirjastoon, joka automatisoi osan tästä työstä.</p>
+
+		<p>Oletamme, että tietokantakaaviomme on luvussa 3 käyttämämme kuvitteellisen pyörävuokraamon tietokannan osa. Tietokantakaaviomme on seuraavanlainen:</p>
+
+
+		<figure>
+		  <img src="img/viikko4/vuokraamokaavio.png" alt="[Pyora|(pk) rekisterinumero; merkki]
+[Varaaja|(pk) asiakasnumero; etunimi; sukunimi]
+[Varaus|(pk) varaustunnus; (fk) varaaja: Varaaja; (fk) pyora: Pyora; varaus_alkaa; varaus_loppuu]
+[Pyora]1-*[Varaus]
+[Varaus]*-1[Varaaja]"/>
+		</figure>
+		
+		<p>Kun ylläoleva tietokantakaavio luodaan Java-ohjelmakoodina siten, että taulujen väliset viitteet on otettu huomioon, luomme käytännössä kolme luokkaa: <em>Pyora</em>, <em>Varaaja</em> ja <em>Varaus</em>. Yhteen pyörään voi liittyä monta varausta, eli jokaiseen pyöräolioon liittyy lista varauksia. Vastaavasti, jokaiseen varaajaan voi liittyä monta varausta, eli jokaiseen varaajaolioon liittyy lista varauksia. Jokaiseen varausolioon liittyy yksi pyöräolio ja yksi varaajaolio.</p>
+
+		<pre class="sh_java">
+import java.util.*;
+
+public class Pyora {
+
+    private String rekisterinumero;
+    private String merkki;
+    private List&lt;Varaus&gt; varaukset;
+
+// konstruktorit, getterit ja setterit</pre>
+
+		<pre class="sh_java">
+import java.util.*;
+
+public class Varaaja {
+
+    private Integer asiakasnumero;
+    private String etunimi;
+    private String sukunimi;
+    private List&lt;Varaus&gt; varaukset;
+
+// konstruktorit, getterit ja setterit</pre>
+
+
+		<pre class="sh_java">
+import java.util.*;
+import java.sql.*;
+
+public class Varaus {
+
+    private Integer varaustunnus;
+    private Pyora pyora;
+    private Varaaja varaaja;
+    private Timestamp varausAlkaa;
+    private Timestamp varausLoppuu;
+
+// konstruktorit, getterit ja setterit</pre>
+
+		<p>Luokassa Varaus käytetty muuttujan tyyppi <code><a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html" target="_blank">Timestamp</a></code> on eräs tietokannoissa käytetty muuttujatyyppi ajan tallentamiseen.</p>
+
+		<p>Ohjelmallisia tietokantakyselyitä suorittaessa -- esimerkiksi varauksen noutamisen yhteydessä -- tulee nyt hakea (1) varaustaulusta rivi, (2) haetun varausrivin pyora-kentästä löytyvällä viiteavaimella rivi pyörätaulusta, (3) haetun varausrivin varaaja-kentästä löytyvällä viiteavaimella rivi varaaja-taulusta, ja (4) luoda haettujen rivien perusteella oliot -- varaaja- ja pyörä-oliot tulee lisäksi asettaa varaukseen kuuluvaksi. Kokonaisuudessaan, ilman toiminnallisuuden jakamista erillisiin osiin, tietyn varauksen ja siihen liittyvän pyörän hakemiseen tarvittava kysely voisi olla vaikkapa seuraavanlainen.</p>
+
+<pre class="sh_java">
+String driver = "org.sqlite.JDBC";
+String databaseAddress = "jdbc:sqlite:vuokraamo.db";
+
+// haetaan tietokanta-ajuri ja avataan tietokantayhteys
+Class.forName(driver);
+Connection conn = DriverManager.getConnection(databaseAddress);
+
+// haetaan yksittäinen varaus, jonka tunnus on 42
+PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Varaus WHERE varaustunnus = ?");
+stmt.setObject(1, 42);
+
+// suoritetaan kysely ja siirrytään ensimmäiseen vastausriviin
+ResultSet rs = stmt.executeQuery();
+rs.next();
+
+// haetaan vastausriviltä oleelliset kentät
+Integer varaustunnus = rs.getInt("varaustunnus");
+Timestamp alku = rs.getTimestamp("varaus_alkaa");
+Timestamp loppu = rs.getTimestamp("varaus_loppuu");
+String pyora = rs.getString("pyora");
+
+// luodaan varaus varaustunnuksen, sekä alun ja lopun perusteella
+Varaus v = new Varaus(varaustunnus, alku, loppu);
+
+// vapautetaan varaus-tauluun kohdistuneeseen kyselyyn liittyvät resurssin
+rs.close();
+stmt.close();
+
+// haetaan yksittäinen pyörä, jonka rekisterinumero oli varaustaulusta haetussa rivissä
+stmt = conn.prepareStatement("SELECT * FROM Pyora WHERE rekisterinumero = ?");
+stmt.setObject(1, pyora);
+
+// suoritetaan kysely ja siirrytään ensimmäiseen vastausriviin
+rs = stmt.executeQuery();
+rs.next();
+
+// haetaan vastausriviltä oleelliset kentät
+String rekisterinumero = rs.getString("rekisterinumero");
+String merkki = rs.getString("merkki");
+
+// luodaan pyörä vastauksen perusteella
+Pyora p = new Pyora(rekisterinumero, merkki);
+
+// asetetaan pyörä varaukseen liittyväksi pyöräksi
+v.setPyora(p);
+
+// vapautetaan kyselyyn liittyvät resurssit ja suljetaan tietokantayhteys
+rs.close();
+stmt.close();
+conn.close();
+
+// nyt käytössämme on varaus-olio, sekä varaukseen liittyvä pyörä-olio
+</pre>
+
+                <p>Käytännössä toiminnallisuutta kuitenkin jaetaan osiin.</p>
+
+
+		<h2>Data Access Object -suunnittelumalli</h2>
+
+		<p>Tietokantasovelluksia toteuttaessa on hyvin tyypillistä abstrahoida, eli piilottaa, konkreettinen tiedon hakemis- ja tallennustoiminnallisuus siten, että ohjelmoijan ei tarvitse nähdä sitä jatkuvasti. Ideana on, että sovelluskehittäjä käyttää <em>DAO</em>-rajapinnan toteuttamia olioita, ja se, että mistä tai miten tiedot konkreettisesti haetaan ei ole sovelluksen muiden osien tiedossa.</p>
+
+		<p>Hahmotellaan hakemiseen ja poistamiseen liittyvää rajapintaa, joka tarjoaa metodit <code>findOne</code>, <code>findAll</code> ja <code>delete</code>, eli toiminnallisuudet hakemiseen ja poistamiseen. Tehdään rajapinnasta <em>geneerinen</em>, eli toteuttava luokka määrittelee palautettavien olioiden tyypin sekä avaimen.</p>
+
+<pre class="sh_java">
+import java.sql.*;
+import java.util.*;
+
+public interface Dao&lt;T, K&gt; {
+
+    T findOne(K key) throws SQLException;
+
+    List&lt;T&gt; findAll() throws SQLException;
+
+    void delete(K key) throws SQLException;
+}</pre>
+
+                <p>Metodi findOne hakee tietyllä avaimella haettavan olion, jonka tyyppi voi olla mikä tahansa. Alustava hahmotelma konkreettisesta varausten hakemiseen tarkoitetusta <code>VarausDao</code>-luokasta on seuraavanlainen. </p>
+
+<pre class="sh_java">
+import java.util.*;
+import java.sql.*;
+
+public class VarausDao implements Dao&lt;Varaus, Integer&gt; {
+
+    @Override
+    public Varaus findOne(Integer key) throws SQLException {
+        // ei toteutettu
+        return null;
+    }
+
+    @Override
+    public List&lt;Varaus&gt; findAll() throws SQLException {
+	// ei toteutettu
+	return null;
+    }
+
+    @Override
+    public void delete(Integer key) throws SQLException {
+        // ei toteutettu 
+    }
+}</pre>
+
+                <p>Käytännössä tyyppiparametrit annetaan rajapinnan toteuttamisesta kertovan avainsanan <code>implements</code>-yhteyteen. Ylläolevassa esimerkissä haettavan olion tyyppi on <code>Varaus</code>, ja sen avain on tyyppiä <code>Integer</code>.</p>
+
+		<p>Koska varausten hakemiseen tarvitaan myös pyörien hakemista, hahmotellaan myös pyörien hakemiseen liittyvää toiminnallisuutta. Luokan rakenne on hyvin samankaltainen kuin edellä.</p>
+
+
+<pre class="sh_java">
+import java.util.*;
+import java.sql.*;
+
+public class PyoraDao implements Dao&lt;Pyora, String&gt; {
+
+    @Override
+    public Pyora findOne(String key) throws SQLException {
+        // ei toteutettu
+        return null;
+    }
+
+    @Override
+    public List&lt;Pyora&gt; findAll() throws SQLException {
+	// ei toteutettu
+	return null;
+    }
+
+    @Override
+    public void delete(String key) throws SQLException {
+        // ei toteutettu 
+    }
+}</pre>
+
+		<p>Jatketaan luokan <code>PyoraDao</code>-toteuttamista. Lisätään luokalle pääsy tietokanta-abstraktioon, jolta voi pyytää tietokantayhteyden, ja hahmotellaan yksittäisen pyörän hakemista aiemman ohjelmakoodin perusteella. Emme tässä esimerkissä lisää pyörään siihen liittyviä varauksia.</p>
+
+
+<pre class="sh_java">
+import java.util.*;
+import java.sql.*;
+
+public class PyoraDao implements Dao&lt;Pyora, String&gt; {
+
+    private Database database;
+
+    @Override
+    public Pyora findOne(String key) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Pyora WHERE rekisterinumero = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        String rekisterinumero = rs.getString("rekisterinumero");
+        String merkki = rs.getString("merkki");
+
+        Pyora p = new Pyora(rekisterinumero, merkki);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return p;
+    }
+
+    @Override
+    public List&lt;Pyora&gt; findAll() throws SQLException {
+	// ei toteutettu
+	return null;
+    }
+
+    @Override
+    public void delete(String key) throws SQLException {
+        // ei toteutettu 
+    }
+}</pre>
+
+		<p>Luokka <code>Database</code> on esimerkiksi seuraavanlainen -- huomaa, että jaamme tietokantakyselyiden tekemisen vastuuta jokaiselle Dao-rajapinnan toteuttavalle luokalle erikseen -- kyselyt eivät siis ole enää <code>Database</code>-luokassa.</p>
+
+<pre class="sh_java">
+import java.sql.*;
+
+public class Database {
+
+    private String databaseAddress;
+
+    public Database(String driver, String databaseAddress) throws ClassNotFoundException {
+        Class.forName(driver);
+        this.databaseAddress = databaseAddress;
+    }
+
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(databaseAddress);
+    }
+}</pre>
+
+		<p>Hahmotellaan nyt yksittäisen varaus-olion hakemista. Toteutetaan luokka siten, että se saa konstruktorissaan sekä viitteen tietokanta-olioon, että viitteen pyörien hakemiseen tarkoitettuun Dao-rajapintaan.</p>
+
+<pre class="sh_java">
+import java.util.*;
+import java.sql.*;
+
+public class VarausDao implements Dao&lt;Varaus, Integer&gt; {
+
+
+    private Database database;
+    private Dao&lt;Pyora, String&gt; pyoraDao;
+
+    public VarausDao(Database database, Dao&lt;Pyora, String&gt; pyoraDao) {
+        this.database = database;
+        this.pyoraDao = pyoraDao;
+    }
+
+    @Override
+    public Varaus findOne(Integer key) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Varaus WHERE varaustunnus = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        Integer varaustunnus = rs.getInt("varaustunnus");
+        Timestamp alku = rs.getTimestamp("varaus_alkaa");
+        Timestamp loppu = rs.getTimestamp("varaus_loppuu");
+
+        Varaus v = new Varaus(varaustunnus, alku, loppu);
+
+        Integer varaaja = rs.getInt("varaaja");
+        String pyora = rs.getString("pyora");
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        v.setPyora(this.pyoraDao.findOne(pyora));
+
+        return v;
+    }
+
+    @Override
+    public List&lt;Varaus&gt; findAll() throws SQLException {
+	// ei toteutettu
+	return null;
+    }
+
+    @Override
+    public void delete(Integer key) throws SQLException {
+        // ei toteutettu 
+    }
+}</pre>
+
+
+		<p>Nyt yksittäisen varauksen hakemisen yhteydessä palautetaan sekä varaus, että siihen liittyvä pyörä. Rajapintaa käyttävän toteutuksen näkökulmasta tietokannan käyttäminen toimii seuraavasti:</p>
+
+<pre class="sh_java">
+Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:vuokraamo.db");
+PyoraDao pyoraDao = new PyoraDao(database);
+VarausDao varausDao = new VarausDao(database, pyoraDao);
+
+Varaus varaus = varausDao.findOne(4);
+System.out.println(varaus.getPyora().getRekisterinumero()
+        + " " + varaus.getVarausAlkaa()
+        + " - " + varaus.getVarausLoppuu());</pre>
+
+<pre>
+HAB-4 2015-07-17 16:00:00.0 - 2015-07-18 10:00:00.0</pre>
+
+
+
+		<p><strong><em>Kokoelmien hakeminen</em></strong></p>
+
+		<p>Voisimme nyt jo toteuttaa kaikkien varausten hakemisen siten, että kävisimme jokaisen varaus-taulussa olevan varaustunnuksen läpi yksitellen, ja lisäisimme siihen halutun pyörän. Tämä ei kuitenkaan ole haluttua. Kaikken varausten hakeminen kannattanee toteuttaa siten, että haemme ensin kaikki varaukset, jonka jälkeen haemme pyörät, jotka lisäämme varauksiin. Kaikkien pyörien hakeminen -- jos emme toteuta erikseen pyöriin liittyvien varausten listausta -- tapahtuu esimerkiksi seuraavasti.</p>
+
+<pre class="sh_java">
+@Override
+public List&lt;Pyora&gt; findAll() throws SQLException {
+    Connection connection = database.getConnection();
+    PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Pyora");
+
+    ResultSet rs = stmt.executeQuery();
+    List&lt;Pyora&gt; pyorat = new ArrayList&lt;&gt;();
+    while (rs.next()) {
+        String rekisterinumero = rs.getString("rekisterinumero");
+        String merkki = rs.getString("merkki");
+
+        pyorat.add(new Pyora(rekisterinumero, merkki));
+    }
+    
+    rs.close();
+    stmt.close();
+    connection.close();
+
+    return pyorat;
+}</pre>
+
+		<p>Nyt pyörien liittäminen varauksiin onnistuu kahdella tietokantakyselyllä (1) haetaan kaikki varaukset ja (2) haetaan kaikki pyörät -- yhdistäminen tapahtuu ohjelmakoodissa esimerkiksi seuraavasti.</p>
+
+<pre class="sh_java">
+@Override
+public List&lt;Varaus&gt; findAll() throws SQLException {
+    Connection connection = database.getConnection();
+    PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Varaus");
+    ResultSet rs = stmt.executeQuery();
+
+    Map&lt;String, List&lt;Varaus&gt;&gt; varaustenPyorat = new HashMap&lt;&gt;();
+
+    List&lt;Varaus&gt; varaukset = new ArrayList&lt;&gt;();
+
+    while (rs.next()) {
+
+        Integer varaustunnus = rs.getInt("varaustunnus");
+        Timestamp alku = rs.getTimestamp("varaus_alkaa");
+        Timestamp loppu = rs.getTimestamp("varaus_loppuu");
+
+        Varaus v = new Varaus(varaustunnus, alku, loppu);
+        varaukset.add(v);
+        
+        String pyora = rs.getString("pyora");
+        
+        if(!varaustenPyorat.containsKey(pyora)) {
+            varaustenPyorat.put(pyora, new ArrayList&lt;&gt;());
+        }
+        varaustenPyorat.get(pyora).add(v);
+    }
+
+    rs.close();
+    stmt.close();
+    connection.close();
+    
+    for (Pyora pyora : this.pyoraDao.findAll()) {
+        if(!varaustenPyorat.containsKey(pyora.getRekisterinumero())) {
+            continue;
+        }
+        
+        for (Varaus varaus : varaustenPyorat.get(pyora.getRekisterinumero())) {
+            varaus.setPyora(pyora);
+        }
+    }
+    
+    return varaukset;
+}</pre>
+
+		<p>Yllä haetaan ensin kaikki varaukset. Varausolioita luotaessa luodaan kirjanpito varauksiin liittyvien pyörien (viiteavain tauluun Pyörä) liittymisestä varausolioihin. Tämän jälkeen haetaan pyörät, ja lisätään ne varaukseen.</p>
+
+		<p><strong><em>Osajoukon hakeminen</em></strong></p>
+
+
+		<p>Edellisessä esimerkissä on kuitenkin hieman hölmöä se, että haemme <em>kaikki</em> viitatussa taulussa olevat rivit. Pyörien tapauksessa tämä voi olla hyväksyttävää, jos niitä on melko vähän, ja voimme olettaa, että lähes jokaista pyörää varataan. Toisaalta, jos vastaavaa toteutusta tehtäisiin varaajiin liittyen, ei jokaisen varaajan hakeminen olisi toivottua.</p>
+
+		<p>Lisätään Dao-rajapintaan metodi <code>findAllIn(Collection&lt;K&gt; keys)</code>, joka hakee ne oliot, joiden avaimet ovat annetussa joukossa.</p>
+		
+<pre class="sh_java">
+import java.sql.*;
+import java.util.*;
+
+public interface Dao&lt;T, K&gt; {
+
+    T findOne(K key) throws SQLException;
+
+    List&lt;T&gt; findAll() throws SQLException;
+
+    List&lt;T&gt; findAllIn(Collection&lt;K&gt; keys) throws SQLException;
+
+    void delete(K key) throws SQLException;
+}</pre>
+
+		<p>Nyt jokaista rajapinnan toteuttavaa luokkaa tulee muokata siten, että se toteuttaa uuden metodin. Lisätään metodin luokalle <code>PyoraDao</code> -- metodissa haetaan kaikki ne rivit, joiden alkiot ovat annetussa joukossa.</p>
+
+<pre class="sh_java">
+@Override
+public List&lt;Pyora&gt; findAllIn(Collection&lt;String&gt; keys) throws SQLException {
+    if (keys.isEmpty()) {
+        return new ArrayList&lt;&gt;();
+    }
+
+    // Luodaan IN-kyselyä varten paikat, joihin arvot asetetaan -- 
+    // toistaiseksi IN-parametrille ei voi antaa suoraan kokoelmaa
+    StringBuilder muuttujat = new StringBuilder("?");
+    for (int i = 1; i &lt; keys.size(); i++) {
+        muuttujat.append(", ?");
+    }
+
+    Connection connection = database.getConnection();
+    PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Pyora WHERE rekisterinumero IN (" + muuttujat + ")");
+    int laskuri = 1;
+    for (String key : keys) {
+        stmt.setObject(laskuri, key);
+        laskuri++;
+    }
+
+    ResultSet rs = stmt.executeQuery();
+    List&lt;Pyora&gt; pyorat = new ArrayList&lt;&gt;();
+    while (rs.next()) {
+        String rekisterinumero = rs.getString("rekisterinumero");
+        String merkki = rs.getString("merkki");
+
+        pyorat.add(new Pyora(rekisterinumero, merkki));
+    }
+
+    return pyorat;
+}</pre>
+
+		<p>Nyt VarausDaon metodia voidaan muuttaa sopivasti, jolloin taulusta Pyora haetaan vain ne rivit, jotka liittyvät varauksiin.</p>
+
+<pre class="sh_java">
+@Override
+public List&lt;Varaus&gt; findAll() throws SQLException {
+    Connection connection = database.getConnection();
+    PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Varaus");
+    ResultSet rs = stmt.executeQuery();
+
+    Map&lt;String, List&lt;Varaus&gt;&gt; varaustenPyorat = new HashMap&lt;&gt;();
+
+    List&lt;Varaus&gt; varaukset = new ArrayList&lt;&gt;();
+
+    while (rs.next()) {
+
+        Integer varaustunnus = rs.getInt("varaustunnus");
+        Timestamp alku = rs.getTimestamp("varaus_alkaa");
+        Timestamp loppu = rs.getTimestamp("varaus_loppuu");
+
+        Varaus v = new Varaus(varaustunnus, alku, loppu);
+        varaukset.add(v);
+
+        String pyora = rs.getString("pyora");
+
+        if (!varaustenPyorat.containsKey(pyora)) {
+            varaustenPyorat.put(pyora, new ArrayList&lt;&gt;());
+        }
+        varaustenPyorat.get(pyora).add(v);
+    }
+
+    rs.close();
+    stmt.close();
+    connection.close();
+
+    for (Pyora pyora : this.pyoraDao.findAllIn(varaustenPyorat.keySet())) {
+        for (Varaus varaus : varaustenPyorat.get(pyora.getRekisterinumero())) {
+            varaus.setPyora(pyora);
+        }
+    }
+
+    return varaukset;
+}</pre>
+
+		<aside class="info">
+		  <br/>
+
+		  <h1>Mitä noudetaan?</h1>
+
+		  <p>Eikö edellisessä esimerkissä varaukseen liittyvää pyörää noudettaessa pitäisi noutaa myös pyörään liittyvät varaukset? Entä näihin varauksiin liittyvät pyörät ja varaajat?</p>
+
+		  <p>Hyvä kysymys. Kun tietokantataulujen välisten yhteyksien perusteella tehdään uusia kyselyitä tietokantaan, olemassa on oleellisesti kaksi epätoivottua tilannetta: (1) haetaan liikaa tietoa, jolloin hakemisoperaatioon menee turhaan aikaa, tai (2) haetaan liian vähän tietoa, jolloin tieto tulee hakea myöhemmin.</p>
+
+		  <p>Yksi tapa ratkaista ongelma on toimia siten, että tietoa haetaan vain silloin kun sitä tarvitaan. Tällöin esimerkiksi vasta Varaus-olioon mahdollisesti liittyvää <code>getPyora</code>-metodia kutsuttaessa pyörään liittyvät tiedot haettaisiin tietokannasta -- getPyora-metodi tekisi siis tietokantahaun. Tämäkään ei kuitenkaan ratkaise tilannetta, sillä jos tavoitteenamme olisi vaikkapa tulostaa kaikki varaukset ja niihin liittyvät pyörät -- edellisellä lähestymistavalla kaksi tietokantakyselyä -- saattaisi toteutus lopulta tehdä jokaisen varauksen kohdalla oman erillisen tietokantahaun.</p>
+
+		  <p>Tähän ei ole suoraviivaista ratkaisua. Tyypillisesti Dao-rajapinnan määrittelemille metodeille kerrotaan, tuleeko haettaviin olioihin liittyvät viitteet hakea erikseen.</p>
+
+		</aside>
+
+		  
+		<h2>Valmiit kirjastot</h2>
+
+		<p>Nykyään markkinoilla löytyy huomattava määrä valmiita kirjastoja, jotka tarjoavat Dao-toiminnallisuuksia. Yksi tällainen kirjasto on <a href="http://ormlite.com/" target="_blank">ORMLite</a>, joka abstrahoi ja toteuttaa osan tietokantakyselyistä ohjelmoijan puolesta. ORMLite-kirjaston saa projektiin lisäämällä siihen liittyvän riippuvuuden Mavenin <code>pom.xml</code>-tiedostoon.</p>
+
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;com.j256.ormlite&lt;/groupId&gt;
+    &lt;artifactId&gt;ormlite-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;4.48&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+		<p>ORMLiteä käytettäessä tietokantatauluja kuvaaville luokille lisätään annotaatiot <code>@DatabaseTable(tableName = "<em>taulun nimi</em>")</code>, jonka lisäksi oliomuuttujille lisätään <code>@DatabaseField</code>-annotaatiot, joissa määritellään sarakkeen nimi, johon oliomuuttuja liittyy. Jos oliomuuttuja on taulun pääavain, lisätään sille erillinen määrittely (id=true) annotaatioon @DatabaseField: <code>@DatabaseField(id = true, columnName = "<em>sarakkeen nimi</em>")</code>.</p>
+
+		<p>Käytännössä ORMLite osaa luoda olioita tietokannasta haettavista riveistä annotaatioiden perusteella. Jokaisessa tietokantataulua kuvaavassa tulee olla myös tyhjä konstruktori. Luokka <code>Pyora</code> ORMLite-annotaatioilla olisi esimerkiksi seuraavanlainen (tässä pyörään liittyviä varauksia ei ole otettu huomioon):</p>
+
+<pre class="sh_java">
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "Pyora")
+public class Pyora {
+
+    @DatabaseField(id = true, columnName = "rekisterinumero")
+    private String rekisterinumero;
+    @DatabaseField(columnName = "rekisterinumero")
+    private String merkki;
+
+    // jokaisella tallennettavalla oliolle tulee olla parametriton konstruktori
+    public Pyora() {
+    }
+
+    public Pyora(String rekisterinumero, String merkki) {
+        this.rekisterinumero = rekisterinumero;
+        this.merkki = merkki;
+    }
+
+// getterit ja setterit
+}</pre>
+
+
+		<p>Nyt kaikkien pyörien hakeminen tietokannasta onnistuu seuraavasti. Huom! Käytössä on ORMLiten tarjoama Dao-rajapinta -- emme siis kirjoita erikseen ohjelmakoodia kyselyiden tulosten muuttamiseksi olioiksi.</p>
+
+<pre class="sh_java">
+Class.forName("org.sqlite.JDBC");
+ConnectionSource connectionSource
+        = new JdbcConnectionSource("jdbc:sqlite:vuokraamo.db");
+
+Dao&lt;Pyora, String&gt; pyoraDao
+        = DaoManager.createDao(connectionSource, Pyora.class);
+
+List&lt;Pyora&gt; pyorat = pyoraDao.queryForAll();
+for (Pyora pyora : pyorat) {
+    System.out.println(pyora.getMerkki() + " " + pyora.getRekisterinumero());
+}</pre>
+
+		<p>Käytännössä ORMLite lukee luokkaan määritellyt annotaatiot, ja tekee niiden perusteella käytettävät tietokantakyselyt, joita ohjelmoija käyttää ORMLiten toteuttaman Dao-rajapinnan kautta.</p>
+
+		<p><strong><em>Viitteiden käsittely</em></strong></p>
+
+		<p>Osoitteessa <a href="http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html" target="_blank">http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html</a> oleva ORMLiten "How to Use"-dokumentaatio sisältää neuvoja ORMLiten käyttöön. Lisätään seuraavaksi toiminnallisuus pyörien hakemiseen Varaus-luokan kautta. Annotaatioiden määrittely tapahtuu kuten Pyora-luokalle, mutta viittausta pyörään määriteltäessä annotaatiolle <code>@DatabaseField</code> tulee kertoa, että sarake viittaa toiseen tauluun, ja että viitatusta taulusta tulee hakea oliolle arvo. Tämä tapahtuu lisäämällä annotaatioon parametri <code>foreign = true</code>.</p>
+
+<pre class="sh_java">
+@DatabaseTable(tableName = "Varaus")
+public class Varaus {
+
+    @DatabaseField(id = true)
+    private Integer varaustunnus;
+    @DatabaseField(columnName = "pyora", canBeNull = false, foreign = true)
+    private Pyora pyora;
+    private Varaaja varaaja;
+    @DatabaseField(columnName = "varaus_alkaa")
+    private Timestamp varausAlkaa;
+    @DatabaseField(columnName = "varaus_loppuu")
+    private Timestamp varausLoppuu;
+
+    public Varaus() {
+    }
+
+// konstruktorit, getterit, setterit
+</pre>
+
+		<p>Ylläolevassa esimerkissä Varaus-luokka on määritelty siten, että se liittyy tietokantatauluun Varaus. Sillä on lisäksi kenttä pyora, joka viittaa tauluun, johon Pyora-luokka liittyy. Luokalle Varaaja ei ole määritelty toiminnallisuutta.</p>
+
+		<p>Varauksiin liittyvien pyörien tulostaminen onnistuu nyt seuraavasti:</p>
+
+<pre class="sh_java">
+Class.forName("org.sqlite.JDBC");
+ConnectionSource connectionSource
+        = new JdbcConnectionSource("jdbc:sqlite:vuokraamo.db");
+
+Dao&lt;Varaus, String&gt; varausDao
+        = DaoManager.createDao(connectionSource, Varaus.class);
+
+List&lt;Varaus&gt; varaukset = varausDao.queryForAll();
+for (Varaus varaus : varaukset) {
+    System.out.println(varaus.getPyora().getRekisterinumero() + ", alkaa " + varaus.getVarausAlkaa());
+}</pre>
 
 
 		<aside class="info">
 		  <br/>
 
-		  <h1>Voidaan myös yhdistää edellisiä</h1>
+		  <h1>Java Persistence API ja Hibernate</h1>
+		  
+		  <p>Vastaavia toimintoja tarjoavia kirjastoja on huomattava määrä, ja Javalle on määritelty myös standardi näille kirjastoille. Javalle määritellyn standardin nimi on <em>Java Persistence API</em>, ja se määrittelee notaation luokkien annotoinnille ja kyselyiden kirjoittamiselle.</p>
 
-		  <p>alikyselyt tuottavat taulun, johon voi viitata kyselyissä..</p>
-
-		  <p>hae kurssit, joilla eniten opintopisteitä.</p>
-
-		  <p></p>
-
+		  <p>Valitsemamme ORMLite-kirjasto tarjoaa pienen määrän toiminnallisuutta, mutta kuitenkin samalla oleelliset osat on toteutettu melko hyvin. Jos toiminnallisuutta kaipaa enemmän, voi käyttöön valita esimerkiksi <a href="http://hibernate.org/" target="_blank">Hibernaten</a>, joka on ehkäpä eniten käytetty vastaavaa toiminnallisuutta tarjoava Java-kirjasto.</p>
 		</aside>
+		  
 
-		<p>TODO: missä järjestyksessä kyselyt pitäisi kirjoittaa?</p>
 
+
+                <figure>
+		  <img src="img/paivitysraja.jpg" alt="päivitysraja :: 
+C
+ (\.   \      ,/)
+  \(   |\     )/
+  //\  | \   /\\
+ (/ /\_#oo#_/\ \)
+  \/\  ####  /\/
+       `##'
+"/> 
+		  <figcaption>Päivitysraja, tähän on hyvä lopettaa lukeminen.</figcaption>
+		</figure>
 
 
 
@@ -3233,14 +4018,18 @@ logging.file=</pre>
         <script src="js/libs/jquery/jquery.js"></script>
         <script src="js/libs/jqueryui/jquery-ui.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+<!--
+	<script src="js/libs/bootstrap.min.js"></script>
+-->
         <script src="js/libs/syntaxhighlight/sh_main.min.js"></script>
         <script src="js/tikape.js"></script>
 
 
 
 	<!-- angularjs -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<!--	<script src="js/libs/angular.min.js"></script>
+-->	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
 	<!-- tikape sqljs -- https://github.com/mluukkai/tikape-sqljs -->
         <script src="js/libs/sql.js"></script>
         <script src="js/table.js"></script>
