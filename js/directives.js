@@ -139,7 +139,7 @@ myAppModule.directive('query', function() {
 		      if($scope.order) {
 			  console.log("Expecting ordered data");
 			  // 5. onko n:s datarivi ok
-			  for (var i = 1; i < testRows.length; i++) {
+			  for (var i = 0; i < testRows.length; i++) {
 			      for (var j = 0; j < testColumns.length; j++) {
 				  if(testRows[i][testColumns[j]].valueOf() == $scope.rows[i][testColumns[j]].valueOf()) {
 				      continue;
@@ -159,7 +159,7 @@ myAppModule.directive('query', function() {
 			  console.log("Not expecting ordered data");
 			  var expectedRows = [];
 			  var outputRows = [];
-			  for (var i = 1; i < testRows.length; i++) {
+			  for (var i = 0; i < testRows.length; i++) {
 			      var expectedRow = "  " + testColumns[0] + ": " + testRows[i][testColumns[0]].valueOf();
 			      var outputRow = "  " + testColumns[0] + ": " + $scope.rows[i][testColumns[0]].valueOf();
 
@@ -171,6 +171,9 @@ myAppModule.directive('query', function() {
 			      expectedRows.push(expectedRow);
 			      outputRows.push(outputRow);
 			  }
+			  
+//			  console.log(expectedRows);
+//			  console.log(outputRows);
 
 			  for(var i = 0; i < expectedRows.length; i++) {
 			      if(outputRows.indexOf(expectedRows[i]) < 0) {

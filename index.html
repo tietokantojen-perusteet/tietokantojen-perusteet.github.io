@@ -2638,7 +2638,7 @@ SELECT o.nimi opiskelija, k.arvosana
 
 		<h2>Alikyselyt</h2>
 		
-		<p>Alikyselyt ovat nimensä mukaan kyselyn osana suoritettavia alikyselyitä, joiden tuloksia käytetään osana pääkyselyä. Pohditaan kysymystä <em>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</em>, ja käytetään siihen ensin aiemmin tutuksi tullutta tapaa, eli LEFT JOIN -kyselyä. Yhdistetään opiskelijaa ja kurssisuoritusta kuvaavat taulut LEFT JOIN-kyselyllä siten, että myös opiskelijat, joilla ei ole suorituksia tulevat mukaan vastaukseen. Tämän jälkeen, poistetaan vastauksesta ne rivit, joissa kurssisuoritusta ei ole löytynyt, eli kurssisuoritus-tauluun liittyvien sarakkeiden arvo on <em>null</em>. Tämä onnistuu seuraavasti:</p>
+		<p>Alikyselyt ovat nimensä mukaan kyselyn osana suoritettavia alikyselyitä, joiden tuloksia käytetään osana pääkyselyä. Pohditaan kysymystä <em>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</em>, ja käytetään siihen ensin aiemmin tutuksi tullutta tapaa, eli LEFT JOIN -kyselyä. Yhdistetään opiskelijaa ja kurssisuoritusta kuvaavat taulut LEFT JOIN-kyselyllä siten, että myös opiskelijat, joilla ei ole suorituksia tulevat mukaan vastaukseen. Tämän jälkeen, poistetaan vastauksesta ne rivit, joille kurssisuoritusta ei ole löytynyt -- tämä onnistuu katsomalla mitä tahansa kurssisuoritus-taulun saraketta, ja tarkistamalla onko se tyhjä, eli <em>null</em>. Tämä onnistuu seuraavasti:</p>
 
 
 		<div ng-controller="weekThreeSqlController">
@@ -2762,7 +2762,7 @@ SELECT o.nimi opiskelija, k.arvosana
 		    </query>
 		  </div>
 
-		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat kurssit kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen. Alla olevassa esimerkissä lasketaan tehtävien määrä eri kursseilla siten, että tehtävän nimi haetaan taulusta Tehtävä, ja Kurssin nimi taulusta Kurssi.</p>
+		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat kurssit kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen. Alla olevassa esimerkissä lasketaan tehtävien määrä eri kursseilla siten, että kurssin nimi haetaan taulusta Kurssi, ja tehtävät haetaan kurssitehtävistä.</p>
 		  
 		  <query
 		     db="db"
@@ -3504,7 +3504,7 @@ public class Pyora {
 
     @DatabaseField(id = true, columnName = "rekisterinumero")
     private String rekisterinumero;
-    @DatabaseField(columnName = "rekisterinumero")
+    @DatabaseField(columnName = "merkki")
     private String merkki;
 
     // jokaisella tallennettavalla oliolle tulee olla parametriton konstruktori
@@ -3518,6 +3518,15 @@ public class Pyora {
 
 // getterit ja setterit
 }</pre>
+
+                <aside class="info">
+		  <br/>
+		  <h1>@DatabaseField</h1>
+		  
+		  <p>Jos tietokannassa olevan sarakkeen nimi on sama kuin oliomuuttujan nimi, voidaan annotaatiosta <code>@DatabaseField</code> jättää <code>columnName</code>-määrittely pois. Tietokantataulun sarakkeet, jotka ovat muotoa <code>sarakkeen_nimi</code> tulee olla määriteltynä <em>camelCase</em>-muodossa oliomuuttujina. Sarake <code>sarakkeen_nimi</code> olisi siis oliomuuttujana muotoa <code>sarakkeenNimi</code>.</p>
+
+		</aside>
+
 
 
 		<p>Nyt kaikkien pyörien hakeminen tietokannasta onnistuu seuraavasti. Huom! Käytössä on ORMLiten tarjoama Dao-rajapinta -- emme siis kirjoita erikseen ohjelmakoodia kyselyiden tulosten muuttamiseksi olioiksi.</p>
@@ -3539,7 +3548,7 @@ for (Pyora pyora : pyorat) {
 
 		<p><strong><em>Viitteiden käsittely</em></strong></p>
 
-		<p>Osoitteessa <a href="http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html" target="_blank">http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html</a> oleva ORMLiten "How to Use"-dokumentaatio sisältää neuvoja ORMLiten käyttöön. Lisätään seuraavaksi toiminnallisuus pyörien hakemiseen Varaus-luokan kautta. Annotaatioiden määrittely tapahtuu kuten Pyora-luokalle, mutta viittausta pyörään määriteltäessä annotaatiolle <code>@DatabaseField</code> tulee kertoa, että sarake viittaa toiseen tauluun, ja että viitatusta taulusta tulee hakea oliolle arvo. Tämä tapahtuu lisäämällä annotaatioon parametri <code>foreign = true</code>.</p>
+		<p>Osoitteessa <a href="http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html" target="_blank">http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html</a> oleva ORMLiten "How to Use"-dokumentaatio sisältää neuvoja ORMLiten käyttöön. Lisätään seuraavaksi toiminnallisuus pyörien hakemiseen Varaus-luokan kautta. Annotaatioiden määrittely tapahtuu kuten Pyora-luokalle, mutta viittausta pyörään määriteltäessä annotaatiolle <code>@DatabaseField</code> tulee kertoa, että sarake viittaa toiseen tauluun, ja että viitatusta taulusta tulee hakea oliolle arvo. Tämä tapahtuu lisäämällä annotaatioon parametri <code>foreign = true</code>. Tämän lisäksi, myös viitattuun tauluun tulee lisätä annotaatiot.</p>
 
 <pre class="sh_java">
 @DatabaseTable(tableName = "Varaus")
