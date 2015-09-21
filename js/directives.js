@@ -41,7 +41,8 @@ myAppModule.directive('query', function() {
           query: '@',
           editable: '@',
           done: '=?',
-	  valid: '@?'
+	  valid: '@?',
+          order: '=?'
       },
       controller: function($scope) {
           $scope.run_query = function(query) {
@@ -131,27 +132,61 @@ myAppModule.directive('query', function() {
 			  return;
 		      }
 
-		      // 4. ovatko rivit järjestyksessä
+		      // 4. ovatko rivit järjestyksessä tai oikein
 		      // TODO: myöh
 
-		      console.log("Test case 5");
-		      testRows.length != $scope.rows.length
-		      // 5. onko n:s datarivi ok
-		      for (var i = 1; i < testRows.length; i++) {
-			  for (var j = 0; j < testColumns.length; j++) {
-			      if(testRows[i][testColumns[j]].valueOf() == $scope.rows[i][testColumns[j]].valueOf()) {
-				  continue;
+		      console.log("Test case 4");
+		      if($scope.order) {
+			  console.log("Expecting ordered data");
+			  // 5. onko n:s datarivi ok
+			  for (var i = 1; i < testRows.length; i++) {
+			      for (var j = 0; j < testColumns.length; j++) {
+				  if(testRows[i][testColumns[j]].valueOf() == $scope.rows[i][testColumns[j]].valueOf()) {
+				      continue;
+				  }
+				  
+				  $scope.validMessage = [];
+				  $scope.validMessage.push("Virhe vastauksen rivillä " + i + ". Odotettiin, että arvot olisivat seuraavat:");
+				  
+				  for (var k = 0; k < testColumns.length; k++) {
+				      $scope.validMessage.push("  " + testColumns[k] + ": " + testRows[i][testColumns[k]]);
+				  }
+				  
+				  return;
 			      }
-
-			      $scope.validMessage = [];
-			      $scope.validMessage.push("Virhe vastauksen rivillä " + i + ". Odotettiin, että arvot olisivat seuraavat:");
-
-			      for (var k = 0; k < testColumns.length; k++) {
-				  $scope.validMessage.push("  " + testColumns[k] + ": " + testRows[i][testColumns[k]]);
-			      }
-
-			      return;
 			  }
+		      } else {
+			  console.log("Not expecting ordered data");
+			  var expectedRows = [];
+			  var outputRows = [];
+			  for (var i = 1; i < testRows.length; i++) {
+			      var expectedRow = "  " + testColumns[0] + ": " + testRows[i][testColumns[0]].valueOf();
+			      var outputRow = "  " + testColumns[0] + ": " + $scope.rows[i][testColumns[0]].valueOf();
+
+			      for (var j = 1; j < testColumns.length; j++) {
+				  expectedRow += "\n  " + testColumns[j] + ": " +  " " + testRows[i][testColumns[j]].valueOf();
+				  outputRow += "\n  " + testColumns[j] + ": " +  " " + $scope.rows[i][testColumns[j]].valueOf();
+			      }
+
+			      expectedRows.push(expectedRow);
+			      outputRows.push(outputRow);
+			  }
+
+			  for(var i = 0; i < expectedRows.length; i++) {
+			      if(outputRows.indexOf(expectedRows[i]) < 0) {
+				  $scope.validMessage = [];
+				  $scope.validMessage.push("Odotettua riviä ei löytynyt vastauksesta. Odotettu rivi oli: ");
+				  
+				  var parts = expectedRows[i].split("\n");
+				  for (var j = 0; j < parts.length; j++) {
+				      $scope.validMessage.push(parts[j]);				      
+				  }
+
+				  return;
+			      }
+			  }
+
+			  // check that expected has all rows in output
 		      }
 
 		      $scope.done = true;
