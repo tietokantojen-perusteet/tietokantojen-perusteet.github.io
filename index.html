@@ -2775,7 +2775,8 @@ SELECT o.nimi opiskelija, k.arvosana
 
 		  
 		  <div ng-show="unlockListCountKurssisuorituksetByKurssiWithName">
-		    <p>Tee nyt kysely, jossa lasket kurssisuoritus-taulussa olevien kurssien suoritukset -- taas koodin perusteella. Tällä kertaa tulostuksessa tulee kuitenkn tulostaa kurssikoodin sijaan kurssin nimi. Käytä sarakkeiden niminä "kurssi" ja "lukumäärä".</p>
+
+		    <p>Tee nyt kysely, jossa lasket kurssisuoritus-taulussa olevien kurssien suoritukset -- taas koodin perusteella. Tällä kertaa tulostuksessa tulee kuitenkn tulostaa kurssikoodin sijaan kurssin nimi. Käytä sarakkeiden niminä "kurssi" ja "lukumäärä". (Huomaa, että edellisessä osassa katsotaan kurssitehtäviä, tässä kurssisuorituksia!)</p>
 
 		    
 		    <query
@@ -2791,8 +2792,8 @@ SELECT o.nimi opiskelija, k.arvosana
 		  <query
 		     db="db"
 		     editable="false"
-		     query="SELECT k.nimi AS kurssi, COUNT(kt.tunnus) as tehtäviä FROM Kurssi k LEFT JOIN Kurssitehtävä kt
-    ON k.kurssitunnus = kt.kurssi GROUP BY k.nimi"
+		     query="SELECT k.nimi AS kurssi, COUNT(ks.kurssi) as tehtäviä FROM Kurssi k LEFT JOIN Kurssisuoritus ks
+    ON k.kurssitunnus = ks.kurssi GROUP BY k.nimi"
 		     done="unlockLeftJoinKurssiAndKurssisuoritus">
 		  </query>
 		  
@@ -2894,7 +2895,7 @@ SELECT o.nimi opiskelija, k.arvosana
 		  
 		  <li><p>Suurimman arvon valitseminen <code>MAX</code></p>
 		    
-		    <p>Funktio <code>MIN</code> valitsee sille annettujen arvojen joukosta suurimman arvon.</p></li>
+		    <p>Funktio <code>MAX</code> valitsee sille annettujen arvojen joukosta suurimman arvon.</p></li>
 		</ul>
 		
 		<aside class="info">
