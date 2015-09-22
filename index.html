@@ -3548,7 +3548,7 @@ for (Pyora pyora : pyorat) {
 
 		<p><strong><em>Viitteiden käsittely</em></strong></p>
 
-		<p>Osoitteessa <a href="http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html" target="_blank">http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html</a> oleva ORMLiten "How to Use"-dokumentaatio sisältää neuvoja ORMLiten käyttöön. Lisätään seuraavaksi toiminnallisuus pyörien hakemiseen Varaus-luokan kautta. Annotaatioiden määrittely tapahtuu kuten Pyora-luokalle, mutta viittausta pyörään määriteltäessä annotaatiolle <code>@DatabaseField</code> tulee kertoa, että sarake viittaa toiseen tauluun, ja että viitatusta taulusta tulee hakea oliolle arvo. Tämä tapahtuu lisäämällä annotaatioon parametri <code>foreign = true</code>. Tämän lisäksi, myös viitattuun tauluun tulee lisätä annotaatiot.</p>
+		<p>Osoitteessa <a href="http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html" target="_blank">http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html</a> oleva ORMLiten "How to Use"-dokumentaatio sisältää neuvoja ORMLiten käyttöön. Lisätään seuraavaksi toiminnallisuus pyörien hakemiseen Varaus-luokan kautta. Annotaatioiden määrittely tapahtuu kuten Pyora-luokalle, mutta viittausta pyörään määriteltäessä annotaatiolle <code>@DatabaseField</code> tulee kertoa, että sarake viittaa toiseen tauluun, ja että viitatusta taulusta tulee hakea oliolle arvo. Tämä tapahtuu lisäämällä annotaatioon parametrit <code>foreign = true</code> ja <code>foreignAutoRefresh = true</code>. Tämän lisäksi, myös viitattuun tauluun tulee lisätä annotaatiot.</p>
 
 <pre class="sh_java">
 @DatabaseTable(tableName = "Varaus")
@@ -3556,7 +3556,7 @@ public class Varaus {
 
     @DatabaseField(id = true)
     private Integer varaustunnus;
-    @DatabaseField(columnName = "pyora", canBeNull = false, foreign = true)
+    @DatabaseField(columnName = "pyora", canBeNull = false, foreign = true, foreignAutoRefresh = true)
     private Pyora pyora;
     private Varaaja varaaja;
     @DatabaseField(columnName = "varaus_alkaa")
