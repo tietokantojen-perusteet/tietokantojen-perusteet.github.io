@@ -150,6 +150,10 @@ WK3TABLES['Tehtäväsuoritus'] = {
     ]
 };
 
+
+var NOTABLES = {};
+
+
 /*
 TABLES['students'] = {
   schema: "name, age, address, city, studentnumber",

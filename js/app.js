@@ -56,6 +56,19 @@ myAppModule.controller('weekThreeSqlController', function($scope) {
   });
 });
 
+myAppModule.controller('noTablesSqlController', function($scope) {
+  var db = new SQL.Database();
+  $scope.db = db;
+
+  $scope.tabledata = NOTABLES;
+  $scope.tables = [];
+  
+  $scope.tables.forEach(function(table) {
+    initialize_table($scope.tabledata, table, db);
+  });
+});
+
+
 /*
 myAppModule.controller('weekOneSqlController', function($scope) {
   var db = new SQL.Database();

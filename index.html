@@ -37,10 +37,10 @@
                     <li>
                         <a href="#viikko4">Viikko 4</a>
                     </li>
-<!--
                     <li>
                         <a href="#viikko5">Viikko 5</a>
                     </li>
+<!--
                     <li>
                         <a href="#viikko6">Viikko 6</a>
                     </li>
@@ -65,9 +65,6 @@
 
                     <p><em>"miten tietoa sekä siihen liittyviä yhteyksiä mallinnetaan ja hallinnoidaan?" </em></p>
 
-<!--
-                    <a class="call-to-action" href="#start" role="button">No todellakin!</a>
--->
                 </header>
 
                 <h1 id="start">Sisältö, aikataulu, arvostelu</h1>
@@ -247,7 +244,7 @@
 		  <li><a href="https://docs.google.com/document/d/18PXEYZGuLOO6p1F5HfjRLAZrsgqWuKcYhgnilHVtIrY/edit?usp=sharing" target="_blank">Viikko 2</a></li>
 		  <li><a href="https://docs.google.com/document/d/18bYt11F4HzWDX8RanKzl_6Vhb5rpJ1KirDWn1-dpVW4/edit" target="_blank">Viikko 3</a></li>
 		  <li><a href="https://docs.google.com/document/d/1gCpBSDbjn3NqT1_jeoQl2eOvwQS1WVHVYiH7xGtL6a4/edit?usp=sharing" target="_blank">Viikko 4</a></li>
-		  <li>Viikko 5 (julkaistaan 25.9.)</li>
+		  <li><a href="https://docs.google.com/document/d/1xeBB7QD0EpLEdr7Yd7mlZSp89Al1bhNzaJmb0vu_N-E/edit?usp=sharing" target="_blank">Viikko 5</a></li>
 		  <li>Viikko 6 (julkaistaan 2.10.)</li>
 		  <li>Viikko 7 (julkaistaan 9.10.)</li>
 		</ul>
@@ -272,9 +269,8 @@
             </section>
             <!-- END INDEX -->
 
-            <!-- BEGIN WEEK1 -->
-            <section class="weeklimit" data-week-id="1">
 
+            <section class="weeklimit" data-week-id="1">
 
                 <header>
                     <h1 id="viikko1">Viikko 1</h1>
@@ -316,9 +312,6 @@
 
 		<p>Käytämme tällä kurssilla yhtenä esimerkkinä opiskelun ja oppimisen seuraamiseen tarkoitettua järjestelmää, joka kehittyy materiaalin edetessä. Järjestelmä pitää kirjaa kursseista, opiskelijoista, kurssiharjoituksista, arvosanoista, kurssipalautteista, sekä muista oleellisista asioista, joita kurssin edetessä tulee esille. Jotta tämä onnistuisi, tarvitsemme jonkinlaisen jäsentelytavan eli rakenteen tallennettavalle tiedolle, tapoja tiedon tallentamiseen tässä sovitussa muodossa, sekä tapoja erilaisten raporttien luomiseen. Katsotaan miten käy..</p>
 
-		<!--
-		    Tilanteeseen luonnollisesti vaikuttaa myös se, kun järjestelmää alkaa käyttämään useampi käyttäjä...
-		  -->
 
 
 		<h2>Tietokanta ja tiedon rakenteen kuvaaminen</h2>
@@ -433,9 +426,6 @@
 
 		</aside>
 
-<!--
-		<p>[tehtävä: ideointia yhdistämistapoihin, johdattelua relaatiomalliin?]</p>
--->
 
 		<h2>Tietokannanhallintajärjestelmä</h2>
 
@@ -467,13 +457,6 @@
 
 		</aside>
 
-
-<!--
-		<h2>Tiedon käsittely ohjelmallisesti</h2>
-
-
-		<p>TODO: halutaanko case?</p>
--->
 
 
 		<h1>Johdanto relaatiomalliin ja relaatiotietokantoihin</h1>
@@ -627,7 +610,6 @@
 
 		</aside>
 
-		<!-- viikon 1 SQL-tehtävät alkaa -->
 		<div ng-controller="weekOneSqlController">
 
 
@@ -651,7 +633,7 @@
 		    
 		    <p>Tee nyt kysely, jolla saat listattua kaikki <code>Kurssisuoritus</code>-taulussa olevat rivit.</p>
 		    
-		    <togglable content="taulut">
+		    <togglable content="taulut" db="db">
                       <table-info></table-info>
 		    </togglable>
 		    
@@ -679,7 +661,7 @@
 		    
 		    <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulussa olevien kurssien nimet.</p>
 		    
-		    <togglable content="taulut">
+		    <togglable content="taulut" db="db">
                       <table-info></table-info>
 		    </togglable>
 		    
@@ -708,7 +690,7 @@
 		    
 		    <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulussa olevat <em>uniikit</em> kurssit.</p>
 		    
-		    <togglable content="taulut">
+		    <togglable content="taulut" db="db">
                       <table-info></table-info>
 		    </togglable>
 		    
@@ -735,7 +717,7 @@
 		    
 		    <p>Tee nyt kysely, jolla saat listattua <code>Opiskelija</code>-taulusta kaikki ne opiskelijat, joiden nimi on 'Anna'.</p>
 		    
-		    <togglable content="taulut">
+		    <togglable content="taulut" db="db">
                       <table-info></table-info>
 		    </togglable>
 		    
@@ -748,7 +730,7 @@
 		    
 		      <p>Tee nyt kysely, jolla saat listattua <code>Kurssisuoritus</code>-taulusta kaikki Pihla-nimisen opiskelijan suoritukset. Voit olettaa, että Opiskelija-taulun sisältö on täsmälleen se, kuin mikä se tähän asti on ollut. Vinkki: millä Pihlan tunnistaa kummassakin taulussa?</p>
 		    
-		      <togglable content="taulut">
+		      <togglable content="taulut" db="db">
 			<table-info></table-info>
 		      </togglable>
 		      
@@ -797,7 +779,7 @@
 		    
 		    <p>Huom! Tee kysely siten, että näet vain uniikit vastaukset. Kyselyn vastauksessa pitäisi olla vain 2 riviä. Kun saat kyselyn toimimaan, kokeile mitä tapahtuu jos muutat 'LIKE'-operaation muotoon 'NOT LIKE'.</p>
 		    
-		    <togglable content="taulut">
+		    <togglable content="taulut" db="db">
                       <table-info></table-info>
 		    </togglable>
 		    
@@ -819,8 +801,6 @@
 		  <p>Ehtoja voi myös yhdistää, jonka lisäksi suluilla voi rajata suoritusjärjestystä. Ota selvää mitä kysely <code>SELECT * FROM Kurssisuoritus WHERE (Kurssi = 'Ohjelmoinnin perusteet' OR Kurssi = 'Ohjelmoinnin jatkokurssi') AND Arvosana = 3</code> tekee.</p>
 
 		</aside>
-
-		<!-- viikko 1 loppuu ja viikko 2 alkaa -->
 
 		<header>
 		  <h1 id="viikko2">Viikko 2</h1>
@@ -984,7 +964,7 @@
 
 		      <p>Kyselyn tuloksessa pitäisi olla 4 riviä ja 3 saraketta.</p>
 		      
-		      <togglable content="taulut">
+		      <togglable content="taulut" db="db">
 			<table-info></table-info>
 		      </togglable>
 		      
@@ -1158,7 +1138,7 @@
 		
 		<div ng-controller="weekTwoSqlController">
 		  
-		    <togglable content="taulut">
+		    <togglable content="taulut" db="db">
                       <table-info></table-info>
 		    </togglable>
 		    
@@ -1202,7 +1182,7 @@
 		    <p>Tee nyt kysely, joka tulostaa jokaisen opiskelijan nimen, kurssisuorituksen päivämäärän, ja kurssisuorituksen arvosanan.</p>
 		    
 		    
-		    <togglable content="taulut">
+		    <togglable content="taulut" db="db">
                       <table-info></table-info>
 		    </togglable>
 		    
@@ -1240,7 +1220,7 @@
 		    <p>Tee nyt kysely, joka tulostaa jokaiseen kurssiin liittyvän tehtävän. Tulostuksen otsikoiden nimien tulee olla 'kurssi' ja 'tehtävä'.</p>
 		    
 		    
-		    <togglable content="taulut">
+		    <togglable content="taulut" db="db">
                       <table-info></table-info>
 		    </togglable>
 		    
@@ -1457,7 +1437,7 @@ SELECT Tehtävä.nimi AS Tehtävä
 		  <p>Tee nyt kysely, joka tulostaa kaikki tehtävät, jotka opiskelija 'Anna' on suorittanut. Tee tulostuksesta sellainen, että yksi sarake sisältää kurssin nimen, ja toinen sarake tehtävän nimen.</p>
 		  
 		  
-		  <togglable content="taulut">
+		  <togglable content="taulut" db="db">
                     <table-info></table-info>
 		  </togglable>
 		  
@@ -1603,13 +1583,6 @@ SELECT Kurssi.nimi AS Kurssi, Opiskelija.nimi AS Opiskelija
 
 		</aside>
 
-<!--		
-		<h2>Alikyselyt</h2>
-		
-		
-		
-		<p>Kun yhdistämme kahdessa taulussa olevia rivejä WHERE-ehdon avulla, kyselymme tuottaa typillisesti ne rivit, joissa tietyt avaimet ja sarakkete </p>
--->		
 		
 		<h2>Tietokantarivien lisääminen ja poistaminen</h2>
 		
@@ -1685,9 +1658,6 @@ INSERT INTO Kurssi (kurssitunnus, nimi, kuvaus)
 		<p>Vaikka edelliset esimerkit tehtiin osana kurssimateriaalia, tehdään tietokantakyselyjä usein ohjelmallisesti tai suoraan tietokannanhallintajärjestelmässä, esimerkiksi konsolin kautta.</p>
 
 
-		<!-- tähän kuva siitä, miten tietokanta on erillinen sovelluksesta --> 
-
-		<!-- desktop-sovellus, webisovellus, useampi sovellus voi käyttää samaa tietokantaa -->
 
 		<p>Lähes jokainen ohjelmointikieli tarjoaa jonkinlaisen rajapinnan tietokantakyselyiden tekemiseen. Esimerkiksi Java-kielelle on määritelty yhtenäinen standardi tietokantakyselyiden tekemiseen, minkä avulla lähes sama koodi käy useamman tietokannan käyttöön.</p>
 
@@ -2719,23 +2689,6 @@ SELECT o.nimi opiskelija, k.arvosana
 		  <p>Edellä oleva kysely tarkistaa jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla ettei sitä löydy Kurssisuoritus-taulun opiskelija-sarakkeesta. Käytännössä -- jos tietokantamoottori ei optimoi kyselyä -- jokainen opiskelija-taulun rivi aiheuttaa uuden kyselyn kurssisuoritus-tauluun, mikä tekee kyselystä tehottoman.</p>
 		  
 		</aside>
-		<!--
-
-		<p>Jos alikysely palauttaa taulun, jossa on vain yksi sarake, voidaan sarakkeessa olevien arvojen perusteella tehdä myös hakujen rajausta. Esimerkiksi seuraavalla kyselyllä voimme hakea kaikista vanhimman opiskelijan:</p>
-
-		<div ng-controller="weekThreeSqlController">
-		    
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT * FROM Opiskelija
-    WHERE opiskelijanumero <= (SELECT opiskelijanumero FROM Opiskelija)">
-		  </query>
-		</div>
-
-		<p>...</p>
-
--->
 
 
 		<h2>Yhteenvetokyselyt</h2>
@@ -3601,6 +3554,1003 @@ for (Varaus varaus : varaukset) {
 
 
 
+
+		<header>
+		  <h1 id="viikko5">Viikko 5</h1>
+		</header>
+
+		<h1>Tietokantataulujen luominen ja muokkaaminen</h1>
+
+		<p>Tähän mennessä tietokantataulut ovat olleet valmiiksi annettuna, eikä meidän ole tarvinnut pohtia niiden luomista. Tehdään korjausliike, ja tutustutaan tietokantataulujen -- ja sitä kautta -- oman tietokannan rakenteen määrittelyyn ja luomiseen.</p>
+
+		<h2>Tietokantataulun luominen</h2>
+
+		<p>Tietokantataulu luodaan SQL-komennolla <code>CREATE TABLE</code>, jota seuraa luotavan taulun nimi, ja suluissa attribuuttien eli sarakkeiden nimet sekä niiden tyypit pilkulla eroteltuna. Tyyppien määrittely ei ole kaikissa tietokannanhallintajärjestelmissä pakollista, jolloin tietokannanhallintajärjestelmä käyttää mahdollista oletustyyppiä.</p>
+
+		<p>Luodaan aiemmin tutuksi tullut Opiskelija-taulu.</p>
+		
+		<div class="data-table">
+		  <h4>Opiskelija</h4>
+		  <table class="table">
+		    <thead>
+		      <tr>
+			<th>opiskelijanumero</th>
+			<th>nimi</th>
+			<th>syntymävuosi</th>
+			<th>pääaine</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>9999999</td>
+			<td>Pihla</td>
+			<td>1997</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		      <tr>
+ 			<td>9999998</td>
+			<td>Joni</td>
+			<td>1993</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+		
+		
+                <p>Taulu opiskelija saadaan luotua SQL-komennolla <code>CREATE TABLE Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine)</code> -- emme ota vielä kantaa sarakkeiden tietotyyppeihin, vaan määrittelemme vain nimet. Tällöin tietokannanhallintajärjestelmä ottaa vastuun sarakkeiden tyyppien asettamisesta -- jos se on mahdollista. </p>
+		
+		<div ng-controller="noTablesSqlController">
+		  
+		  <togglable content="taulut" db="db">
+		    <table-info></table-info>
+		  </togglable>
+		  
+		  <query
+		     editable="false"
+		     done="tableOpiskelijaWasCreated"
+		     db="db"
+		     rows="3"
+		     query="CREATE TABLE Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine)">
+		  </query>
+		  
+		  
+		  <div ng-show="tableOpiskelijaWasCreated">
+		    
+		    <p>Juuri luotuun tauluun saa lisättyä uusia rivejä komennolla <code>INSERT INTO</code>, jota seuraa taulun nimi, sarakkeet suluissa eroteltuna, sekä uudelle riville asetettavat arvot.</p>
+		    
+		    <query
+		       db="db"
+		       rows="3"
+		       query="INSERT INTO Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine) 
+    VALUES ('01283581', 'Jack Bower', 1983, 'Tietojenkäsittelytiede')"
+		       done="opiskelijaAddedToTableOpiskelija">
+		    </query>
+		  </div>
+		  
+		  <div ng-show="opiskelijaAddedToTableOpiskelija">
+		    <p>Luodussa taulussa olevan tiedon hakeminen tapahtuu kuten ennenkin.</p>
+		    
+		    <query
+		       db="db"
+		       rows="3"
+		       query="SELECT * FROM Opiskelija">
+		    </query>
+		  </div>
+		  
+		  
+		  <p><strong><em>Kurssi-taulun luominen</em></strong></p>
+		  
+		  <p>Luo tietokantaan taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>.</p>
+		  
+		  
+		  <togglable content="taulut" db="db">
+		    <table-info></table-info>
+		  </togglable>
+		  
+		  <query
+		     db="db"
+		     rows="3"
+		     done="tableKurssiWasCreated">
+		  </query>
+		  
+		  <div ng-show="tableKurssiWasCreated">
+		    <p>Lisää nyt tauluun Kurssi kurssi nimeltä "SQL-kielen perusteet", jonka kurssitunnus on "12345" ja kuvaus "SELECT 'Hei maailma';".</p>
+		    
+		    <query
+		       db="db"
+		       rows="3"
+		       done="newCourseWasInserted">
+		    </query>
+		    
+		  </div>
+		  
+		  <div ng-show="newCourseWasInserted">
+		    
+		    <p>Tarkista vielä, että taulun luominen onnistui, ja että uusi kurssi löytyy tietokantataulusta.</p>
+		    
+		    <query
+		       db="db"
+		       rows="3">
+		    </query>
+		    
+		  </div>
+		  
+		  
+		  
+		  <aside class="info">
+		    <br/>
+		    <h1>Olemassaolevien taulujen listaaminen</h1>
+		    
+		    <p>Tietokannanhallintajärjestelmät tyypillisesti tarjoavat mahdollisuuden olemassaolevien tietokantataulujen listaamiseen. Tämä toiminnallisuus on kuitenkin järjestelmäkohtaista -- esimerkiksi tässä materiaalissa käyttämässämme SQLite-versiossa taulujen tiedot löytyvät piilotetusta tietokantataulusta <code>sqlite_master</code>.</p>
+		    
+		    <query
+		       db="db"
+		       rows="2"
+		       query="SELECT * FROM sqlite_master">
+		    </query>
+		    
+		  </aside>
+		</div>
+
+		
+		<h2>Attribuuttien datatyypit</h2>
+		
+                <p>Jokaisella attribuutilla tulee olla nimi sekä datatyyppi. Jos datatyyppiä ei määritellä, voi tietokannanhallintajärjestelmä määritellä sen itse -- esimerkiksi SQLite pyrkii päättelemään attribuutin tyypin dynaamisesti, mutta useimmat tietokannanhallintajärjestelmät eivät tällaista päättelyä tee.</p>
+
+		<p>Tietokantaan säilöttävä tieto voi olla montaa eri muotoa, esimerkiksi merkkijonoja, numeroita, binäärimuodossa olevia tiedostoja, sekä päivämääriä. Tietokannan suunnittelijan tehtävänä on päättää, minkämuotoista dataa missäkin sarakkeessa on.</p>
+
+                <p>Puhekielessä voidaan puhua sarakkeen tyypistä, sillä sarakkeen tyyppi määrää millaista tietoa sarakkeeseen tallennetaan. Käytännössä tietokantataulua luotaessa sarakkeen määrittelyssä annettavat tiedot kertovat tietokannanhallintajärjestelmälle siitä, että minkälaista tietoa sarakkeeseen voidaan lisätä, ja toisaalta samalla minkälaista tietoa sarakkeeseen ei voida lisätä. Sarakkeen tyyppi vaikuttaa myös toiminnallisuuksiin -- esimerkiksi keskiarvon laskeminen merkkijonotyyppisiä arvoja sisältävästä sarakkeesta ei todennäköisesti ole hyödyllistä.</p>
+
+		<p>Tyypilliset datatyypit ovat seuraavat:</p>
+
+		<ul>
+		  <li><strong>varchar(n)</strong> korkeintaan <em>n</em> merkin pituinen merkkijono.</li>
+		  <li><strong>integer</strong> kokonaisluku</li>
+		  <li><strong>float</strong> liukuluku eli desimaaliluku</li>
+		  <li><strong>date</strong> päivämäärä, tallentaa vuoden, kuukauden ja päivän</li>
+		  <li><strong>timestamp</strong> aikaleima, tallentaa vuoden, kuukauden, päivän, tunnit, minuutit ja sekunnit -- mahdollisesti myös tarkempia arvoja</li>
+		</ul>
+		
+                <p>Taulua luodessa sarakkeen tyyppi määritellään lisäämällä datatyypin nimi sarakkeen nimen perään. Esimerkiksi Opiskelija-taulua luodessa opiskelijanumero voitaisiin määritellä kokonaisluvuksi, nimi korkeintaan 200 merkkiä pitkäksi merkkijonoksi, syntymävuosi päivämääräksi ja pääaine korkeintaan 50 merkkiä pitkäksi merkkijonoksi seuraavasti:</p> 
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija 
+(
+    opiskelijanumero integer, 
+    nimi varchar(200), 
+    syntymävuosi date, 
+    pääaine varchar(50)
+)
+</pre>
+
+                <p>Nyt -- riippuen käytetystä tietokannanhallintajärjestelmästä -- sarakkeeseen opiskelijanumero ei voisi esimerkiksi lisätä merkkijonoa, sillä se on kokonaisluku. Tämä johtaa tilanteeseen, missä tietokannanhallintajärjestelmä itsessään varoittaa tiedon lisääjää yksinkertaisista virheistä.</p>
+
+
+		<aside class="info">
+		  <br/>
+		  
+		  <h1>Olemassaolevien attribuuttien datatyypin selvittäminen</h1>
+
+
+		  <p>Attribuutin -- tai sarakkeen -- datatyypin kysymiseen tietokannalta <a href="http://stackoverflow.com/questions/13405572/sql-statement-to-get-column-type" target="_blank">ei ole yhtä tapaa</a>, vaan tapa liittyy käytettävään tietokannanhallintajärjestelmään. Käyttämässämme SQLite-versiossa sarakkeen tyypin saa selville kyselyllä <code>PRAGMA TABLE_INFO(<em>TaulunNimi</em>)</code>, missä <em>TaulunNimi</em> on tarkasteltavan taulun nimi.</p>
+
+		  <div ng-controller="noTablesSqlController">
+		    
+		    <p>Luo ensin tarkasteltava tietokantataulu.</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       done="tableCreated">
+		    </query>
+
+		    <div ng-show="tableCreated">
+
+
+		      <togglable content="taulut" db="db">
+			<table-info></table-info>
+		      </togglable>
+		      
+		      <p>Kun tietokantataulu on luotu, saat tarkasteltua sen sisältöä <code>PRAGMA</code>-komennolla.</p>
+
+		      <query
+			 db="db"
+			 rows="3"
+			 query="PRAGMA TABLE_INFO(LuodunTaulunNimi)">
+		      </query>
+		    </div>
+		    
+		  </div>
+		</aside>
+
+
+                <p><strong><em>Kurssi-taulun luominen sarakkeiden tyypeillä</em></strong></p>
+					    
+		<p>Luo taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>. Kurssitunnuksen tulee olla kokonaisluku, nimen merkkijono, ja kuvauksen merkkijono.</p>
+
+
+		<div ng-controller="noTablesSqlController">
+
+		  <query
+		     db="db"
+		     rows="3"
+		     done="tableCreated">
+		  </query>
+
+		  <div ng-show="tableCreated">
+		    
+		    
+		    <togglable content="taulut" db="db">
+		      <table-info></table-info>
+		    </togglable>
+		    
+		    <p>Varmista vielä PRAGMA-komennolla, että sarakkeiden tyypit ovat halutut.</p>
+		    
+		    <query
+		       db="db"
+		       rows="3">
+		    </query>
+		  </div>
+		</div>
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>Tietokannanhallintajärjestelmien datatyyppejä</h1>
+
+		  <p>Eri tietokannanhallintajärjestelmät kuten <code>SQLite</code>, <code>MySQL</code> ja <code>PostgreSQL</code> tarjoavat hieman erilaisia datatyyppejä ohjelmoijan käyttöön. Tutustu seuraaviin dokumentteihin, missä näistä kerrotaan enemmän:</p>
+
+
+		  <ul>
+		    <li><a href="https://www.sqlite.org/datatype3.html" target="_blank">https://www.sqlite.org/datatype3.html</a></li>
+		    <li><a href="http://www.w3schools.com/sql/sql_datatypes.asp" target="_blank">http://www.w3schools.com/sql/sql_datatypes.asp</a></li>
+		  </ul>
+		</aside>
+
+
+		<h2>Rajoitteet ja avaimet</h2>
+
+		<p>Kun olemme aiemmin luoneet tietokantakaavioita käsitekaavioista, olemme määritelleet tietokantatauluille yksilöivän <em>pääavaimen</em>. Pääavain on taulukohtainen tunniste, joka on uniikki jokaiselle taulun riville, jonka lisäksi sen arvo ei saa olla tyhjä (<em>null</em>) millään rivillä. Pääavaimeksi valitaan joko olemassaoleva taulun sarake, tai tauluun luodaan uusi sarake.</p>
+
+		<p><strong><em>Pääavaimen määrittely</em></strong></p>
+
+		<p>Pääavain määritellään tietokantataulun luonnin yhteydessä lisäämällä sarakkeen tyypin perään rajoite <code>PRIMARY KEY</code>. Tämä tarkoittaa, että sarakkeen arvo on uniikki, ja että se ei saa koskaan olla tyhjä. Täydennetään aiempaa opiskelijan määrittelyä siten, että opiskelijanumerosta tehdään Opiskelija-taulun pääavain</p>
+
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija 
+(
+    opiskelijanumero integer PRIMARY KEY, 
+    nimi varchar(200), 
+    syntymävuosi date, 
+    pääaine varchar(50)
+)
+</pre>
+
+
+		<div ng-controller="noTablesSqlController">
+		  
+		  <p>Kokeillaan edelläolevaa komentoa käytännössä.</p>
+
+		  <query
+		     db="db"
+		     rows="7"
+		     done="tableCreated"
+		     editable="false"
+		     query="CREATE TABLE Opiskelija 
+(
+    opiskelijanumero integer PRIMARY KEY, 
+    nimi varchar(200), 
+    syntymävuosi date, 
+    pääaine varchar(50)
+)">
+		  </query>
+
+		  <div ng-show="tableCreated">
+		  		    
+		    <togglable content="taulut" db="db">
+		      <table-info></table-info>
+		    </togglable>
+		    
+		    <p>Lisätään seuraavaksi tietokantatauluun uusi opiskelija nimeltä <code>Ada Lovelace</code>. Seuraavalla komennolla vain tietokantataulun kenttään <code>nimi</code> asetetaan arvo.</p>
+		    
+		    <query
+		       db="db"
+		       rows="3"
+		       query="INSERT INTO Opiskelija (nimi) VALUES ('Ada Lovelace')"
+		       done="studentInserted">
+		    </query>
+		  </div>
+
+		  <div ng-show="studentInserted">
+		    <p>Listaa nyt taulussa olevat opiskelijat. Mitä huomaat jos opiskelijoita lisätään tietokantatauluun enemmän?</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       query="SELECT * FROM Opiskelija"
+		       done="studentsListed">
+		    </query>
+		  </div>
+
+		  <div ng-show="studentsListed">
+		    <p>Koska tietokantatauluun on määritelty avain, joka on uniikki, ei taulun sarakkeessa <code>opiskelijanumero</code> voi olla kahta samaa arvoa. Kokeile tätä painamalla alla olevaa nappia ensin kerran -- jolloin opiskelija lisätään -- ja sitten vielä toisen kerran. Mitä virheviesti kertoo?</p> 
+
+		    <query
+		       db="db"
+		       rows="3"
+		       query="INSERT INTO Opiskelija (opiskelijanumero, nimi)
+    VALUES (999, 'Beezow Doo-Doo Zopittybop-Bop-Bop')">
+		    </query>
+
+		  </div>
+
+		</div>
+
+
+		<aside class="info">
+
+		  <br/>
+
+		  <h1>Pääavaimen arvojen automaattinen luonti</h1>
+
+		  <p>Tietyt tietokannanhallintajärjestelmät tarjoavat tuen automaattiselle pääavaimen arvojen luomiselle. Esimerkiksi SQLite luo automaattisesti kokonaislukutyyppiselle sarakkeelle arvoja, jos sarake on määritelty pääavaimeksi, ja ohjelmoija ei tauluun tietoa lisätessään arvoja erikseen määrittele. Vastaava toiminnallisuus löytyy myös useista muista tietokannanhallintajärjestelmistä -- tutustu esimerkiksi <a href="https://mariadb.com/kb/en/mariadb/auto_increment/" target="_blank">MariaDB:n dokumentaatioon asiasta</a>.</p>
+
+		</aside>
+
+                <p><strong><em>Kurssi-taulun luominen sarakkeiden tyypeillä ja pääavaimella</em></strong></p>
+					    
+		<p>Luo taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>. Kurssitunnuksen tulee olla kokonaisluku, nimen merkkijono, ja kuvauksen merkkijono. Tämän lisäksi, kurssitunnuksen tulee olla pääavain.</p>
+
+
+		<div ng-controller="noTablesSqlController">
+
+		  <query
+		     db="db"
+		     rows="6"
+		     done="tableCreated">
+		  </query>
+
+		  <div ng-show="tableCreated">
+		    
+		    
+		    <togglable content="taulut" db="db">
+		      <table-info></table-info>
+		    </togglable>
+		    
+		    <p>Seuraavan kyselyn useampaan otteeseen suorittamisen pitäisi epäonnistua, sillä tietokantataulun kurssitunnus-sarakkeen pitäisi olla olla pääavain, ja sen takia uniikki. </p>
+		    
+		    <query
+		       db="db"
+		       rows="3"
+		       query="INSERT INTO Kurssi (kurssitunnus, nimi) VALUES (42, 'Meaning of Life')">
+		    </query>
+		  </div>
+		</div>
+
+
+                <p>Jokaisella taululla voi olla vain yksi määritelty pääavain. Joskus kuitenkin haluamme, että pääavain liittyy useampaan sarakkeeseen, jolloin sarakkeiden yhdistelmän tulee olla uniikki. Voimme esimerkiksi haluta rajoittaa opiskelijoiden kurssi-ilmoittautumisia siten, että jokainen opiskelija voi ilmoittautua vain kerran tietylle kurssille. Tämä onnistuisi kuvitteellisen <em>KurssiIlmoittautuminen</em>-taulun kautta siten, että taulun pääavaimena toimisi opiskelijanumeron ja kurssin yhdistelmä.</p>
+
+<pre class="sh_sql">
+CREATE TABLE KurssiIlmoittautuminen
+(
+    opiskelijanumero integer, 
+    kurssi integer,
+    PRIMARY KEY (opiskelija, kurssi)
+)
+</pre>
+
+                <p>Nyt taulussa KurssiIlmoittautuminen voi olla vain yksi samanlainen <code>opiskelijanumero</code>-<code>kurssi</code> -arvopari, jolloin opiskelija voi ilmoittautua kurssille vain kerran.</p>
+
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>Pääavaimen valinta.</h1>
+
+		  <p>Tietokantataulun pääavaimen valinta on herättänyt paljon keskustelua. Tutustu yhteen tällaiseen keskusteluun <a href="https://web.archive.org/web/20080524175003/http://articles.techrepublic.com.com/5100-10878_11-1045050.html" target="_blank">täällä</a>.</p>
+
+		</aside>
+
+		<p><strong><em>Uniikkius ja arvon pakollinen määrittely</em></strong></em>
+
+                <p>Tietokantataulun sarakkeille voidaan määritellä myös muita rajoitteita, kuten se, että sarakkeen arvon tulee olla uniikki, tai että sarakkeessa on pakko olla arvo. Sarakkeen uniikkius määritellään komennolla <code>UNIQUE</code>, joka seuraa tyyppiä. Vastaavasti se, että sarakkeessa on pakko olla arvo määritellään komennolla <code>NOT NULL</code>.</p>
+
+		<p>Jos haluamme esimerkiksi lisätä Opiskelija-tauluun rajoitteet, missä määritellään se, että nimeä ja syntymäaikaa ei saa jättää määrittelemättä, lisätään niihin <code>NOT NULL</code> määreet.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija 
+(
+    opiskelijanumero integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL, 
+    syntymävuosi date NOT NULL, 
+    pääaine varchar(50)
+)
+</pre>
+
+                <p>Toisaalta, jos määrittelisimme ylläolevan lisäksi säännöt, joiden mukaan nimen ja syntymävuoden tulisi olla uniikkeja, olisi määrittely seuraava.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija 
+(
+    opiskelijanumero integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL UNIQUE, 
+    syntymävuosi date NOT NULL UNIQUE, 
+    pääaine varchar(50)
+)
+</pre>
+
+                <p>Tämä ei kuitenkaan olisi kovin fiksua, sillä yllä määriteltävässä taulussa yhdelläkään opiskelijalla ei saisi olla samaa nimeä jonkun toisen kanssa. Vastaavasti, sama syntymävuosi (tai aika) johtaisi virhetilanteeseen.</p> 
+
+ 
+		<aside class="info">
+		  <br/>
+		  <h1>CHECK</h1>
+
+		  <p>Edellämainittujen rajoitteiden lisäksi käytössä on mm. rajoite <code>CHECK</code>, jonka avulla voidaan rajoittaa arvoja esimerkiksi tietylle arvovälille. Voimme esimerkiksi luoda Opiskelija-tauluun säännön, jonka mukaan jokaisen opiskelijanumeron tulee olla suurempi kuin 0.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija 
+(
+    opiskelijanumero integer PRIMARY KEY CHECK (opiskelijanumero &gt; 0), 
+    nimi varchar(200) NOT NULL, 
+    syntymävuosi date NOT NULL, 
+    pääaine varchar(50)
+)
+</pre>
+
+                  <p>Rajoitteet voidaan määritellä myös sarakemäärittelyiden jälkeen. Tämä on näppärää esimerkiksi silloin, jos rajoitteita on useampia. Tehdään erillinen tarkistus, joss varmistetaan, että jokainen nimi on yli 2 merkkiä pitkä, ja opiskelijanumero on aina suurempi kuin 0.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija 
+(
+    opiskelijanumero integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL, 
+    syntymävuosi date NOT NULL, 
+    pääaine varchar(50),
+    CONSTRAINT <em>saannonNimi</em> CHECK (opiskelijanumero &gt; 0 AND LENGTH(nimi) &gt; 2)
+)
+</pre>
+
+		  <p><em>Funktion <code>LENGTH</code> kirjoitusasu riippuu järjestelmästä, esimerkiksi MySQL:ssä se kirjoitetaan muodossa <code>LEN</code>.</em></p>
+
+		</aside>
+
+
+
+		<p><strong><em>Viiteavainten määrittely</em></strong></p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>SQLite ja viiteavaimet</h1>
+
+		  <p>Käytössämme olevan SQLiten kolmosversiossa viiteavaimiin liittyvät tarkistukset ovat oletuksena poissa päältä. Tarkastukset saadaan päälle seuraavalla komennolla:</p>
+
+		  <pre class="sh_sql">PRAGMA foreign_keys = ON;</pre>
+
+		  <p>Oletamme, että komento on suoritettu.</p>
+
+		</aside>
+
+                <p>Tietokantataulujen viiteavaimet ovat sarakkeita, joissa olevat arvot viittaavat toisissa tauluissa oleviin pääavaimiin. Tietokantataulua määriteltäessä viiteavaimet listataan sarakkeiden määrittelyn jälkeen. Jokaisen viiteavaimen yhteydessä kerrotaan sekä luotavan taulun sarake -- eli sarake, joka on viiteavain -- että taulu ja sarake, johon viiteavaimella viitataan. Viiteavaimen määrittely tapahtuu komennolla <code>FOREIGN KEY(<em>sarake</em>) REFERENCES <em>ViitattavaTaulu(viitattavaSarake)</em></code>.</p>
+
+		<p>Jos tietokantataulut Opiskelija ja Kurssi ovat määritelty seuraavasti:</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija 
+(
+    opiskelijanumero integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL, 
+    syntymävuosi date NOT NULL, 
+    pääaine varchar(50)
+);
+
+CREATE TABLE Kurssi 
+(
+    kurssitunnus integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL, 
+    kuvaus varchar(3000)
+);</pre>
+
+                <p>Voidaan taulu kurssisuoritus, joka viittaa sekä opiskelijaan, että kurssiin, määritellä seuraavasti.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Kurssisuoritus 
+(
+    opiskelija integer NOT NULL,
+    kurssi integer NOT NULL,
+    päivämäärä date NOT NULL,
+    arvosana integer NOT NULL,
+    opintopistemäärä integer NOT NULL,
+    FOREIGN KEY(opiskelija) REFERENCES Opiskelija(opiskelijanumero),
+    FOREIGN KEY(kurssi) REFERENCES Kurssi(kurssitunnus)
+);
+</pre>
+
+ 		<p>Viiteavaimet ovat siis sarakkeita siinä missä muutkin sarakkeet, mutta niille määritellään eriseen rajoitteet, jotka kertovat, että ne ovat viiteavaimia. Taulussa käytettävien viiteavainten määrä ei käytännössä ole rajattu -- voi olla, että niitä ei ole yhtäkään, tai niitä voi olla useita. Yllä viiteavainsarakkeille <code>opiskelija</code> ja <code>kurssi</code> on lisäksi määritelty <code>NOT NULL</code>-rajoitteet, joiden avulla määritellään että sarakkeiden arvot eivät saa jäädä tyhjiksi.</p>
+
+		<div ng-controller="noTablesSqlController">
+
+		  <p>Kokeillaan edellä nähtyä käytännössä. Luodaan ensin tietokantataulut Opiskelija ja Kurssi, sekä lisätään niihin muutama rivi.</p>
+
+		  <query
+		     db="db"
+		     rows="20"
+		     editable="false"
+		     query="PRAGMA foreign_keys = ON;
+
+CREATE TABLE Opiskelija (
+    opiskelijanumero integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL, 
+    syntymävuosi date NOT NULL, 
+    pääaine varchar(50)
+);
+
+CREATE TABLE Kurssi (
+    kurssitunnus integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL, 
+    kuvaus varchar(3000)
+);
+
+INSERT INTO Opiskelija (nimi, syntymävuosi) VALUES ('Ada', '1997');
+INSERT INTO Opiskelija (nimi, syntymävuosi) VALUES ('Pihla', '1998');
+INSERT INTO Kurssi (nimi) VALUES ('Ohpe');
+INSERT INTO Kurssi (nimi) VALUES ('Tikape');"
+		     done="tablesCreated">
+		  </query>
+
+		  <div ng-show="tablesCreated">
+
+		    <p>Nyt käytössämme on taulut Opiskelija ja Kurssi, jonka lisäksi niissä on kummassakin muutama rivi. Luodaan seuraavaksi taulu Kurssisuoritus, jossa on viiteavaimet kumpaankin edellä mainuttuun tauluun.</p>
+
+
+		    <togglable content="taulut" db="db">
+		      <table-info></table-info>
+		    </togglable>
+		    
+		    <query
+		       db="db"
+		       rows="10"
+		       editable="false"
+		       query="CREATE TABLE Kurssisuoritus 
+(
+    opiskelija integer NOT NULL,
+    kurssi integer NOT NULL,
+    päivämäärä date NOT NULL,
+    arvosana integer NOT NULL,
+    opintopistemäärä integer NOT NULL,
+    FOREIGN KEY(opiskelija) REFERENCES Opiskelija(opiskelijanumero),
+    FOREIGN KEY(kurssi) REFERENCES Kurssi(kurssitunnus)
+);"
+		       
+		       done="kurssisuoritusCreated">
+		    </query>
+		  </div>
+
+
+		  <div ng-show="kurssisuoritusCreated">
+		    
+		    <p>Nyt käytössä on tietokantataulut Opiskelija, Kurssi, ja Kurssisuoritus. Kurssisuoritus-taulussa on kaksi viiteavainta -- toinen viittaa tauluun Opiskelija, ja toinen tauluun Kurssi. Tutki ensin taulujen Opiskelija ja Kurssi sisältöjä, ja lisää sen jälkeen tauluun Kurssisuoritus suoritusmerkintä kurssista Tikape opiskelijalle Ada. Voit kokeilla ensin mitä tapahtuu, jos et aseta viiteavaimia oikein.</p>
+		    
+		    <query
+		       db="db"
+		       rows="3">
+		    </query>
+		  </div>
+		</div>
+
+		<p><strong><em>Tehtävän ja Kurssitehtävän lisääminen.</em></strong></p>
+
+                <p>Harjoitellaan edellä nähtyjä asioita vielä hieman. Käytämme pohjana viikolta 3 tuttua tietokantakaaviota.</p>
+
+		<figure>
+		  <img src="img/viikko3/tietokantakaavio-tehtavasuorituksella.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]1-*[Kurssisuoritus|(fk) opiskelija: Opiskelija;(fk) kurssi: Kurssi;päivämäärä;arvosana;opintopistemäärä]
+[Kurssisuoritus]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]
+[Tehtävä|(pk) tunnus;nimi;kuvaus]1-*[Kurssitehtävä|(pk) tunnus; (fk) tehtävä: Tehtävä; (fk) kurssi: Kurssi]
+[Kurssitehtävä]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]
+[Tehtäväsuoritus|(fk) opiskelija: Opiskelija; (fk) tehtävä: Kurssitehtävä; suoritusaika]
+[Tehtäväsuoritus]*-1[Opiskelija]
+[Tehtäväsuoritus]*-1[Kurssitehtävä]"/>
+
+		</figure>
+
+                <p></p>
+
+		<hr/>
+
+                <p>Alla olevaan kyselylaatikkoon on määritelty kysely, minkä avulla luodaan tietokantataulu Kurssi sekä lisätään sinne kurssit Ohpe ja Tikape.</p>
+
+		<div ng-controller="noTablesSqlController">
+		  
+		  <query
+		     db="db"
+		     rows="11"
+		     editable="false"
+		     query="PRAGMA foreign_keys = ON;
+
+CREATE TABLE Kurssi (
+    kurssitunnus integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL, 
+    kuvaus varchar(3000)
+);
+
+INSERT INTO Kurssi (nimi) VALUES ('Ohpe');
+INSERT INTO Kurssi (nimi) VALUES ('Tikape');"
+		     done="tablesCreated">
+		  </query>
+		  
+		  <div ng-show="tablesCreated">
+
+		    <p>Toteuta nyt taulut Kurssitehtävä ja Tehtävä siten, että niissä on määriteltynä sekä pääavaimet että viiteavaimet. Pohdi, missä järjestyksessä taulut tulee toteuttaa, jotta saat viiteavaimet määriteltyä oikein.</p>
+
+
+		    <togglable content="taulut" db="db">
+                      <table-info></table-info>
+		    </togglable>
+		    
+
+		    <query
+		       db="db"
+		       rows="9"
+		       query=""
+		       done="kurssiTehtavaAndTehtavaCreated">
+		    </query>
+		  </div>
+
+		  <div ng-show="kurssiTehtavaAndTehtavaCreated">
+
+		    <p>Lisää nyt Tehtävä-tauluun muutama rivi, ja määrittele olemassaoleville kursseille muutamia tehtäviä.</p>
+
+		    <query
+		       db="db"
+		       rows="4">
+		    </query>
+		  </div>
+		</div>
+
+
+		<h2>Hakuja nopeuttavat indeksirakenteet</h2>
+
+		<p>Tietokantatauluun kohdistuvissa kyselyissä hakua rajataan ehdoilla. Esimerkiksi kysely <code>SELECT * FROM <em>Taulu</em> WHERE <em>sarake</em> = 'haluttu'</code>, hakee kaikki taulussa olevat rivit, joissa annetun sarakkeen arvo on 'haluttu'. Oletuksena kysely tietokantamoottori käy läpi kaikki rivit, ja valitsee niistä vain ne, joissa rivin arvo on haluttu. Jos rivejä on vaikkapa 100 miljoonaa, käydään niistä jokainen yksitellen läpi, mikä ei ole kovin tehokasta.</p>
+
+		<p>Tietokantakyselyiden tehostamista on tutkittu paljon, ja tietokantamoottorit tarjoavat tyypillisesti erilaisia välineitä kyselyiden tehostamiseksi. Yksi väline on usein toistuvien hakujen tehostamiseen tarkoitettu <em>indeksi</em>, eli hakurakenne.</p>
+
+		<p>Pohditaan tilannetta, missä edellisen 100 miljoonaa riviä sisältävän taulun lisäksi tietokannalla on erillinen hakurakenne usein käytetylle sarakkeelle. Hakurakenteessa sarakkeen arvot ovat järjestettynä. Tällöin, tiettyä arvoa haettaessa, voimme aloittaa keskimmäisestä arvosta -- jos haettava arvo on pienempi, tutkitaan "vasemmalla" olevaa puolikasta. Jos taas haettava arvo on suurempi, tutkitaan "oikealla" olevaa puolikasta. Alueen rajaaminen jatkuu niin pitkään, kunnes haettava arvo löytyy, tai rajaus päätyy tilanteesee, missä tutkittavia arvoja ei enää ole. Tämä menetelmä -- <em>puolitushaku</em> tai <em>binäärihaku</em> saattaa olla tuttu kurssilta Ohjelmoinnin perusteet.</p>
+
+                <p>Jos rivejä on yhteensä 100 miljoonaa, voidaan ne jakaa kahteen osaan noin <em>log_2 100 000 000</em> kertaa, eli noin 27 kertaa. Jos oletamme, että arvoa ei löydy taulusta, tulee yhteensä tarkastella siis noin 27 riviä aiemman 100 miljoonan sijaan.</p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>Häh?</h1>
+
+		  <p>Kurssilla <em>Tietorakenteet ja algoritmit</em> tutustutaan erilaisiin hakurakenteisiin tarkemmin. Tietokantakursseista esimerkiksi kurssilla <em>Tietovarastot</em> tutustutaan tähän myös syvemmin.</p>
+
+		</aside>
+
+		<p><strong><em>Indeksin määrittely</em></strong></p>
+
+                <p>Indeksin määrittely tietokantataulun sarakkeelle tapahtuu tietokantataulun luomisen jälkeen komennolla <code>CREATE INDEX</code>, jota seuraa uuden indeksin nimi, avainsana <code>ON</code>, ja sarakkeet, joille indeksi luodaan. Tietokantataulun pääavaimelle ja viiteavaimelle luodaan indeksit automaattisesti.</p>
+
+		<p>Oletetaan, että haluaisimme hakea opiskelijoita pääaineen perusteella melko usein, jolloin rajauksen tehokkuudella on hieman väliä. Tehdään siis tauluun Opiskelija erillinen indeksi pääaine-sarakkeelle.</p>
+
+<pre class="sh_sql">
+CREATE INDEX idx_paaaine ON Opiskelija (pääaine);
+</pre>
+
+                <p>Indeksien nimentä alkaa tyypillisesti sanalla <code>idx</code>, jatkuu alaviivalla sekä sarakkeita kuvaavalla sopivalla nimellä. Jos indeksin haluaa määritellä useammalle sarakkeelle samaan aikaan, voi indeksoitavat sarakkeet listata pilkuilla toisistaan erotettuna.</p>
+
+
+
+		<h2>Tietokantataulun muokkaaminen</h2>
+
+		<p>Valitettava totuus on se, että vaikka tekisimme kuinka hienon tietokantasuunnitelman, tulee se muuttumaan ajan myötä erilaisten asiakkailta ja muilta sidosryhmiltä tulevien toiveiden ja tarpeiden perusteella. Tietokantaa ei kannata luoda täysin uudestaan jokaisen muutoksen perusteella, vaan sitä voi muokata -- esimerkiksi uusien sarakkeiden lisääminen tauluun on melko suoraviivaista.</p>
+
+		<p>Harjoitellaan tässä välissä hieman tiedon hakua muualta. Sivusto <em>W3Schools</em> sisältää hyviä oppaita -- lue nyt heidän <a href="http://www.w3schools.com/sql/sql_alter.asp" target="_blank">ALTER TABLE</a> -opas.</p>
+
+
+ 
+
+<!--
+
+		<aside class="info">
+		  <br/>
+		  <h1>Näkymien luominen kyselyiden kautta</h1>
+		  
+		</aside>
+-->
+
+		
+<!--
+TODO: hyödynnä dellin DVD-kauppaa: http://linux.dell.com/dvdstore/
+
+-->
+
+		<h1>Tietokannan normalisointi</h1>
+		
+		<p><em>Omenan (data) herkullisuudella, kuljetusvälineellä (tietokantasovellus ja palvelin), tai kaupassa tehtävällä asettelulla (sovelluksen käyttöliittymä) ei ole merkitystä jos omenoita ei säilöntään (tietokantakaavio) ei ole kiinnitetty huomiota.</em> -- <a href="https://news.ycombinator.com/item?id=8839017" target="_blank">Anonyymi</a></p>
+		
+		
+
+		<p>Tutustuimme aiemmin tietokannan suunnitteluun käsiteanalyysin kautta. Tutustutaan nyt täydentävään lähestymistapaan nimeltä tietokannan normalisointi (<em>database normalization</em>).</p>
+
+		<p>Tietokannan normalisointi on askeleittainen lähestymistapa tiedon jakamiseen loogisiksi tietokantatauluiksi ja niiden sarakkeiksi. Pääpiirteittäin idea on sama kuin käsiteanalyysissä -- jokaisen taulun pitäisi liittyä tiettyyn aiheeseen, ja tauluun määritellään vain sarakkeita jotka liittyvät samaan aiheeseen. Lähestymistapa on hieman toisenlainen -- tietokannan normalisoinnissa tutkimme tiedon välisiä riippuvuuksia ja suhteita, ja etsimme sieltä epäkohtia. Epäkohdat tyypillisesti jaetaan useampaan osaan, esimerkiksi tauluiksi.</p>
+
+		<p>Lähtökohtana tietokannan normalisoinnille ovat seuraavat relaatiomalliin liittyvät oletukset:</p>
+
+		<ul>
+
+		  <li>Jokaisen tietokantataulun sarakkeen nimen tulee olla uniikki. Tietokantataulussa ei siis saa olla kahta saman nimistä saraketta.</li>
+
+		  <li>Jokaisen tietokantataulun sarakkeen tulee olla sellainen, että se sisältää korkeintaan yhden arvon. Yksittäisessä sarakkeen rivissä ei siis esimerkiksi saa säilöä listaa asioita.</li>
+
+		  <li>Jokaisen tietyssä tietokantataulun sarakkeessa olevan arvon tulee olla saman tyyppinen. Eri riveillä, mutta samassa sarakkeessa ei siis saa olla esimerkiksi kokonaislukutyyppisiä arvoja ja merkkijonotyyppisiä arvoja.</li>
+
+		  <li>Tietokantataulun sarakkeiden järjestyksen ei tule vaikuttaa tietoon. Sarakkeiden paikkaa tulee siis voida vaihtaa tarvittaessa.</li>
+		  <li>Tietokantataulussa ei tule olla kahta tai useampaa täsmälleen samat arvot sisältävää riviä. Jos rivi esiintyy kerran, ei sen toistamisesta ole hyötyä.</li>
+
+		  <li>Tietokantataulussa olevien rivien järjestyksellä ei tule olla merkitystä.</li>
+
+		</ul>
+
+
+		<p>Tietokannan normalisointiin liittyy useampia tavoitteita; (1) tiedon kopioiden minimointi, (2) tiedon muuttamiseen liittyvien ongelmien vähentäminen, ja (3) tietokantaan tehtävien kyselyiden yksinkertaistaminen. Käytetään esimerkkinä seuraavaa yhden taulun avulla määriteltyä asiakastietokantaa, joka kertoo asiakkaan tiedot, laskutusosoitteen, ja kuljetusosoitteen.</p>
+
+
+		<figure>
+
+		  <img src="img/viikko5/normalisoitava.png" alt="[Asiakas|(pk) asiakastunnus;etunimi;sukunimi;kayttajatunnus;ika;sukupuoli;yritys;puhelin_koti;puhelin_tyo;laskutusosoite_1;laskutusosoite_2;laskutusosoite_3;laskutus_kaupunki;laskutus_postinumero;kuljetusosoite_1;kuljetusosoite_2;kuljetusosoite_3;kuljetus_kaupunki;kuljetus_postinumero]">
+
+		</figure>
+
+		<p></p>
+
+		<p>Tietokannan normalisointiin liittyy useampia askeleita, joista tutustumme kolmeen.</p>
+
+
+		<h2>Ensimmäinen normaalimuoto</h2>
+
+		<p>Ensimmäisen normaalimuodon mukaan jokaisen sarakkeen arvojen tulee olla sellaisia, että niitä ei voi jakaa (järkeviin) osiin. Sarakkeen arvot eivät siis saa olla esimerkiksi listoja. Tämän lisäksi, tietokantataulun sarakkeista ei pitäisi olla mahdollista huomata toistuvia ryhmiä.</p>
+
+		<p>Edelläolevassa tietokantataulussa on toistuvia ryhmiä. Sekä puhelinnumero (kotipuhelin, työpuhelin) että osoite toistuu (kotiosoite, laskutusosoite). Emme tiedä sarakkeiden sisällöstä, joten emme tässä kohtaa osaa sanoa siitä, että onko sarakkeiden arvoissa jotain omituista -- jos tietokantataulussa olisi esimerkiksi sarakkeessa <em>yritys</em> useamman yrityksen nimi, tulisi se ottaa myös käsittelyyn.</p>
+
+		<p>Tietokannan saa ensimmäiseen normaalimuotoon eriyttämällä puhelinnumeron ja osoitteen omiksi tauluikseen, joista on viittaus Asiakas-tauluun. Uusissa tauluissa on myös sarake tyyppi, jonka avulla määritellään onko esimerkiksi puhelinnumero koti- vai työnumero.</p>
+
+
+		<figure>
+
+		  <img src="img/viikko5/1nf.png" alt="[Asiakas| (pk) asiakastunnus;etunimi;sukunimi;kayttajatunnus;ika;sukupuoli;yritys]
+[Puhelin| (fk) asiakas:Asiakas; puhelin_tyyppi; numero]
+[Osoite| (fk) asiakas:Asiakas; osoite_tyyppi; osoite_1; osoite_2; osoite_3; kaupunki; postinumero]
+[Asiakas]1-*[Puhelin]
+[Asiakas]1-*[Osoite]">
+
+		</figure>
+
+		<p></p>
+
+		<p>Jos tietokantataulun sarakkeiden arvoissa olisi esimerkiksi listoja -- vaikkapa yksittäisen rivin yritys-sarakkeessa useampia yrityksiä, tulisi siitä myös tehdä erillinen taulu.</p>
+
+
+		<h2>Toinen normaalimuoto</h2>
+
+		<p>Tietokanta on toisessa normaalimuodossa jos (1) se on ensimmäisessä normaalimuodossa ja (2) tietokantataulun sarakkeet (poislukien avaimet) ovat <em>funktionaalisesti riippuvaisia</em> tietokantataulun pääavaimesta.</p>
+
+		
+		<aside class="info">
+		  <br/>
+		  
+		  <h1>Funktionaalinen riippuvuus</h1>
+		  
+		  <p>Sarake B on funktionaalisesti riippuvainen sarakkeesta A, jos sarakkeen A arvon perusteella voidaan yksikäsitteisesti selvittää sarakkeen B arvo. Tällöin kirjoitetaan <code>A -&gt; B</code>, ja sanotaan, että "sarake B on funktionaalisesti riippuvainen sarakkeesta A". Huom! A voi olla myös kokoelma sarakkeita!</p>
+
+		  <p>Selvittäminen voi tapahtua kyselyllä "SELECT DISTINCT b FROM Taulu WHERE a=tiedetty_arvo". Jos attribuutti <code>b</code> on funktionaalisesti riippuva <code>a</code>:sta, tuottaa ylläoleva kysely joko yhden tai ei yhtään tulosriviä, mutta ei koskaan enempää. Tämän ehdon on oltava voimassa aina, ei vain hetkellisesti.</p>
+
+		  <p>Esimerkki: <code>Henkilo( (pk) id, nimi, henkilötunnus)</code> -- mitkä arvot ovat funktionaalisesti riippuvaisia toisistaan?</p>
+		  <table class="table">
+		    
+		    <thead>
+		      <tr>
+			<th>Henkilo</th>
+			<th>A: id</th>
+			<th>A: nimi</th>
+			<th>A: henkilötunnus</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>B: id</td>
+			<td>?</td>
+			<td>?</td>
+			<td>?</td>
+		      </tr>
+		      <tr>
+ 			<td>B: nimi</td>
+			<td>?</td>
+			<td>?</td>
+			<td>?</td>
+		      </tr>
+		      <tr>
+			<td>B: henkilötunnus</td>
+			<td>?</td>
+			<td>?</td>
+			<td>?</td>
+		      </tr>
+		    </tbody>
+		  </table>
+
+		  <p>Sarakkeen perusteella voi aina määritellä itsensä. Esimerkiksi <code>id -&gt; id</code> on aina totta.</p>
+
+		  <table class="table">
+		    
+		    <thead>
+		      <tr>
+			<th>Henkilo</th>
+			<th>A: id</th>
+			<th>A: nimi</th>
+			<th>A: henkilötunnus</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>B: id</td>
+			<td>kyllä</td>
+			<td>?</td>
+			<td>?</td>
+		      </tr>
+		      <tr>
+ 			<td>B: nimi</td>
+			<td>?</td>
+			<td>kyllä</td>
+			<td>?</td>
+		      </tr>
+		      <tr>
+			<td>B: henkilötunnus</td>
+			<td>?</td>
+			<td>?</td>
+			<td>kyllä</td>
+		      </tr>
+		    </tbody>
+		  </table>
+
+		  <p>Voimmeko tunnistaa nimen perusteella henkilön yksilöivän tunnisteen? Useammalla henkilöllä voi olla sama nimi, joten tämä ei pidä paikkansa. Voimmeko tunnistaa henkilötunnuksen perusteella henkilön yksilöivän tunnisteen? Henkilötunnus on uniikki, joten oletetaan että kyllä (tämä pätee tosin vain Suomessa..).</p>
+
+		  <table class="table">
+		    
+		    <thead>
+		      <tr>
+			<th>Henkilo</th>
+			<th>A: id</th>
+			<th>A: nimi</th>
+			<th>A: henkilötunnus</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>B: id</td>
+			<td>kyllä</td>
+			<td>ei</td>
+			<td>kyllä</td>
+		      </tr>
+		      <tr>
+ 			<td>B: nimi</td>
+			<td>?</td>
+			<td>kyllä</td>
+			<td>?</td>
+		      </tr>
+		      <tr>
+			<td>B: henkilötunnus</td>
+			<td>?</td>
+			<td>?</td>
+			<td>kyllä</td>
+		      </tr>
+		    </tbody>
+		  </table>
+
+		  <p>Voiko yksilöivän avaimen perusteella tunnistaa henkilön nimen? Kyllä. </p>
+
+		  <table class="table">
+		    
+		    <thead>
+		      <tr>
+			<th>Henkilo</th>
+			<th>A: id</th>
+			<th>A: nimi</th>
+			<th>A: henkilötunnus</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>B: id</td>
+			<td>kyllä</td>
+			<td>ei</td>
+			<td>kyllä</td>
+		      </tr>
+		      <tr>
+ 			<td>B: nimi</td>
+			<td>kyllä</td>
+			<td>kyllä</td>
+			<td>?</td>
+		      </tr>
+		      <tr>
+			<td>B: henkilötunnus</td>
+			<td>?</td>
+			<td>?</td>
+			<td>kyllä</td>
+		      </tr>
+		    </tbody>
+		  </table>
+
+		  <p>Loput jäävät harjoitustehtäväksi.</p>
+		</aside>
+
+
+		<p>Jos tietokantataulun pääavain on määritelty yhden sarakkeen avulla, ovat kaikki sen sen sarakkeet automaattisesti funktionaalisesti riippuvaisia pääavaimesta. Käytännössä siis, jos taulu on ensimmäisessä normaalimuodossa ja sillä on yhden sarakkeen kautta määritelty pääavain, on se automaattisesti toisessa normaalimuodossa.</p>
+
+
+		<h2>Kolmas normaalimuoto</h2>
+
+		<p>Tietokantataulu on kolmannessa normaalimuodossa jos (1) se on toisessa normaalimuodossa ja (2) siinä on vain sarakkeita, jotka eivät ole transitiivisesti riippuvaisia taulun pääavaimesta. </p>
+
+		<aside class="info">
+		  <br/>
+		  
+		  <h1>Transitiivinen riippuvuus</h1>
+
+		  <p>Transitiivisella riippuvuudella tarkoitetaan sitä, että sarake A on riippuvainen sarakkeesta B jonkun toisen sarakkeen kautta. Käytännössä sarake A on transitiivisesti riippuvainen sarakkeesta B, jos sarake A on riippuvainen sarakkeesta C, joka on riippuvainen sarakkeesta B. </p>
+
+		</aside>
+
+		<p>Kaikkien tietokantataulun sarakkeiden tulee olla itsenäisiä ja riippumattomia muista pääavaimeen kuulumattomista kentistä. Jos tietokantataulusta tunnistetaan sarakkeita, jotka ovat transitiivisesti riippuvaisia pääavaimesta, eriytetään ne omaksi taulukseen.</p>
+
+		<p>Esimerkiksi Osoite-taulussa oleva sarake kaupunki on transitiivisesti riippuvainen asiakkaasta postinumeron kautta. Voimme tällöin luoda uuden tietokantataulun <em>Postinumero</em>, joka sisältää jokaiseen postinumeroon liittyvät kaupungit.</p>
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>Normalisoida vaiko eikö normalisoida?</h1>
+		  
+		  <p>Lue CodingHorror.com-blogista kirjoitus <a href="http://blog.codinghorror.com/maybe-normalizing-isnt-normal/" target="_blank">Maybe Normalizing Isn't Normal</a>. Milloin tietokannan normalisointi kannattaa, ja milloin ei?</p>
+
+		  <p>Tutki myös seuraavaa Asiakas-taulun rakennetta. Mitkä edellämainituista normaalimuodoista taulu täyttää?</p>
+
+		  <table class="table">
+		    <thead>
+		      <tr>
+			<th>asiakastunnus</th>
+			<th>etunimi</th>
+			<th>sukunimi</th>
+			<th>kayttajatunnus</th>
+			<th>ika</th>
+			<th>sukupuoli</th>
+			<th>yritys</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>1</td>
+			<td>arto</td>
+			<td>vainee</td>
+			<td>avi</td>
+			<td>30</td>
+			<td>M</td>
+			<td>yliopisto</td>
+		      </tr>
+		      <tr>
+			<td>2</td>
+			<td>arto</td>
+			<td>vainee</td>
+			<td>avi</td>
+			<td>30</td>
+			<td>M</td>
+			<td>rage-research</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		  
+		</aside>
+
+
                 <figure>
 		  <img src="img/paivitysraja.jpg" alt="päivitysraja :: 
 C
@@ -3614,41 +4564,7 @@ C
 		  <figcaption>Päivitysraja, tähän on hyvä lopettaa lukeminen.</figcaption>
 		</figure>
 
-
-		<h1>Tietokantataulujen luominen ja muokkaaminen</h1>
-
-		<h2>Tietokantataulun luominen</h2>
-
-		<aside class="info">
-		  <br/>
-		  <h1>Näkymien luominen kyselyiden kautta</h1>
-
-		</aside>
-
-		<h2>Attribuuttien datatyypit</h2>
-
-
-		<h2>Avaimet ja viiteavaimet</h2>
-
-
-		<h2>Rajoitteet</h2>
-
-
-		<p>unique, not null, check</p>
-
-
-
-		<h2>Hakuja nopeuttavat indeksirakenteet</h2>
-
-
-
-		<h2>Tietokantataulun muokkaaminen</h2>
-
- 
-
-		<h1>Tiedon normalisointi</h1>
 		
-
 
 <!--
 

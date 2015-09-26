@@ -4,7 +4,8 @@ myAppModule.directive('togglable', function() {
   return {
       restrict: 'E',
       scope: {
-        content: '@'
+          content: '@',
+	  db: '=',
       },
       transclude: true,
       templateUrl: 'templates/togglable-template.html',
@@ -12,25 +13,76 @@ myAppModule.directive('togglable', function() {
       controller: function($scope){
         $scope.visible = false;
         $scope.command = "näytä";
+
         $scope.toggle = function () {
           $scope.visible = !$scope.visible;
           $scope.command = $scope.visible ? "piilota" : "näytä";
+
+          if(!$scope.visible) {
+              return;
+	  }
+
+          var query = "SELECT substr(sql, 13) AS Taulut FROM sqlite_master";
+
+	  console.log("Retrieving tables from database");
+	  console.log("Running query " + query);
+
+	  var stmt = $scope.db.prepare(query);
+
+          stmt.getAsObject();
+          stmt.bind();
+
+          $scope.table_rows = [];
+            
+	  while(stmt.step()) {
+            var row = stmt.getAsObject();
+            $scope.table_rows.push(row);
+          }
+
+          if($scope.table_rows.length <= 0) {
+            console.log("No tables in database");
+	    return;
+	  }
+            
+	  $scope.table_columns = Object.keys($scope.table_rows[0]);
+	  console.log($scope.table_columns);
+	  console.log($scope.table_rows);
         }
       }
   };
 });
 
+/*
 myAppModule.directive('tableInfo', function() {
   return {
       restrict: 'E',
       templateUrl: 'templates/table-template.html',
       controller: function($scope){
+
         $scope.table_details = function (table_name) {
+	    console.log("Retrieving table details for " + table_name);
+
+            var stmt = $scope.db.prepare("SELECT substr(sql, 13) AS Taulut FROM sqlite_master");
+            stmt.getAsObject();
+            stmt.bind();
+
+            $scope.table_rows = [];
+            
+	    while(stmt.step()) {
+                var row = stmt.getAsObject();
+                $scope.table_rows.push(row);
+            }
+            
+	    $scope.table_columns = Object.keys($scope.rows[0]);
+	    console.log($scope.table_columns);
+	    console.log($scope.table_rows);
+
             return $scope.tabledata[table_name].schema;
         }
       }
   };
 });
+*/
 
 myAppModule.directive('query', function() {
     return {
@@ -42,9 +94,15 @@ myAppModule.directive('query', function() {
           editable: '@',
           done: '=?',
 	  valid: '@?',
-          order: '=?'
+          order: '=?',
+          rows: '=?',
+	  reset: '=?'
       },
       controller: function($scope) {
+	  if (!$scope.rows) {
+	      $scope.rows = 4;
+	  }
+
           $scope.run_query = function(query) {
               try {
 		  console.log("Running query " + query);
@@ -58,7 +116,10 @@ myAppModule.directive('query', function() {
 		  }
 
 		  if (query.toUpperCase().indexOf("DELETE") > -1 || 
-		      query.toUpperCase().indexOf("INSERT") > -1) {
+		      query.toUpperCase().indexOf("INSERT") > -1 || 
+		      query.toUpperCase().indexOf("CREATE") > -1 || 
+		      query.toUpperCase().indexOf("ALTER") > -1) {
+
 		      $scope.db.run(query);
 
 		      if(!$scope.valid) {
@@ -72,17 +133,20 @@ myAppModule.directive('query', function() {
 		  }
 
                   var stmt = $scope.db.prepare(query);
-
                   stmt.getAsObject();
-
                   stmt.bind();
-
                   $scope.rows = [];
                   
 		  while(stmt.step()) {
                       var row = stmt.getAsObject();
                       $scope.rows.push(row);
                   }
+
+		  if($scope.rows.length <= 0) {
+		      $scope.columns = ["Tyhjä vastaus"];
+		      $scope.done = true;
+		      return;
+		  }
                   
 		  $scope.columns = Object.keys($scope.rows[0]);
 		  
@@ -199,6 +263,27 @@ myAppModule.directive('query', function() {
                   $scope.error = err.toString();
               }
           };
+
+          $scope.doReset = function() {
+	      $scope.rows = null;
+              $scope.columns = null;
+              
+
+              var query = "SELECT tbl_name FROM sqlite_master";
+	      var stmt = $scope.db.prepare(query);
+
+              stmt.getAsObject();
+              stmt.bind();
+	      
+              $scope.table_rows = [];
+              
+	      while(stmt.step()) {
+		  var row = stmt.getAsObject();
+		  console.log(row);
+		  console.log("Dropping table " + row[0]);
+		  $scope.db.run("DROP TABLE " + row[0]);
+	      }
+	  };
 
           $scope.clear = function () {
               $scope.rows = null;
