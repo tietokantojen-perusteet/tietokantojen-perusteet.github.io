@@ -3680,7 +3680,7 @@ for (Varaus varaus : varaukset) {
 		  
 		  <aside class="info">
 		    <br/>
-		    <h1>Olemassaolevien taulujen listaaminen</h1>
+		    <h1>Olemassaolevien taulujen listaaminen ja poisto</h1>
 		    
 		    <p>Tietokannanhallintajärjestelmät tyypillisesti tarjoavat mahdollisuuden olemassaolevien tietokantataulujen listaamiseen. Tämä toiminnallisuus on kuitenkin järjestelmäkohtaista -- esimerkiksi tässä materiaalissa käyttämässämme SQLite-versiossa taulujen tiedot löytyvät piilotetusta tietokantataulusta <code>sqlite_master</code>.</p>
 		    
@@ -3688,6 +3688,14 @@ for (Varaus varaus : varaukset) {
 		       db="db"
 		       rows="2"
 		       query="SELECT * FROM sqlite_master">
+		    </query>
+
+
+		    <p>Olemassaolevan taulun poistaminen -- esimerkiksi silloin jos sen nimen on kirjoittanut väärin, onnistuu komennolla <code>DROP TABLE</code>, mitä seuraa taulun nimi. Voit kokeilla sitä seuraavassa -- näet poistuiko tietokantataulu kyselyn <code>SELECT * FROM sqlite_master</code> avulla.</p>
+
+		    <query
+		       db="db"
+		       rows="2">
 		    </query>
 		    
 		  </aside>
