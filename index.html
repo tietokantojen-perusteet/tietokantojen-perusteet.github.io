@@ -40,10 +40,10 @@
                     <li>
                         <a href="#viikko5">Viikko 5</a>
                     </li>
-<!--
                     <li>
                         <a href="#viikko6">Viikko 6</a>
                     </li>
+<!--
                     <li>
                         <a href="#viikko7">Viikko 7</a>
                     </li>
@@ -1825,7 +1825,7 @@ Package: tikape"
 
 <pre class="sh_xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+&lt;project&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
     &lt;groupId&gt;tikape&lt;/groupId&gt;
     &lt;artifactId&gt;tikape&lt;/artifactId&gt;
@@ -1844,7 +1844,7 @@ Package: tikape"
 
 <pre class="sh_xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+&lt;project&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
     &lt;groupId&gt;tikape&lt;/groupId&gt;
     &lt;artifactId&gt;tikape&lt;/artifactId&gt;
@@ -1864,7 +1864,7 @@ Package: tikape"
 
 <pre class="sh_xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+&lt;project&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
     &lt;groupId&gt;tikape&lt;/groupId&gt;
     &lt;artifactId&gt;tikape&lt;/artifactId&gt;
@@ -4577,7 +4577,337 @@ C
 		  <figcaption>Päivitysraja, tähän on hyvä lopettaa lukeminen.</figcaption>
 		</figure>
 
-		
+
+
+		<header>
+		  <h1 id="viikko6">Viikko 6</h1>
+		</header>
+
+
+		<h1>Tietokannat osana muita sovelluksia</h1>
+
+		<p>Viimeisen 20 vuoden aikana selaimen kautta käytettävät sovellukset ovat kiihtyvää tahtia syrjäyttäneet perinteisiä työpöytäsovelluksia. Tietokannan käyttöön toisen sovelluksen osana liittyvät perusajatukset eivät kuitenkaan ole juurikaan muuttuneet. Työpöytäsovellusten aikana työpöytäsovellus käytti joko paikallisella koneella olevaa tietokannanhallintajärjestelmää, tai otti etäyhteyden toisella koneella käynnissä olevaan tietokannanhallintajärjestelmään. Selaimessa toimivia sovelluksia käytettäessä tietokannanhallintajärjestelmä toimii palvelinohjelmiston -- eli sovelluksen, johon selain ottaa yhteyttä -- kanssa samalla koneella, tai erillisellä koneella, johon palvelinohjelmisto ottaa yhteyden tarvittaessa.</p>
+
+		<p>Tutustutaan tässä kappaleessa tietokantaa käyttävän palvelinohjelmiston toimintaan, sekä toteutetaan sellainen itse.</p>
+
+		<h2>Selaimen ja palvelimen välinen kommunikaatio</h2>
+
+		<p>Selain kommunikoi palvelimen kanssa tekemällä pyyntöjä joihin palvelin vastaa. Selain tekee pyynnön esimerkiksi kun käyttäjä kirjoittaa osoitekenttään sivun osoitteen -- tietokantojen-perusteet.github.io -- ja painaa enter. Tällöin tehdään hakupyyntö (<code>GET</code>) osoitteessa <code>tietokantojen-perusteet.github.io</code> olevalle palvelimelle. Palvelin vastaanottaa pyynnön, käsittelee sen -- esimerkiksi hakee haluttavan dokumentin tiedostojärjestelmästä -- ja luo käyttäjälle näytettävän sivun. Sivu palautetaan vastauksena pyynnölle tekstimuodossa. Selain päättelee vastauksen sisällön perusteella miten sivu tulee näyttää käyttäjälle, luo sivun ulkoasun, ja näyttää sivun käyttäjälle.</p>
+
+		<p>Sivun näyttämisen yhteydessä selain hakee myös sisältöä, joihin sivu viittaa. Esimerkiksi jokainen tällä sivulla oleva kuva haetaan erikseen, aivan kuten erilaiset dynaamista toiminnallisuutta lisäävät Javascript -tiedostot sekä sivun ulkoasun tyylittelyyn liittyvät tyylitiedostot.</p>
+
+		<p>Käyttäjän näkökulmasta selain tekee käytännössä kahdenlaisia pyyntöjä. Hakupyynnöt (<code>GET</code>) liittyvät tietyssä osoitteessa olevan resurssin hakemiseen, kun taas lähestyspyynnöt (<code>POST</code>) liittyvät tiedon lähettämiseen tiettyyn osoitteeseen.</p>
+
+		<p>Tutustutaan tähän käytännössä Javalla toteutetun <a href="http://sparkjava.com/" target="_blank">Spark</a>-nimisen web-sovelluskehyksen avulla.</p>
+
+		<h2>Spark ja ensimmäinen web-sovellus</h2>
+
+		<p><a href="http://sparkjava.com/" target="_blank">Spark</a>-sovelluskehyksen käyttöönotto toimii luvun 3.2 osassa "<em>Maven-projektin luominen NetBeansissa</em>" esitetyllä tavalla. Toisin kuin oppaassa, Maven-projektin riippuvuudeksi halutaan lisätä Spark. Tiedosto <code>pom.xml</code> näyttää lopuksi esimerkiksi seuraavalta:</p>
+
+<pre class="sh_xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;tikape&lt;/groupId&gt;
+    &lt;artifactId&gt;tikape-web-sample&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;/properties&gt;
+    
+    &lt;dependencies&gt;        
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
+            &lt;artifactId&gt;spark-core&lt;/artifactId&gt;
+            &lt;version&gt;2.3&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+
+
+		<p>Oleellista edellä on se, että Javan versioksi on määritelty 1.8, ja sparkin versioksi 2.3.</p>
+
+		<p>Nyt voimme luoda uuden pääohjelmaluokan (seuraa luvun 2.3 kohtaa "<em>Ensimmäinen tietokantaa käyttävä Maven-ohjelma</em>") pääohjelmaluokan luomiseksi. Lisätään <code>Main.java</code>-tiedostoon rivi <code>import static spark.Spark.*;</code>, jolloin käyttöömme tulee oleellisimmat Sparkin tarjoamat toiminnallisuudet. Kutsutaan tämän jälkeen Sparkin get-metodia, ja määritellään sen avulla osoite, jota palvelinohjelmistomme tulee kuuntelemaan, sekä teksti, joka palautetaan, kun selaimella tehdään pyyntö annettuun osoitteeseen.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import static spark.Spark.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        get("/hei", (req, res) -&gt; {
+            return "Hei maailma!";
+        });
+
+    }
+}
+</pre>
+
+		<p>Yllä olevassa esimerkissä palvelimelle määritellään osoite <code>/hei</code>. Jos selaimella tehdään osoitteeseen pyyntö, pyyntöön vastataan tekstillä <code>Hei maailma!</code>.</p>
+
+		<p>Jos ylläolevan sovelluksen käynnistää, Spark käynnistää web-palvelimen osoitteeseen <code>http://localhost:4567</code>, eli paikallisen koneen porttiin <code>4567</code>. Palvelin on tämän jälkeen käynnissä, ja odottaa siihen tehtäviä pyyntöjä. Kun haemme web-selaimella sivua osoitteesta <code>http://localhost:4567</code>, palauttaa palvelin selaimelle tekstimuotoista tietoa, ja selain näyttää käyttäjälle seuraavanlaisen sivun:</p>
+
+                <figure>
+		  <img src="img/viikko6/spark-localhost-not-found.png" alt="Kun osoitteeseen http://localhost:4567 tehdään pyyntö, sieltä palautuu sivu, jossa näkyy teksti '404 Not found'."/> 
+		  <figcaption>Kun osoitteeseen http://localhost:4567 tehdään pyyntö, sieltä palautuu sivu, jossa näkyy teksti '404 Not found'.</figcaption>
+		</figure>
+
+		<p>Mutta! Kun teemme pyynnön osoitteeseen <code>http://localhost:4567/hei</code>, eli palvelinohjelmiston osoitteeseen <code>/hei</code>, saammekin vastaukseksi ohjelmakoodissa määrittelemämme <code>Hei maailma!</code>-tekstin.</p>
+
+                <figure>
+		  <img src="img/viikko6/spark-localhost-hei-maailma.png" alt="Kun osoitteeseen http://localhost:4567/hei tehdään pyyntö, sieltä palautuu teksti 'Hei maailma!'."/> 
+		  <figcaption>Kun osoitteeseen http://localhost:4567/hei tehdään pyyntö, sieltä palautuu teksti 'Hei maailma!'.</figcaption>
+		</figure>
+
+		<p>Vapise, google.</p>
+
+
+		<h2>Useamman osoitteen kuunteleminen</h2>
+
+
+		<p>Spark-palvelimelle määritellään <code>get</code>-metodin avulla palvelimen kuuntelemia osoitteita. Metodikutsun yhteydessä määritellään myös palvelimen palauttama data. Palautettava data on tekstiä, mutta selain päättelee palautetun tekstin sisällön perusteella, mitä tekstille tulee tehdä. Alla olevassa ohjelmakoodissa määritellään kaksi osoitetta, joista palautetaan dataa. Toinen palauttaa aiemmin nähdyn tekstin <code>Hei maailma!</code>, ja toinen palauttaa <a href="http://www.w3schools.com/html/" target="_blank">HTML</a>-elementin, jonka selain käsittelee ja näyttää. Koska elementin sisällä on linkki Youtube-videoon, aloittaa selain videon hakemisen Youtube-palvelusta.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import static spark.Spark.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        get("/hei", (req, res) -&gt; {
+            return "Hei maailma!";
+        });
+        
+        
+        get("/testi", (req, res) -&gt; {
+            return "&lt;iframe width=\"640\" height=\"420\" src=\"https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&autoplay=1\"&gt;&lt;/iframe&gt;";
+        });
+
+    }
+}
+</pre>
+
+
+		<h2>Tiedon lähettäminen palvelimelle</h2>
+
+		<p>Tiedon lähettäminen (<code>POST</code>) palvelimelle tapahtuu HTML-sivuilla lomakkeen avulla.</p>
+
+		<p><strong><em>Lomakkeen määrittely</em></strong></p>
+
+                <p>Lomakkeelle (<code>form</code>) määritellään metodiksi (<code>method</code>) lähetys, eli POST, sekä osoite, johon lomakkeella oleva tieto tulee lähettää. Lomakkeen määrittely alkaa muodossa <code>&lt;form method="POST" action="/osoite"&gt;</code>, missä <code>/osoite</code> on palvelimelle määritelty osoite. Tätä seuraa erilaiset lomakkeen kentät, esimerkiksi tekstikenttä (<code>&lt;input type="text" name="nimi"/&gt;</code>), johon syötettävälle arvolle tulee <code>name</code>-kentässä määritelty nimi. Lomakkeeseen tulee lisätä myös nappi (<code>&lt;input type="submit" value="Lähetä!"/&gt;</code>), jota painamalla lomake lähetetään. Lomake voi olla kokonaisuudessaan esimerkiksi seuraava:</p>
+
+<pre class="sh_html">
+&lt;form method="POST" action="/opiskelijat"&gt;
+Nimi:&lt;br/&gt;
+&lt;input type="text" name="nimi"/&gt;&lt;br/&gt;
+&lt;input type="submit" value="Lisää opiskelija"/&gt;
+&lt;/form&gt;
+</pre>
+
+                
+                <p>Yllä määritelty lomake näyttää selaimessa (esimerkiksi) seuraavalta:</p>
+
+<pre>
+<div>
+<form method="POST" action="/opiskelijat">
+Nimi:<br/>
+<input type="text" name="nimi"/><br/>
+<input type="submit" value="Lisää opiskelija"/>
+</form>
+</div>
+</pre>
+
+                <p>Nappia painamalla lomakkeeseen kirjoitettu tieto yritetään lähettää osoitteessa <code>http://tietokantojen-perusteet.github.io</code> olevan palvelimen osoitteeseen <code>/opiskelijat</code>. Ei taida onnistua :).</p>
+
+		<p><strong><em>Tiedon lähetyksen vastaanotto</em></strong></p>
+
+		<p>Palvelimelle määritellään tietoa vastaanottava osoite metodilla <code>post</code>, jolle annetaan parametrina kuunneltava osoite, sekä koodi, joka suoritetaan kun osoitteeseen lähetetään tietoa. Pyynnön mukana lähetettävään tietoon -- esimerkiksi ylläolevalla lomakkeella voidaan lähettää nimi-niminen arvo palvelimelle -- pääsee käsiksi <code>req</code>-nimisen parametrin metodilla <code>queryParams</code>.</p>
+
+<pre class="sh_java">
+        post("/opiskelijat", (req, res) -&gt; {
+            String nimi = req.queryParams("nimi");
+            System.out.println("Vastaanotettiin " + nimi);
+
+            return "Kerrotaan siitä tiedon lähettäjälle: " + nimi;
+        });
+</pre>
+
+		<p>Samaa osoitetta voi käsitellä sekä <code>get</code>, että <code>post</code>-metodilla. Palvelin voi siis palauttaa selaimen tekemiin hakupyyntöihin tiettyä dataa -- esimerkiksi vaikkapa lomakkeen -- ja käsitellä lähetetyn tiedon erikseen. Alla on määritelty kaksi <code>/opiskelijat</code>-osoitetta kuuntelevaa toiminnallisuutta. Toinen palauttaa lomakkeen, toinen taas palauttaa tekstin, jonka osana on lomakkeella lähetetty nimi.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import static spark.Spark.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        get("/opiskelijat", (req, res) -&gt; {
+            return "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
+                    + "Nimi:&lt;br/&gt;\n"
+                    + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
+                    + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
+                    + "&lt;/form&gt;";
+                    + "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
+                    + "Nimi:&lt;br/&gt;\n"
+                    + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
+                    + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
+                    + "&lt;/form&gt;";
+        });
+
+        post("/opiskelijat", (req, res) -&gt; {
+            String nimi = req.queryParams("nimi");
+            nimet.add(nimi);
+            return "Kerrotaan siitä tiedon lähettäjälle: " + nimi;
+        });
+
+    }
+}
+</pre>
+
+		<p>Kun palvelin käynnistetään ylläolevalla ohjelmalla, löytyy osoitteesta <code>http://localhost:4567/opiskelijat</code> seuraavanlainen sivu:</p>
+
+                <figure>
+		  <img src="img/viikko6/spark-lomake.png" alt="Kun osoitteeseen http://localhost:4567/opiskelijat tehdään pyyntö, nähdään aiemmin määritelty."/> 
+		  <figcaption>Kun osoitteeseen http://localhost:4567/opiskelijat tehdään pyyntö, nähdään aiemmin määritelty.</figcaption>
+		</figure>
+
+		<p>Täytetään lomake -- vaikkapa nimellä <a href="https://en.wikipedia.org/wiki/Edgar_F._Codd" target="_blank">Edgar F. Codd</a>.</p>
+
+                <figure>
+		  <img src="img/viikko6/spark-lomake-taytetty.png" alt="Lomakkeen nimi-kenttään asetettu arvo 'Edgar F. Codd'."/> 
+		  <figcaption>Lomakkeen nimi-kenttään asetettu arvo 'Edgar F. Codd'.</figcaption>
+		</figure>
+
+		<p>Kun painamme nyt nappia <code>Lisää opiskelija</code>, tekstikentän sisältö lähetetään palvelimelle lomakkeen <code>action</code>-kentän määrittelemään osoitteeseen. Jos lomakkeessa määritelty metodiksi (<code>method</code>) post, tehdään lähetyspyyntö. Jos action kenttä on <code>/opiskelijat</code> ja metodi <code>POST</code>, lähetettävä tieto vastaanotetaan ja suoritetaan rivillä <code>post("/opiskelijat", (req, res) -&gt; {</code> alkavalla ohjelmakoodilla. Aiemmin määritellyllä ohjelmalla käyttäjälle näytetään seuraavanlainen sivu:</p>
+
+                <figure>
+		  <img src="img/viikko6/spark-lomake-lahetetty.png" alt="Lomake on lähetetty ja palvelin palauttaa tekstin 'Kerrotaan siitä tiedon lähettäjälle: Edgar F. Codd'."/> 
+		  <figcaption>Lomake on lähetetty ja palvelin palauttaa tekstin 'Kerrotaan siitä tiedon lähettäjälle: Edgar F. Codd'.</figcaption>
+		</figure>
+
+
+		<p><strong><em>Tiedon säilöminen palvelimelle hetkellisesti</em></strong></p>
+
+		<p>Voimme tallentaa vastaanotettu tieto palvelimelle palvelimen käynnissäoloajaksi säilömällä tieto esimerkiksi <code>ArrayList</code>-tyyppiseen listaan. Muokataan ylläolevaa aiempaa koodia siten, että hakupyyntö osoitteeseen <code>/opiskelijat</code> palauttaa sekä lomakkeen että tallennetut opiskelijat. Tämän lisäksi, lisätään osoitteeseen <code>/opiskelijat</code> tehtävän lähetyspyynnön käsittelyyn lomakkeelta saatavan nimi-kentän lisääminen ohjelmassa olevaan listaan.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.util.ArrayList;
+import static spark.Spark.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList&lt;String&gt; nimet = new ArrayList&lt;&gt;();
+
+        get("/opiskelijat", (req, res) -&gt; {
+            String opiskelijat = "";
+            for (String nimi : nimet) {
+                opiskelijat += nimi + "&lt;br/&gt;";
+            }
+
+            return opiskelijat
+                    + "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
+                    + "Nimi:&lt;br/&gt;\n"
+                    + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
+                    + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
+                    + "&lt;/form&gt;";
+                    + "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
+                    + "Nimi:&lt;br/&gt;\n"
+                    + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
+                    + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
+                    + "&lt;/form&gt;";
+        });
+
+        post("/opiskelijat", (req, res) -&gt; {
+            String nimi = req.queryParams("nimi");
+            nimet.add(nimi);
+            return "Kerrotaan siitä tiedon lähettäjälle: " + nimi;
+        });
+
+    }
+}
+</pre>
+
+                <p>Nyt kun osoitteessa <code>/opiskelijat</code> olevalla lomakkeella tehdään useampia pyyntöjä, tulee lomakesivulle lisää näytettäviä opiskelijoita.</p>
+
+
+                <figure>
+		  <img src="img/viikko6/spark-lomake-lahetetty-monesti.png" alt="Lomakkeella lähetetty arvot 'Edgar F. Codd' ja 'Ada Lovelace' ja lomake-sivu avattu uudestaan."/> 
+		  <figcaption>Lomakkeella lähetetty arvot 'Edgar F. Codd' ja 'Ada Lovelace' ja lomake-sivu avattu uudestaan.</figcaption>
+		</figure>
+
+
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>Useamman kentän lähettäminen</h1>
+
+		  <p>HTML-lomakkeelle voidaan määritellä useampia kenttiä. Jokaisella kentällä tulee olla eri nimi, jotta palvelimella voidaan ottaa lomakkeen tiedon vastaan. Esimerkiksi nimeä ja osoitetta voisi kerätä vaikkapa seuraavanlaisella lomakkeella.</p>
+
+<pre class="sh_html">
+&lt;form method="POST" action="/opiskelijat"&gt;
+Nimi:&lt;br/&gt;
+&lt;input type="text" name="nimi"/&gt;&lt;br/&gt;
+Osoite:&lt;br/&gt;
+&lt;input type="text" name="osoite"/&gt;&lt;br/&gt;
+&lt;input type="submit" value="Lisää opiskelija"/&gt;
+&lt;/form&gt;
+</pre>
+
+                
+                <p>Lomake näyttää selaimessa (esimerkiksi) seuraavalta:</p>
+
+<pre>
+<div>
+<form method="POST" action="/opiskelijat">
+Nimi:<br/>
+<input type="text" name="nimi"/><br/>
+Osoite:<br/>
+<input type="text" name="osoite"/><br/>
+<input type="submit" value="Lisää opiskelija"/>
+</form>
+</div>
+</pre>
+
+		</aside>
+
+
+		<h2>Tiedon esittäminen selaimessa</h2>
+
+		<p>tänne juttua XML:stä ja (X)HTML:stä -- sattumalta myös tapoja näyttää rakenteellista tietoa.</p>
+
+		<p>sen lisäksi, otetaan käyttöön yksi näkymätemplate (varmaankin thymeleaf), jotta saadaan jotain järkeä html-sivujen tekemiseen.</p>
+
+		<h2>Tietokanta käyttöön</h2>
+
+		<p>otetaan tietokanta käyttöön -- nyt voidaankin tallentaa tietoa tietokantaan lomakkeen avulla -- JA -- näyttää tietokannasta tulevaa tietoa sivulla</p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>Toisen tietokannan käyttö</h1>
+
+		  <p>ei tartte käyttää SQLiteä -- voidaan periaatteessa vaihtaa vain ajuri, ja tietty osoite.</p>
+
+		</aside>
+
+		<h2>Case: Kurssi-ilmoittautuminen? Chat?</h2>
+
+
+
 
 <!--
 
