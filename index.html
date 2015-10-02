@@ -245,7 +245,7 @@
 		  <li><a href="https://docs.google.com/document/d/18bYt11F4HzWDX8RanKzl_6Vhb5rpJ1KirDWn1-dpVW4/edit" target="_blank">Viikko 3</a></li>
 		  <li><a href="https://docs.google.com/document/d/1gCpBSDbjn3NqT1_jeoQl2eOvwQS1WVHVYiH7xGtL6a4/edit?usp=sharing" target="_blank">Viikko 4</a></li>
 		  <li><a href="https://docs.google.com/document/d/1xeBB7QD0EpLEdr7Yd7mlZSp89Al1bhNzaJmb0vu_N-E/edit?usp=sharing" target="_blank">Viikko 5</a></li>
-		  <li>Viikko 6 (julkaistaan 2.10.)</li>
+		  <li><a href="https://docs.google.com/document/d/1zZt2GYeoxRR3Pu82AYdBvQ1bJ0dAXbK4XpQDfo1SRkA/edit?usp=sharing" target="_blank">Viikko 6</a></li>
 		  <li>Viikko 7 (julkaistaan 9.10.)</li>
 		</ul>
 
@@ -4262,7 +4262,78 @@ CREATE INDEX idx_paaaine ON Opiskelija (pääaine);
 		<p>Harjoitellaan tässä välissä hieman tiedon hakua muualta. Sivusto <em>W3Schools</em> sisältää hyviä oppaita -- lue nyt heidän <a href="http://www.w3schools.com/sql/sql_alter.asp" target="_blank">ALTER TABLE</a> -opas.</p>
 
 
- 
+
+		<h2>Väliaikaisten näkymien luominen</h2>
+
+		<p>Ohjelmia suunniteltaessa ja rakentessa ohjelmoija pilkkoo ohjelman toiminnallisuutta pienempiin osiin muunmuassa metodien ja luokkien avulla. Tietokantakyselyitä toteuttaessa ohjelmoija vastaavasti voi pilkkoa tehtäväänsä osiin väliaikaisten näkymien avulla. Väliaikaiset näkymät ovat tallennettuja SQL-kyselyitä, joiden suorituksesta saatuja tulostauluja voidaan käyttää osana muita kyselyitä.</p>
+
+		<p>Väliaikainen näkymä luodaan komennolla <code>CREATE VIEW <em>NäkymänNimi</em> AS <em>kysely</em></code>, missä <code>NäkymänNimi</code> on nimi, jonka perusteella väliaikaiseen näkymään pääsee käsiksi, ja <code>kysely</code> on <code>SELECT</code>-kysely, jonka suoritus tuottaa näkymän.</p>
+
+
+		<div ng-controller="noTablesSqlController">
+
+		  <p>Tutustutaan tähän pikaisesti. Luodaan ensin käyttöömme taulu <code>Kurssi</code>, jossa on kursseja.</p>
+		  
+		  <query
+		     db="db"
+		     rows="11"
+		     editable="false"
+		     query="CREATE TABLE Kurssi (
+    kurssitunnus integer PRIMARY KEY, 
+    nimi varchar(200) NOT NULL, 
+    kuvaus varchar(3000)
+);
+
+INSERT INTO Kurssi (nimi) VALUES ('Ohpe');
+INSERT INTO Kurssi (nimi) VALUES ('Tikape');
+INSERT INTO Kurssi (nimi) VALUES ('Otm');
+INSERT INTO Kurssi (nimi) VALUES ('Ohja');"
+		     done="tablesCreated">
+		  </query>
+		  
+		  <div ng-show="tablesCreated">
+
+		    <p>Luodaan tämän jälkeen näkymä nimeltä <code>Ohjelmointikurssit</code>, missä on vain ohjelmoinnin perusteet ja ohjelmoinnin jatkokurssi.</p>
+
+
+		    <togglable content="taulut" db="db">
+                      <table-info></table-info>
+		    </togglable>
+		    
+
+		    <query
+		       db="db"
+		       rows="3"
+                       editable="false"
+		       query="CREATE VIEW Ohjelmointikurssit AS
+    SELECT * FROM Kurssi WHERE nimi LIKE 'Oh%'"
+		       done="viewCreated">
+		    </query>
+		  </div>
+
+		  <div ng-show="viewCreated">
+
+		    <p>Valitse nyt kaikki kurssit näkymästä Ohjelmointikurssit -- haku tapahtuu samalla tavalla kuin taulusta haettaessa.</p>
+
+		    <query
+		       db="db"
+		       rows="4" 
+		       done="viewSelected">
+		    </query>
+		  </div>
+
+		  <div ng-show="viewSelected">
+
+		    <p>Poista näkymä lopuksi komennolla <code>DROP VIEW <em>NäkymänNimi</em></code>.</p>
+
+		    <query
+		       db="db"
+		       rows="2">
+		    </query>
+		  </div>
+		</div>
+
+
 
 <!--
 
@@ -4888,14 +4959,410 @@ Osoite:<br/>
 
 		<h2>Tiedon esittäminen selaimessa</h2>
 
-		<p>tänne juttua XML:stä ja (X)HTML:stä -- sattumalta myös tapoja näyttää rakenteellista tietoa.</p>
 
-		<p>sen lisäksi, otetaan käyttöön yksi näkymätemplate (varmaankin thymeleaf), jotta saadaan jotain järkeä html-sivujen tekemiseen.</p>
+		<p>Selain näyttää käyttäjälle palvelimelta saamansa tekstimuotoisen vastauksen. Jos vastaus on HTML-muodossa, tulkitsee selain vastauksen, ja luo sen perusteella näkymän käyttäjälle. Toteutimme näkymän näyttämisen käyttäjälle aiemmin siten, että palautimme palvelimelta HTML-koodia.</p>
 
-		<h2>Tietokanta käyttöön</h2>
+<pre class="sh_java">
+return "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
+        + "Nimi:&lt;br/&gt;\n"
+        + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
+        + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
+        + "&lt;/form&gt;";
+        + "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
+        + "Nimi:&lt;br/&gt;\n"
+        + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
+        + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
+        + "&lt;/form&gt;";
+</pre>
 
-		<p>otetaan tietokanta käyttöön -- nyt voidaankin tallentaa tietoa tietokantaan lomakkeen avulla -- JA -- näyttää tietokannasta tulevaa tietoa sivulla</p>
+                <p>HTML-koodin palauttaminen suoraan palvelinohjelmistosta on kuitenkin hyvin epätyypillistä. Käytännössä html-sivut luodaan lähes aina ensin erilliseen tiedostoon, jonka palvelin palauttaa käyttäjälle. Voimme tehdä näin myös Sparkin kautta.</p>
 
+		<p><strong><em>HTML-sivujen käyttöönotto projektissa</em></strong></p>
+
+		<p>Lisätään projektiin riippuvuudeksi <code>spark-template-thymeleaf</code>-projekti, joka tuo käyttöön <a href="http://www.thymeleaf.org/" target="_blank">Thymeleaf</a>-kirjaston. Projektin konfiguraatio on nyt kokonaisuudessaan seuraavanlainen:</p>
+
+<pre class="sh_xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;tikape&lt;/groupId&gt;
+    &lt;artifactId&gt;tikape-web-sample&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;/properties&gt;
+    
+    &lt;dependencies&gt;        
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
+            &lt;artifactId&gt;spark-core&lt;/artifactId&gt;
+            &lt;version&gt;2.3&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
+            &lt;artifactId&gt;spark-template-thymeleaf&lt;/artifactId&gt;
+            &lt;version&gt;2.3&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+
+                <p>Tehdään seuraavaksi resurssikansio (<code>resources</code>) projektin kansioon <code>src/main/</code>, jos sitä ei vielä ole. Uuden kansion saa luotua NetBeansin Files-välilehdellä klikkaamalla kansiota oikealla hiirennapilla, ja valitsemalla <code>New -> Folder</code>. Kun kansio on luotu, pitäisi käytössä olla kansio <code>src/main/resources</code>. Tämän jälkeen <code>resources</code>-kansioon tulee vielä luoda kansio <code>templates</code>, johon HTML-tiedostot tullaan laittamaan.</p>
+
+                <figure>
+		  <img src="img/viikko6/nb-src-main-resources-templates.png" alt="Kansio src/main/resources/templates on luotu."/> 
+		  <figcaption>Projektiin liittyvän kansion <code>src</code> allaolevassa kansiossa <code>main</code> on nyt kansio <code>resources</code>, jossa on taas kansio <code>templates</code>.</figcaption>
+		</figure>
+
+		<p>Lisätään kansioon <code>templates</code> uusi html-dokumentti (<code>New -&gt; HTML File</code>), ja asetetaan tiedoston nimeksi <code>index.html</code>.</p>
+
+                <figure>
+		  <img src="img/viikko6/nb-src-main-resources-templates-index.png" alt="Kansioon src/main/resources/templates on luotu index.html-niminen tiedosto."/> 
+		  <figcaption>Nyt kansiossa <code>src/main/resources/templates</code> on tiedosto <code>index.html</code>.</figcaption>
+		</figure>
+
+		<p>Käyttämämme Thymeleaf-kirjasto olettaa, että HTML-tiedostot ovat tietyn muotoisia -- palataan tähän myöhemmin. Tässä välissä riittää, että html-sivun sisällöksi kopioi seuraavan aloitussisällön.</p>
+
+<pre class="sh_xml">
+&lt;!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+
+    &lt;head&gt;
+        &lt;title&gt;Otsikko&lt;/title&gt;
+        &lt;meta charset="utf-8" /&gt; 
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Hei maailma!&lt;/h1&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+
+		<p><strong><em>HTML-sivun palauttaminen käyttäjälle</em></strong></p>
+
+
+		<p>Voimme palauttaa kansiossa <code>src/main/java/resources/templates</code> olevia <code>.html</code>-päätteisiä tiedostoja Sparkin avulla seuraavasti. Allaolevassa metodikutsussa määritellään kuunneltavaksi osoitteeksi <code>/sivu</code>, jonka jälkeen käyttäjälle palautetaan <code>index</code>-niminen sivu. Sivun nimen perusteella päätellään palautettava html-tiedosto -- nimi <code>index</code> muunnetaan muotoon <code>src/main/java/resources/templates/</code>index<code>.html</code>.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.util.HashMap;
+import spark.ModelAndView;
+import static spark.Spark.*;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+public class Main {
+
+    public static void main(String[] args) {
+        get("/sivu", (req, res) -> {
+            HashMap map = new HashMap<>();
+
+            return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
+    }
+}
+</pre>
+
+		<p>Kun yllä määritelty sovellus käynnistetään, ja kansiossa <code>src/main/java/resources/templates</code> on tiedosto <code>index.html</code>, näytetään tiedoston sisältö käyttäjälle. Huomaathan, että tiedoston sisällön tulee olla kuten edellisessä kappaleessa näytetty. Näkymä on käyttäjälle esimerkiksi seuraavanlainen:</p>
+
+                <figure>
+		  <img src="img/viikko6/spark-index.png" alt="Osoite http://localhost:4567/sivu avattuna."/> 
+		  <figcaption>Osoite http://localhost:4567/sivu avattuna.</figcaption>
+		</figure>
+
+		<aside class="info">
+		  <br/>
+		  <h1>Sivun palauttaminen hieman tarkemmin</h1>
+
+		  <p>Tutkitaan sivun palauttamista vielä tarkemmin.</p>
+
+<pre class="sh_java">
+get("/sivu", (req, res) -> {
+    HashMap map = new HashMap&lt;&gt;();
+
+    return new ModelAndView(map, "index");
+}, new ThymeleafTemplateEngine());
+</pre>
+
+                  <p>Metodikutsun ensimmäinen rivi lienee tuttu. Kerromme, että ohjelman tulee kuunnella osoitteeseen <code>/sivu</code> tehtäviä hakupyyntöjä. Tämän jälkeen tulee pyynnön käsittelyyn liittyvä lohko, josta tällä kertaa palautetaan olio, joka sisältää <code>HashMap</code>-olion sekä tiedon näytettävästä html-sivusta. Tämän jälkeen pyynnön käsittelyyn lisätään vielä erillinen olio, <code>ThymeleafTemplateEngine</code>, joka käsittelee html-sivun ennen sen palautusta.</p> 
+	
+		</aside>
+
+
+		<p><strong><em>Palvelimelta saadun tiedon näyttäminen käyttäjälle</em></strong></p>
+
+		<p>Thymeleaf-komponentin avulla voimme lisätä html-sivulle tietoa. Tämä tapahtuu lisäämällä <code>HashMap</code>-olioon <code>put</code>-metodilla arvo, esimerkiksi <code>map.put("teksti", "Hei mualima!");</code>.</p>
+
+<pre class="sh_java">
+get("/sivu", (req, res) -> {
+    HashMap map = new HashMap<>();
+    map.put("teksti", "Hei mualima!");
+
+    return new ModelAndView(map, "index");
+}, new ThymeleafTemplateEngine());
+</pre>
+		<p>Tämän jälkeen html-sivua <code>index.html</code> muokataan siten, että sinne lisätään "paikka" tiedolle. Tiedon lisääminen tapahtuu lisäämällä sivulle html-elementti, jossa on <em>attribuutti</em> <code>th:text</code>, jolle annetaan HashMap-olioon lisätyn arvon nimi aaltosulkujen sisällä siten, että aaltosulkuja edeltää dollarimerkki -- eli <code>th:text="${teksti}"</code>. Elementti voi olla vaikka <code>h2</code>-elementti, jolloin kokonaisuus voisi olla vaikkapa seuraava <code>&lt;h2 th:text="${teksti}"&gt;testi&lt;/h2&gt;</code>.</p>
+
+<pre class="sh_xml">
+&lt;!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+
+    &lt;head&gt;
+        &lt;title&gt;Otsikko&lt;/title&gt;
+        &lt;meta charset="utf-8" /&gt; 
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Hei maailma!&lt;/h1&gt;
+        
+        &lt;h2 th:text="${teksti}"&gt;testi&lt;/h2&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+		<p>Kun käynnistämme palvelimen, ja avaamme osoitteen <code>http://localhost:4567/sivu</code>, näemme seuraavanlaisen näkymän.</p>
+
+
+
+
+                <figure>
+		  <img src="img/viikko6/spark-index-ja-thyme.png" alt="Osoite http://localhost:4567/sivu avattuna."/> 
+		  <figcaption>Osoite http://localhost:4567/sivu avattuna.</figcaption>
+		</figure>
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>HashMap ja Thymeleaf</h1>
+
+		  <p>Tässä oikeastaan tulee kaksi uutta ja mielenkiintoista asiaa.</p>
+
+		  <p><strong>HashMap</strong> on ohjelmoinnissa käytettävä lokerikko, missä jokaisella lokerolla on nimi, mihin arvon voi asettaa. Alla olevassa esimerkissä luomme ensin HashMap-olion, jonka jälkeen asetamme lokeroon nimeltä <code>teksti</code> arvon <code>"Hei mualima!"</code>.</p>
+<pre class="sh_java">
+    HashMap map = new HashMap&lt;&gt;();
+    map.put("teksti", "Hei mualima!");
+</pre>
+
+		  <p>Kun HashMap-olio <em>palautetaan</em> pyynnön käsittelyn jälkeen -- <code>return new ModelAndView(map, "index");</code> -- annetaan lokerikko Thymeleafin käyttöön.</p>
+
+		  <p><strong>Thymeleaf</strong> etsii annetusta HashMap-oliosta lokeroita <code>th:text</code>-attribuutille annetulla nimellä. Esimerkiksi kun Thymeleaf käsittelee edellä näkemämme <code>&lt;h2 th:text="${teksti}"&gt;testi&lt;/h2&gt;</code>-rivin, etsii se HashMap-oliosta lokeron nimeltä <code>teksti</code>, ja asettaa siinä olevan arvon <em>elementin tekstiarvoksi</em>. Tässä tapauksessa teksti <code>testi</code> korvataan HashMap-olion lokerosta teksti löytyvällä arvolla, eli tekstillä <code>Hei mualima!</code>.</p>
+
+		</aside>
+
+		<p><strong><em>Listojen lisääminen sivulle</em></strong></p>
+
+		<p>Tutustutaan vielä olioiden ja listojen käsittelyyn Thymeleafin avulla. Oletetaan, että käytössämme on seuraava <em>Opiskelija</em>-luokka.</p>
+
+<pre class="sh_java">
+package tikape;
+
+public class Opiskelija {
+
+    private Integer id;
+    private String nimi;
+
+    public Opiskelija() {
+    }
+
+    public Opiskelija(Integer id, String nimi) {
+        this.id = id;
+        this.nimi = nimi;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+
+}
+</pre>
+
+		<p>Jokaisella opiskelijalla on siis tunnus sekä nimi. Tämän lisäksi, jokaiselle opiskelijalle kuuluu <code>get</code>- ja <code>set</code>-metodit, joiden avulla opiskelijaan liittyviä tietoja voidaan hakea ja muokata. Muokataan aiempaa ohjelmaamme siten, että käytössämme on listallinen opiskelijoita, jotka palautetaan sivun mukana thymeleafin käsiteltäväksi.</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import spark.ModelAndView;
+import static spark.Spark.*;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList&lt;Opiskelija&gt; opiskelijat = new ArrayList&lt;&gt;();
+        opiskelijat.add(new Opiskelija(1, "Ada Lovelace"));
+        opiskelijat.add(new Opiskelija(2, "Charles Babbage"));
+
+        get("/opiskelijat", (req, res) -> {
+            HashMap map = new HashMap&lt;&gt;();
+            map.put("teksti", "Hei mualima!");
+            map.put("opiskelijat", opiskelijat);
+
+            return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
+    }
+}
+</pre>
+
+		<p>Lisätään vielä opiskelijat html-sivulle.</p>
+
+
+<pre class="sh_xml">
+&lt;!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+
+    &lt;head&gt;
+        &lt;title&gt;Otsikko&lt;/title&gt;
+        &lt;meta charset="utf-8" /&gt; 
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Hei maailma!&lt;/h1&gt;
+        
+        &lt;h2 th:text="${teksti}"&gt;testi&lt;/h2&gt;
+        
+        &lt;h2 th:text="${opiskelijat}"&gt;opiskelijatesti&lt;/h2&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+                <p>Kun nyt haemme sivua, saamme (esimerkiksi) seuraavanlaisen näkymän.</p>
+
+
+                <figure>
+		  <img src="img/viikko6/spark-index-opiskelijat.png" alt="Osoite http://localhost:4567/opiskelijat avattuna. Sivulla näkyy teksti Hei maailma!
+
+Hei mualima!
+
+[tikape.Opiskelija@4f4a43a5, tikape.Opiskelija@41ce9964]"/> 
+		  <figcaption>Osoite http://localhost:4567/sivu avattuna. Opiskelijat näkyvät, mutta eivät toivotussa muodossa.</figcaption>
+		</figure>
+
+		<p><strong><em>Thymeleafin "for-each"-lause</em></strong></p>
+
+		<p>Kurssilla ohjelmoinnin perusteet käytetään listan läpikäymiseen <code>for</code>-lausetta. Voisimme esimerkiksi tulostaa opiskelijoihin liittyvät tiedot seuraavasti Java-koodissa:</p>
+
+<pre class="sh_java">
+ArrayList&lt;Opiskelija&gt; opiskelijat = new ArrayList&lt;&gt;();
+opiskelijat.add(new Opiskelija(1, "Ada Lovelace"));
+opiskelijat.add(new Opiskelija(2, "Charles Babbage"));
+
+for(Opiskelija opiskelija : opiskelijat) {
+    System.out.println("id: " + opiskelija.getId());
+    System.out.println("nimi: " + opiskelija.getNimi());
+    System.out.println();
+}
+</pre>
+
+<pre>
+id: 1
+nimi: Ada Lovelace
+
+id: 2
+nimi: Charles Babbage
+</pre>
+
+                <p>Vastaavanlainen toiminnallisuus löytyy myös Thymeleafista. Voimme käydä listan elementit läpi attribuutilla <code>th:each</code>, jolle annetaan sekä läpikäytävän listan nimi -- taas aaltosulkujen sisällä siten, että aaltosulkuja ennen on dollarimerkki -- sekä yksittäisen listaelementin nimi, jota käytetään listaa läpikäydessä. Alla olevassa esimerkissä aloitetaan lista <code>ul</code>-elementin avulla. Jokaiselle opiskelijalle luodaan oma <code>li</code>-elementti (<code>&lt;li th:each="opiskelija: ${opiskelijat}"&gt;...&lt;/li&gt;</code>), jonka sisälle haetaan käsiteltävään opiskelijaan liittyvät tiedot.</p>
+
+<pre class="sh_xml">
+&lt;!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+
+    &lt;head&gt;
+        &lt;title&gt;Otsikko&lt;/title&gt;
+        &lt;meta charset="utf-8" /&gt; 
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Hei maailma!&lt;/h1&gt;
+        
+        &lt;h2 th:text="${teksti}"&gt;testi&lt;/h2&gt;
+
+        &lt;ul&gt;
+            &lt;li th:each="opiskelija: ${opiskelijat}"&gt;
+                &lt;span th:text="${opiskelija.id}"&gt;1&lt;/span&gt; &lt;span th:text="${opiskelija.nimi}"&gt;Essi esimerkki&lt;/span&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+                <p>Kun sivua tarkastelee selaimesta, näyttää se seuraavalta:</p>
+
+                <figure>
+		  <img src="img/viikko6/spark-index-opiskelijat-listana.png" alt="Osoite http://localhost:4567/opiskelijat avattuna. Sivulla näkyy teksti 
+Hei maailma!
+
+Hei mualima!
+
+1 Ada Lovelace
+2 Charles Babbage"/> 
+		  <figcaption>Osoite http://localhost:4567/sivu avattuna. Opiskelijat näkyvät listattuna.</figcaption>
+		</figure>
+
+                <p>Edelläolevassa esimerkissä käydään listalla olevat opiskelijat läpi, ja luodaan niiden perusteella sivulle dataa. Mielenkiintoista esimerkissä on se, että yksittäisen opiskelijan id-kenttään pääsee käsiksi sanomalla (esimerkiksi) <code>&lt;span th:text="${opiskelija.id}"&gt;1&lt;/span&gt;</code>. Tässä Thymeleaf päättelee <code>opiskelija.id</code>-kohdassa, että sen tulee etsiä opiskelija-oliolta <code>getId()</code>-metodia, kutsua sitä, ja asettaa tähän metodin palauttama arvo.</p>
+
+		<h2>Tietokannan käyttöönotto</h2>
+
+		<p>Tietokannan käyttöönotto onnistuu lukua 3 mukaillen. Tällä kertaa tosin -- sen sijaan, että käyttäisimme tietokantaa komentoriviltä -- hyödynnämme tietokantaa osana web-sovellusta. Opiskelijoiden noutaminen tietokannasta tapahtuisi esimerkiksi seuraavasti:</p>
+
+<pre class="sh_java">
+package tikape;
+
+import java.util.HashMap;
+import spark.ModelAndView;
+import static spark.Spark.*;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tikape.database.Database;
+import tikape.database.OpiskelijaDao;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:opiskelijat.db");
+        database.setDebugMode(true);
+
+        OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
+
+        get("/opiskelijat", (req, res) -> {
+            HashMap map = new HashMap&lt;&gt;();
+            map.put("opiskelijat", opiskelijaDao.findAll());
+
+            return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
+
+    }
+}
+</pre>
+
+                 <p>Harjoitellaan tätä lisää kotitehtävissä.</p>
+
+
+
+
+<!--
 		<aside class="info">
 		  <br/>
 		  <h1>Toisen tietokannan käyttö</h1>
@@ -4903,9 +5370,62 @@ Osoite:<br/>
 		  <p>ei tartte käyttää SQLiteä -- voidaan periaatteessa vaihtaa vain ajuri, ja tietty osoite.</p>
 
 		</aside>
+-->
 
+		<aside class="info">
+		  <br/>
+		  <h1>XML (EXtensible Markup Language)</h1>
+
+		  <p>Näkemämme HTML-kieli on eräänlainen tapa kuvata rakenteellista tietoa, mutta muitakin tapoja löytyy.</p>
+
+		  <p>XML on eräs kieli, jolla kuvataan rakenteellista tietoa. Se koostuu kahdesta osasta, otsakkeesta ja rungosta. Otsake on valinnainen, ja sisältää esimerkiksi dokumentin versionumeron, tiedon käsittelyohjeita, sekä mahdollisia tietoja tiedon rakenteesta. XML-dokumentin runko taas alkaa <em>juurielementistä</em>, joita on vain yksi, jonka alla on yksi tai useampia elementtejä, joilla voi olla arvoja.</p>
+
+		  <p>Alla on esimerkki XML-dokumentista, jossa on kuvattu opiskelijoiden nimiä.</p>
+
+<pre class="sh_xml">
+&lt;?xml version="1.0"?&gt;
+&lt;opiskelijat&gt;
+  &lt;opiskelija&gt;
+    &lt;nimi&gt;Ada Lovelace&lt;/nimi&gt;
+  &lt;/opiskelija&gt;
+  &lt;opiskelija&gt;
+    &lt;nimi&gt;Edgar F. Codd&lt;/nimi&gt;
+  &lt;/opiskelija&gt;
+  &lt;opiskelija&gt;
+    &lt;nimi&gt;Lixia Zhang&lt;/nimi&gt;
+  &lt;/opiskelija&gt;
+&lt;/opiskelijat&gt;
+</pre>
+
+		  <p>XML-dokumentin elementit voivat sisältää useita elementtejä. Alla on kuvaus kahdesta kurssista sekä niihin liittyvistä opettajista.</p>
+
+<pre class="sh_xml">
+&lt;?xml version="1.0"?&gt;
+&lt;kurssit&gt;
+  &lt;kurssi&gt;
+    &lt;nimi&gt;Ohjelmoinnin perusteet&lt;/nimi&gt;
+    &lt;luento&gt;Ma 10-12&lt;/nimi&gt;
+    &lt;opettaja&gt;
+      &lt;nimi&gt;Charles Babbage&lt;/nimi&gt;
+    &lt;/opettaja&gt;
+  &lt;/kurssi&gt;
+  &lt;kurssi&gt;
+    &lt;nimi&gt;Tietokantojen perusteet&lt;/nimi&gt;
+    &lt;luento&gt;Ti 10-12&lt;/nimi&gt;
+    &lt;opettaja&gt;
+      &lt;nimi&gt;Edgar F. Codd&lt;/nimi&gt;
+    &lt;/opettaja&gt;
+  &lt;/kurssi&gt;
+&lt;/kurssit&gt;
+</pre>
+
+		  <p>Tiedon välittämiseen löytyy toki myös useita muita muotoja, joista <a href="http://www.json.org/" target="_blank">JSON</a> on web-maailmassa ehkäpä tällä hetkellä eniten esillä.</p>
+
+		</aside>
+
+<!--
 		<h2>Case: Kurssi-ilmoittautuminen? Chat?</h2>
-
+-->
 
 
 
