@@ -5484,7 +5484,7 @@ Avain-arvotietokantojen tarjoamat kyselymahdollisuudet ovat erittäin rajoittune
 Tarkastellaan nyt <a href="http://redis.io/">Redisiä</a> joka on eräs suosituimmista avain-arvotietokannoista.
 </p>
 <p>
-Redisin perusoperaatiot ovat <code>set, get</code> ja <code>del</code> joiden avulla käsitellään merkkijonomuotoisena talletettavia arvoja.
+Redisin perusoperaatiot ovat <code>set</code>, <code>get</code> ja <code>del</code> joiden avulla käsitellään merkkijonomuotoisena talletettavia arvoja.
 </p>
 
 <p>
@@ -5576,7 +5576,7 @@ public class WeatherService {
 
     // metodi joka hakee tiedot joko Redisistä tai internetistä
     private JsonElement getDataFor(String city) throws Exception {
-        // etsitään kaupungin city säätietoja redisistä
+        // etsitään kaupungin city säätietoja Redisistä
         String weatherInfo = jedis.get(city);
 
         // jos ei löytyny
@@ -5584,9 +5584,9 @@ public class WeatherService {
             // haetaan tiedot internetistä
             weatherInfo = readFromUrl("http://api.openweathermap.org/data/2.5/weather?q="+city);
 
-            // ja talletetaan ne redisiin
+            // ja talletetaan ne Redisiin
             jedis.set(city, weatherInfo);
-            // määritellään tallennusajaksi 10 minuuttia
+            // määritellään tallennusajaksi 10 minuuttia eli 600 sekuntia
             jedis.expire(city, 600);
         }
 
@@ -5602,34 +5602,34 @@ public class WeatherService {
 Palvelua käytetään seuraavasti:
 </p>
 
-<pre>
+<pre class="sh_java">
   WeatherService weather = new WeatherService();
   weather.weatherFor("Helsinki");
 </pre>
 
 <p>
-Kun haemme ensimmäistä kertaa esim. Helsingin tietoja, etsitään niitä (metodissa <em>getDataFor</em>) ensin rediksestä:
+Kun haemme ensimmäistä kertaa esim. Helsingin tietoja, etsitään niitä (metodissa <code>getDataFor</code>) ensin rediksestä:
 </p>
 
-<pre>
-// nyt city = "Helsinki"
+<pre class="sh_java">
+  // nyt city = "Helsinki"
   String weatherInfo = jedis.get(city);
 </pre>
 
 <p>
-tiedot eivät löydy, joten metodi palauttaa <em>null</em>. Tämän takia mennään if-haaraan, jossa tiedot haetaan apumetodin avulla internetistä. Haetut tiedot talletetaan ensin redisiin:
+tiedot eivät löydy, joten metodi palauttaa <code>null</code>. Tämän takia mennään if-haaraan, jossa tiedot haetaan apumetodin avulla internetistä. Haetut tiedot talletetaan ensin Redisiin:
 </p>
 
-<pre>
+<pre class="sh_java">
   // nyt city="Helsinki" ja weatherInfo Helsingin sään 'raakadata'
   jedis.set(city, weatherInfo);
 </pre>
 
 <p>
-talletetulle datalle asetetaan myös elinaika sekunneissa:
+talletetulle datalle asetetaan myös elinaika sekunteina:
 </p>
 
-<pre>
+<pre class="sh_java">
   jedis.expire(city, 600);
 </pre>
 
@@ -5638,7 +5638,7 @@ tämän jälkeet data palautetaan kutsujalle.
 </p>
 
 <p>
-Jos Helsingin säätietoja haetaan 600 sekunnin sisällä uudelleen, löytyvät tiedot suoraan redististä. 600 sekunnin kuluttua hakuoperaatio <em>jedis.get('Helsinki')</em> palauttaa jälleen <em>null</em> ja tuore säätilanne haetaan internetistä.
+Jos Helsingin säätietoja haetaan 600 sekunnin sisällä uudelleen, löytyvät tiedot suoraan Redististä. 600 sekunnin kuluttua hakuoperaatio <code>jedis.get('Helsinki')</code> palauttaa jälleen <code>null</code> ja tuore säätilanne haetaan internetistä.
 </p>
 
 <p>
@@ -5647,7 +5647,7 @@ Ohjelman koodi kokonaisuudessan löytyy
 </p>
 
 <p>
-<a href="http://db-engines.com/en/ranking/key-value+store">Suosituimmat</a>avain-arvotietokannoat.
+<a href="http://db-engines.com/en/ranking/key-value+store">Lista</a> suosituimmista avain-arvotietokannoista.
 </p>
 
 <h3>Dokumenttitietokannat, MongoDB</h3>
@@ -5664,7 +5664,7 @@ Käytetään seuraavassa esimerkkinä ylivoimaisesti suosituimman dokumenttitiet
 Dokumenttikannoissa käytetään tiedon loogisena esitysmuotona yleensä <a href="https://fi.wikipedia.org/wiki/JSON">JSON</a>:ia. Seuraavassa kurssia </em>Ohjelmoinnin perusteet</em> esittävä JSON-dokumentti:
 </p>
 
-<pre>
+<pre class="sh_jscript">
 {
   "id": ObjectId("10"),
   "nimi": "Ohjelmoinnin perusteet",
@@ -5678,14 +5678,15 @@ JSON-dokumentti koostuu avain-arvo-pareista. Avainta vastaava arvo merkitään k
 </p>
 
 <p>
-Kurssi-dokumentissa on siis neljä avain-arvo-paria. Voidaankin ajatella että kurssilla on neljä kenttää. Näistä kentistä erikoisasemassa on MongoDB:n dokumentille automaattisesti keneroima avainkenttä <em>id</em> jonka arvo on tyypiltään <em>ObjectId</em>.
+Kurssi-dokumentissa on siis neljä avain-arvo-paria. Voidaankin ajatella että kurssilla on neljä kenttää. Näistä kentistä erikoisasemassa on MongoDB:n dokumentille automaattisesti keneroima avainkenttä <code>id</code> jonka arvo on tyypiltään <code>ObjectId</code>.
 Poikkeavaa relaatiotietokantoihin nähden on se, että kentän arvona voi olla taulukko.
 </p>
 
 <p>
 Seuraavassa on opiskelijaa kuvaava dokumentti:
 </p>
-<pre>
+
+<pre class="sh_jscript">
 {
   "id" : ObjectId("59"),
   "nimi" : "Pekka Mikkola",
@@ -5699,7 +5700,7 @@ Seuraavassa on opiskelijaa kuvaava dokumentti:
 </pre>
 
 <p>
-Nyt kentän osoite arvona on olio, jolla on itsellään omat kenttänsä.
+Nyt kentän osoite arvona on <em>olio</em>, jolla on itsellään omat kenttänsä.
 </p>
 
 <p>
@@ -5743,7 +5744,7 @@ Relaatiotietokannoissa kannan skeeman muodostaminen on sikäli helppoa, että jo
 </p>
 
 <p>
-Dokumenttikantojen suhteen tilanne on toinen. Tarkastellaan esimerkiksi Kursseja ja Opiskelijoiden kurssisuorituksia. Relaatiotietokannassa tilanne olisi suoraviivainen, Suoritus olisi Kurssin ja Opiskelijan liitostaulu.
+Dokumenttikantojen suhteen tilanne on toinen. Tarkastellaan esimerkiksi Kursseja ja Opiskelijoiden kurssisuorituksia. Relaatiotietokannassa tilanne olisi suoraviivainen, <em>Suoritus</em> olisi <em>Kurssin</em> ja <em>Opiskelijan</em> liitostaulu.
 </p>
 
 <p>
@@ -5753,7 +5754,8 @@ Eräs mahdollisuus olisi tehdä täsmälleen sama ratkaisu dokumenttikannassa.
 <p>
 Kokoelma Opiskelija:
 </p>
-<pre>
+
+<pre class="sh_js">
 [
   {
     "id": ObjectId("10"),
@@ -5772,7 +5774,7 @@ Kokoelma Opiskelija:
 Kokoelma kurssi:
 </p>
 
-<pre>
+<pre class="sh_js">
 [
   {
     "id": ObjectId("34"),
@@ -5791,7 +5793,7 @@ Kokoelma kurssi:
 Suoritus olisi nyt "liitostaulumaien" kokoelma:
 </p>
 
-<pre>
+<pre class="sh_js">
 [
   {
     "id": 55
@@ -5808,7 +5810,7 @@ Suoritus olisi nyt "liitostaulumaien" kokoelma:
   {
     "id": 57
     "kurssi_id" : ObjectId("35"),
-    "opiskelija_id" : ObjectId("1§"),
+    "opiskelija_id" : ObjectId("11"),
     "arvosana" : 2
   }
 ]
@@ -5903,7 +5905,7 @@ Tämä ratkaisu vaikeuttaisi kurssin suorittajien selvittämistä, joten joissai
 </p>
 
 <p>
-Yhtä "oikeaa" vastausta miten sovelluksen data kannattaa mallintaa dokumenttikannan kokoelmiksi ja dokumenteiksi ei ole olemassa. Parhaaseen tapaan vaikuttaa suuresti se minkälainen käyttöprofiili rakennettavalla sovelluksella on: datamalli kannattaa valita siten että se tekee yleisimpien operaatioiden suorituksen nopeaksi ja helpoksi.
+Yhtä "oikeaa" vastausta miten sovelluksen data kannattaa mallintaa dokumenttikannan kokoelmiksi ja dokumenteiksi ei ole olemassa. Parhaaseen tapaan vaikuttaa suuresti se minkälainen käyttöprofiili rakennettavalla sovelluksella on: datamalli kannattaa valita siten, että se tekee yleisimpien operaatioiden suorituksen nopeaksi ja helpoksi.
 </p>
 
 <p>
