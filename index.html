@@ -43,11 +43,9 @@
                     <li>
                         <a href="#viikko6">Viikko 6</a>
                     </li>
-<!--
                     <li>
                         <a href="#viikko7">Viikko 7</a>
                     </li>
--->
                 </ul>
             </nav>
         </header>
@@ -5712,12 +5710,12 @@ Kuten edellä opiskelijan kohdalla näimme, on dokumenttikannoissa mahdollista s
 </p>
 
 <pre>
-  {
-    "id" : ObjectId("123"),
-    "katu" : "Tehtaankatu 10 B 1",
-    "postinumero" : "00120",
-    "postitoimipaikka" : "Helsinki"
-  }
+{
+  "id" : ObjectId("123"),
+  "katu" : "Tehtaankatu 10 B 1",
+  "postinumero" : "00120",
+  "postitoimipaikka" : "Helsinki"
+}
 </pre>
 
 Opiskelijadokumentti sisältäisi nyt ainoastaan viitteen osoitedokumenttiin:
@@ -5956,11 +5954,13 @@ Relaatiotietokannat tallettavat tiedon levylle <em>riveittäin</em>, eli taulu t
 </pre>
 
 <p>
-jos nyt haluttaisiin selvitää yrityksessä vähintään 5 työskennelleiden keskipalkka, eli tehtäisiin kysely
+jos nyt haluttaisiin selvitää yrityksessä vähintään 5 vuotta työskennelleiden keskipalkka, eli tehtäisiin kysely
 </p>
 
-<pre>
-SELECT avg(*) FROM Employees WHERE YearsEmployed>4
+<pre class="sh_sql">
+SELECT avg(*)
+FROM Employees
+WHERE YearsEmployed>4
 </pre>
 
 <p>
@@ -5982,7 +5982,7 @@ Sex:M;F;F;M
 
 Salary:40000;50000;44000;55000
 
-// muut sarakkeet....
+YearsEmplyed:1;6;3;9
 </pre>
 
 <p>
@@ -5990,7 +5990,7 @@ Tehtäessä sama kysely, riittäisi että levyltä luettaisiin ainoastaan kysely
 </p>
 
 <p>
-Vanhemmman sukupolven saraketietokannoissa data on organisoitu relaatiotietokantojen tapaan tauluihin ja dataa hallitaan SQL:llä, niitä ei välttämättä edes luokitella NoSQL-kannoiksi. Uudemman polven saraketietokannat taas noudattavat enemmän yhden tai muutaman ison tai "leveän" taulun skeematonta mallia. Tauluissa on sarakkeita erittäin suuri määrä, mutta läheskään kaikilla sarakkeilla ei ole arvoa. Näiden esikuvana on Googlen vuodesta 2004 asti kehittämä <a href="https://en.wikipedia.org/wiki/BigTable">BigTable</a>. Uuden polven ratkaisut mahdollistavat massiivisten datamäärien rinnakkaiskäsittelyn.
+Vanhemmman sukupolven saraketietokannoissa data on organisoitu relaatiotietokantojen tapaan tauluihin ja dataa hallitaan SQL:llä. Vanhemman polven saraketietokantoja ei välttämättä edes luokitella NoSQL-kannoiksi. Uudemman polven saraketietokannat taas noudattavat enemmän yhden tai muutaman ison tai "leveän" taulun skeematonta mallia. Tauluissa on sarakkeita erittäin suuri määrä, mutta läheskään kaikilla sarakkeilla ei ole arvoa. Näiden esikuvana on Googlen vuodesta 2004 asti kehittämä <a href="https://en.wikipedia.org/wiki/BigTable">BigTable</a>. Uuden polven ratkaisut mahdollistavat massiivisten datamäärien rinnakkaiskäsittelyn.
 </p>
 
 <p>
@@ -6000,12 +6000,13 @@ Vanhemmman sukupolven saraketietokannoissa data on organisoitu relaatiotietokant
 <h3>Verkkotietokannat</h3>
 
 <p>
-Relaatiotietokannat ja esittelemämme NoSQL-kantatyypit keskittyvät dataentiteettien esittämiseen. Relaatiotietokannat esittävät entiteetit taulujen riveinä, esim. Henkilö-taulussa jokainen ihminen esitettään omana rivinään. Yhteydet ja suhteet eri entiteettien välillä esitetään epäsuorasti vierasavaimien ja liitostaulujen avulla. Itse yhteys, esim. <em>missä henkilö Arto on töissä</em> saadaan selville vasta kyselyn aikana tapahtuvan liitosoperaation avulla.
+Relaatiotietokannat ja esittelemämme NoSQL-kantatyypit keskittyvä<em>dataentiteettien</em> esittämiseen. Relaatiotietokannat esittävät entiteetit taulujen riveinä, esim. Henkilö-taulussa jokainen ihminen esitettään omana rivinään. Yhteydet ja suhteet eri entiteettien välillä esitetään epäsuorasti vierasavaimien ja liitostaulujen avulla. Itse yhteys, esim. <em>missä henkilö Arto on töissä</em> saadaan selville vasta kyselyn aikana tapahtuvan liitosoperaation avulla.
 </p>
 <p>
 Joissain tilanteissa entiteettien suhteiden selvittäminen relaatiotietokannassa saattaa olla erittäin hankalaa. Oletetaan, että meillä on Henkilöitä kuvaava taulu:
 </p>
-<pre>
+
+<pre class="sh_sql">
 CREATE TABLE Henkilo (
   id integer not null PRIMARY KEY,
   nimi string not null
@@ -6026,7 +6027,7 @@ CREATE TABLE Vanhemmuus (
 )
 </pre>
 
-<p>Jos nyt haluaisimme selvittää henkilön "Arto Vihavainen" kaikki sukulaiset, huomaamme, että kyselyn tekeminen SQL:llä olisi erittäin vaikeaa.
+<p>Jos nyt haluaisimme selvittää henkilön "Arto Vihavainen" kaikki sukulaiset, huomaamme, että kyselyn tekeminen SQL:llä olisi erittäin hankalaa.
 </p>
 
 <p>
@@ -6040,7 +6041,7 @@ Tilanne mutkistuisi entisestään jos haluaisimme kuvata myös muunlaisia suhtei
 </ul>
 
 <p>
-Ratkaisun tämänkaltaisiin tilanteisiin tuovat <em>verkkotietokannat</em>, jotka mallintavat eksplisiittisesti sekä entiteetit eli esim. henkilöt ja niiden ominaisuudet että entiteettien väliset suhteet ja niiden ominaisuudet kuten sukulaisuuden henkilöiden välillä. Kuten nimestä voi päätellä, on verkkotietokannan pohjalla olevana tietorakenteena verkko (engl. <em>graph</em>), joka koostuu entiteettejä kuvaavista <em>solmuista</em> (engl. <em>node</em>) ja niiden välisiä suhteita kuvaavista <em>kaarista</em> (engl. <em>edge</em>). Sekä solmuilla, että kaarilla voi olla attribuutteja. Verkko, joka kuvaa yllä olevan esimerkin mallintamista verkkotietokannan solmuiksi ja kaariksi:
+Ratkaisun tämänkaltaisiin tilanteisiin tuovat <em>verkkotietokannat</em>, jotka mallintavat eksplisiittisesti sekä entiteetit eli esim. henkilöt ja niiden ominaisuudet että entiteettien väliset suhteet kuten sukulaisuuden henkilöiden välillä. Kuten nimestä voi päätellä, on verkkotietokannan pohjalla olevana tietorakenteena verkko (engl. <em>graph</em>), joka koostuu entiteettejä kuvaavista <em>solmuista</em> (engl. <em>node</em>) ja niiden välisiä suhteita kuvaavista <em>kaarista</em> (engl. <em>edge</em>). Sekä solmuilla, että kaarilla voi olla attribuutteja. Verkko, joka kuvaa yllä olevan esimerkin mallintamista verkkotietokannan solmuiksi ja kaariksi:
 </p>
 
 <figure>
@@ -6048,7 +6049,7 @@ Ratkaisun tämänkaltaisiin tilanteisiin tuovat <em>verkkotietokannat</em>, jotk
 </figure>
 
 <p>
-Verkkotietokannat tarjoavat kyselykielen, jonka avulla on helppo "navigoida" verkossa. Toisin kuin relaatiotietokannoissa, jotka edellyttävät yhteyden muodostamiseen laskennallisesti kallista join-operaatiota, yhteyksien navigointi verkkotietokannassa on nopeaa. Verkkotietokannoille ei ole olemassa yhtä vakiintunutta kyselykieltä. On kuitenkin tiettyjä kyselykieliä kuten tämän hetken suosituimman verkkotietokannan <a href="http://neo4j.com">Neo4J</a> käyttämä
+Verkkotietokannat tarjoavat kyselykielen, jonka avulla on helppo "navigoida" verkossa. Toisin kuin relaatiotietokannoissa, jotka edellyttävät yhteyden muodostamiseen laskennallisesti kallista join-operaatiota, yhteyksien navigointi verkkotietokannassa on nopeaa. Verkkotietokannoille ei ole olemassa yhtä vakiintunutta kyselykieltä. On kuitenkin tiettyjä kyselykieliä, kuten tämän hetken suosituimman verkkotietokannan <a href="http://neo4j.com">Neo4J:n</a> käyttämä
 <a href="http://neo4j.com/developer/cypher-query-language/">Cypher</a>, joita jotkut muutkin verkkotietokannat tukevat.
 </p>
 
@@ -6062,7 +6063,7 @@ RETURN parent
 </pre>
 
 <p>
-MATCH-määre hakee ensin solmun, jonka nimenä on Arto ja sen jälkeen seurataan :CHILD_OF kaarta solmun vanhempiin, jotka kysely palauttaa. Kysely siis palauttaa ne solmut <em>parent</em> joille pätee ehto: solmuun johtaa kaari :CHILD_OF sellaisesta solmusta johon liittyy attribuutti <em>nimi</em>, jonka arvo on "Arto".
+MATCH-määre hakee ensin solmun, jonka nimenä on <em>Arto</em> ja sen jälkeen seurataan kaarta <em>:CHILD_OF</em> pitkin solmun vanhempiin, jotka kysely palauttaa. Kysely siis palauttaa ne solmut <em>parent</em> joille pätee ehto: solmuun johtaa kaari </em>CHILD_OF</em> sellaisesta solmusta johon liittyy attribuutti <em>nimi</em>, jonka arvo on <em>Arto</em>.
 </p>
 
 <p>
@@ -6080,7 +6081,7 @@ Nyt kysely palauttaa sellaiset solmut <em>book</em> joille pätee:
 <ul>
 <li> solmun tyyppi on Book</li>
 <li>
-  solmuun on :LIKED-tyyppinen kaari jostain solmusta johon päästään Artosta yhtä tai useampaa :CHILD_OF kaarta kulkemalla
+  solmuun on <em>:LIKES-tyyppinen</em> kaari jostain solmusta johon päästään Artosta yhtä tai useampaa <em>:CHILD_OF</em> kaarta pitkin kulkemalla
 </li>
 
 </ul>
@@ -6094,7 +6095,7 @@ RETURN friend
 </pre>
 
 <p>
-Vielä yksi esimerkki. Miten löytäisimme lyhimmän ystävien ketjun joka yhdistää Arton ja Barack Obaman?
+Vielä yksi esimerkki. Miten löytäisimme lyhimmän ystävien ketjun,</em> joka yhdistää Arton ja Barack Obaman?
 </p>
 <pre>
 MATCH (arto: { name:"Arto" }) (barack:{ name:"Barack Obama" })
@@ -6104,7 +6105,7 @@ RETURN p
 </pre>
 
 <p>
-Eli ensin etsitään Arto ja Barack ja sen jälkeen Neo4J:n valmis funktio <em>shortestPath</em> etsii lyhimmän polun solmujen välillä. Tämä kysely olisi todennäköisesti mahdoton tehdä SQL:llä tai ainakin äärimmäisen vaikea muotoilla ja todella hidas suorittaa. Verkkotietokannat sopivatkin erittäin hyvin muutamiin sellasiiin käyttöskenaarioihin, joissa muut tietokantatyypit ovat lähes käyttökelvottomia. Verkkotietokantojen käyttö onkin yleistynyt esim. sosiaalisen median sovelluksissa ja suosittelujärjestelmissä.
+Eli ensin etsitään solmut joiden nimenä on Arto ja Barack, ja sen jälkeen Neo4J:n valmis funktio <em>shortestPath</em> etsii lyhimmän polun solmujen välillä. Tämä kysely olisi todennäköisesti mahdoton tehdä SQL:llä tai ainakin äärimmäisen vaikea muotoilla ja todella hidas suorittaa. Verkkotietokannat sopivatkin erittäin hyvin muutamiin sellasiiin käyttöskenaarioihin, joissa muut tietokantatyypit ovat lähes käyttökelvottomia. Verkkotietokantojen käyttö onkin yleistynyt esim. sosiaalisen median sovelluksissa ja suosittelujärjestelmissä.
 </p>
 
 <p>
@@ -6115,18 +6116,22 @@ Eli ensin etsitään Arto ja Barack ja sen jälkeen Neo4J:n valmis funktio <em>s
 
 <p>
 NoSQL-tietokannat löivät läpi suuren kohun saattamina ja erityisesti startupeissa oli muodikasta ottaa käyttöön helpommin suurille käyttäjämäärille skaalautuivia NoSQL-kantoja kuten MongoDB. Pikkuhiljaa kohu on laantunut, ja enenevissä määrin ollaan menossa jo aiemmin mainittuun
-<a href="http://martinfowler.com/bliki/PolyglotPersistence.html">polyglot persistancen</a> nimellä kulkevaan suuntaan, eli valitaan oikea työkalu kuhunkin käyttötarkoitukseen, ja erittäin tyypillistä onkin että jo hieman suuremmissa sovelluksissa on käytössä dokumentti-, avain-arvo- ja relaatiotietokanta. Uusimpana kehityssuuntana on ollut myös se, että vanhat relaatiotietokannat ovat ottaneet vaikutteita muista tietokantatyypeistä. Esim. tämän hetken ehkä suosituin Open Source -relaatiotietokanta PostgeSQL sisältää paljon  <a href="http://www.postgresql.org/docs/9.4/static/datatype-json.html">dokumenttitietokantoja vastaavaa toiminnallisuutta</a>. Kehitystä on tapahtunut myös toiseen suuntaan, jotkut dokumenttitietokannat ovat mahdollistaneet <a href="https://azure.microsoft.com/en-us/documentation/articles/documentdb-sql-query/">SQL:n käytön kyselykielenä.</a>
+<a href="http://martinfowler.com/bliki/PolyglotPersistence.html">polyglot persistancen</a> nimellä kulkevaan suuntaan, eli valitaan oikea työkalu kuhunkin käyttötarkoitukseen, ja erittäin tyypillistä onkin että jo hieman suuremmissa sovelluksissa on käytössä dokumentti-, avain-arvo- ja relaatiotietokanta. Uusimpana kehityssuuntana on ollut myös se, että vanhat relaatiotietokannat ovat ottaneet vaikutteita muista tietokantatyypeistä. Esim. tämän hetken suosituin Open Source -relaatiotietokanta PostgeSQL sisältää paljon <a href="http://www.postgresql.org/docs/9.4/static/datatype-json.html">dokumenttitietokantoja vastaavaa toiminnallisuutta</a>. Kehitystä on tapahtunut myös toiseen suuntaan, jotkut dokumenttitietokannat ovat mahdollistaneet <a href="https://azure.microsoft.com/en-us/documentation/articles/documentdb-sql-query/">SQL:n käytön kyselykielenä.</a>
 </p>
 
 <p>
 Kahtiajaon hieman liudennuttua termin NoSQL sijaan onkin alettu puhua <em>Not Only SQL</em> -tietokannoista, ja termi on muokkautunut muotoon <em>NOSQL</em>. Päätään nostaa esille myös vielä melko epämääräisesti määritelty termi <em><a href="http://www.dbta.com/Columns/DBA-Corner/What-Is-a-NewSQL-Database-System-104489.aspx">NewSQL</a></em>. Wikipedian mukaan NewSQL:llä tarkoittaa seuraavaa:
 </p>
 
-<em>
+<blockquote>
+<p>
 NewSQL is a class of modern relational database management systems that seek to provide the same scalable performance of NoSQL systems for online transaction processing (OLTP) read-write workloads while still maintaining the ACID guarantees of a traditional database system.
+</p>
 
+<p>
 Although NewSQL systems vary greatly in their internal architectures, the two distinguishing features common amongst them is that they all support the relational data model and use SQL as their primary interface.
-</em>
+</p>
+</blockquote>
 
 <p>
 Eräs viime aikoina melko paljon huomiota saanut NewSQL-tietokanta on <a href="https://foundationdb.com/">FoundationDB</a>, joka sisäiseltä organisoinniltaan on avain-arvotietokanta, mutta se tarjoaa kyselykieleksi (myös) SQL:n ja ACID-ominaisuudet takaavat transaktiot eli käyttäytyy sovellusohjelmien kannalta kuten normaali relaatiotietokanta mutta tarjoaa perinteistä relaatiotietokantaa skaalautuvamman ratkaisun.
