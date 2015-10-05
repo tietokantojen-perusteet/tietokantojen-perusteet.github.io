@@ -4737,10 +4737,21 @@ public class Main {
 
 		  <p>Saat portissa <code>4567</code> käynnissä olevan prosessin tunnuksen tietoon terminaalissa komennolla <code>lsof -i :4567</code>. Etsi komennon palauttamasta tulosteesta prosessin tunnus, jonka jälkeen voit sammuttaa prosessin komennolla <code>kill -9 prosessin-tunnus</code>.</p>
 
+		  <p>Esimerkiksi:</p>
 <pre>
 > lsof -i :4567
-katso mikä prosessin-tunnus
-> kill -9 prosessin-tunnus
+COMMAND  PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+java    9916 kayttaja   51u  IPv6 0x65802ef6be5c6f29      0t0  TCP *:tram (LISTEN)
+>
+</pre>
+
+		  <p>Yllä prosessin tunnus (PID) on 9916. Tämän jälkeen prosessi sammutetaan komennolla <code>kill -9 9916</code>.</p>
+
+<pre>
+> lsof -i :4567
+COMMAND  PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+java    9916 kayttaja   51u  IPv6 0x65802ef6be5c6f29      0t0  TCP *:tram (LISTEN)
+> kill -9 9916
 </pre>
 
 		</aside>
