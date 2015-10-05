@@ -144,7 +144,7 @@
                 </div>
 
 
-                <h1 id="viikoittaiset-teemat">Alustavat teemat</h1>
+                <h1 id="viikoittaiset-teemat">Teemat</h1>
 
 
 		<div id="week-toc" class="nav">
@@ -185,13 +185,13 @@
 		      <tr>
 			<td>5</td>
 			<td></td>
-			<td>Tiedon normalisointi, Taulujen määrittely, rajoitteet</td>
+			<td>Tiedon normalisointi, Taulujen määrittely, rajoitteet, Indeksit ja hakurakenteet</td>
 			<td>Tiedon määrittely (DDL) ja tiedon muokkaaminen (DDM)</td>
 		      </tr>
 		      <tr>
 			<td>6</td>
-			<td>Tehokkuus</td>
-			<td>Indeksit ja hakurakenteet</td>
+			<td>Tietokannat osana muita sovelluksia, Tietokanta osana web-sovellusta</td>
+			<td></td>
 			<td></td>
 		      </tr>
 		      <tr>
@@ -4726,6 +4726,24 @@ public class Main {
 		</figure>
 
 		<p>Vapise, google.</p>
+
+		<aside class="info">
+
+		  <br/>
+
+		  <h1>NetBeans ja palvelimen sammuttaminen</h1>
+
+		  <p>Palvelimen sammuttaminen tapahtuu NetBeansissa punaista neliötä klikkaamalla. Joissakin käyttöjärjestelmissä tämä on kuitenkin bugista, jolloin palvelin tulee sammuttaa komentoriviltä.</p>
+
+		  <p>Saat portissa <code>4567</code> käynnissä olevan prosessin tunnuksen tietoon terminaalissa komennolla <code>lsof -i :4567</code>. Etsi komennon palauttamasta tulosteesta prosessin tunnus, jonka jälkeen voit sammuttaa prosessin komennolla <code>kill -9 prosessin-tunnus</code>.</p>
+
+<pre>
+> lsof -i :4567
+katso mikä prosessin-tunnus
+> kill -9 prosessin-tunnus
+</pre>
+
+		</aside>
 
 
 		<h2>Useamman osoitteen kuunteleminen</h2>
