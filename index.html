@@ -4850,7 +4850,6 @@ public class Main {
 
         post("/opiskelijat", (req, res) -&gt; {
             String nimi = req.queryParams("nimi");
-            nimet.add(nimi);
             return "Kerrotaan siitä tiedon lähettäjälle: " + nimi;
         });
 
