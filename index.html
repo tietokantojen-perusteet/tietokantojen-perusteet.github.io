@@ -4846,11 +4846,6 @@ public class Main {
                     + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
                     + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
                     + "&lt;/form&gt;";
-                    + "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
-                    + "Nimi:&lt;br/&gt;\n"
-                    + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
-                    + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
-                    + "&lt;/form&gt;";
         });
 
         post("/opiskelijat", (req, res) -&gt; {
@@ -4907,11 +4902,6 @@ public class Main {
             }
 
             return opiskelijat
-                    + "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
-                    + "Nimi:&lt;br/&gt;\n"
-                    + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
-                    + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
-                    + "&lt;/form&gt;";
                     + "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
                     + "Nimi:&lt;br/&gt;\n"
                     + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
@@ -4981,11 +4971,6 @@ Osoite:<br/>
 
 <pre class="sh_java">
 return "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
-        + "Nimi:&lt;br/&gt;\n"
-        + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
-        + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
-        + "&lt;/form&gt;";
-        + "&lt;form method=\"POST\" action=\"/opiskelijat\"&gt;\n"
         + "Nimi:&lt;br/&gt;\n"
         + "&lt;input type=\"text\" name=\"nimi\"/&gt;&lt;br/&gt;\n"
         + "&lt;input type=\"submit\" value=\"Lisää opiskelija\"/&gt;\n"
