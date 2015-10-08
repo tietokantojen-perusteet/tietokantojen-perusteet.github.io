@@ -5447,8 +5447,84 @@ C
       <h1 id="viikko7">Viikko 7</h1>
     </header>
 
-    <h1>Transaktiot ja ACID</h1>
 
+    <h1>Tietokantatransaktiot ja ACID</h1>
+
+    <p>Tietokantatransaktio sisältää yhden tai useamman tietokantaan kohdistuvan operaation, jotka suoritetaan (järjestyksessä) kokonaisuutena. Jos yksikin operaatio epäonnistuu, kaikki operaatiot perutaan, ja tietokanta palautetaan tilaan, missä se oli ennen transaktion aloitusta. Klassinen esimerkki tietokantatransaktiosta on tilisiirto, missä nostetaan rahaa yhdeltä tililtä, ja siirretään rahaa toiselle tilille. Jos tilisiirron suoritus ei onnistu -- esimerkiksi rahan lisääminen toiselle tilille epäonnistuu -- tulee myös rahan nostaminen toiselta tililtä perua.</p>
+
+    <p>Jokainen tietokantakysely suoritetaan omassa transaktiossaan, mutta, käyttäjä voi myös määritellä useamman kyselyn saman transaktion sisälle. Transaktio aloitetaan komennolla <code>BEGIN TRANSACTION</code>, jota seuraa kyselyt, ja lopulta komento <code>COMMIT</code>. Oletetaan, että käytössämme on taulu <code>Tili(id, saldo)</code>.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Tili 
+(
+    id integer PRIMARY KEY,
+    saldo NOT NULL
+)
+</pre>
+
+    <p>Tilisiirto kahden tilin välillä toteutetaan yhtenä transaktiona seuraavasti.</p>
+
+<pre class="sh_sql">
+BEGIN TRANSACTION;
+  UPDATE Tili SET saldo = saldo - 10 WHERE id = 1;
+  UPDATE Tili SET saldo = saldo + 10 WHERE id = 2;
+COMMIT;
+</pre>
+
+    <p>Ylläolevassa transaktiossa suoritetaan kaksi kyselyä, mutta tietokannan näkökulmasta toiminto on <em>atominen</em>, eli sitä ei voi pilkkoa osiin. Komennon <code>COMMIT</code> yhteydessä muutokset joko tallennetaan kokonaisuudessaan tietokantaan, tai tietokantaan ei tehdä minkäänlaisia muutoksia.</p>
+
+    <p>Tietokantatransaktiota kirjoittaessa, ohjelmoija voi huomata tehneensä virheen. Tällöin suoritetaan komento <code>ROLLBACK</code>, joka peruu aloitetun transaktion aikana tehdyt muutokset. Suoritettua (<code>COMMIT</code>) tietokantatransaktiota ei voi perua.</p>
+
+    <p>Alla esimerkki kahdesta tietokantatransaktiosta. Ensimmäinen perutaan, sillä siinä yritettiin vahingossa siirtää rahaa väärälle tilille. Toinen suoritetaan. Kokonaisuudessaan allaolevan kyselyn lopputulos on se, että tililtä 1 on otettu 10 rahayksikköä, ja tilille 2 on lisätty 10 rahayksikköä.</p>
+
+<pre class="sh_sql">
+BEGIN TRANSACTION;
+  UPDATE Tili SET saldo = saldo - 10 WHERE id = 1;
+  UPDATE Tili SET saldo = saldo + 10 WHERE id = 3;
+ROLLBACK;
+
+BEGIN TRANSACTION;
+  UPDATE Tili SET saldo = saldo - 10 WHERE id = 1;
+  UPDATE Tili SET saldo = saldo + 10 WHERE id = 2;
+COMMIT;
+</pre>
+
+    <p>Jokainen tietokantakysely suoritetaan transaktion sisällä.</p>
+
+    <p><strong><em>Tietokantatransaktiot ja rajoitteet</em></strong></p>
+
+    <p>Koska tietokannanhallintajärjestelmä näkee transaktioiden sisällä suoritettavat käskyt atomisina, eli yksittäisenä kokonaisuutena, voi tietokantatauluun määritellyt rajoitteet olla hetkellisesti rikki, kunhan ne transaktion suorituksen jälkeen ovat kunnossa.</p>
+
+    <p>Esimerkiksi suomen kirjanpitosääntöjen mukaan jokaisessa yrityksessä tulee olla kaksinkertainen kirjanpito. Tässä jokaisen tilitapahtuman yhteydessä tulee merkitä sekä mistä raha on otettu (debit), että mihin raha on laitettu (credit). Tällaisessa järjestelmässä tulee olla (esimerkiksi) tietokantataulu <code>Kirjanpitotapahtuma</code>, johon muutokset merkitään.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Kirjanpitotapahtuma
+(
+    id integer PRIMARY KEY,
+    paivamaara date NOT NULL,
+    kirjanpitotili integer NOT NULL,
+    kuvaus text NOT NULL,
+    debit integer NOT NULL,
+    credit integer NOT NULL,
+    FOREIGN KEY(kirjanpitotili) REFERENCES Tili(id),
+    CONSTRAINT kirjaus_tasmaa CHECK (SUM(debit) = SUM(credit))
+)
+</pre>
+
+    <p>Nyt yhden transaktion sisällä voi tehdä useamman kirjanpitotapahtuman, kunhan transaktion suorituksen yhteydessä kirjanpitotapahtumien debit- ja credit-sarakkeiden summa täsmää.</p>
+
+
+    <p><strong>ACID</strong> (<strong>A</strong>tomicity, <strong>C</strong>onsistency, <strong>I</strong>solation, <strong>D</strong>durability) on joukko tietokannanhallintajärjestelmän ominaisuuksia:</p>
+
+    <ul>
+      <li>Atomisuudella (<code>Atomicity</code>) varmistetaan, että tietokantatransaktio suoritetaan joko kokonaisuudessaan tai ei lainkaan. Jos tietokannanhallintajärjestelmään tehtävät transaktiot eivät olisi atomisia, voisi esimerkiksi päivityskyselyistä päätyä tietokantaan asti vain osa -- tilisiirtoesimerkissä vain rahan ottaminen yhdeltä tililtä, mutta ei sen lisäämistä toiselle.</li>
+      
+      <li>Eheydellä (<code>Consistency</code>) varmistetaan, että tietokantaan määritellyt rajoitteet, kuten viiteavaimet, pätevät jokaisen transaktion jälkeen. Jos tietokanta ei mahdollistaisi eheystarkistusta, voisi esimerkiksi kirjanpito olla virheellinen.</li>
+      <li>Eristäytyneisyydellä (<code>Isolation</code>) varmistetaan, että transaktio ei voi lukea toisen tietoa toisesta transaktiosta ennenkuin toinen transaktio on suoritettu loppuun. Tällä varmistetaan se, että jos transaktioita suoritetaan rinnakkaisesti, kumpikin näkee tietokannan eheässä tilassa.</li>
+
+      <li>Pysyvyydellä (<code>Durability</code>) varmistetaan, että transaktion suorituksessa tapahtuvat muutokset ovat pysyviä. Kun käyttäjä lisää tietoa tietokantaan, tietokannanhallintajärjestelmän tulee varmistaa että tieto säilyy myös virhetilanteissa (jos transaktion suoritus onnistuu).</li> 
+
+   </ul>
    
 
 
