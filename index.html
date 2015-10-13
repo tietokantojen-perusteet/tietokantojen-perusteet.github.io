@@ -256,7 +256,7 @@
 		  <li><a href="https://docs.google.com/document/d/1WfZmUGGg9YKMBEe3HAQ7mc8-QlPS8WJnza8aT4Iqe3o/edit?usp=sharing" target="_blank">Viikko 4</a></li>
 		  <li><a href="https://docs.google.com/document/d/1UGQOn-e8r1C9wnkrVo_udjbfefRA1oEhjfjDKAhXC4Q/edit?usp=sharing" target="_blank">Viikko 5</a></li>
 		  <li><a href="https://docs.google.com/document/d/1X6eFv661BHWS8-LcADyX-PAq6XHktZe7pgWoG4AqXhA/edit?usp=sharing" target="_blank">Viikko 6</a></li>
-		  <li>Viikko 7 (julkaistaan 14.10.)</li>
+		  <li><a href="https://www.cs.helsinki.fi/u/laine/tikape/koe/tikape_20100615.pdf" target="_blank">Viikko 7</a> (vanha kurssikoe, tehtävää 5b ei käydä -- harjoituksissa tutustutaan myös tehtävän 2 syntaksiin)</li>
 		</ul>
 
 		<h2>Kurssikoe</h2>
@@ -6024,7 +6024,7 @@ Tarkastellaan tilannetta esimerkin kautta. Oletetaan, että analyysiin käytetty
 </p>
 
 <pre>
-EmpId Lastname  Firstname Sex Salary  YearsEmplyed
+EmpId Lastname  Firstname Sex Salary  YearsEmployed
 10    Smith     Joe       M   40000   1
 12    Jones     Mary      F   50000   6
 11    Johnson   Cathy     F   44000   3
@@ -6039,18 +6039,17 @@ Relaatiotietokannat tallettavat tiedon levylle <em>riveittäin</em>, eli taulu t
 10;Smith;Joe;M;40000;1;12;Jones;Mary;F;50000;6;11;Johnson;Cathy;F;44000;3;...
 </pre>
 
-<p>
-jos nyt haluttaisiin selvitää yrityksessä vähintään 5 vuotta työskennelleiden keskipalkka, eli tehtäisiin kysely
+<p>Jos nyt haluttaisiin selvittää yrityksessä vähintään 5 vuotta työskennelleiden keskipalkka, tehtäisiin kysely
 </p>
 
 <pre class="sh_sql">
-SELECT avg(*)
-FROM Employees
-WHERE YearsEmployed>4
+SELECT AVG(Salary)
+  FROM Employees
+  WHERE YearsEmployed &gt; 4
 </pre>
 
 <p>
-olisi relaatiotietokannan tapauksessa luettava taulun <em>koko data</em> levyltä siitä huolimatta, että kysely ei tarvitse kuin pientä osaa taulun datasta. Jos taulussa olisi satoja sarakkeita (mikä on varsin tyypillistä analytiikkatietokannoissa), olisi kyselyn tekeminen erittäin hidasta johtuen juuri tarpeettoman raskaasta, kaiken datan hakevasta levyoperaatiosta.
+Tässä olisi relaatiotietokannan tapauksessa luettava taulun <em>koko data</em> levyltä siitä huolimatta, että kysely ei tarvitse kuin pientä osaa taulun datasta. Jos taulussa olisi satoja sarakkeita (mikä on varsin tyypillistä analytiikkatietokannoissa), olisi kyselyn tekeminen erittäin hidasta johtuen juuri tarpeettoman raskaasta, kaiken datan hakevasta levyoperaatiosta.
 </p>
 
 <p>
@@ -6068,7 +6067,7 @@ Sex:M;F;F;M
 
 Salary:40000;50000;44000;55000
 
-YearsEmplyed:1;6;3;9
+YearsEmployed:1;6;3;9
 </pre>
 
 <p>
@@ -6122,7 +6121,7 @@ Tilanne mutkistuisi entisestään jos haluaisimme kuvata myös muunlaisia suhtei
 
 <ul>
 <li>Arton kaikkien esivanhempien työpaikat</li>
-<li>Kirjat joista jonkun Arton esivanhemman ystävät pitivät</li>
+<li>Kirjat joista Arton esivanhemmat pitivät</li>
 <li>Arton ystävistä ja ystävien ystävistä, ja näiden ystävistä jne kaikki ne, jotka ovat opiskelleet samassa paikassa kun Arto</li>
 </ul>
 
@@ -6153,7 +6152,7 @@ MATCH-määre hakee ensin solmun, jonka nimenä on <em>Arto</em> ja sen jälkeen
 </p>
 
 <p>
-Kirjat joista Arton jonkun esivanhemman ystävät pitävät:
+Kirjat joista Arton esivanhemmat pitävät:
 </p>
 
 <pre>
