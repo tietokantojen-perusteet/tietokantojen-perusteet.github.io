@@ -31,10 +31,10 @@
           <li>
             <a href="#viikko2">Viikko 2</a>
           </li>
-<!--
           <li>
             <a href="#viikko3">Viikko 3</a>
           </li>
+<!--
           <li>
             <a href="#viikko4">Viikko 4</a>
           </li>
@@ -84,7 +84,7 @@
         <ul>
           <li>Kurssikokeessa on kolme tehtävää, joista jokainen on kuuden pisteen arvoinen. Kokeesta voi saada yhteensä 18 pistettä. Käytössä on koeleikkuri, eli kurssin hyväksytty suoritus vaatii vähintään puolia koepisteistä.</li>
 	  <li>Tekemällä kaikki ennalta tehtävät harjoitustehtävät, joiden läpikäynti harjoitustilaisuuksissa alkaa kurssin toisella viikolla, saa kolme pistettä. Harjoitustehtävien tekemisestä voi saada yhteensä 18 pistettä.</li>
-	  <li>Kurssin kolmannella viikolla julkaistaan 2-4 hengen ryhmissä tehtävä tietokannan suunnittelutehtävä, joka tulee palauttaa ennen tenttiä. Suunnittelutehtävästä voi saada 8 pistettä.</li>
+	  <li>Kurssin kolmannella viikolla julkaistaan 2-4 hengen ryhmissä tehtävä tietokannan suunnittelu- ja toteutustehtävä, joka tulee palauttaa ennen tenttiä. Suunnittelu- ja toteutustehtävästä voi saada 8 pistettä.</li>
 	  <li>Harjoitustilaisuuksissa läsnäolosta saa yhden pisteen. Läsnäoloista voi saada yhteensä 6 pistettä.</li>
 	</ul>
 	
@@ -241,8 +241,8 @@
 	<h2>Kotona tehtävät tehtäväsarjat</h2>
 	
 	<ul>
-	  <li><a href="https://docs.google.com/document/d/18PXEYZGuLOO6p1F5HfjRLAZrsgqWuKcYhgnilHVtIrY/edit?usp=sharing" target="_blank">Viikko 2</a></li>
-	  <li><a href="https://docs.google.com/document/d/18bYt11F4HzWDX8RanKzl_6Vhb5rpJ1KirDWn1-dpVW4/edit?usp=sharing" target="_blank">Viikko 3</a></li>
+	  <li><a href="https://docs.google.com/document/d/18PXEYZGuLOO6p1F5HfjRLAZrsgqWuKcYhgnilHVtIrY/edit?usp=sharing" target="_blank">Viikko 2</a> (25-29.1.)</li>
+	  <li><a href="https://docs.google.com/document/d/18bYt11F4HzWDX8RanKzl_6Vhb5rpJ1KirDWn1-dpVW4/edit?usp=sharing" target="_blank">Viikko 3</a> (1-5.2.)</li>
 <!--
 	  <li><a href="https://docs.google.com/document/d/1gCpBSDbjn3NqT1_jeoQl2eOvwQS1WVHVYiH7xGtL6a4/edit?usp=sharing" target="_blank">Viikko 4</a></li>
 	  <li><a href="https://docs.google.com/document/d/1xeBB7QD0EpLEdr7Yd7mlZSp89Al1bhNzaJmb0vu_N-E/edit?usp=sharing" target="_blank">Viikko 5</a></li>
@@ -254,7 +254,7 @@
 
 
 	<ul>
-	  <li><a href="https://docs.google.com/document/d/1miKnCLH2fa9crAZCmpFXju1ybDU2xHftUFNOpAtFFq8/edit?usp=sharing" target="_blank">Viikko 2</a></li>
+	  <li><a href="https://docs.google.com/document/d/1miKnCLH2fa9crAZCmpFXju1ybDU2xHftUFNOpAtFFq8/edit?usp=sharing" target="_blank">Viikko 2</a> (25-29.1.)</li>
 	</ul>
 	
 <!--
@@ -271,7 +271,7 @@
 	
 	<h2>Harjoitustyö</h2>
 	
-	<p>Ohjeet julkaistaan kurssin kolmannella viikolla.</p>
+	<p>Ohjeet julkaistaan kurssin kolmannella viikolla. Ryhmät muodostetaan laskareissa, ole siis paikalla!</p>
 	
 	<h2>Kurssikoe</h2>
 	
@@ -1838,10 +1838,1030 @@ INSERT INTO Kurssi (kurssitunnus, nimi, kuvaus)
 	<p>Käsitteisiin liittyvien attribuuttien määrittely tapahtuu sekä haastatteluiden että ongelma-alueen analyysin kautta. Ongelma-alueen tekstimuotoisesta kuvauksesta tiedämme esimerkiksi, että kilpailuilla on paikka ("paikalliset kilpailut", "seuran ulkopuoliset kilpailut"), mutta toisaalta tekstimuotoinen kuvaus ei esimerkiksi kerro kilpailujen järjestämisajankohdasta. Tieto kilpailun ajankohdasta -- ja sitä kautta tulosten ajankohdasta -- on oleellinen uimareiden kehittymisen seurantaan.</p>
 
 
-		
+		<header>
+		  <h1 id="viikko3">Viikko 3</h1>
+		</header>
+
+		<h1>Ali- ja yhteenvetokyselyt sekä tilastojen luominen</h1>
+
+
+		<p>Osaamme hakea yhdestä tai useammasta tietokantataulusta tietoa, sekä rajata kyselyiden palauttamia tuloksia erilaisilla ehdoilla. On kuitenkin kysymyksiä, joihin vastaaminen nykyisillä työvälineillämme on melko hankalaa. Miten esimerkiksi ratkaisisit seuraavat ongelmat?</p>
+
+		<ul>
+		  <li>Mitkä tehtävät ovat sellaisia, joita kursseilla heikommin menestyneet opiskelijat -- esimerkiksi hylätyn arvosanan tai ykkösen saaneet -- eivät ole saaneet tehtyä?</li>
+		  <li>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</li>
+		  <li>Kuinka monta opiskelijaa pääsi tietyn kurssin läpi?</li>
+		  <li>Mikä on jokaisen kurssin keskiarvo?</li>
+		</ul>
+
+		<p>Yhteistä edellä olevilla kysymyksillä on se, että lähes kaikki niistä ovat oikeastaan yhteenvetokyselyjä. Tutustutaan kohta näiden käsittelyyn liittyviin menetelmiin.</p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>SQL-kyselyt lyhyemmiksi</h1>
+
+		  <p>Olemme -- tarkoituksella -- käyttäneet SQL-kyselykielestä verboosia kirjoitusasua, missä myös ei-pakollisia komentoja on kirjoitettu kyselyihin niiden selkeyttämiseksi. Jos olet tykästynyt aiemmin käytettyyn verboosiin kirjoitusasuun, ei siitä tarvitse vaihtaa pois. Alla on kuitenkin esitelty vinkkejä SQL-kyselyiden lyhentämiseksi:</p>
+
+		  <ul>
+		    <li><p>Taulujen nimeäminen SQL-kyselyissä.</p> <p>Kirjoittaessamme tauluja yhdisteleviä kysejä kuten <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> taulujen nimet toistuvat. Tauluja voidaan uudelleennimetä SQL-kyselyissä asettamalla taulun nimen jälkeen kyselyn aikana käytettävän nimi. Seuraavassa esimerkissä taulu Opiskelija on uudelleennimetty <code>o</code>:ksi, ja taulu Kurssisuoritus on uudelleennimetty <code>k</code>:ksi.</p>
+
+<pre class="sh_sql">
+SELECT * FROM Opiskelija o, Kurssisuoritus k WHERE o.opiskelijanumero = k.opiskelija</pre></li>
+
+		    <li><p>Sarakkeiden nimeäminen SQL-kyselyissä.</p><p>Olemme käyttäneet avainsanaa <code>AS</code> taulun sarakkeiden uudelleennimennässä. Kysely <code>SELECT nimi FROM Opiskelija</code> palauttaa sarakkeen, jonka nimi on 'nimi', ja jossa on kaikkien Opiskelija-taulussa olevien opiskelijoiden nimet. Toisaalta, kysely <code>SELECT nimi AS opiskelija FROM Opiskelija</code> nimeää sarakkeen 'nimi' tulostuksessa uudestaan, jolloin sarakkeen 'nimi' otsikoksi tulee 'opiskelija' -- rivit sisältävät opiskelijoiden nimet. Avainsanan <code>AS</code> voi myös jättää pois. Alla oleva kysely tulostaa Opiskelija-taulun nimi-sarakkeen sisällön, mutta siten, että sarakkeen otsikkona on 'opiskelija'.</p><br/>
+
+<pre class="sh_sql">
+SELECT nimi opiskelija FROM Opiskelija</pre>
+
+		      <p>Sarakkeet erotellaan pilkulla kuten aiemminkin.</p>
+
+<pre class="sh_sql">
+SELECT nimi opiskelija, syntymävuosi vuosi FROM Opiskelija</pre>
+
+		      <p>Kyselyssä voi luonnollisesti sekä lyhentää taulun nimeä, että jättää <code>AS</code> avainsanan pois:</p>
+
+<pre class="sh_sql">
+SELECT o.nimi opiskelija, k.arvosana
+    FROM Opiskelija o, Kurssisuoritus k
+    WHERE o.opiskelijanumero = k.opiskelija</pre></li>
+
+		    <li><p>INNER JOIN ja JOIN</p>
+
+		      <p>Liitoskyselyn INNER JOIN voi kirjoittaa muodossa JOIN.</p></li>
+		  </ul>
+		</aside>
+
+
+		<h2>Alikyselyt</h2>
+
+		<p>Alikyselyt ovat nimensä mukaan kyselyn osana suoritettavia alikyselyitä, joiden tuloksia käytetään osana pääkyselyä. Pohditaan kysymystä <em>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</em>, ja käytetään siihen ensin aiemmin tutuksi tullutta tapaa, eli LEFT JOIN -kyselyä. Yhdistetään opiskelijaa ja kurssisuoritusta kuvaavat taulut LEFT JOIN-kyselyllä siten, että myös opiskelijat, joilla ei ole suorituksia tulevat mukaan vastaukseen. Tämän jälkeen, jätetään vastaukseen vain ne rivit, joilla kurssisuoritukseen liittyvät tiedot ovat tyhjiä -- tämä onnistuu katsomalla mitä tahansa kurssisuoritus-taulun saraketta, ja tarkistamalla onko se tyhjä, eli <em>null</em>. Tämä onnistuu seuraavasti:</p>
+
+
+		<div ng-controller="weekThreeSqlController">
+
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT opiskelijanumero FROM Opiskelija o
+    LEFT JOIN Kurssisuoritus k
+    ON o.opiskelijanumero = k.opiskelija
+    WHERE k.kurssi IS null">
+		  </query>
+
+		</div>
+
+		<p>Toinen vaihehtoehto edellisen kyselyn toteuttamiseen on toteuttaa kysely, joka hakee kaikki ne opiskelijat, jotka eivät ole kurssisuorituksia saaneiden opiskelijoiden joukossa. Tässä on oleellisesti kaksi kyselyä: (1) hae opiskelijat, joilla on kurssisuoritus, ja (2) hae opiskelijat, jotka eivät ole edellisen kyselyn palauttamassa joukossa.</p>
+
+		<p><strong><em>Alikyselyn toteuttaminen</em></strong></p>
+
+		<p>Alikyselyn toteuttamiseksi voimme määritellä kyselyn WHERE-osaan sarakkeen nimen, jota seuraa avainsana <em>NOT IN</em>, jota taas seuraa suluissa oleva kysely.</p>
+
+
+		<div ng-controller="weekThreeSqlController">
+
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT opiskelijanumero FROM Opiskelija o
+    WHERE o.opiskelijanumero
+        NOT IN (SELECT opiskelija FROM Kurssisuoritus)"
+		     done="unlockListCoursesWithNoAssignments">
+		  </query>
+
+		  <div ng-show="unlockListCoursesWithNoAssignments">
+
+		    <p>Tee nyt kysely, joka listaa kaikki kurssit, joilla ei ole yhtään tehtävää.</p>
+
+		    <query
+		       db="db"
+		       query="">
+		    </query>
+		  </div>
+
+		</div>
+
+		<p>Käytännössä alikyselyt tuottavat kyselyn tuloksena taulun, josta pääkyselyssä tehtävä kysely tehdään. Ylläolevassa esimerkissä alikyselyn tuottamassa taulussa on vain yksi sarake, jossa on kurssisuorituksen saaneiden opiskelijoiden opiskelijanumerot.</p>
+
+		<p>Määreen <code>NOT IN</code>, joka tarkastaa että valitut arvot eivät ole alikyselyn tuottamassa taulussa, lisäksi käytössä on määre <code>IN</code>. Määreen <code>IN</code> avulla voidaan luoda ehto, jolla tarkastetaan, että valitut arvot ovat annetussa joukossa tai taulussa. Esimerkiksi alla haetaan kaikki kurssisuoritukset, joissa arvosana on kolme tai viisi.</p>
+
+		<div ng-controller="weekThreeSqlController">
+
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT * FROM Kurssisuoritus WHERE arvosana IN (5, 3)">
+		  </query>
+		</div>
+
+		<aside class="info">
+		  <br/>
+
+		  <h1>EXISTS ja NOT EXISTS</h1>
+
+		  <p>Määreiden IN ja NOT IN lisäksi alikyselyissä voidaan käyttää määreitä EXISTS ja NOT EXISTS, joiden avulla voidaan rajata hakujoukkoa alikyselyssä olevan ehdon perusteella. Voimme esimerkiksi kirjoittaa aiemmin kirjoitetun kursseja suorittamattomia opiskelijoita etsivän kyselyn siten, että jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla tarkistetaan, että sitä ei löydy taulusta Kurssisuoritus.</p>
+
+		  <div ng-controller="weekThreeSqlController">
+
+		    <query
+		       db="db"
+		       editable="false"
+		       query="SELECT opiskelijanumero FROM Opiskelija o
+    WHERE NOT EXISTS
+        (SELECT opiskelija FROM Kurssisuoritus k
+        WHERE k.opiskelija = o.opiskelijanumero)">
+		    </query>
+                  </div>
+
+		  <p>Edellä oleva kysely tarkistaa jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla ettei sitä löydy Kurssisuoritus-taulun opiskelija-sarakkeesta. Käytännössä -- jos tietokantamoottori ei optimoi kyselyä -- jokainen opiskelija-taulun rivi aiheuttaa uuden kyselyn kurssisuoritus-tauluun, mikä tekee kyselystä tehottoman.</p>
+
+		</aside>
+
+
+		<h2>Yhteenvetokyselyt</h2>
+
+		<p>Yhteenvetokyselyiden avulla kyselyiden tuloksia ryhmitellään sarakkeissa olevien arvojen perusteella, jonka jälkeen luoduille ryhmille tehdään erilaisia yhteenvetokyselyitä. Voimme esimerkiksi haluta selvittää opiskelijoiden määrän pääaineittain ryhmiteltynä -- toisin sanoen, listata pääaineet ja opiskelijalukumäärät. Kyselyn vastauksessa olevan rivien lukumäärän saa komennolla <code>COUNT(<em>sarake</em>)</code>, missä <em>sarake</em> on laskettavan sarakkeen nimi. Ryhmittely tapahtuu komennon <code>GROUP BY</code>-perusteella, jota seuraa sarakkeen nimi, jonka perusteella tulokset ryhmitellään.</p>
+
+
+		<div ng-controller="weekThreeSqlController">
+
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT pääaine, COUNT(*) AS lukumäärä
+    FROM Opiskelija GROUP BY pääaine"
+                     done="unlockListCountKurssisuorituksetByKurssi">
+		  </query>
+
+		  <div ng-show="unlockListCountKurssisuorituksetByKurssi">
+		    <p>Tee nyt kysely, jolla lasket kurssisuoritus-taulussa olevat kurssisuoritukset kurssin koodin perusteella. Käytä tulostuksessa sarekkeiden nimiä "kurssikoodi" ja "lukumäärä".</p>
+		    <query
+		       db="db"
+		       query=""
+		       valid="SELECT kurssi AS kurssikoodi, COUNT(*) lukumäärä FROM Kurssisuoritus GROUP BY kurssi">
+		    </query>
+		  </div>
+
+		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat kurssit kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen. Alla olevassa esimerkissä lasketaan tehtävien määrä eri kursseilla siten, että kurssin nimi haetaan taulusta Kurssi, ja tehtävät haetaan kurssitehtävistä.</p>
+
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT k.nimi AS kurssi, COUNT(kt.tunnus) AS tehtäviä FROM Kurssi k, Kurssitehtävä kt
+    WHERE k.kurssitunnus = kt.kurssi GROUP BY k.nimi"
+		     done="unlockListCountKurssisuorituksetByKurssiWithName">
+		  </query>
+
+
+
+		  <div ng-show="unlockListCountKurssisuorituksetByKurssiWithName">
+
+		    <p>Tee nyt kysely, jossa lasket kurssisuoritus-taulussa olevien kurssien suoritukset -- taas koodin perusteella. Tällä kertaa tulostuksessa tulee kuitenkn tulostaa kurssikoodin sijaan kurssin nimi. Käytä sarakkeiden niminä "kurssi" ja "lukumäärä". (Huomaa, että edellisessä osassa katsotaan kurssitehtäviä, tässä kurssisuorituksia!)</p>
+
+
+		    <query
+		       db="db"
+		       query=""
+		       valid="SELECT Kurssi.nimi AS kurssi, COUNT(*) lukumäärä FROM Kurssisuoritus, Kurssi WHERE Kurssisuoritus.kurssi = Kurssi.kurssitunnus GROUP BY kurssi">
+		    </query>
+		  </div>
+
+
+		  <p>Edellä olevia tuloksia tarkasteltaessamme, huomaamme, että luku nolla ei esiinny yhdelläkään rivillä. Tämä selittyy kyselyillämme -- olemme valinneet mukaan vain rivit, joilla hakuehdot täyttyvät. Hups. Kirjoitetaan edellinen kysely siten, että otamme huomioon kurssit vaikka niihin ei liittyisikään yhtäkään toisen taulun riviä -- käytämme siis <code>LEFT JOIN</code>-liitosoperaatiota.</p>
+
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT k.nimi AS kurssi, COUNT(ks.kurssi) as tehtäviä FROM Kurssi k LEFT JOIN Kurssisuoritus ks
+    ON k.kurssitunnus = ks.kurssi GROUP BY k.nimi"
+		     done="unlockLeftJoinKurssiAndKurssisuoritus">
+		  </query>
+
+
+		  <div ng-show="unlockLeftJoinKurssiAndKurssisuoritus">
+
+		    <p>Tee nyt LEFT JOIN -operaatiota käyttäen kysely, jolla listaat kurssikohtaiset suorituslukumäärät siten, että myös ne kurssit, joilla ei ole yhtäkään suoritusta otetaan huomioon. Käytä sarakkeiden niminä nimiä "kurssi" ja "lukumäärä".</p>
+
+		    <query
+		       db="db"
+		       query=""
+		       valid="SELECT Kurssi.nimi AS kurssi, COUNT(Kurssisuoritus.kurssi) lukumäärä FROM Kurssi LEFT JOIN Kurssisuoritus ON Kurssi.kurssitunnus = Kurssisuoritus.kurssi GROUP BY kurssi">
+		    </query>
+
+		  </div>
+
+		</div>
+
+		<p><strong><em>Ryhmittely useamman sarakkeen perusteella</em></strong></p>
+
+		<p>Komennolle <code>GROUP BY</code> voi antaa myös useampia sarakkeita, jolloin se ryhmittelee ne annetussa järjestyksessä. Esimerkiksi ryhmittely <code>GROUP BY kurssi, arvosana</code> ryhmittelisi taulussa olevat rivit ensin kurssin perusteella, jonka jälkeen ne vielä ryhmiteltäisiin arvosanan perusteella. Tällöin jokaiselle kurssille tulisi erilliset arvosanaryhmät. Esimerkiksi kurssikohtaiset arvosanat saisi tulostettua seuraavalla kyselyllä:</p>
+
+
+		<div ng-controller="weekThreeSqlController">
+
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT k.nimi AS kurssi, ks.arvosana AS arvosana, COUNT (ks.opiskelija) AS lukumäärä
+    FROM Kurssi k, Kurssisuoritus ks WHERE k.kurssitunnus = ks.kurssi
+        GROUP BY k.nimi, ks.arvosana">
+		  </query>
+		</div>
+
+		<p>Edellisessä kyselyssä on hieman tylsää se, että kurssien nimet ja arvosanat eivät ole järjestyksessä.</p>
+
+		<p><strong><em>Tulosten järjestäminen</em></strong></p>
+
+		<p>Kyselyn tulokset voi järjestää komennolla <code>ORDER BY</code>, jota seuraa järjestettävät sarakkeet. Sarakkeelle voi antaa myös lisämääreen <code>ASC</code> (<em>ascending</em>), joka kertoo että tulokset tulee järjestää nousevaan järjestykseen, ja <code>DESC</code> (<em>descending</em>), joka kertoo että tulokset tulee järjestää laskevaan järjestykseen. Oletuksena järjestys on laskeva.</p>
+
+		<p>Komento <code>ORDER BY</code> tulee kyselyn loppuun. Järjestetään edellisen kyselyn tulokset.</p>
+
+		<div ng-controller="weekThreeSqlController">
+
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT k.nimi AS kurssi, ks.arvosana AS arvosana, COUNT (ks.opiskelija) AS lukumäärä
+    FROM Kurssi k, Kurssisuoritus ks WHERE k.kurssitunnus = ks.kurssi
+        GROUP BY k.nimi, ks.arvosana ORDER BY k.nimi, ks.arvosana DESC">
+		  </query>
+		</div>
+
+
+		<p><strong><em>Yhteenvetokyselyissä käytettäviä funktioita</em></strong></p>
+
+		<p>Komento <code>COUNT(<em>sarake</em>)</code> on funktio, jolle annetaan joukko arvoja, ja joka palauttaa niiden pohjalta luodun arvon -- annetun joukon koon eli arvojen lukumäärän. Yhteenvetokyselyiden käytössä on myös nippu muita funktioita, joista seuraavassa listataan muutamia.</p>
+
+
+		<ul>
+		  <li><p>Keskiarvon laskeminen <code>AVG</code></p>
+
+		    <p>Funktio <code>AVG</code> laskee sille annettujen arvojen keskiarvon. Esimerkiksi kurssikohtaiset arvosanojen keskiarvot saa laskettua seuraavalla kyselyllä:</p>
+
+		    <div ng-controller="weekThreeSqlController">
+
+		      <query
+			 db="db"
+			 editable="false"
+			 query="SELECT kurssi, AVG(arvosana) AS keskiarvo
+    FROM Kurssisuoritus GROUP BY kurssi">
+		      </query>
+		    </div>
+
+		  </li>
+
+		  <li><p>Summan laskeminen <code>SUM</code></p>
+
+		    <p>Funktio <code>SUM</code> laskee sille annettujen arvojen summan. Esimerkiksi kysely seuraava kysely laskee opiskelijakohtaisen opintopistemäärän.</p>
+
+		    <div ng-controller="weekThreeSqlController">
+
+		      <query
+			 db="db"
+			 editable="false"
+			 query="SELECT o.nimi AS nimi, SUM(ks.opintopistemäärä) AS opintopisteitä
+    FROM Opiskelija o LEFT JOIN Kurssisuoritus ks
+        ON o.opiskelijanumero = ks.opiskelija
+    WHERE ks.arvosana > 0 GROUP BY o.nimi">
+		      </query>
+		    </div>
+
+
+		    <p>Kuten ehkä huomaat, kysely ei toimi tapauksissa, missä opiskelija on korottanut kurssin arvosanaa, sillä hänellä on tällöin useampia hyväksyttyjä merkintöjä samasta kurssista.</p></li>
+
+		  <li><p>Pienimmän arvon valitseminen <code>MIN</code></p>
+
+		    <p>Funktio <code>MIN</code> valitsee sille annettujen arvojen joukosta pienimmän arvon.</p></li>
+
+		  <li><p>Suurimman arvon valitseminen <code>MAX</code></p>
+
+		    <p>Funktio <code>MAX</code> valitsee sille annettujen arvojen joukosta suurimman arvon.</p></li>
+		</ul>
+
+		<aside class="info">
+		  <br/>
+
+		  <h1>Funktiot osana kyselyitä, joissa ryhmittelyä ei tehdä</h1>
+
+		  <p>Edellämainittuja funktioita voi käyttää osana käytännössä minkälaista kyselyä tahansa, jos kyselyn vastauksessa on selkeä yksittäinen sarake, jonka arvoja funktio käsittelee. Esimerkiksi kaikkien kurssien keskiarvon voi laskea seuraavasti:</p>
+
+		  <div ng-controller="weekThreeSqlController">
+
+		    <query
+		       db="db"
+		       editable="false"
+		       query="SELECT AVG(arvosana) FROM Kurssisuoritus">
+		    </query>
+		  </div>
+
+		  <p>Tässä on kuitenkin huomioitava se, että jos kyselyssä on useampia sarakkeita, tulee funktion pystyä laskemaan sarakekohtaisia tuloksia -- esimerkiksi ryhmittelyn kautta. Alla oleva kysely on esimerkki kyselystä, joka ei palauta oikeaa tulosta.</p>
+
+		  <div ng-controller="weekThreeSqlController">
+
+		    <query
+		       db="db"
+		       editable="false"
+		       query="SELECT kurssi, AVG(arvosana) FROM Kurssisuoritus">
+		    </query>
+		  </div>
+
+		</aside>
+
+
+
+		<h2>Kyselyn tulos on taulu</h2>
+
+		<p>Kaikki SQL-kyselyt tuottavat tuloksena taulun. Taulussa voi olla tasan yksi sarake ja rivi, tai vaikkapa tuhansia rivejä ja kymmeniä sarakkeita. Silloinkin, kun suoritamme yksinkertaisen haun, kuten vaikkapa "Hae kaikki kurssilla 'Tietokantojen perusteet' olevat opiskelijat", on haun tuloksena taulu.</p>
+
+		<p>Kaikki tekemämme SQL-kyselyt ovat liittyneet tauluihin. Emmekö siis voisi tehdä kyselyjä myös vastauksiin? Vastaus on kyllä.</p>
+
+		<p>Esimerkiksi vanhimman (tai vanhimmat, jos tämä ei ole yksikäsitteistä) opiskelijat löytää -- muunmuassa -- etsimällä kaikista pienimmän mahdollisimman syntymävuoden (kyselyn tulos on taulu), jonka jälkeen vastaustaulussa olevaa tulosta kaikkien opiskelijoiden syntymävuosiin.</p>
+
+		<div ng-controller="weekThreeSqlController">
+		  <query
+		     db="db"
+		     editable="false"
+		     query="SELECT * FROM Opiskelija
+    WHERE syntymävuosi
+        IN (SELECT MIN(syntymävuosi) FROM Opiskelija)">
+		  </query>
+		</div>
+
+
+
+		<h1>Tietokantataulujen luominen ja muokkaaminen</h1>
+
+		<p>Tähän mennessä tietokantataulut ovat olleet valmiiksi annettuna, eikä meidän ole tarvinnut pohtia niiden luomista. Tehdään korjausliike, ja tutustutaan tietokantataulujen -- ja sitä kautta -- oman tietokannan rakenteen määrittelyyn ja luomiseen.</p>
+
+		<h2>Tietokantataulun luominen</h2>
+
+		<p>Tietokantataulu luodaan SQL-komennolla <code>CREATE TABLE</code>, jota seuraa luotavan taulun nimi, ja suluissa attribuuttien eli sarakkeiden nimet sekä niiden tyypit pilkulla eroteltuna. Tyyppien määrittely ei ole kaikissa tietokannanhallintajärjestelmissä pakollista, jolloin tietokannanhallintajärjestelmä käyttää mahdollista oletustyyppiä.</p>
+
+		<p>Luodaan aiemmin tutuksi tullut Opiskelija-taulu.</p>
+
+		<div class="data-table">
+		  <h4>Opiskelija</h4>
+		  <table class="table">
+		    <thead>
+		      <tr>
+			<th>opiskelijanumero</th>
+			<th>nimi</th>
+			<th>syntymävuosi</th>
+			<th>pääaine</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+			<td>9999999</td>
+			<td>Pihla</td>
+			<td>1997</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		      <tr>
+ 			<td>9999998</td>
+			<td>Joni</td>
+			<td>1993</td>
+			<td>Tietojenkäsittelytiede</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+
+
+                <p>Taulu opiskelija saadaan luotua SQL-komennolla <code>CREATE TABLE Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine)</code> -- emme ota vielä kantaa sarakkeiden tietotyyppeihin, vaan määrittelemme vain nimet. Tällöin tietokannanhallintajärjestelmä ottaa vastuun sarakkeiden tyyppien asettamisesta -- jos se on mahdollista. </p>
+
+		<div ng-controller="noTablesSqlController">
+
+		  <togglable content="taulut" db="db">
+		    <table-info></table-info>
+		  </togglable>
+
+		  <query
+		     editable="false"
+		     done="tableOpiskelijaWasCreated"
+		     db="db"
+		     rows="3"
+		     query="CREATE TABLE Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine)">
+		  </query>
+
+
+		  <div ng-show="tableOpiskelijaWasCreated">
+
+		    <p>Juuri luotuun tauluun saa lisättyä uusia rivejä komennolla <code>INSERT INTO</code>, jota seuraa taulun nimi, sarakkeet suluissa eroteltuna, sekä uudelle riville asetettavat arvot.</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       query="INSERT INTO Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine)
+    VALUES ('01283581', 'Jack Bower', 1983, 'Tietojenkäsittelytiede')"
+		       done="opiskelijaAddedToTableOpiskelija">
+		    </query>
+		  </div>
+
+		  <div ng-show="opiskelijaAddedToTableOpiskelija">
+		    <p>Luodussa taulussa olevan tiedon hakeminen tapahtuu kuten ennenkin.</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       query="SELECT * FROM Opiskelija">
+		    </query>
+		  </div>
+
+
+		  <p><strong><em>Kurssi-taulun luominen</em></strong></p>
+
+		  <p>Luo tietokantaan taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>.</p>
+
+
+		  <togglable content="taulut" db="db">
+		    <table-info></table-info>
+		  </togglable>
+
+		  <query
+		     db="db"
+		     rows="3"
+		     done="tableKurssiWasCreated">
+		  </query>
+
+		  <div ng-show="tableKurssiWasCreated">
+		    <p>Lisää nyt tauluun Kurssi kurssi nimeltä "SQL-kielen perusteet", jonka kurssitunnus on "12345" ja kuvaus "SELECT 'Hei maailma';".</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       done="newCourseWasInserted">
+		    </query>
+
+		  </div>
+
+		  <div ng-show="newCourseWasInserted">
+
+		    <p>Tarkista vielä, että taulun luominen onnistui, ja että uusi kurssi löytyy tietokantataulusta.</p>
+
+		    <query
+		       db="db"
+		       rows="3">
+		    </query>
+
+		  </div>
+
+
+
+		  <aside class="info">
+		    <br/>
+		    <h1>Olemassaolevien taulujen listaaminen ja poisto</h1>
+
+		    <p>Tietokannanhallintajärjestelmät tyypillisesti tarjoavat mahdollisuuden olemassaolevien tietokantataulujen listaamiseen. Tämä toiminnallisuus on kuitenkin järjestelmäkohtaista -- esimerkiksi tässä materiaalissa käyttämässämme SQLite-versiossa taulujen tiedot löytyvät piilotetusta tietokantataulusta <code>sqlite_master</code>.</p>
+
+		    <query
+		       db="db"
+		       rows="2"
+		       query="SELECT * FROM sqlite_master">
+		    </query>
+
+
+		    <p>Olemassaolevan taulun poistaminen -- esimerkiksi silloin jos sen nimen on kirjoittanut väärin, onnistuu komennolla <code>DROP TABLE</code>, mitä seuraa taulun nimi. Voit kokeilla sitä seuraavassa -- näet poistuiko tietokantataulu kyselyn <code>SELECT * FROM sqlite_master</code> avulla.</p>
+
+		    <query
+		       db="db"
+		       rows="2">
+		    </query>
+
+		  </aside>
+		</div>
+
+
+		<h2>Attribuuttien datatyypit</h2>
+
+                <p>Jokaisella attribuutilla tulee olla nimi sekä datatyyppi. Jos datatyyppiä ei määritellä, voi tietokannanhallintajärjestelmä määritellä sen itse -- esimerkiksi SQLite pyrkii päättelemään attribuutin tyypin dynaamisesti, mutta useimmat tietokannanhallintajärjestelmät eivät tällaista päättelyä tee.</p>
+
+		<p>Tietokantaan säilöttävä tieto voi olla montaa eri muotoa, esimerkiksi merkkijonoja, numeroita, binäärimuodossa olevia tiedostoja, sekä päivämääriä. Tietokannan suunnittelijan tehtävänä on päättää, minkämuotoista dataa missäkin sarakkeessa on.</p>
+
+                <p>Puhekielessä voidaan puhua sarakkeen tyypistä, sillä sarakkeen tyyppi määrää millaista tietoa sarakkeeseen tallennetaan. Käytännössä tietokantataulua luotaessa sarakkeen määrittelyssä annettavat tiedot kertovat tietokannanhallintajärjestelmälle siitä, että minkälaista tietoa sarakkeeseen voidaan lisätä, ja toisaalta samalla minkälaista tietoa sarakkeeseen ei voida lisätä. Sarakkeen tyyppi vaikuttaa myös toiminnallisuuksiin -- esimerkiksi keskiarvon laskeminen merkkijonotyyppisiä arvoja sisältävästä sarakkeesta ei todennäköisesti ole hyödyllistä.</p>
+
+		<p>Tyypilliset datatyypit ovat seuraavat:</p>
+
+		<ul>
+		  <li><strong>varchar(n)</strong> korkeintaan <em>n</em> merkin pituinen merkkijono.</li>
+		  <li><strong>integer</strong> kokonaisluku</li>
+		  <li><strong>float</strong> liukuluku eli desimaaliluku</li>
+		  <li><strong>date</strong> päivämäärä, tallentaa vuoden, kuukauden ja päivän</li>
+		  <li><strong>timestamp</strong> aikaleima, tallentaa vuoden, kuukauden, päivän, tunnit, minuutit ja sekunnit -- mahdollisesti myös tarkempia arvoja</li>
+		</ul>
+
+                <p>Taulua luodessa sarakkeen tyyppi määritellään lisäämällä datatyypin nimi sarakkeen nimen perään. Esimerkiksi Opiskelija-taulua luodessa opiskelijanumero voitaisiin määritellä kokonaisluvuksi, nimi korkeintaan 200 merkkiä pitkäksi merkkijonoksi, syntymävuosi päivämääräksi ja pääaine korkeintaan 50 merkkiä pitkäksi merkkijonoksi seuraavasti:</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija
+(
+    opiskelijanumero integer,
+    nimi varchar(200),
+    syntymävuosi date,
+    pääaine varchar(50)
+)
+</pre>
+
+                <p>Nyt -- riippuen käytetystä tietokannanhallintajärjestelmästä -- sarakkeeseen opiskelijanumero ei voisi esimerkiksi lisätä merkkijonoa, sillä se on kokonaisluku. Tämä johtaa tilanteeseen, missä tietokannanhallintajärjestelmä itsessään varoittaa tiedon lisääjää yksinkertaisista virheistä.</p>
+
+
+		<aside class="info">
+		  <br/>
+
+		  <h1>Olemassaolevien attribuuttien datatyypin selvittäminen</h1>
+
+
+		  <p>Attribuutin -- tai sarakkeen -- datatyypin kysymiseen tietokannalta <a href="http://stackoverflow.com/questions/13405572/sql-statement-to-get-column-type" target="_blank">ei ole yhtä tapaa</a>, vaan tapa liittyy käytettävään tietokannanhallintajärjestelmään. Käyttämässämme SQLite-versiossa sarakkeen tyypin saa selville kyselyllä <code>PRAGMA TABLE_INFO(<em>TaulunNimi</em>)</code>, missä <em>TaulunNimi</em> on tarkasteltavan taulun nimi.</p>
+
+		  <div ng-controller="noTablesSqlController">
+
+		    <p>Luo ensin tarkasteltava tietokantataulu.</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       done="tableCreated">
+		    </query>
+
+		    <div ng-show="tableCreated">
+
+
+		      <togglable content="taulut" db="db">
+			<table-info></table-info>
+		      </togglable>
+
+		      <p>Kun tietokantataulu on luotu, saat tarkasteltua sen sisältöä <code>PRAGMA</code>-komennolla.</p>
+
+		      <query
+			 db="db"
+			 rows="3"
+			 query="PRAGMA TABLE_INFO(LuodunTaulunNimi)">
+		      </query>
+		    </div>
+
+		  </div>
+		</aside>
+
+
+                <p><strong><em>Kurssi-taulun luominen sarakkeiden tyypeillä</em></strong></p>
+
+		<p>Luo taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>. Kurssitunnuksen tulee olla kokonaisluku, nimen merkkijono, ja kuvauksen merkkijono.</p>
+
+
+		<div ng-controller="noTablesSqlController">
+
+		  <query
+		     db="db"
+		     rows="3"
+		     done="tableCreated">
+		  </query>
+
+		  <div ng-show="tableCreated">
+
+
+		    <togglable content="taulut" db="db">
+		      <table-info></table-info>
+		    </togglable>
+
+		    <p>Varmista vielä PRAGMA-komennolla, että sarakkeiden tyypit ovat halutut.</p>
+
+		    <query
+		       db="db"
+		       rows="3">
+		    </query>
+		  </div>
+		</div>
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>Tietokannanhallintajärjestelmien datatyyppejä</h1>
+
+		  <p>Eri tietokannanhallintajärjestelmät kuten <code>SQLite</code>, <code>MySQL</code> ja <code>PostgreSQL</code> tarjoavat hieman erilaisia datatyyppejä ohjelmoijan käyttöön. Tutustu seuraaviin dokumentteihin, missä näistä kerrotaan enemmän:</p>
+
+
+		  <ul>
+		    <li><a href="https://www.sqlite.org/datatype3.html" target="_blank">https://www.sqlite.org/datatype3.html</a></li>
+		    <li><a href="http://www.w3schools.com/sql/sql_datatypes.asp" target="_blank">http://www.w3schools.com/sql/sql_datatypes.asp</a></li>
+		  </ul>
+		</aside>
+
+
+		<h2>Rajoitteet ja avaimet</h2>
+
+		<p>Kun olemme aiemmin luoneet tietokantakaavioita käsitekaavioista, olemme määritelleet tietokantatauluille yksilöivän <em>pääavaimen</em>. Pääavain on taulukohtainen tunniste, joka on uniikki jokaiselle taulun riville, jonka lisäksi sen arvo ei saa olla tyhjä (<em>null</em>) millään rivillä. Pääavaimeksi valitaan joko olemassaoleva taulun sarake, tai tauluun luodaan uusi sarake.</p>
+
+		<p><strong><em>Pääavaimen määrittely</em></strong></p>
+
+		<p>Pääavain määritellään tietokantataulun luonnin yhteydessä lisäämällä sarakkeen tyypin perään rajoite <code>PRIMARY KEY</code>. Tämä tarkoittaa, että sarakkeen arvo on uniikki, ja että se ei saa koskaan olla tyhjä. Täydennetään aiempaa opiskelijan määrittelyä siten, että opiskelijanumerosta tehdään Opiskelija-taulun pääavain</p>
+
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija
+(
+    opiskelijanumero integer PRIMARY KEY,
+    nimi varchar(200),
+    syntymävuosi date,
+    pääaine varchar(50)
+)
+</pre>
+
+
+		<div ng-controller="noTablesSqlController">
+
+		  <p>Kokeillaan edelläolevaa komentoa käytännössä.</p>
+
+		  <query
+		     db="db"
+		     rows="7"
+		     done="tableCreated"
+		     editable="false"
+		     query="CREATE TABLE Opiskelija
+(
+    opiskelijanumero integer PRIMARY KEY,
+    nimi varchar(200),
+    syntymävuosi date,
+    pääaine varchar(50)
+)">
+		  </query>
+
+		  <div ng-show="tableCreated">
+
+		    <togglable content="taulut" db="db">
+		      <table-info></table-info>
+		    </togglable>
+
+		    <p>Lisätään seuraavaksi tietokantatauluun uusi opiskelija nimeltä <code>Ada Lovelace</code>. Seuraavalla komennolla vain tietokantataulun kenttään <code>nimi</code> asetetaan arvo.</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       query="INSERT INTO Opiskelija (nimi) VALUES ('Ada Lovelace')"
+		       done="studentInserted">
+		    </query>
+		  </div>
+
+		  <div ng-show="studentInserted">
+		    <p>Listaa nyt taulussa olevat opiskelijat. Mitä huomaat jos opiskelijoita lisätään tietokantatauluun enemmän?</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       query="SELECT * FROM Opiskelija"
+		       done="studentsListed">
+		    </query>
+		  </div>
+
+		  <div ng-show="studentsListed">
+		    <p>Koska tietokantatauluun on määritelty avain, joka on uniikki, ei taulun sarakkeessa <code>opiskelijanumero</code> voi olla kahta samaa arvoa. Kokeile tätä painamalla alla olevaa nappia ensin kerran -- jolloin opiskelija lisätään -- ja sitten vielä toisen kerran. Mitä virheviesti kertoo?</p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       query="INSERT INTO Opiskelija (opiskelijanumero, nimi)
+    VALUES (999, 'Beezow Doo-Doo Zopittybop-Bop-Bop')">
+		    </query>
+
+		  </div>
+
+		</div>
+
+
+		<aside class="info">
+
+		  <br/>
+
+		  <h1>Pääavaimen arvojen automaattinen luonti</h1>
+
+		  <p>Tietyt tietokannanhallintajärjestelmät tarjoavat tuen automaattiselle pääavaimen arvojen luomiselle. Esimerkiksi SQLite luo automaattisesti kokonaislukutyyppiselle sarakkeelle arvoja, jos sarake on määritelty pääavaimeksi, ja ohjelmoija ei tauluun tietoa lisätessään arvoja erikseen määrittele. Vastaava toiminnallisuus löytyy myös useista muista tietokannanhallintajärjestelmistä -- tutustu esimerkiksi <a href="https://mariadb.com/kb/en/mariadb/auto_increment/" target="_blank">MariaDB:n dokumentaatioon asiasta</a>.</p>
+
+		</aside>
+
+                <p><strong><em>Kurssi-taulun luominen sarakkeiden tyypeillä ja pääavaimella</em></strong></p>
+
+		<p>Luo taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>. Kurssitunnuksen tulee olla kokonaisluku, nimen merkkijono, ja kuvauksen merkkijono. Tämän lisäksi, kurssitunnuksen tulee olla pääavain.</p>
+
+
+		<div ng-controller="noTablesSqlController">
+
+		  <query
+		     db="db"
+		     rows="6"
+		     done="tableCreated">
+		  </query>
+
+		  <div ng-show="tableCreated">
+
+
+		    <togglable content="taulut" db="db">
+		      <table-info></table-info>
+		    </togglable>
+
+		    <p>Seuraavan kyselyn useampaan otteeseen suorittamisen pitäisi epäonnistua, sillä tietokantataulun kurssitunnus-sarakkeen pitäisi olla olla pääavain, ja sen takia uniikki. </p>
+
+		    <query
+		       db="db"
+		       rows="3"
+		       query="INSERT INTO Kurssi (kurssitunnus, nimi) VALUES (42, 'Meaning of Life')">
+		    </query>
+		  </div>
+		</div>
+
+
+                <p>Jokaisella taululla voi olla vain yksi määritelty pääavain. Joskus kuitenkin haluamme, että pääavain liittyy useampaan sarakkeeseen, jolloin sarakkeiden yhdistelmän tulee olla uniikki. Voimme esimerkiksi haluta rajoittaa opiskelijoiden kurssi-ilmoittautumisia siten, että jokainen opiskelija voi ilmoittautua vain kerran tietylle kurssille. Tämä onnistuisi kuvitteellisen <em>KurssiIlmoittautuminen</em>-taulun kautta siten, että taulun pääavaimena toimisi opiskelijanumeron ja kurssin yhdistelmä.</p>
+
+<pre class="sh_sql">
+CREATE TABLE KurssiIlmoittautuminen
+(
+    opiskelijanumero integer,
+    kurssi integer,
+    PRIMARY KEY (opiskelija, kurssi)
+)
+</pre>
+
+                <p>Nyt taulussa KurssiIlmoittautuminen voi olla vain yksi samanlainen <code>opiskelijanumero</code>-<code>kurssi</code> -arvopari, jolloin opiskelija voi ilmoittautua kurssille vain kerran.</p>
+
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>Pääavaimen valinta.</h1>
+
+		  <p>Tietokantataulun pääavaimen valinta on herättänyt paljon keskustelua. Alla on muutamia linkkejä teemaan liittyen:</p>
+
+		  <ul>
+		    <li><a href="http://www.techrepublic.com/article/the-great-primary-key-debate/" target="_blank">The great primary key debate</a></li>
+		    <li><a href="http://www.agiledata.org/essays/keys.html" target="_blank">Choosing a primary key: Natural or surrogate?</a></li>
+		    <li><a href="http://dba.stackexchange.com/questions/10383/sql-server-primary-keys-advice-to-my-whitepaper-needed" target="_blank">Tips for explaining primary keys to junior developers?</a></li>
+		  </ul>
+		</aside>
+
+		<p><strong><em>Uniikkius ja arvon pakollinen määrittely</em></strong></em>
+
+                <p>Tietokantataulun sarakkeille voidaan määritellä myös muita rajoitteita, kuten se, että sarakkeen arvon tulee olla uniikki, tai että sarakkeessa on pakko olla arvo. Sarakkeen uniikkius määritellään komennolla <code>UNIQUE</code>, joka seuraa tyyppiä. Vastaavasti se, että sarakkeessa on pakko olla arvo määritellään komennolla <code>NOT NULL</code>.</p>
+
+		<p>Jos haluamme esimerkiksi lisätä Opiskelija-tauluun rajoitteet, missä määritellään se, että nimeä ja syntymäaikaa ei saa jättää määrittelemättä, lisätään niihin <code>NOT NULL</code> määreet.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija
+(
+    opiskelijanumero integer PRIMARY KEY,
+    nimi varchar(200) NOT NULL,
+    syntymävuosi date NOT NULL,
+    pääaine varchar(50)
+)
+</pre>
+
+                <p>Toisaalta, jos määrittelisimme ylläolevan lisäksi säännöt, joiden mukaan nimen ja syntymävuoden tulisi olla uniikkeja, olisi määrittely seuraava.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija
+(
+    opiskelijanumero integer PRIMARY KEY,
+    nimi varchar(200) NOT NULL UNIQUE,
+    syntymävuosi date NOT NULL UNIQUE,
+    pääaine varchar(50)
+)
+</pre>
+
+                <p>Tämä ei kuitenkaan olisi kovin fiksua, sillä yllä määriteltävässä taulussa yhdelläkään opiskelijalla ei saisi olla samaa nimeä jonkun toisen kanssa. Vastaavasti, sama syntymävuosi (tai aika) johtaisi virhetilanteeseen.</p>
+
+
+		<aside class="info">
+		  <br/>
+		  <h1>CHECK</h1>
+
+		  <p>Edellämainittujen rajoitteiden lisäksi käytössä on mm. rajoite <code>CHECK</code>, jonka avulla voidaan rajoittaa arvoja esimerkiksi tietylle arvovälille. Voimme esimerkiksi luoda Opiskelija-tauluun säännön, jonka mukaan jokaisen opiskelijanumeron tulee olla suurempi kuin 0.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija
+(
+    opiskelijanumero integer PRIMARY KEY CHECK (opiskelijanumero &gt; 0),
+    nimi varchar(200) NOT NULL,
+    syntymävuosi date NOT NULL,
+    pääaine varchar(50)
+)
+</pre>
+
+                  <p>Rajoitteet voidaan määritellä myös sarakemäärittelyiden jälkeen. Tämä on näppärää esimerkiksi silloin, jos rajoitteita on useampia. Tehdään erillinen tarkistus, joss varmistetaan, että jokainen nimi on yli 2 merkkiä pitkä, ja opiskelijanumero on aina suurempi kuin 0.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija
+(
+    opiskelijanumero integer PRIMARY KEY,
+    nimi varchar(200) NOT NULL,
+    syntymävuosi date NOT NULL,
+    pääaine varchar(50),
+    CONSTRAINT <em>saannonNimi</em> CHECK (opiskelijanumero &gt; 0 AND LENGTH(nimi) &gt; 2)
+)
+</pre>
+
+		  <p><em>Funktion <code>LENGTH</code> kirjoitusasu riippuu järjestelmästä, esimerkiksi MySQL:ssä se kirjoitetaan muodossa <code>LEN</code>.</em></p>
+
+		</aside>
+
+
+
+		<p><strong><em>Viiteavainten määrittely</em></strong></p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>SQLite ja viiteavaimet</h1>
+
+		  <p>Käytössämme olevan SQLiten kolmosversiossa viiteavaimiin liittyvät tarkistukset ovat oletuksena poissa päältä. Tarkastukset saadaan päälle seuraavalla komennolla:</p>
+
+		  <pre class="sh_sql">PRAGMA foreign_keys = ON;</pre>
+
+		  <p>Oletamme, että komento on suoritettu.</p>
+
+		</aside>
+
+                <p>Tietokantataulujen viiteavaimet ovat sarakkeita, joissa olevat arvot viittaavat toisissa tauluissa oleviin pääavaimiin. Tietokantataulua määriteltäessä viiteavaimet listataan sarakkeiden määrittelyn jälkeen. Jokaisen viiteavaimen yhteydessä kerrotaan sekä luotavan taulun sarake -- eli sarake, joka on viiteavain -- että taulu ja sarake, johon viiteavaimella viitataan. Viiteavaimen määrittely tapahtuu komennolla <code>FOREIGN KEY(<em>sarake</em>) REFERENCES <em>ViitattavaTaulu(viitattavaSarake)</em></code>.</p>
+
+		<p>Jos tietokantataulut Opiskelija ja Kurssi ovat määritelty seuraavasti:</p>
+
+<pre class="sh_sql">
+CREATE TABLE Opiskelija
+(
+    opiskelijanumero integer PRIMARY KEY,
+    nimi varchar(200) NOT NULL,
+    syntymävuosi date NOT NULL,
+    pääaine varchar(50)
+);
+
+CREATE TABLE Kurssi
+(
+    kurssitunnus integer PRIMARY KEY,
+    nimi varchar(200) NOT NULL,
+    kuvaus varchar(3000)
+);</pre>
+
+                <p>Voidaan taulu kurssisuoritus, joka viittaa sekä opiskelijaan, että kurssiin, määritellä seuraavasti.</p>
+
+<pre class="sh_sql">
+CREATE TABLE Kurssisuoritus
+(
+    opiskelija integer NOT NULL,
+    kurssi integer NOT NULL,
+    päivämäärä date NOT NULL,
+    arvosana integer NOT NULL,
+    opintopistemäärä integer NOT NULL,
+    FOREIGN KEY(opiskelija) REFERENCES Opiskelija(opiskelijanumero),
+    FOREIGN KEY(kurssi) REFERENCES Kurssi(kurssitunnus)
+);
+</pre>
+
+ 		<p>Viiteavaimet ovat siis sarakkeita siinä missä muutkin sarakkeet, mutta niille määritellään eriseen rajoitteet, jotka kertovat, että ne ovat viiteavaimia. Taulussa käytettävien viiteavainten määrä ei käytännössä ole rajattu -- voi olla, että niitä ei ole yhtäkään, tai niitä voi olla useita. Yllä viiteavainsarakkeille <code>opiskelija</code> ja <code>kurssi</code> on lisäksi määritelty <code>NOT NULL</code>-rajoitteet, joiden avulla määritellään että sarakkeiden arvot eivät saa jäädä tyhjiksi.</p>
+
+		<div ng-controller="noTablesSqlController">
+
+		  <p>Kokeillaan edellä nähtyä käytännössä. Luodaan ensin tietokantataulut Opiskelija ja Kurssi, sekä lisätään niihin muutama rivi.</p>
+
+		  <query
+		     db="db"
+		     rows="20"
+		     editable="false"
+		     query="PRAGMA foreign_keys = ON;
+
+CREATE TABLE Opiskelija (
+    opiskelijanumero integer PRIMARY KEY,
+    nimi varchar(200) NOT NULL,
+    syntymävuosi date NOT NULL,
+    pääaine varchar(50)
+);
+
+CREATE TABLE Kurssi (
+    kurssitunnus integer PRIMARY KEY,
+    nimi varchar(200) NOT NULL,
+    kuvaus varchar(3000)
+);
+
+INSERT INTO Opiskelija (nimi, syntymävuosi) VALUES ('Ada', '1997');
+INSERT INTO Opiskelija (nimi, syntymävuosi) VALUES ('Pihla', '1998');
+INSERT INTO Kurssi (nimi) VALUES ('Ohpe');
+INSERT INTO Kurssi (nimi) VALUES ('Tikape');"
+		     done="tablesCreated">
+		  </query>
+
+		  <div ng-show="tablesCreated">
+
+		    <p>Nyt käytössämme on taulut Opiskelija ja Kurssi, jonka lisäksi niissä on kummassakin muutama rivi. Luodaan seuraavaksi taulu Kurssisuoritus, jossa on viiteavaimet kumpaankin edellä mainuttuun tauluun.</p>
+
+
+		    <togglable content="taulut" db="db">
+		      <table-info></table-info>
+		    </togglable>
+
+		    <query
+		       db="db"
+		       rows="10"
+		       editable="false"
+		       query="CREATE TABLE Kurssisuoritus
+(
+    opiskelija integer NOT NULL,
+    kurssi integer NOT NULL,
+    päivämäärä date NOT NULL,
+    arvosana integer NOT NULL,
+    opintopistemäärä integer NOT NULL,
+    FOREIGN KEY(opiskelija) REFERENCES Opiskelija(opiskelijanumero),
+    FOREIGN KEY(kurssi) REFERENCES Kurssi(kurssitunnus)
+);"
+
+		       done="kurssisuoritusCreated">
+		    </query>
+		  </div>
+
+
+		  <div ng-show="kurssisuoritusCreated">
+
+		    <p>Nyt käytössä on tietokantataulut Opiskelija, Kurssi, ja Kurssisuoritus. Kurssisuoritus-taulussa on kaksi viiteavainta -- toinen viittaa tauluun Opiskelija, ja toinen tauluun Kurssi. Tutki ensin taulujen Opiskelija ja Kurssi sisältöjä, ja lisää sen jälkeen tauluun Kurssisuoritus suoritusmerkintä kurssista Tikape opiskelijalle Ada. Voit kokeilla ensin mitä tapahtuu, jos et aseta viiteavaimia oikein.</p>
+
+		    <query
+		       db="db"
+		       rows="3">
+		    </query>
+		  </div>
+		</div>
+
+		<p><strong><em>Tehtävän ja Kurssitehtävän lisääminen.</em></strong></p>
+
+                <p>Harjoitellaan edellä nähtyjä asioita vielä hieman. Käytämme pohjana seuraavaa tietokantakaaviota.</p>
+
+		<figure>
+		  <img src="img/viikko3/tietokantakaavio-tehtavasuorituksella.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]1-*[Kurssisuoritus|(fk) opiskelija: Opiskelija;(fk) kurssi: Kurssi;päivämäärä;arvosana;opintopistemäärä]
+[Kurssisuoritus]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]
+[Tehtävä|(pk) tunnus;nimi;kuvaus]1-*[Kurssitehtävä|(pk) tunnus; (fk) tehtävä: Tehtävä; (fk) kurssi: Kurssi]
+[Kurssitehtävä]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]
+[Tehtäväsuoritus|(fk) opiskelija: Opiskelija; (fk) tehtävä: Kurssitehtävä; suoritusaika]
+[Tehtäväsuoritus]*-1[Opiskelija]
+[Tehtäväsuoritus]*-1[Kurssitehtävä]"/>
+
+		</figure>
+
+                <p></p>
+
+		<hr/>
+
+                <p>Alla olevaan kyselylaatikkoon on määritelty kysely, minkä avulla luodaan tietokantataulu Kurssi sekä lisätään sinne kurssit Ohpe ja Tikape.</p>
+
+		<div ng-controller="noTablesSqlController">
+
+		  <query
+		     db="db"
+		     rows="11"
+		     editable="false"
+		     query="PRAGMA foreign_keys = ON;
+
+CREATE TABLE Kurssi (
+    kurssitunnus integer PRIMARY KEY,
+    nimi varchar(200) NOT NULL,
+    kuvaus varchar(3000)
+);
+
+INSERT INTO Kurssi (nimi) VALUES ('Ohpe');
+INSERT INTO Kurssi (nimi) VALUES ('Tikape');"
+		     done="tablesCreated">
+		  </query>
+
+		  <div ng-show="tablesCreated">
+
+		    <p>Toteuta nyt taulut Kurssitehtävä ja Tehtävä siten, että niissä on määriteltynä sekä pääavaimet että viiteavaimet. Pohdi, missä järjestyksessä taulut tulee toteuttaa, jotta saat viiteavaimet määriteltyä oikein.</p>
+
+
+		    <togglable content="taulut" db="db">
+                      <table-info></table-info>
+		    </togglable>
+
+
+		    <query
+		       db="db"
+		       rows="9"
+		       query=""
+		       done="kurssiTehtavaAndTehtavaCreated">
+		    </query>
+		  </div>
+
+		  <div ng-show="kurssiTehtavaAndTehtavaCreated">
+
+		    <p>Lisää nyt Tehtävä-tauluun muutama rivi, ja määrittele olemassaoleville kursseille muutamia tehtäviä.</p>
+
+		    <query
+		       db="db"
+		       rows="4">
+		    </query>
+		  </div>
+		</div>
 
 
 <!--	
+		<p>Tätä harjoitellaan lisää kurssin tehtävissä.</p>
+
+
+		<h1>Ohjelmalliset tietokantakyselyt ja viitteet taulujen välillä</h1>
+
+
+		
+
+
         <figure>
 	  <img src="img/paivitysraja.jpg" alt="päivitysraja ::
 C
@@ -2599,359 +3619,6 @@ statement.execute();
 
 		</aside>
 
-		<header>
-		  <h1 id="viikko4">Viikko 4</h1>
-		</header>
-
-		<h1>Ali- ja yhteenvetokyselyt sekä tilastojen luominen</h1>
-
-
-		<p>Osaamme hakea yhdestä tai useammasta tietokantataulusta tietoa, sekä rajata kyselyiden palauttamia tuloksia erilaisilla ehdoilla. On kuitenkin kysymyksiä, joihin vastaaminen nykyisillä työvälineillämme on melko hankalaa. Miten esimerkiksi ratkaisisit seuraavat ongelmat?</p>
-
-		<ul>
-		  <li>Mitkä tehtävät ovat sellaisia, joita kursseilla heikommin menestyneet opiskelijat -- esimerkiksi hylätyn arvosanan tai ykkösen saaneet -- eivät ole saaneet tehtyä?</li>
-		  <li>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</li>
-		  <li>Kuinka monta opiskelijaa pääsi tietyn kurssin läpi?</li>
-		  <li>Mikä on jokaisen kurssin keskiarvo?</li>
-		</ul>
-
-		<p>Yhteistä edellä olevilla kysymyksillä on se, että lähes kaikki niistä ovat oikeastaan yhteenvetokyselyjä. Tutustutaan kohta näiden käsittelyyn liittyviin menetelmiin.</p>
-
-		<aside class="info">
-		  <br/>
-		  <h1>SQL-kyselyt lyhyemmiksi</h1>
-
-		  <p>Olemme -- tarkoituksella -- käyttäneet SQL-kyselykielestä verboosia kirjoitusasua, missä myös ei-pakollisia komentoja on kirjoitettu kyselyihin niiden selkeyttämiseksi. Jos olet tykästynyt aiemmin käytettyyn verboosiin kirjoitusasuun, ei siitä tarvitse vaihtaa pois. Alla on kuitenkin esitelty vinkkejä SQL-kyselyiden lyhentämiseksi:</p>
-
-		  <ul>
-		    <li><p>Taulujen nimeäminen SQL-kyselyissä.</p> <p>Kirjoittaessamme tauluja yhdisteleviä kysejä kuten <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> taulujen nimet toistuvat. Tauluja voidaan uudelleennimetä SQL-kyselyissä asettamalla taulun nimen jälkeen kyselyn aikana käytettävän nimi. Seuraavassa esimerkissä taulu Opiskelija on uudelleennimetty <code>o</code>:ksi, ja taulu Kurssisuoritus on uudelleennimetty <code>k</code>:ksi.</p>
-
-<pre class="sh_sql">
-SELECT * FROM Opiskelija o, Kurssisuoritus k WHERE o.opiskelijanumero = k.opiskelija</pre></li>
-
-		    <li><p>Sarakkeiden nimeäminen SQL-kyselyissä.</p><p>Olemme käyttäneet avainsanaa <code>AS</code> taulun sarakkeiden uudelleennimennässä. Kysely <code>SELECT nimi FROM Opiskelija</code> palauttaa sarakkeen, jonka nimi on 'nimi', ja jossa on kaikkien Opiskelija-taulussa olevien opiskelijoiden nimet. Toisaalta, kysely <code>SELECT nimi AS opiskelija FROM Opiskelija</code> nimeää sarakkeen 'nimi' tulostuksessa uudestaan, jolloin sarakkeen 'nimi' otsikoksi tulee 'opiskelija' -- rivit sisältävät opiskelijoiden nimet. Avainsanan <code>AS</code> voi myös jättää pois. Alla oleva kysely tulostaa Opiskelija-taulun nimi-sarakkeen sisällön, mutta siten, että sarakkeen otsikkona on 'opiskelija'.</p><br/>
-
-<pre class="sh_sql">
-SELECT nimi opiskelija FROM Opiskelija</pre>
-
-		      <p>Sarakkeet erotellaan pilkulla kuten aiemminkin.</p>
-
-<pre class="sh_sql">
-SELECT nimi opiskelija, syntymävuosi vuosi FROM Opiskelija</pre>
-
-		      <p>Kyselyssä voi luonnollisesti sekä lyhentää taulun nimeä, että jättää <code>AS</code> avainsanan pois:</p>
-
-<pre class="sh_sql">
-SELECT o.nimi opiskelija, k.arvosana
-    FROM Opiskelija o, Kurssisuoritus k
-    WHERE o.opiskelijanumero = k.opiskelija</pre></li>
-
-		    <li><p>INNER JOIN ja JOIN</p>
-
-		      <p>Liitoskyselyn INNER JOIN voi kirjoittaa muodossa JOIN.</p></li>
-		  </ul>
-		</aside>
-
-
-		<h2>Alikyselyt</h2>
-
-		<p>Alikyselyt ovat nimensä mukaan kyselyn osana suoritettavia alikyselyitä, joiden tuloksia käytetään osana pääkyselyä. Pohditaan kysymystä <em>Miten haen opiskelijat, jotka eivät ole vielä osallistuneet yhdellekään kurssille?</em>, ja käytetään siihen ensin aiemmin tutuksi tullutta tapaa, eli LEFT JOIN -kyselyä. Yhdistetään opiskelijaa ja kurssisuoritusta kuvaavat taulut LEFT JOIN-kyselyllä siten, että myös opiskelijat, joilla ei ole suorituksia tulevat mukaan vastaukseen. Tämän jälkeen, jätetään vastaukseen vain ne rivit, joilla kurssisuoritukseen liittyvät tiedot ovat tyhjiä -- tämä onnistuu katsomalla mitä tahansa kurssisuoritus-taulun saraketta, ja tarkistamalla onko se tyhjä, eli <em>null</em>. Tämä onnistuu seuraavasti:</p>
-
-
-		<div ng-controller="weekThreeSqlController">
-
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT opiskelijanumero FROM Opiskelija o
-    LEFT JOIN Kurssisuoritus k
-    ON o.opiskelijanumero = k.opiskelija
-    WHERE k.kurssi IS null">
-		  </query>
-
-		</div>
-
-		<p>Toinen vaihehtoehto edellisen kyselyn toteuttamiseen on toteuttaa kysely, joka hakee kaikki ne opiskelijat, jotka eivät ole kurssisuorituksia saaneiden opiskelijoiden joukossa. Tässä on oleellisesti kaksi kyselyä: (1) hae opiskelijat, joilla on kurssisuoritus, ja (2) hae opiskelijat, jotka eivät ole edellisen kyselyn palauttamassa joukossa.</p>
-
-		<p><strong><em>Alikyselyn toteuttaminen</em></strong></p>
-
-		<p>Alikyselyn toteuttamiseksi voimme määritellä kyselyn WHERE-osaan sarakkeen nimen, jota seuraa avainsana <em>NOT IN</em>, jota taas seuraa suluissa oleva kysely.</p>
-
-
-		<div ng-controller="weekThreeSqlController">
-
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT opiskelijanumero FROM Opiskelija o
-    WHERE o.opiskelijanumero
-        NOT IN (SELECT opiskelija FROM Kurssisuoritus)"
-		     done="unlockListCoursesWithNoAssignments">
-		  </query>
-
-		  <div ng-show="unlockListCoursesWithNoAssignments">
-
-		    <p>Tee nyt kysely, joka listaa kaikki kurssit, joilla ei ole yhtään tehtävää.</p>
-
-		    <query
-		       db="db"
-		       query="">
-		    </query>
-		  </div>
-
-		</div>
-
-		<p>Käytännössä alikyselyt tuottavat kyselyn tuloksena taulun, josta pääkyselyssä tehtävä kysely tehdään. Ylläolevassa esimerkissä alikyselyn tuottamassa taulussa on vain yksi sarake, jossa on kurssisuorituksen saaneiden opiskelijoiden opiskelijanumerot.</p>
-
-		<p>Määreen <code>NOT IN</code>, joka tarkastaa että valitut arvot eivät ole alikyselyn tuottamassa taulussa, lisäksi käytössä on määre <code>IN</code>. Määreen <code>IN</code> avulla voidaan luoda ehto, jolla tarkastetaan, että valitut arvot ovat annetussa joukossa tai taulussa. Esimerkiksi alla haetaan kaikki kurssisuoritukset, joissa arvosana on kolme tai viisi.</p>
-
-		<div ng-controller="weekThreeSqlController">
-
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT * FROM Kurssisuoritus WHERE arvosana IN (5, 3)">
-		  </query>
-		</div>
-
-		<aside class="info">
-		  <br/>
-
-		  <h1>EXISTS ja NOT EXISTS</h1>
-
-		  <p>Määreiden IN ja NOT IN lisäksi alikyselyissä voidaan käyttää määreitä EXISTS ja NOT EXISTS, joiden avulla voidaan rajata hakujoukkoa alikyselyssä olevan ehdon perusteella. Voimme esimerkiksi kirjoittaa aiemmin kirjoitetun kursseja suorittamattomia opiskelijoita etsivän kyselyn siten, että jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla tarkistetaan, että sitä ei löydy taulusta Kurssisuoritus.</p>
-
-		  <div ng-controller="weekThreeSqlController">
-
-		    <query
-		       db="db"
-		       editable="false"
-		       query="SELECT opiskelijanumero FROM Opiskelija o
-    WHERE NOT EXISTS
-        (SELECT opiskelija FROM Kurssisuoritus k
-        WHERE k.opiskelija = o.opiskelijanumero)">
-		    </query>
-                  </div>
-
-		  <p>Edellä oleva kysely tarkistaa jokaisen Opiskelija-taulussa olevan opiskelijanumeron kohdalla ettei sitä löydy Kurssisuoritus-taulun opiskelija-sarakkeesta. Käytännössä -- jos tietokantamoottori ei optimoi kyselyä -- jokainen opiskelija-taulun rivi aiheuttaa uuden kyselyn kurssisuoritus-tauluun, mikä tekee kyselystä tehottoman.</p>
-
-		</aside>
-
-
-		<h2>Yhteenvetokyselyt</h2>
-
-		<p>Yhteenvetokyselyiden avulla kyselyiden tuloksia ryhmitellään sarakkeissa olevien arvojen perusteella, jonka jälkeen luoduille ryhmille tehdään erilaisia yhteenvetokyselyitä. Voimme esimerkiksi haluta selvittää opiskelijoiden määrän pääaineittain ryhmiteltynä -- toisin sanoen, listata pääaineet ja opiskelijalukumäärät. Kyselyn vastauksessa olevan rivien lukumäärän saa komennolla <code>COUNT(<em>sarake</em>)</code>, missä <em>sarake</em> on laskettavan sarakkeen nimi. Ryhmittely tapahtuu komennon <code>GROUP BY</code>-perusteella, jota seuraa sarakkeen nimi, jonka perusteella tulokset ryhmitellään.</p>
-
-
-		<div ng-controller="weekThreeSqlController">
-
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT pääaine, COUNT(*) AS lukumäärä
-    FROM Opiskelija GROUP BY pääaine"
-                     done="unlockListCountKurssisuorituksetByKurssi">
-		  </query>
-
-		  <div ng-show="unlockListCountKurssisuorituksetByKurssi">
-		    <p>Tee nyt kysely, jolla lasket kurssisuoritus-taulussa olevat kurssisuoritukset kurssin koodin perusteella. Käytä tulostuksessa sarekkeiden nimiä "kurssikoodi" ja "lukumäärä".</p>
-		    <query
-		       db="db"
-		       query=""
-		       valid="SELECT kurssi AS kurssikoodi, COUNT(*) lukumäärä FROM Kurssisuoritus GROUP BY kurssi">
-		    </query>
-		  </div>
-
-		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat kurssit kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen. Alla olevassa esimerkissä lasketaan tehtävien määrä eri kursseilla siten, että kurssin nimi haetaan taulusta Kurssi, ja tehtävät haetaan kurssitehtävistä.</p>
-
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT k.nimi AS kurssi, COUNT(kt.tunnus) AS tehtäviä FROM Kurssi k, Kurssitehtävä kt
-    WHERE k.kurssitunnus = kt.kurssi GROUP BY k.nimi"
-		     done="unlockListCountKurssisuorituksetByKurssiWithName">
-		  </query>
-
-
-
-		  <div ng-show="unlockListCountKurssisuorituksetByKurssiWithName">
-
-		    <p>Tee nyt kysely, jossa lasket kurssisuoritus-taulussa olevien kurssien suoritukset -- taas koodin perusteella. Tällä kertaa tulostuksessa tulee kuitenkn tulostaa kurssikoodin sijaan kurssin nimi. Käytä sarakkeiden niminä "kurssi" ja "lukumäärä". (Huomaa, että edellisessä osassa katsotaan kurssitehtäviä, tässä kurssisuorituksia!)</p>
-
-
-		    <query
-		       db="db"
-		       query=""
-		       valid="SELECT Kurssi.nimi AS kurssi, COUNT(*) lukumäärä FROM Kurssisuoritus, Kurssi WHERE Kurssisuoritus.kurssi = Kurssi.kurssitunnus GROUP BY kurssi">
-		    </query>
-		  </div>
-
-
-		  <p>Edellä olevia tuloksia tarkasteltaessamme, huomaamme, että luku nolla ei esiinny yhdelläkään rivillä. Tämä selittyy kyselyillämme -- olemme valinneet mukaan vain rivit, joilla hakuehdot täyttyvät. Hups. Kirjoitetaan edellinen kysely siten, että otamme huomioon kurssit vaikka niihin ei liittyisikään yhtäkään toisen taulun riviä -- käytämme siis <code>LEFT JOIN</code>-liitosoperaatiota.</p>
-
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT k.nimi AS kurssi, COUNT(ks.kurssi) as tehtäviä FROM Kurssi k LEFT JOIN Kurssisuoritus ks
-    ON k.kurssitunnus = ks.kurssi GROUP BY k.nimi"
-		     done="unlockLeftJoinKurssiAndKurssisuoritus">
-		  </query>
-
-
-		  <div ng-show="unlockLeftJoinKurssiAndKurssisuoritus">
-
-		    <p>Tee nyt LEFT JOIN -operaatiota käyttäen kysely, jolla listaat kurssikohtaiset suorituslukumäärät siten, että myös ne kurssit, joilla ei ole yhtäkään suoritusta otetaan huomioon. Käytä sarakkeiden niminä nimiä "kurssi" ja "lukumäärä".</p>
-
-		    <query
-		       db="db"
-		       query=""
-		       valid="SELECT Kurssi.nimi AS kurssi, COUNT(Kurssisuoritus.kurssi) lukumäärä FROM Kurssi LEFT JOIN Kurssisuoritus ON Kurssi.kurssitunnus = Kurssisuoritus.kurssi GROUP BY kurssi">
-		    </query>
-
-		  </div>
-
-		</div>
-
-		<p><strong><em>Ryhmittely useamman sarakkeen perusteella</em></strong></p>
-
-		<p>Komennolle <code>GROUP BY</code> voi antaa myös useampia sarakkeita, jolloin se ryhmittelee ne annetussa järjestyksessä. Esimerkiksi ryhmittely <code>GROUP BY kurssi, arvosana</code> ryhmittelisi taulussa olevat rivit ensin kurssin perusteella, jonka jälkeen ne vielä ryhmiteltäisiin arvosanan perusteella. Tällöin jokaiselle kurssille tulisi erilliset arvosanaryhmät. Esimerkiksi kurssikohtaiset arvosanat saisi tulostettua seuraavalla kyselyllä:</p>
-
-
-		<div ng-controller="weekThreeSqlController">
-
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT k.nimi AS kurssi, ks.arvosana AS arvosana, COUNT (ks.opiskelija) AS lukumäärä
-    FROM Kurssi k, Kurssisuoritus ks WHERE k.kurssitunnus = ks.kurssi
-        GROUP BY k.nimi, ks.arvosana">
-		  </query>
-		</div>
-
-		<p>Edellisessä kyselyssä on hieman tylsää se, että kurssien nimet ja arvosanat eivät ole järjestyksessä.</p>
-
-		<p><strong><em>Tulosten järjestäminen</em></strong></p>
-
-		<p>Kyselyn tulokset voi järjestää komennolla <code>ORDER BY</code>, jota seuraa järjestettävät sarakkeet. Sarakkeelle voi antaa myös lisämääreen <code>ASC</code> (<em>ascending</em>), joka kertoo että tulokset tulee järjestää nousevaan järjestykseen, ja <code>DESC</code> (<em>descending</em>), joka kertoo että tulokset tulee järjestää laskevaan järjestykseen. Oletuksena järjestys on laskeva.</p>
-
-		<p>Komento <code>ORDER BY</code> tulee kyselyn loppuun. Järjestetään edellisen kyselyn tulokset.</p>
-
-		<div ng-controller="weekThreeSqlController">
-
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT k.nimi AS kurssi, ks.arvosana AS arvosana, COUNT (ks.opiskelija) AS lukumäärä
-    FROM Kurssi k, Kurssisuoritus ks WHERE k.kurssitunnus = ks.kurssi
-        GROUP BY k.nimi, ks.arvosana ORDER BY k.nimi, ks.arvosana DESC">
-		  </query>
-		</div>
-
-
-		<p><strong><em>Yhteenvetokyselyissä käytettäviä funktioita</em></strong></p>
-
-		<p>Komento <code>COUNT(<em>sarake</em>)</code> on funktio, jolle annetaan joukko arvoja, ja joka palauttaa niiden pohjalta luodun arvon -- annetun joukon koon eli arvojen lukumäärän. Yhteenvetokyselyiden käytössä on myös nippu muita funktioita, joista seuraavassa listataan muutamia.</p>
-
-
-		<ul>
-		  <li><p>Keskiarvon laskeminen <code>AVG</code></p>
-
-		    <p>Funktio <code>AVG</code> laskee sille annettujen arvojen keskiarvon. Esimerkiksi kurssikohtaiset arvosanojen keskiarvot saa laskettua seuraavalla kyselyllä:</p>
-
-		    <div ng-controller="weekThreeSqlController">
-
-		      <query
-			 db="db"
-			 editable="false"
-			 query="SELECT kurssi, AVG(arvosana) AS keskiarvo
-    FROM Kurssisuoritus GROUP BY kurssi">
-		      </query>
-		    </div>
-
-		  </li>
-
-		  <li><p>Summan laskeminen <code>SUM</code></p>
-
-		    <p>Funktio <code>SUM</code> laskee sille annettujen arvojen summan. Esimerkiksi kysely seuraava kysely laskee opiskelijakohtaisen opintopistemäärän.</p>
-
-		    <div ng-controller="weekThreeSqlController">
-
-		      <query
-			 db="db"
-			 editable="false"
-			 query="SELECT o.nimi AS nimi, SUM(ks.opintopistemäärä) AS opintopisteitä
-    FROM Opiskelija o LEFT JOIN Kurssisuoritus ks
-        ON o.opiskelijanumero = ks.opiskelija
-    WHERE ks.arvosana > 0 GROUP BY o.nimi">
-		      </query>
-		    </div>
-
-
-		    <p>Kuten ehkä huomaat, kysely ei toimi tapauksissa, missä opiskelija on korottanut kurssin arvosanaa, sillä hänellä on tällöin useampia hyväksyttyjä merkintöjä samasta kurssista.</p></li>
-
-		  <li><p>Pienimmän arvon valitseminen <code>MIN</code></p>
-
-		    <p>Funktio <code>MIN</code> valitsee sille annettujen arvojen joukosta pienimmän arvon.</p></li>
-
-		  <li><p>Suurimman arvon valitseminen <code>MAX</code></p>
-
-		    <p>Funktio <code>MAX</code> valitsee sille annettujen arvojen joukosta suurimman arvon.</p></li>
-		</ul>
-
-		<aside class="info">
-		  <br/>
-
-		  <h1>Funktiot osana kyselyitä, joissa ryhmittelyä ei tehdä</h1>
-
-		  <p>Edellämainittuja funktioita voi käyttää osana käytännössä minkälaista kyselyä tahansa, jos kyselyn vastauksessa on selkeä yksittäinen sarake, jonka arvoja funktio käsittelee. Esimerkiksi kaikkien kurssien keskiarvon voi laskea seuraavasti:</p>
-
-		  <div ng-controller="weekThreeSqlController">
-
-		    <query
-		       db="db"
-		       editable="false"
-		       query="SELECT AVG(arvosana) FROM Kurssisuoritus">
-		    </query>
-		  </div>
-
-		  <p>Tässä on kuitenkin huomioitava se, että jos kyselyssä on useampia sarakkeita, tulee funktion pystyä laskemaan sarakekohtaisia tuloksia -- esimerkiksi ryhmittelyn kautta. Alla oleva kysely on esimerkki kyselystä, joka ei palauta oikeaa tulosta.</p>
-
-		  <div ng-controller="weekThreeSqlController">
-
-		    <query
-		       db="db"
-		       editable="false"
-		       query="SELECT kurssi, AVG(arvosana) FROM Kurssisuoritus">
-		    </query>
-		  </div>
-
-		</aside>
-
-
-
-		<h2>Kyselyn tulos on taulu</h2>
-
-		<p>Kaikki SQL-kyselyt tuottavat tuloksena taulun. Taulussa voi olla tasan yksi sarake ja rivi, tai vaikkapa tuhansia rivejä ja kymmeniä sarakkeita. Silloinkin, kun suoritamme yksinkertaisen haun, kuten vaikkapa "Hae kaikki kurssilla 'Tietokantojen perusteet' olevat opiskelijat", on haun tuloksena taulu.</p>
-
-		<p>Kaikki tekemämme SQL-kyselyt ovat liittyneet tauluihin. Emmekö siis voisi tehdä kyselyjä myös vastauksiin? Vastaus on kyllä.</p>
-
-		<p>Esimerkiksi vanhimman (tai vanhimmat, jos tämä ei ole yksikäsitteistä) opiskelijat löytää -- muunmuassa -- etsimällä kaikista pienimmän mahdollisimman syntymävuoden (kyselyn tulos on taulu), jonka jälkeen vastaustaulussa olevaa tulosta kaikkien opiskelijoiden syntymävuosiin.</p>
-
-		<div ng-controller="weekThreeSqlController">
-		  <query
-		     db="db"
-		     editable="false"
-		     query="SELECT * FROM Opiskelija
-    WHERE syntymävuosi
-        IN (SELECT MIN(syntymävuosi) FROM Opiskelija)">
-		  </query>
-		</div>
-
-
-		<p>Tätä harjoitellaan lisää kurssin tehtävissä.</p>
-
-
-		<h1>Ohjelmalliset tietokantakyselyt ja viitteet taulujen välillä</h1>
 
 		<p>Aiemmat, luvussa kolme näkemämme tietokantakyselyiden ohjelmalliseen suorittamiseen liittyvät esimerkit ovat olleet melko yksinkertaisia, sillä niissä on ladattu tietoa yhdestä taulusta kerrallaan. Todellisuudessa tietokannoissa on usein viitteitä taulujen välillä, ja ohjelmallista tietokanta-abstraktiota käyttävän ohjelmoijan näkökulmasta olisi hyvin kätevää, jos nämä viitteet toimisivat myös olioina.</p>
 
