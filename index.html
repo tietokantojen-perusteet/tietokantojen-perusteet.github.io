@@ -258,8 +258,10 @@
 	<ul>
 	  <li><a href="https://docs.google.com/document/d/1miKnCLH2fa9crAZCmpFXju1ybDU2xHftUFNOpAtFFq8/edit?usp=sharing" target="_blank">Viikko 2</a> (25-29.1.)</li>
 	  <li><a href="https://docs.google.com/document/d/1y1zx_FiAE1sEcVo5uzXMFrkfzrVp1NXMKE7mOrqIvNM/edit?usp=sharing" target="_blank">Viikko 3</a> (1-5.2.)</li>
-	</ul>
+	  <li><a href="https://docs.google.com/document/d/18AXMmMZpy0WBkEKlnuwqRJoJNdvk3aFc1hEK7vEW_HE/edit?usp=sharing" target="_blank">Viikko 4</a> (8-12.2.)</li></ul>
 	
+
+
 <!--
 	<ul>
 	  <li><a href="https://docs.google.com/document/d/18tYsgXU0u-6KFbuGft4yN3tkG0yxgE4DY0IdFx-C5Gg/edit?usp=sharing" target="_blank">Viikko 1</a></li>
@@ -2006,7 +2008,7 @@ SELECT o.nimi opiskelija, k.arvosana
 		    </query>
 		  </div>
 
-		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat kurssit kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen. Alla olevassa esimerkissä lasketaan tehtävien määrä eri kursseilla siten, että kurssin nimi haetaan taulusta Kurssi, ja tehtävät haetaan kurssitehtävistä.</p>
+		  <p>Useampien taulujen yhdistäminen toimii kuten ennen -- valittavat taulut kerrotaan joko FROM -avainsanan jälkeen tai JOIN -avainsanan jälkeen, riippuen kyselytavasta. Ryhmittelykomento tulee mahdollisten WHERE-ehtojen jälkeen. Alla olevassa esimerkissä lasketaan tehtävien määrä eri kursseilla siten, että kurssin nimi haetaan taulusta Kurssi, ja tehtävät haetaan kurssitehtävistä.</p>
 
 		  <query
 		     db="db"
@@ -2076,7 +2078,7 @@ SELECT o.nimi opiskelija, k.arvosana
 
 		<p><strong><em>Tulosten järjestäminen</em></strong></p>
 
-		<p>Kyselyn tulokset voi järjestää komennolla <code>ORDER BY</code>, jota seuraa järjestettävät sarakkeet. Sarakkeelle voi antaa myös lisämääreen <code>ASC</code> (<em>ascending</em>), joka kertoo että tulokset tulee järjestää nousevaan järjestykseen, ja <code>DESC</code> (<em>descending</em>), joka kertoo että tulokset tulee järjestää laskevaan järjestykseen. Oletuksena järjestys on laskeva.</p>
+		<p>Kyselyn tulokset voi järjestää komennolla <code>ORDER BY</code>, jota seuraa järjestettävät sarakkeet. Sarakkeelle voi antaa myös lisämääreen <code>ASC</code> (<em>ascending</em>), joka kertoo että tulokset tulee järjestää nousevaan järjestykseen, ja <code>DESC</code> (<em>descending</em>), joka kertoo että tulokset tulee järjestää laskevaan järjestykseen. Oletuksena järjestys on nouseva.</p>
 
 		<p>Komento <code>ORDER BY</code> tulee kyselyn loppuun. Järjestetään edellisen kyselyn tulokset.</p>
 
