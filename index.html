@@ -3659,7 +3659,6 @@ connection.close();</pre>
 		<p>Kyselyt kuten rivien lisääminen ja poistaminen onnistuu myös ohjelmallisesti. Tällöin tuloksessa ei kuitenkaan ole erillistä ResultSet-oliota, vaan luku, joka kertoo kyselyn muuttaneiden rivien määrän. Allaoleva ohjelmakoodi lisää tietokantaan uuden pyörän.</p>
 
 <pre class="sh_java">
-Class.forName("org.sqlite.JDBC");
 Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");
 
 Statement stmt = connection.createStatement();
@@ -3816,8 +3815,6 @@ import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // ladataan käyttöön SQLite:n JDBC-ajuri
-        Class.forName("org.sqlite.JDBC");
         // luodaan yhteys sqlite-tietokantaan nimeltä "tietokanta.db"
         Connection connection = DriverManager.getConnection("jdbc:sqlite:tietokanta.db");
 
@@ -4041,7 +4038,6 @@ import java.sql.*;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Class.forName("org.sqlite.JDBC");
         Connection connection = DriverManager.getConnection("jdbc:sqlite:testi.db");
 
         Statement statement = connection.createStatement();
@@ -4075,7 +4071,6 @@ Hei tietokantamaailma!</pre>
 		<p>Tietokannassa on tietokantataulu <code>Pyora</code>, jolla on sarakkeet <code>rekisterinumero</code> ja <code>merkki</code>. Jokaisen pyörän rekisterinumeron ja merkin tulostaminen tapahtuu seuraavasti -- huomaa myös, että olemme vaihtaneet käytössä olevaa tietokantaa.<p>
 
 <pre class="sh_java">
-Class.forName("org.sqlite.JDBC");
 Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");
 
 Statement stmt = connection.createStatement();
