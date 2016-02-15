@@ -37,10 +37,10 @@
           <li>
             <a href="#viikko4">Viikko 4</a>
           </li>
-<!--
           <li>
             <a href="#viikko5">Viikko 5</a>
           </li>
+<!--
           <li>
             <a href="#viikko6">Viikko 6</a>
           </li>
@@ -260,9 +260,10 @@
 	<ul>
 	  <li><a href="https://docs.google.com/document/d/1miKnCLH2fa9crAZCmpFXju1ybDU2xHftUFNOpAtFFq8/edit?usp=sharing" target="_blank">Viikko 2</a> (25-29.1.)</li>
 	  <li><a href="https://docs.google.com/document/d/1y1zx_FiAE1sEcVo5uzXMFrkfzrVp1NXMKE7mOrqIvNM/edit?usp=sharing" target="_blank">Viikko 3</a> (1-5.2.)</li>
-	  <li><a href="https://docs.google.com/document/d/18AXMmMZpy0WBkEKlnuwqRJoJNdvk3aFc1hEK7vEW_HE/edit?usp=sharing" target="_blank">Viikko 4</a> (8-12.2.)</li></ul>
-	
-
+	  <li><a href="https://docs.google.com/document/d/18AXMmMZpy0WBkEKlnuwqRJoJNdvk3aFc1hEK7vEW_HE/edit?usp=sharing" target="_blank">Viikko 4</a> (8-12.2.)</li>
+	  <li><a href="https://docs.google.com/document/d/1ixodCntz5DLQrBrM-7RAoJDYrl0cA2JO4dBsyJRz1w4/edit?usp=sharing" target="_blank">Viikko 5</a> (15-19.2.)</li>
+	  <li><a href="TODO" target="_blank">Viikko 6</a> (22-26.2.)</li></ul>
+		
 
 <!--
 	<ul>
@@ -2867,7 +2868,6 @@ INSERT INTO Kurssi (nimi) VALUES ('Tikape');"
 		</header>
 
 
-
 		<h2>Hakuja nopeuttavat indeksirakenteet</h2>
 
 
@@ -3696,6 +3696,7 @@ String kysely = "SELECT * FROM User WHERE username = '"
 		  <p>SQL-injektioita voi luonnollisesti tehdä myös muunlaisiin kyselyihin. Web-sarjakuva <a href="http://xkcd.com/" target="_blank">xkcd</a> kuvastaa tätä ilmiötä hyvin <em>Exploits of a Mom</em>-sarjakuvallaan.</p>
 
 		  <figure>
+
 		    <img src="http://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="School: Hi, this is your son's school. We're having some computer trouble.
 
 Mom: Oh, dear -- Did he break something?
@@ -3707,456 +3708,30 @@ Mom: Oh. Yes. Little Bobby Tables we call him.
 School: Well, we've lost this year's student records. I hope you're happy.
 
 Mom: And I hope you've learned to sanitize your database inputs."/>
+
 		    <figcaption>http://xkcd.com/327/ -- Exploits of a Mom. </figcaption>
+
 		  </figure>
 
 		</aside>
 
 
+		<header>
+		  <h1 id="viikko5">Viikko 5</h1>
+		</header>
 
-<!--	
-		<p>Tätä harjoitellaan lisää kurssin tehtävissä.</p>
 
+                <h2>Vastuiden eriyttäminen ja debug-viestien tulostaminen</h2>
 
-		<h1>Ohjelmalliset tietokantakyselyt ja viitteet taulujen välillä</h1>
 
+		<p>Tietokantaa ohjelmallisesti käytettäessä kannattaa tietokantalogiikka ja sovelluslogiikka eriyttää toisistaan. Esimerkiksi tietokanta-ajurin hakeminen ja yhteyden luominen sopii hyvin erillisen tietokantaluokan vastuulle, ja sovelluskehittäjän työtä helpottaa, jos ohjelma mahdollistaa viestien tulostuksen. Samalla myös tietokannassa olevia käsitteitä on kätevä esittää luokkien avulla.</p>
 
-		
+		<p>Pohditaan tätä seuraavaksi moottoripyörävuokraamoesimerkin ohjelmallisen käsittelyn kautta.</p>
 
 
-        <figure>
-	  <img src="img/paivitysraja.jpg" alt="päivitysraja ::
-C
- (\.   \      ,/)
-  \(   |\     )/
-  //\  | \   /\\
- (/ /\_#oo#_/\ \)
-  \/\  ####  /\/
-       `##'
-"/>
-	  <figcaption>Tähän on hyvä lopettaa lukeminen.</figcaption>
-	</figure>
--->
-<!--
-	
+		<p><strong><em>Koodissa on käsite, tehdään siitä olio (déjà-vu)</em></strong></p>
 
-
-
-	<aside class="info">
-	  <br/>
-	  
-	  <h1>Rivien poistamisesta ja lisäämisestä</h1>
-	  
-	  <p>Tietokannan käyttämiseen tarkoitetut rajapinnat -- kuten tällä sivulla käytettävä <a href="https://github.com/kripken/sql.js/" target="_blank">sql.js</a> -- tyypillisesti rajoittavat tietokantaan tehtäviä kyselyitä. Suoran kyselyn tekeminen muodossa <code>DELETE FROM Opiskelija WHERE nimi = 'Gandhi'</code> ei ole aina mahdollista, vaan kysely määritellään parametrin avulla -- esimerkiksi <code>DELETE FROM Opiskelija WHERE nimi = '?'</code>, missä parametri annetaan kyselylle erikseen.</p>
-	  
-	  <p>Tutustutaan toisenlaiseen tapaan näiden kyselyiden tekemiseen.</p>
-	  
-	</aside>
-
-		<h1>Tietokantakyselyiden tekeminen ohjelmallisesti</h1>
-
-		<p>Vaikka edelliset esimerkit tehtiin osana kurssimateriaalia, tehdään tietokantakyselyjä usein ohjelmallisesti tai suoraan tietokannanhallintajärjestelmässä, esimerkiksi konsolin kautta.</p>
-
-
-
-		<p>Lähes jokainen ohjelmointikieli tarjoaa jonkinlaisen rajapinnan tietokantakyselyiden tekemiseen. Esimerkiksi Java-kielelle on määritelty yhtenäinen standardi tietokantakyselyiden tekemiseen, minkä avulla lähes sama koodi käy useamman tietokannan käyttöön.</p>
-
-
-
-
-		<h2>Java ja JDBC</h2>
-
-		<p>Java-kielessä on määritelty standardi (JDBC, <a href="https://en.wikipedia.org/wiki/Java_Database_Connectivity" target="_blank">Java Database Connectivity API</a>) tietokantayhteyden luomiseen, tietoa hakevien kyselyjen muodolle, sekä tietoa muokkaavien kyselyjen muodolle. Käytännössä tietokannanhallintajärjestelmän toteuttajan tulee toteuttaa kyseinen rajapinta, ja tarjota sille kirjasto, mitä ohjelmoija voi käyttää projektissaan. Jotta JDBCn avulla voidaan ottaa yhteys tietokantaan, tulee käytössä siis olla tietokantakohtainen JDBC-ajuri, jonka vastuulla on tietokantayhteyden luomiseen liittyvät yksityiskohdat sekä kyselytulosten muuntaminen JDBC-standardin mukaiseen muotoon.</p>
-
-		<p>Oletetaan, että käytössämme on aiemmin näkemämme tietokantataulu Opiskelija:</p>
-
-
-		<div class="data-table">
-		  <h4>Opiskelija</h4>
-		  <table class="table">
-		    <thead>
-		      <tr>
-			<th>opiskelijanumero</th>
-			<th>nimi</th>
-			<th>syntymävuosi</th>
-			<th>pääaine</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-			<td>9999999</td>
-			<td>Pihla</td>
-			<td>1997</td>
-			<td>Tietojenkäsittelytiede</td>
-		      </tr>
-		      <tr>
- 			<td>9999998</td>
-			<td>Joni</td>
-			<td>1993</td>
-			<td>Tietojenkäsittelytiede</td>
-		      </tr>
-		      <tr>
-			<td>...</td>
-			<td></td>
-			<td></td>
-			<td></td>
-		      </tr>
-		    </tbody>
-		  </table>
-		</div>
-
-		<p>JDBCn avulla kyselyn tekeminen tietokantatauluun tapahtuu seuraavasti -- olettaen, että käytössämme on sekä tietokanta, että tietokannan ajuri:</p>
-
-
-<pre class="sh_java">
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
-public class Main {
-    public static void main(String[] args) throws Exception {
-        // luodaan yhteys sqlite-tietokantaan nimeltä "tietokanta.db"
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:tietokanta.db");
-
-        // luodaan olio, jonka avulla voidaan tehdä kyselyitä tietokantaan
-        Statement statement = connection.createStatement();
-        // tehdään tietokantaan SQL-kysely "SELECT * FROM Opiskelija", jolla haetaan
-        // kaikki tiedot Opiskelija-taulusta -- tuloksena resultSet-olio
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM Opiskelija");
-
-        // käydään tuloksena saadussa oliossa olevat rivit läpi -- next-komento hakee
-        // aina seuraavan rivin, ja palauttaa true jos rivi löytyi
-        while(resultSet.next()) {
-            // haetaan nykyiseltä riviltä opiskelijanumero int-muodossa
-            Integer opNro = resultSet.getInt("opiskelijanumero");
-            // haetaan nykyiseltä riviltä nimi String-muodossa
-            String nimi = resultSet.getString("nimi");
-            // haetaan nykyiseltä riviltä syntymävuosi int-muodossa
-            Integer syntVuosi = resultSet.getInt("syntymävuosi");
-            // haetaan nykyiseltä riviltä pääaine String-muodossa
-            String paaAine = resultSet.getString("pääaine");
-
-            // tulostetaan tiedot
-            System.out.println(opNro + "\t" + nimi + "\t" + syntVuosi + "\t" + paaAine);
-        }
-
-        // suljetaan lopulta yhteys tietokantaan
-        connection.close();
-    }
-}
-</pre>
-
-		<p>Ohjelman suoritus tuottaa (esimerkiksi) seuraavanlaisen tulostuksen:</p>
-
-<pre>
-999999	Pihla	1997	Tietojenkäsittelytiede
-999998	Joni	1993	Tietojenkäsittelytiede
-999997	Anna	1991	Matematiikka
-999996	Krista	1990	Tietojenkäsittelytiede
-...
-</pre>
-
-		<aside class="info">
-		  <br/>
-
-		  <h1>SQL-injektiot</h1>
-
-		  <p>Suurin osa olemassaolevista sovelluksista liittyy tietoon: tiedon hakemiseen tietokannasta, tiedon muokkaamiseen ja näyttämiseen, ja tiedon tallentamiseen tietokantaan. Jos ulkopuolinen henkilö voi vaikuttaa tietokoneelle annettavien SQL-kyselyiden sisältöön, on myös mahdollista, että hän pääsee vaikuttamaan näytettävään tietoon sekä tietokannassa suoritettuihin kyselyihin.</p>
-
-		  <p>SQL-injektio on tekniikka, millä sovellukselle annetaan komentoja, joita sille ei pitäisi pystyä antamaan. Oletetaan esimerkiksi että seuraava sovellus suorittaa kirjautumisen tarkistamalla onko suoritettavan tietokantakyselyn tulos tyhjä:</p>
-
-<pre class="sh_java">
-// ...
-String nimi = "nimi";
-String salasana = "salasana";
-
-String kysely = "SELECT * FROM User WHERE username = '"
-                           + nimi + "' AND password = '" + salasana + "'";
-// ...</pre>
-
-		  <p>Vaikka kysely toimii siinä mielessä oikein, että se ei palauta yhtäkään riviä, jos tietokannasta ei löydy annetulla käyttäjätunnuksella ja salasanalla tunnettua henkilöä, on se kuitenkin hieman ongelmallinen. Jos käyttäjä antaa käyttäjänimen <code>' OR '1' = '1' OR '1' = '1</code>, tulee tietokannassa suoritettava kysely olemaan <code>SELECT * FROM User WHERE username = 'nimi' OR '1' = '1' OR '1' = '1' AND password = 'salasana'</code>. Koska '1' on '1', palautuu vastauksessa kaikki rivit.</p>
-
-		  <p>SQL-injektioita voi luonnollisesti tehdä myös muunlaisiin kyselyihin. Web-sarjakuva <a href="http://xkcd.com/" target="_blank">xkcd</a> kuvastaa tätä ilmiötä hyvin <em>Exploits of a Mom</em>-sarjakuvallaan.</p>
-
-		  <figure>
-		    <img src="http://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="School: Hi, this is your son's school. We're having some computer trouble.
-
-Mom: Oh, dear -- Did he break something?
-
-School: In a way. Did you really name your son Robert'); DROP TABLE Students;--?
-
-Mom: Oh. Yes. Little Bobby Tables we call him.
-
-School: Well, we've lost this year's student records. I hope you're happy.
-
-Mom: And I hope you've learned to sanitize your database inputs."/>
-		    <figcaption>http://xkcd.com/327/ -- Exploits of a Mom. </figcaption>
-		  </figure>
-
-		</aside>
-
-		<h2>Java-projekti ja JDBC-ajurin noutaminen</h2>
-
-		<p>Jotta Javalla tehtävään projektiin saa tietokannan käyttöön, tulee ohjelmoijan noutaa tietokanta-ajuri. Ajurien noutaminen kannattaa hoitaa ns. riippuvuuksia hallinnoivan projektinhallintatyökalun, kuten Mavenin, avulla.</p>
-
-		<p>Oletamme tässä, että käytössäsi on <a href="http://www.oracle.com/technetwork/articles/javase/jdk-netbeans-jsp-142931.html" target="_blank">NetBeans-ohjelmointiympäristö sekä Java 8</a>  (tietojenkäsittelytieteen laitoksella käytössä oleva TMCBeans käy myös mainiosti).</p>
-
-		<p><strong><em>Maven-projektin luominen NetBeansissa</em></strong></p>
-
-		<p>Uuden Mavenia käyttävän projektin luominen NetBeansissa tapahtuu valitsemalla <em>File</em> -> <em>New Project</em> -> Kategoriaksi <em>Maven</em> ja projektiksi <em>Java Application</em>. Tämän jälkeen valitaan <em>Next</em>, ja täytetään projektin tiedot. Alla on esimerkki projektin tiedoista, projektin sijainti (Project location) on konekohtainen.</p>
-
-		  <figure>
-		    <img src="img/viikko3/nb-maven.png" alt="Project Name: tikape
-
-Project Location: (omasta koneesta riippuva)
-
-Group Id: tikape
-
-Version: (saa olla kuten on aluksi)
-
-Package: tikape"
-/>
-		    <figcaption>Maven-projektin asetukset</figcaption>
-		  </figure>
-
-		  <p>Tämän jälkeen painetaan Finish, ja projekti ilmestyy NetBeansin vasemmassa laidassa olevalle listalle. Etsi nyt projektin <em>Project Files</em> sisältä <code>pom.xml</code>-tiedosto -- se näyttää esimerkiksi seuraavalta:</p>
-
-<pre class="sh_xml">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;tikape&lt;/groupId&gt;
-    &lt;artifactId&gt;tikape&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;
-        &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;
-    &lt;/properties&gt;
-&lt;/project&gt;
-</pre>
-
-
-		<p>Koska käytössämme on Java 8, vaihdetaan sekä <code>maven.compiler.source</code> että <code>maven.compiler.source</code> -arvot muotoon <code>1.8</code>.</p>
-
-<pre class="sh_xml">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;tikape&lt;/groupId&gt;
-    &lt;artifactId&gt;tikape&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.source&gt;<strong>1.8</strong>&lt;/maven.compiler.source&gt;
-        &lt;maven.compiler.target&gt;<strong>1.8</strong>&lt;/maven.compiler.target&gt;
-    &lt;/properties&gt;
-&lt;/project&gt;
-</pre>
-
-		<p><strong><em>SQLite-ajurin lisäämien Maven-projektin riippuvuuksiin</em></strong></p>
-
-		<p>Lisätään <em>riippuvuus</em> (dependency) SQLite-ajuriin osaksi sovellusta.</p>
-
-<pre class="sh_xml">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;tikape&lt;/groupId&gt;
-    &lt;artifactId&gt;tikape&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.source&gt;<strong>1.8</strong>&lt;/maven.compiler.source&gt;
-        &lt;maven.compiler.target&gt;<strong>1.8</strong>&lt;/maven.compiler.target&gt;
-    &lt;/properties&gt;
-
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.xerial&lt;/groupId&gt;
-            &lt;artifactId&gt;sqlite-jdbc&lt;/artifactId&gt;
-            &lt;version&gt;3.8.11.1&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-
-&lt;/project&gt;
-</pre>
-
-		<p>Nyt kun NetBeans-projektista valitsee oikealla hiirennapilla <em>Dependencies</em> ja klikkaa <em>Download Declared Dependencies</em>, latautuu JDBC-ajuri projektin käyttöön.</p>
-
-
-		<p><strong><em>Ensimmäinen tietokantaa käyttävä Maven-ohjelma</em></strong></p>
-
-		<p>Avaa projektiin liittyvä <em>Source Packages</em>, ja klikkaa <em>tikape</em>-pakkausta oikealle hiirennapilla. Valitse tämän jälkeen <em>New</em> -> <em>Java Class</em>, jonka jälkeen avautuu valikko, missä voit antaa luokalle nimen. Anna luokan nimeksi <code>Main</code>.</p>
-
-		<p>Avaa tiedosto tuplaklikkaamalla sitä. Muokkaa tiedostoa vielä siten, että se on seuraavan näköinen:</p>
-
-<pre class="sh_java">
-package tikape;
-
-public class Main {
-
-    public static void main(String[] args) throws Exception {
-
-    }
-}</pre>
-
-
-
-		<figure>
-		  <img src="img/viikko3/nb-main.png" alt="Projektin lähdekooditiedosto Main.java on avattuna."/>
-		  <figcaption>Avattu projekti NetBeansissa</figcaption>
-		</figure>
-
-
-		<p>Lisää projektiin <em>import</em>-komento <code>import java.sql.*;</code>, joka hakee kaikki SQL-kyselyihin liittyvät Javan kirjastot.</p>
-
-
-<pre class="sh_java">
-package tikape;
-
-import java.sql.*;
-
-public class Main {
-
-    public static void main(String[] args) throws Exception {
-
-    }
-}</pre>
-
-
-		<p>Avataan seuraavaksi tietokantayhteys tietokantaan <em>testi.db</em>, ja tehdään siellä kysely "SELECT 1", jolla pyydetään tietokantaa palauttamaan luku 1 -- käytämme tätä yhteyden testaamiseksi. Jos yhteyden luominen onnistuu, tulostetaan "Hei tietokantamaailma!", muulloin "Yhteyden muodostaminen epäonnistui".</p>
-
-<pre class="sh_java">
-package tikape;
-
-import java.sql.*;
-
-public class Main {
-
-    public static void main(String[] args) throws Exception {
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:testi.db");
-
-        Statement statement = connection.createStatement();
-
-        ResultSet resultSet = statement.executeQuery("SELECT 1");
-
-        if(resultSet.next()) {
-            System.out.println("Hei tietokantamaailma!");
-        } else {
-            System.out.println("Yhteyden muodostaminen epäonnistui.");
-        }
-    }
-}</pre>
-
-<pre>
-Hei tietokantamaailma!</pre>
-
-		<p>Kun suoritamme ohjelman ensimmäistä kertaa valitsemalla <em>Run</em> -> <em>Run Project</em>, SQLite luo puuttuvan tietokannan paikalle uuden tietokannan. Projektin kansiossa on nyt tiedosto <code>testi.db</code>, joka on tietokantamme.</p>
-
-
-		<figure>
-		  <img src="img/viikko3/nb-testidb.png" alt="Kun ohjelma on suoritettu ensimmäistä kertaa, tiedosto testi.db luodaan projektiin."/>
-		  <figcaption>Tietokantatiedosto <em>testi.db</em> löytyy projektin kansiosta. Tiedostot löytyvät <em>Files</em>-välilehdeltä.</figcaption>
-		</figure>
-
-
-		<p><strong><em>Tietokantakyselyiden tekeminen</em></strong></p>
-
-		<p>Osoitteessa <a href="dbs/vuokraamo.db">vuokraamo.db</a> löytyy kuvitteellisen moottoripyörävuokraamon tietokanta. Lataa se edellä tehdyn projektin juureen ja kokeile kyselyn tekemistä kyseiseen tietokantaan.</p>
-
-		<p>Tietokannassa on tietokantataulu <code>Pyora</code>, jolla on sarakkeet <code>rekisterinumero</code> ja <code>merkki</code>. Jokaisen pyörän rekisterinumeron ja merkin tulostaminen tapahtuu seuraavasti -- huomaa myös, että olemme vaihtaneet käytössä olevaa tietokantaa.<p>
-
-<pre class="sh_java">
-Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");
-
-Statement stmt = connection.createStatement();
-ResultSet rs = stmt.executeQuery("SELECT * FROM Pyora;");
-
-while (rs.next()) {
-    String rekisterinumero = rs.getString("rekisterinumero");
-    String merkki = rs.getString("merkki");
-
-    System.out.println(rekisterinumero + " " + merkki);
-}
-
-stmt.close();
-rs.close();
-
-connection.close();</pre>
-
-		<p>Käydään ylläoleva ohjelmakoodi läpi askeleittain.</p>
-
-		<ol>
-		  <li><p>Haemme ensin käyttöömme tietokanta-ajurin komennolla <code>Class.forName("org.sqlite.JDBC");</code>, jonka jälkeen otamme SQLiten avulla JDBC-yhteyden tietokantaan <em>vuokraamo.db</em>.
-<pre class="sh_java">
-Class.forName("org.sqlite.JDBC");
-Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");</pre>
-</p>
-		  </li>
-
-		  <li><p>Kyselyn tekeminen tapahtuu pyytämällä yhteydeltä <em>Statement</em>-oliota, jota käytetään kyselyn tekemiseen ja tulosten pyytämiseen. Metodi <em>executeQuery</em> suorittaa parametrina annettavan SQL-kyselyn, ja palauttaa tulokset sisältävän <em>ResultSet</em>-olion.
-
-<pre class="sh_java">
-Statement statement = connection.createStatement();
-ResultSet resultSet = statement.executeQuery("SELECT * FROM Pyora;");</pre>
-</p></li>
-		    <li><p>Tämän jälkeen ResultSet-oliossa olevat tulokset käydään läpi. Metodia next() kutsumalla siirrytään kyselyn palauttamissa tulosriveissä eteenpäin. Kultakin riviltä voi kysyä sarakeotsikon perusteella solun arvoa. Esimerkiksi kutsu getString("rekisterinumero") palauttaa kyseisellä rivillä olevan sarakkeen "rekisterinumero" arvon String-tyyppisenä.
-
-<pre class="sh_java">
-while(resultSet.next()) {
-    String rekisterinumero = rs.getString("rekisterinumero");
-    String merkki = rs.getString("merkki");
-
-    System.out.println(rekisterinumero + " " + merkki);
-}</pre>
-</p></li>
-		    <li><p>Kun kyselyn vastauksena saadut rivit on käyty läpi, eikä niitä enää tarvita, vapautetaan niihin liittyvät resurssit.
-
-<pre class="sh_java">
-stmt.close();
-rs.close();
-</pre></p></li>
-
-
-		    <li><p>Lopulta tietokantayhteys suljetaan.
-
-<pre class="sh_java">
-connection.close();</pre>
-</p></li>
-		</ol>
-
-
-		<p><strong><em>Päivityskyselyiden tekeminen</em></strong></p>
-
-		<p>Kyselyt kuten rivien lisääminen ja poistaminen onnistuu myös ohjelmallisesti. Tällöin tuloksessa ei kuitenkaan ole erillistä ResultSet-oliota, vaan luku, joka kertoo kyselyn muuttaneiden rivien määrän. Allaoleva ohjelmakoodi lisää tietokantaan uuden pyörän.</p>
-
-<pre class="sh_java">
-Class.forName("org.sqlite.JDBC");
-Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");
-
-Statement stmt = connection.createStatement();
-int changes = stmt.executeUpdate("INSERT INTO Pyora (rekisterinumero, merkki) VALUES ('RIP-34', 'Jopo');");
-
-System.out.println("Kyselyn vaikuttamia rivejä: " + changes);
-stmt.close();
-
-connection.close();</pre>
-
-
-
-		<h2>Vastuiden eriyttäminen ja debug-viestien tulostaminen</h2>
-
-		<p>Käytännössä tietokantaa käytettäessä on hyvä eriyttää osa tietokantalogiikasta ja sovelluslogiikasta toisistaan. Esimerkiksi tietokanta-ajurin hakeminen ja yhteyden luominen sopii hyvin erillisen tietokantaluokan vastuulle, ja sovelluskehittäjän työtä helpottaa, jos ohjelma mahdollistaa viestien tulostuksen. Samalla myös tietokannassa olevia käsitteitä on kätevä esittää luokkien avulla.</p>
-
-		<p><strong><em>Luodaan käsitteelle luokka</em></strong></p>
-
-		<p>Hahmotellaan ensin luokka käsitteelle <code>Pyora</code>, jolla on rekisterinumero ja merkki.</p>
+		<p>Moottoripyörävuokraamossa on pyöriä, joihin liittyy rekisterinumero ja merkki. Tehdään käsitteelle luokka <code>Pyora</code>, jolla on rekisterinumero ja merkki.</p>
 
 <pre class="sh_java">
 package tikape;
@@ -4190,9 +3765,52 @@ public class Pyora {
 
 		<p>Luokasta <em>Pyora</em> voi tehdä uusia ilmentymiä konstruktorin avulla, joka saa ensimmäiseksi parametrikseen rekisterinumeron, ja toiseksi parametriksi merkin.</p>
 
-		<p><strong><em>Luodaan mahdollisuus olioiden luomiselle ResultSetissä olevista riveistä</em></strong></p>
+<pre class="sh_java">
+Pyora p = new Pyora("23-BC", "Royal Enfield");
+System.out.println(p.getRekisterinumero());
+System.out.println(p.getMerkki());
+</pre>
 
-		<p>Luodaan rajapinta <em>Collector</em>, jonka tehtävänä on muuttaa tulosrivi olioksi. Teemme rajapinnasta geneerisen, eli sille voi määritellä rajapinnan luovan tyypin rajapinnan toteuttavan olion luonnin yhteydessä.</p>
+<pre>
+23-BC
+Royal Enfield
+</pre>
+
+
+		<p><strong><em>Luodaan olioita ResultSetissä olevista riveistä</em></strong></p>
+
+		<p>Loimme juuri luokan kuvastamaan Pyora-tietokannan rivejä. Luodaan seuraavaksi ohjelmakoodi, joka lukee tietokannan ja muuntaa tietokannan rivit olioiksi.</p>
+
+<pre class="sh_java">
+Connection connection = DriverManager.getConnection("jdbc:sqlite:vuokraamo.db");
+
+Statement stmt = connection.createStatement();
+ResultSet rs = stmt.executeQuery("SELECT * FROM Pyora;");
+
+List&lt;Pyora&gt; pyorat = new ArrayList&lt;&gt;();
+
+while (rs.next()) {
+    String rekisterinumero = rs.getString("rekisterinumero");
+    String merkki = rs.getString("merkki");
+
+    pyorat.add(new Pyora(rekisterinumero, merkki);
+}
+
+stmt.close();
+rs.close();
+
+connection.close();
+
+// pyorat-listalla on kaikki Pyora-tietokantataulun rivit pyora-olioina
+</pre>
+
+
+
+		<p><strong><em>Paremmin!</em></strong></p>
+
+                <p>Edellinen esimerkki sitoo meidät Pyora-tietokannan ja Pyora-olion käyttöön. Entäpä jos haluaisimme hakea tietokannasta lähes minkälaisia olioita?</p>
+ 
+                <p>Luodaan rajapinta <em>Collector</em>, jonka tehtävänä on muuttaa mikä tahansa tulosrivi olioksi. Teemme rajapinnasta geneerisen, eli rajapinnalle voidaan määritellä luotavan olion tyyppi lennosta.</p>
 
 <pre class="sh_java">
 package tikape;
@@ -4205,7 +3823,24 @@ public interface Collector&lt;T&gt; {
 
 }</pre>
 
-		<p>Esimerkiksi pyörien luominen kyselyrivistä onnistuisi nyt seuraavanlaisen <em>Collector</em>-rajapinnan toteuttavan olion avulla.</p>
+                <aside class="info">
+                  <br/>
+                  <h1>Tyyppiparametri?</h1>
+
+                  <p>Javassa on mahdollista määritellä luokka siten, että sille annetaan vasta olion luonnin yhteydessä tyyppiparametreja. Esimerkiksi ArrayList toimii näin. ArrayListille annetaan tyyppiparametrina tallennettavan arvon tyyppi. Alla luodaan erityyppisiä arvoja tallentavia ArrayList-olioita.</p>
+
+<pre class="sh_java">
+// lista, joka käsittelee kokonaislukuja
+ArrayList&lt;Integer&gt; kokonaislukulista = new ArrayList&lt;&gt;();
+// lista, joka käsittelee merkkijonoja
+ArrayList&lt;String&gt; merkkijonolista = new ArrayList&lt;&gt;();
+// lista, joka käsittelee Pyora-olioita
+ArrayList&lt;Pyora&gt; pyoralista = new ArrayList&lt;&gt;();
+</pre>
+
+                </aside>
+
+                <p>Esimerkiksi pyörien luominen kyselyrivistä onnistuisi seuraavanlaisen <em>Collector</em>-rajapinnan toteuttavan olion avulla.</p>
 
 <pre class="sh_java">
 package tikape;
@@ -4224,9 +3859,8 @@ public class Pyorakeraaja implements Collector&lt;Pyora&gt; {
 }</pre>
 
 
+                <p><strong><em>Tietokantaluokan luominen</em></strong></p>
 
-
-		<p><strong><em>Tietokantaluokan luominen</em></strong></p>
 
 		<p>Luodaan seuraavaksi konkreettinen tietokantaluokka, joka ottaa yhteyden tietokantaan, sekä käyttää aiemmin luomaamme Collector-rajapintaa kyselyn tulosten hakemiseksi.</p>
 
@@ -4241,8 +3875,7 @@ public class Database {
     private boolean debug;
     private Connection connection;
 
-    public Database(String driver, String address) throws Exception {
-        Class.forName(driver);
+    public Database(String address) throws Exception {
         this.connection = DriverManager.getConnection(address);
     }
 
@@ -4250,7 +3883,7 @@ public class Database {
         debug = d;
     }
 
-    public &lt;T&gt; List&lt;T&gt; queryAndCollect(String query, Collector&lt;T&gt; col) throws SQLException {
+    public List&lt;T&gt; queryAndCollect(String query, Collector&lt;T&gt; col) throws SQLException {
         List&lt;T&gt; rows = new ArrayList&lt;&gt;();
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
@@ -4286,7 +3919,7 @@ public class Database {
 		<p>Tietokannan konkreettinen käyttö tapahtuu seuraavasti:</p>
 
 <pre class="sh_java">
-Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:vuokraamo.db");
+Database database = new Database("jdbc:sqlite:vuokraamo.db");
 List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", new Pyorakeraaja());
 
 for (Pyora pyora : pyorat) {
@@ -4295,8 +3928,9 @@ for (Pyora pyora : pyorat) {
 
 
 		<p>Tärkeää on myös debug-viestien hyödyntäminen ongelmatapauksissa sekä sovellusta kehitettäessä. Debug-viestit saa tietokantaan päälle metodilla <code>database.setDebugMode(true);</code>.</p>
+
 <pre class="sh_java">
-Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:vuokraamo.db");
+Database database = new Database("jdbc:sqlite:vuokraamo.db");
 database.setDebugMode(true);
 
 List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", new Pyorakeraaja());
@@ -4304,6 +3938,90 @@ List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", new P
 for (Pyora pyora : pyorat) {
     System.out.println(pyora.getMerkki());
 }</pre>
+
+                <aside class="info">
+		  <br/>
+		  <h1>Java 8 ja anonyymit funktiot</h1>
+
+		  <p>Aiemmin luomamme Pyorakeraaja-luokan voi jättää luomatta. Aiemmissa Javan versioissa olemme voineet tehdä seuraavasti:</p>
+
+<pre class="sh_java">
+Database database = new Database("jdbc:sqlite:vuokraamo.db");
+List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", new Collector&lt;Pyora&gt;() {
+
+    @Override
+    public Pyora collect(ResultSet rs) throws SQLException {
+        String reknro = rs.getString("rekisterinumero");
+        String merkki = rs.getString("merkki");
+
+        return new Pyora(reknro, merkki);
+    }
+});
+
+for (Pyora pyora : pyorat) {
+    System.out.println(pyora.getMerkki());
+}</pre>
+
+		  <p>Olemme siis voineet luoda Collector-rajapinnalle toteutuksen ilman erillista luokkamäärittelyä. Java 8 keventää tätä syntaksia hieman, jolloin voimme sanoa myös seuraavasti:</p>
+
+<pre class="sh_java">
+Database database = new Database("jdbc:sqlite:vuokraamo.db");
+List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", rs -> {
+    String reknro = rs.getString("rekisterinumero");
+    String merkki = rs.getString("merkki");
+
+    return new Pyora(reknro, merkki);
+});
+
+for (Pyora pyora : pyorat) {
+    System.out.println(pyora.getMerkki());
+}</pre>
+
+		<p>Ylläolevassa esimerkissä metodi queryAndCollect saa parametrinaan kyselyn ja rajapintatoteutuksen rungon. Java päättelee luokan Database perusteella minkä rajapintatoteutuksen runkoa olemme määrittelemässä. Tässä mahdollisuuksia on vain yksi, ja komento</p>
+
+<pre class="sh_java">
+rs -> {
+    String reknro = rs.getString("rekisterinumero");
+    String merkki = rs.getString("merkki");
+
+    return new Pyora(reknro, merkki);
+}
+</pre>
+
+                <p>Muuttuu ohjelman sisällä aiemmin näkemäämme muotoon:</p>
+
+<pre class="sh_java">
+ new Collector&lt;Pyora&gt;() {
+
+    @Override
+    public Pyora collect(ResultSet rs) throws SQLException {
+        String reknro = rs.getString("rekisterinumero");
+        String merkki = rs.getString("merkki");
+
+        return new Pyora(reknro, merkki);
+    }
+}
+</pre>
+
+                <p>Jos kokonaisuuden voi tehdä yhdellä rivillä, ei aaltosulkeita eikä erillistä return-komentoa tarvita.</p>
+<pre class="sh_java">
+rs -> new Pyora(rs.getString("rekisterinumero"), rs.getString("merkki"))
+</pre>
+
+<pre class="sh_java">
+Database database = new Database("jdbc:sqlite:vuokraamo.db");
+List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora",
+                                rs -> new Pyora(rs.getString("rekisterinumero"), rs.getString("merkki")));
+
+for (Pyora pyora : pyorat) {
+    System.out.println(pyora.getMerkki());
+}</pre>
+
+                <p>Melko näppärää.</p>
+
+                </aside>
+
+
 
 		<p><strong><em>Päivityskyselyiden lisääminen</em></strong></p>
 
@@ -4341,12 +4059,13 @@ public class Database {
 		<p>Nyt myös päivityskyselyt onnistuvat.</p>
 
 <pre class="sh_java">
-Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:vuokraamo.db");
+Database database = new Database("jdbc:sqlite:vuokraamo.db");
 database.setDebugMode(true);
 
 database.update("INSERT INTO Pyora (rekisterinumero, merkki) VALUES ('AKU-313', 'Belchfire Runabout')");
 
-List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora", new Pyorakeraaja());
+List&lt;Pyora&gt; pyorat = database.queryAndCollect("SELECT * FROM Pyora",
+                                rs -> new Pyora(rs.getString("rekisterinumero"), rs.getString("merkki")));
 
 for (Pyora pyora : pyorat) {
     System.out.println(pyora.getMerkki());
@@ -4354,16 +4073,11 @@ for (Pyora pyora : pyorat) {
 
 
 
-                <aside class="info">
-		  <br/>
-		  <h1>Esimerkkiprojekti Githubissa</h1>
-
-		  <p>Juuri rakennettu esimerkkiprojekti löytyy Githubista osoitteessa <a href="https://github.com/tietokantojen-perusteet/Vuokraamo" target="_blank">https://github.com/tietokantojen-perusteet/Vuokraamo</a></p>
-
-		</aside>
 
 
-		<h2>Prepared Statement -kyselyt</h2>
+		<h2>Parameterisoidut kyselyt (Prepared Statement)</h2>
+ 
+                <p>Tietokannan käyttämiseen tarkoitetut rajapinnat -- kuten tällä sivulla käytettävä <a href="https://github.com/kripken/sql.js/" target="_blank">sql.js</a> -- tyypillisesti rajoittavat tietokantaan tehtäviä kyselyitä. Suoran kyselyn tekeminen muodossa <code>DELETE FROM Opiskelija WHERE nimi = 'Gandhi'</code> ei ole aina mahdollista, vaan kysely määritellään parametrin avulla -- esimerkiksi <code>DELETE FROM Opiskelija WHERE nimi = '?'</code>, missä parametri annetaan kyselylle erikseen.</p>
 
 		<p>Prepared Statement-kyselyt ovat valmiiksi määriteltyjä kyselyitä, joissa kyselyissä käytettävät arvot annetaan parametreina. Valmiita kyselyitä käyttämällä estetään merkittävä osa SQL-injektioista, sillä parametreja käytettäessä varmistetaan että parametrien arvot käsitellään tiettyyn kenttään liittyvänä datana -- parametrit eivät siis "vuoda yli".</p>
 
@@ -4405,84 +4119,78 @@ statement.execute();
 		  <br/>
 		  <h1>Prepared Statement ja indeksien numerointi</h1>
 
-		  <p>Tietojenkäsittelytieteilijöille epätyypillisesti kyselyissä käytettävien parametrien indeksointi alkaa numerosta 1.</p>
+		  <p>Tietojenkäsittelytieteilijöille epätyypillisesti kyselyissä käytettävien parametrien indeksit alkavat numerosta 1.</p>
 
 		</aside>
 
-		<p>Prepared Statement-kyselyiden käyttäminen edellisessä luvussa toteutetun tietokanta-abstraktion kautta on myös mahdollista. Toteutetaan tällöin päivitys- ja kyselymetodit sellaisina, että niille annetaan kysely merkkijonona sekä ennalta määrittelemätön määrä parametreja, jotka lisätään kyselyyn kyselyä muodostettaessa.</p>
+
+		<p>Prepared Statement-kyselyitä voi käyttää edellisessä luvussa toteutetun tietokanta-abstraktion kautta. Toteutetaan tällöin päivitys- ja kyselymetodit sellaisina, että niille annetaan kysely merkkijonona sekä ennalta määrittelemätön määrä parametreja, jotka lisätään kyselyyn kyselyä muodostettaessa.</p>
 
 <pre class="sh_java">
-    public int update(String updateQuery, Object... params) throws SQLException {
-        PreparedStatement stmt = connection.prepareStatement(updateQuery);
+public int update(String updateQuery, Object... params) throws SQLException {
+    PreparedStatement stmt = connection.prepareStatement(updateQuery);
 
-        for (int i = 0; i &lt; params.length; i++) {
-            stmt.setObject(i + 1, params[i]);
-        }
+    for (int i = 0; i &lt; params.length; i++) {
+        stmt.setObject(i + 1, params[i]);
+    }
 
-        int changes = stmt.executeUpdate();
+    int changes = stmt.executeUpdate();
 
-        if (debug) {
-            System.out.println("---");
-            System.out.println(updateQuery);
-            System.out.println("Changed rows: " + changes);
-            System.out.println("---");
-        }
-        stmt.close();
+    if (debug) {
+        System.out.println("---");
+        System.out.println(updateQuery);
+        System.out.println("Changed rows: " + changes);
+        System.out.println("---");
+    }
+    stmt.close();
 
-        return changes;
-    }</pre>
+    return changes;
+}</pre>
 
 		<p>Vastaavasti myös olioita kyselystä muodostava olio voidaan toteuttaa PreparedStatement-kyselyn kautta.</p>
 
 <pre class="sh_java">
-    public &lt;T&gt; List&lt;T&gt; queryAndCollect(String query, Collector&lt;T&gt; col, Object... params) throws SQLException {
+public List&lt;T&gt; queryAndCollect(String query, Collector&lt;T&gt; col, Object... params) throws SQLException {
+    if (debug) {
+        System.out.println("---");
+        System.out.println("Executing: " + query);
+        System.out.println("---");
+    }
+
+    PreparedStatement stmt = connection.prepareStatement(query);
+    for (int i = 0; i &lt; params.length; i++) {
+        stmt.setObject(i + 1, params[i]);
+    }
+
+    ResultSet rs = stmt.executeQuery();
+
+    List&lt;T&gt; rows = new ArrayList&lt;&gt;();
+    while (rs.next()) {
         if (debug) {
             System.out.println("---");
-            System.out.println("Executing: " + query);
+            System.out.println(query);
+            debug(rs);
             System.out.println("---");
         }
 
-        List&lt;T&gt; rows = new ArrayList&lt;&gt;();
-        PreparedStatement stmt = connection.prepareStatement(query);
-        for (int i = 0; i &lt; params.length; i++) {
-            stmt.setObject(i + 1, params[i]);
-        }
+        rows.add(col.collect(rs));
+    }
 
-        ResultSet rs = stmt.executeQuery();
+    rs.close();
+    stmt.close();
 
-        while (rs.next()) {
-            if (debug) {
-                System.out.println("---");
-                System.out.println(query);
-                debug(rs);
-                System.out.println("---");
-            }
-
-            rows.add(col.collect(rs));
-        }
-
-        rs.close();
-        stmt.close();
-        return rows;
-    }</pre>
+    return rows;
+}</pre>
 
 
-                <aside class="info">
-		  <br/>
-		  <h1>Viiteavainten käsittely ja koosteoliot</h1>
 
-		  <p>Edellä näkemämme esimerkki, missä tietokannasta haettu rivi muutetaan olioiksi on näppärää tilanteissa, missä yksittäinen tulosrivi voidaan käsitellä yhtenä oliona. Kohtaamme kuitenkin usein tilanteen, missä tietokantataulussa on viite toiseen tauluun. Miten tällainen tilanne kannattaisi käsitellä?</p>
-
-		  <p>Palaamme tähän myöhemmin kurssilla.</p>
-
-		</aside>
+                <h2>Viiteavainten käsittely ja koosteoliot</h2>
 
 
-		<p>Aiemmat, luvussa kolme näkemämme tietokantakyselyiden ohjelmalliseen suorittamiseen liittyvät esimerkit ovat olleet melko yksinkertaisia, sillä niissä on ladattu tietoa yhdestä taulusta kerrallaan. Todellisuudessa tietokannoissa on usein viitteitä taulujen välillä, ja ohjelmallista tietokanta-abstraktiota käyttävän ohjelmoijan näkökulmasta olisi hyvin kätevää, jos nämä viitteet toimisivat myös olioina.</p>
+		<p>Aiemmat esimerkit ovat olleet melko yksinkertaisia, sillä niissä on ladattu tietoa yhdestä taulusta kerrallaan. Todellisuudessa tietokannoissa on usein viitteitä taulujen välillä, ja ohjelmallista tietokanta-abstraktiota käyttävän ohjelmoijan näkökulmasta olisi hyvin kätevää, jos nämä viitteet toimisivat myös olioina. Tutustutaan seuraavaksi viitteiden käsittelyyn taulujen välillä.</p>
 
-		<p>Tässä luvussa tutustumme viitteiden käsittelyyn taulujen välillä, sekä tutustumme olemassaolevaan kirjastoon, joka automatisoi osan tästä työstä.</p>
 
-		<p>Oletamme, että tietokantakaaviomme on luvussa 3 käyttämämme kuvitteellisen pyörävuokraamon tietokannan osa. Tietokantakaaviomme on seuraavanlainen:</p>
+		<p>Oletamme, että tietokantakaaviomme on seuraavanlainen kuvitteellisen pyörävuokraamon tietokannan osa.</p>
 
 
 		<figure>
@@ -4492,6 +4200,7 @@ statement.execute();
 [Pyora]1-*[Varaus]
 [Varaus]*-1[Varaaja]"/>
 		</figure>
+
 
 		<p>Kun ylläoleva tietokantakaavio luodaan Java-ohjelmakoodina siten, että taulujen väliset viitteet on otettu huomioon, luomme käytännössä kolme luokkaa: <em>Pyora</em>, <em>Varaaja</em> ja <em>Varaus</em>. Yhteen pyörään voi liittyä monta varausta, eli jokaiseen pyöräolioon liittyy lista varauksia. Vastaavasti, jokaiseen varaajaan voi liittyä monta varausta, eli jokaiseen varaajaolioon liittyy lista varauksia. Jokaiseen varausolioon liittyy yksi pyöräolio ja yksi varaajaolio.</p>
 
@@ -4504,7 +4213,8 @@ public class Pyora {
     private String merkki;
     private List&lt;Varaus&gt; varaukset;
 
-// konstruktorit, getterit ja setterit</pre>
+// konstruktorit, getterit ja setterit
+}</pre>
 
 		<pre class="sh_java">
 import java.util.*;
@@ -4516,7 +4226,8 @@ public class Varaaja {
     private String sukunimi;
     private List&lt;Varaus&gt; varaukset;
 
-// konstruktorit, getterit ja setterit</pre>
+// konstruktorit, getterit ja setterit
+}</pre>
 
 
 		<pre class="sh_java">
@@ -4531,18 +4242,19 @@ public class Varaus {
     private Timestamp varausAlkaa;
     private Timestamp varausLoppuu;
 
-// konstruktorit, getterit ja setterit</pre>
+// konstruktorit, getterit ja setterit
+}</pre>
+
 
 		<p>Luokassa Varaus käytetty muuttujan tyyppi <code><a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html" target="_blank">Timestamp</a></code> on eräs tietokannoissa käytetty muuttujatyyppi ajan tallentamiseen.</p>
+
 
 		<p>Ohjelmallisia tietokantakyselyitä suorittaessa -- esimerkiksi varauksen noutamisen yhteydessä -- tulee nyt hakea (1) varaustaulusta rivi, (2) haetun varausrivin pyora-kentästä löytyvällä viiteavaimella rivi pyörätaulusta, (3) haetun varausrivin varaaja-kentästä löytyvällä viiteavaimella rivi varaaja-taulusta, ja (4) luoda haettujen rivien perusteella oliot -- varaaja- ja pyörä-oliot tulee lisäksi asettaa varaukseen kuuluvaksi. Kokonaisuudessaan, ilman toiminnallisuuden jakamista erillisiin osiin, tietyn varauksen ja siihen liittyvän pyörän hakemiseen tarvittava kysely voisi olla vaikkapa seuraavanlainen.</p>
 
 <pre class="sh_java">
-String driver = "org.sqlite.JDBC";
 String databaseAddress = "jdbc:sqlite:vuokraamo.db";
 
 // haetaan tietokanta-ajuri ja avataan tietokantayhteys
-Class.forName(driver);
 Connection conn = DriverManager.getConnection(databaseAddress);
 
 // haetaan yksittäinen varaus, jonka tunnus on 42
@@ -4595,10 +4307,48 @@ conn.close();
                 <p>Käytännössä toiminnallisuutta kuitenkin jaetaan osiin.</p>
 
 
+<!--
+	  	 
+
+        <figure>
+	  <img src="img/paivitysraja.jpg" alt="päivitysraja ::
+C
+ (\.   \      ,/)
+  \(   |\     )/
+  //\  | \   /\\
+ (/ /\_#oo#_/\ \)
+  \/\  ####  /\/
+       `##'
+"/>
+	  <figcaption>Tähän on hyvä lopettaa lukeminen.</figcaption>
+	</figure>
+
+
+                <aside class="info">
+		  <br/>
+		  <h1>Esimerkkiprojekti Githubissa</h1>
+
+		  <p>Juuri rakennettu esimerkkiprojekti löytyy Githubista osoitteessa <a href="https://github.com/tietokantojen-perusteet/Vuokraamo" target="_blank">https://github.com/tietokantojen-perusteet/Vuokraamo</a></p>
+
+		</aside>
+
+
+		<h2>Prepared Statement -kyselyt</h2>
+
+-->
+
 		<h2>Data Access Object -suunnittelumalli</h2>
 
 		<p>Tietokantasovelluksia toteuttaessa on hyvin tyypillistä abstrahoida, eli piilottaa, konkreettinen tiedon hakemis- ja tallennustoiminnallisuus siten, että ohjelmoijan ei tarvitse nähdä sitä jatkuvasti. Ideana on, että sovelluskehittäjä käyttää <em>DAO</em>-rajapinnan toteuttamia olioita, ja se, että mistä tai miten tiedot konkreettisesti haetaan ei ole sovelluksen muiden osien tiedossa.</p>
 
+		<aside class="info">
+		  <br/>
+		  <h1>Data Access Object (DAO) -- Wikipedia:</h1>
+		  <p><em>In computer software, a data access object (DAO) is an object that provides an abstract interface to some type of database or other persistence mechanism. By mapping application calls to the persistence layer, DAO provide some specific data operations without exposing details of the database. This isolation supports the Single responsibility principle. It separates what data accesses the application needs, in terms of domain-specific objects and data types (the public interface of the DAO), from how these needs can be satisfied with a specific DBMS, database schema, etc. (the implementation of the DAO).</em></p>
+		  
+		  <p><em>Although this design pattern is equally applicable to the following: (1- most programming languages; 2- most types of software with persistence needs; and 3- most types of databases) it is traditionally associated with Java EE applications and with relational databases (accessed via the JDBC API because of its origin in Sun Microsystems' best practice guidelines "Core J2EE Patterns" for that platform).</em></p>
+		</aside>
+		
 		<p>Hahmotellaan hakemiseen ja poistamiseen liittyvää rajapintaa, joka tarjoaa metodit <code>findOne</code>, <code>findAll</code> ja <code>delete</code>, eli toiminnallisuudet hakemiseen ja poistamiseen. Tehdään rajapinnasta <em>geneerinen</em>, eli toteuttava luokka määrittelee palautettavien olioiden tyypin sekä avaimen.</p>
 
 <pre class="sh_java">
@@ -4642,7 +4392,7 @@ public class VarausDao implements Dao&lt;Varaus, Integer&gt; {
 
                 <p>Käytännössä tyyppiparametrit annetaan rajapinnan toteuttamisesta kertovan avainsanan <code>implements</code>-yhteyteen. Ylläolevassa esimerkissä haettavan olion tyyppi on <code>Varaus</code>, ja sen avain on tyyppiä <code>Integer</code>.</p>
 
-		<p>Koska varausten hakemiseen tarvitaan myös pyörien hakemista, hahmotellaan myös pyörien hakemiseen liittyvää toiminnallisuutta. Luokan rakenne on hyvin samankaltainen kuin edellä.</p>
+		<p>Koska varausten hakemiseen tarvitaan myös pyörien hakemista, hahmotellaan myös pyörien hakemiseen liittyvää toiminnallisuutta. Luokan rakenne on hyvin samankaltainen kuin edellä -- suurin ero liittyy käsiteltävään olioon sekä avaimen tyyppiin (VarausDao käsittelee olioita, joiden avain on Integer-tyyppinen, kun taas PyoraDao käsittelee olioita, joiden avain on String-tyyppinen.</p>
 
 
 <pre class="sh_java">
@@ -4680,6 +4430,10 @@ public class PyoraDao implements Dao&lt;Pyora, String&gt; {
 
     private Database database;
 
+    public PyoraDao(Database database) {
+        this.database = database;
+    }
+ 
     @Override
     public Pyora findOne(String key) throws SQLException {
         Connection connection = database.getConnection();
@@ -4725,8 +4479,7 @@ public class Database {
 
     private String databaseAddress;
 
-    public Database(String driver, String databaseAddress) throws ClassNotFoundException {
-        Class.forName(driver);
+    public Database(String databaseAddress) throws ClassNotFoundException {
         this.databaseAddress = databaseAddress;
     }
 
@@ -4798,7 +4551,7 @@ public class VarausDao implements Dao&lt;Varaus, Integer&gt; {
 		<p>Nyt yksittäisen varauksen hakemisen yhteydessä palautetaan sekä varaus, että siihen liittyvä pyörä. Rajapintaa käyttävän toteutuksen näkökulmasta tietokannan käyttäminen toimii seuraavasti:</p>
 
 <pre class="sh_java">
-Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:vuokraamo.db");
+Database database = new Database("jdbc:sqlite:vuokraamo.db");
 PyoraDao pyoraDao = new PyoraDao(database);
 VarausDao varausDao = new VarausDao(database, pyoraDao);
 
@@ -5057,7 +4810,6 @@ public class Pyora {
 		<p>Nyt kaikkien pyörien hakeminen tietokannasta onnistuu seuraavasti. Huom! Käytössä on ORMLiten tarjoama Dao-rajapinta -- emme siis kirjoita erikseen ohjelmakoodia kyselyiden tulosten muuttamiseksi olioiksi.</p>
 
 <pre class="sh_java">
-Class.forName("org.sqlite.JDBC");
 ConnectionSource connectionSource
         = new JdbcConnectionSource("jdbc:sqlite:vuokraamo.db");
 
@@ -5100,7 +4852,6 @@ public class Varaus {
 		<p>Varauksiin liittyvien pyörien tulostaminen onnistuu nyt seuraavasti:</p>
 
 <pre class="sh_java">
-Class.forName("org.sqlite.JDBC");
 ConnectionSource connectionSource
         = new JdbcConnectionSource("jdbc:sqlite:vuokraamo.db");
 
@@ -5124,1093 +4875,9 @@ for (Varaus varaus : varaukset) {
 		</aside>
 
 
-
-
-
-		<header>
-		  <h1 id="viikko5">Viikko 5</h1>
-		</header>
-
-		<h1>Tietokantataulujen luominen ja muokkaaminen</h1>
-
-		<p>Tähän mennessä tietokantataulut ovat olleet valmiiksi annettuna, eikä meidän ole tarvinnut pohtia niiden luomista. Tehdään korjausliike, ja tutustutaan tietokantataulujen -- ja sitä kautta -- oman tietokannan rakenteen määrittelyyn ja luomiseen.</p>
-
-		<h2>Tietokantataulun luominen</h2>
-
-		<p>Tietokantataulu luodaan SQL-komennolla <code>CREATE TABLE</code>, jota seuraa luotavan taulun nimi, ja suluissa attribuuttien eli sarakkeiden nimet sekä niiden tyypit pilkulla eroteltuna. Tyyppien määrittely ei ole kaikissa tietokannanhallintajärjestelmissä pakollista, jolloin tietokannanhallintajärjestelmä käyttää mahdollista oletustyyppiä.</p>
-
-		<p>Luodaan aiemmin tutuksi tullut Opiskelija-taulu.</p>
-
-		<div class="data-table">
-		  <h4>Opiskelija</h4>
-		  <table class="table">
-		    <thead>
-		      <tr>
-			<th>opiskelijanumero</th>
-			<th>nimi</th>
-			<th>syntymävuosi</th>
-			<th>pääaine</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-			<td>9999999</td>
-			<td>Pihla</td>
-			<td>1997</td>
-			<td>Tietojenkäsittelytiede</td>
-		      </tr>
-		      <tr>
- 			<td>9999998</td>
-			<td>Joni</td>
-			<td>1993</td>
-			<td>Tietojenkäsittelytiede</td>
-		      </tr>
-		    </tbody>
-		  </table>
-		</div>
-
-
-                <p>Taulu opiskelija saadaan luotua SQL-komennolla <code>CREATE TABLE Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine)</code> -- emme ota vielä kantaa sarakkeiden tietotyyppeihin, vaan määrittelemme vain nimet. Tällöin tietokannanhallintajärjestelmä ottaa vastuun sarakkeiden tyyppien asettamisesta -- jos se on mahdollista. </p>
-
-		<div ng-controller="noTablesSqlController">
-
-		  <togglable content="taulut" db="db">
-		    <table-info></table-info>
-		  </togglable>
-
-		  <query
-		     editable="false"
-		     done="tableOpiskelijaWasCreated"
-		     db="db"
-		     rows="3"
-		     query="CREATE TABLE Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine)">
-		  </query>
-
-
-		  <div ng-show="tableOpiskelijaWasCreated">
-
-		    <p>Juuri luotuun tauluun saa lisättyä uusia rivejä komennolla <code>INSERT INTO</code>, jota seuraa taulun nimi, sarakkeet suluissa eroteltuna, sekä uudelle riville asetettavat arvot.</p>
-
-		    <query
-		       db="db"
-		       rows="3"
-		       query="INSERT INTO Opiskelija (opiskelijanumero, nimi, syntymävuosi, pääaine)
-    VALUES ('01283581', 'Jack Bower', 1983, 'Tietojenkäsittelytiede')"
-		       done="opiskelijaAddedToTableOpiskelija">
-		    </query>
-		  </div>
-
-		  <div ng-show="opiskelijaAddedToTableOpiskelija">
-		    <p>Luodussa taulussa olevan tiedon hakeminen tapahtuu kuten ennenkin.</p>
-
-		    <query
-		       db="db"
-		       rows="3"
-		       query="SELECT * FROM Opiskelija">
-		    </query>
-		  </div>
-
-
-		  <p><strong><em>Kurssi-taulun luominen</em></strong></p>
-
-		  <p>Luo tietokantaan taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>.</p>
-
-
-		  <togglable content="taulut" db="db">
-		    <table-info></table-info>
-		  </togglable>
-
-		  <query
-		     db="db"
-		     rows="3"
-		     done="tableKurssiWasCreated">
-		  </query>
-
-		  <div ng-show="tableKurssiWasCreated">
-		    <p>Lisää nyt tauluun Kurssi kurssi nimeltä "SQL-kielen perusteet", jonka kurssitunnus on "12345" ja kuvaus "SELECT 'Hei maailma';".</p>
-
-		    <query
-		       db="db"
-		       rows="3"
-		       done="newCourseWasInserted">
-		    </query>
-
-		  </div>
-
-		  <div ng-show="newCourseWasInserted">
-
-		    <p>Tarkista vielä, että taulun luominen onnistui, ja että uusi kurssi löytyy tietokantataulusta.</p>
-
-		    <query
-		       db="db"
-		       rows="3">
-		    </query>
-
-		  </div>
-
-
-
-		  <aside class="info">
-		    <br/>
-		    <h1>Olemassaolevien taulujen listaaminen ja poisto</h1>
-
-		    <p>Tietokannanhallintajärjestelmät tyypillisesti tarjoavat mahdollisuuden olemassaolevien tietokantataulujen listaamiseen. Tämä toiminnallisuus on kuitenkin järjestelmäkohtaista -- esimerkiksi tässä materiaalissa käyttämässämme SQLite-versiossa taulujen tiedot löytyvät piilotetusta tietokantataulusta <code>sqlite_master</code>.</p>
-
-		    <query
-		       db="db"
-		       rows="2"
-		       query="SELECT * FROM sqlite_master">
-		    </query>
-
-
-		    <p>Olemassaolevan taulun poistaminen -- esimerkiksi silloin jos sen nimen on kirjoittanut väärin, onnistuu komennolla <code>DROP TABLE</code>, mitä seuraa taulun nimi. Voit kokeilla sitä seuraavassa -- näet poistuiko tietokantataulu kyselyn <code>SELECT * FROM sqlite_master</code> avulla.</p>
-
-		    <query
-		       db="db"
-		       rows="2">
-		    </query>
-
-		  </aside>
-		</div>
-
-
-		<h2>Attribuuttien datatyypit</h2>
-
-                <p>Jokaisella attribuutilla tulee olla nimi sekä datatyyppi. Jos datatyyppiä ei määritellä, voi tietokannanhallintajärjestelmä määritellä sen itse -- esimerkiksi SQLite pyrkii päättelemään attribuutin tyypin dynaamisesti, mutta useimmat tietokannanhallintajärjestelmät eivät tällaista päättelyä tee.</p>
-
-		<p>Tietokantaan säilöttävä tieto voi olla montaa eri muotoa, esimerkiksi merkkijonoja, numeroita, binäärimuodossa olevia tiedostoja, sekä päivämääriä. Tietokannan suunnittelijan tehtävänä on päättää, minkämuotoista dataa missäkin sarakkeessa on.</p>
-
-                <p>Puhekielessä voidaan puhua sarakkeen tyypistä, sillä sarakkeen tyyppi määrää millaista tietoa sarakkeeseen tallennetaan. Käytännössä tietokantataulua luotaessa sarakkeen määrittelyssä annettavat tiedot kertovat tietokannanhallintajärjestelmälle siitä, että minkälaista tietoa sarakkeeseen voidaan lisätä, ja toisaalta samalla minkälaista tietoa sarakkeeseen ei voida lisätä. Sarakkeen tyyppi vaikuttaa myös toiminnallisuuksiin -- esimerkiksi keskiarvon laskeminen merkkijonotyyppisiä arvoja sisältävästä sarakkeesta ei todennäköisesti ole hyödyllistä.</p>
-
-		<p>Tyypilliset datatyypit ovat seuraavat:</p>
-
-		<ul>
-		  <li><strong>varchar(n)</strong> korkeintaan <em>n</em> merkin pituinen merkkijono.</li>
-		  <li><strong>integer</strong> kokonaisluku</li>
-		  <li><strong>float</strong> liukuluku eli desimaaliluku</li>
-		  <li><strong>date</strong> päivämäärä, tallentaa vuoden, kuukauden ja päivän</li>
-		  <li><strong>timestamp</strong> aikaleima, tallentaa vuoden, kuukauden, päivän, tunnit, minuutit ja sekunnit -- mahdollisesti myös tarkempia arvoja</li>
-		</ul>
-
-                <p>Taulua luodessa sarakkeen tyyppi määritellään lisäämällä datatyypin nimi sarakkeen nimen perään. Esimerkiksi Opiskelija-taulua luodessa opiskelijanumero voitaisiin määritellä kokonaisluvuksi, nimi korkeintaan 200 merkkiä pitkäksi merkkijonoksi, syntymävuosi päivämääräksi ja pääaine korkeintaan 50 merkkiä pitkäksi merkkijonoksi seuraavasti:</p>
-
-<pre class="sh_sql">
-CREATE TABLE Opiskelija
-(
-    opiskelijanumero integer,
-    nimi varchar(200),
-    syntymävuosi date,
-    pääaine varchar(50)
-)
-</pre>
-
-                <p>Nyt -- riippuen käytetystä tietokannanhallintajärjestelmästä -- sarakkeeseen opiskelijanumero ei voisi esimerkiksi lisätä merkkijonoa, sillä se on kokonaisluku. Tämä johtaa tilanteeseen, missä tietokannanhallintajärjestelmä itsessään varoittaa tiedon lisääjää yksinkertaisista virheistä.</p>
-
-
-		<aside class="info">
-		  <br/>
-
-		  <h1>Olemassaolevien attribuuttien datatyypin selvittäminen</h1>
-
-
-		  <p>Attribuutin -- tai sarakkeen -- datatyypin kysymiseen tietokannalta <a href="http://stackoverflow.com/questions/13405572/sql-statement-to-get-column-type" target="_blank">ei ole yhtä tapaa</a>, vaan tapa liittyy käytettävään tietokannanhallintajärjestelmään. Käyttämässämme SQLite-versiossa sarakkeen tyypin saa selville kyselyllä <code>PRAGMA TABLE_INFO(<em>TaulunNimi</em>)</code>, missä <em>TaulunNimi</em> on tarkasteltavan taulun nimi.</p>
-
-		  <div ng-controller="noTablesSqlController">
-
-		    <p>Luo ensin tarkasteltava tietokantataulu.</p>
-
-		    <query
-		       db="db"
-		       rows="3"
-		       done="tableCreated">
-		    </query>
-
-		    <div ng-show="tableCreated">
-
-
-		      <togglable content="taulut" db="db">
-			<table-info></table-info>
-		      </togglable>
-
-		      <p>Kun tietokantataulu on luotu, saat tarkasteltua sen sisältöä <code>PRAGMA</code>-komennolla.</p>
-
-		      <query
-			 db="db"
-			 rows="3"
-			 query="PRAGMA TABLE_INFO(LuodunTaulunNimi)">
-		      </query>
-		    </div>
-
-		  </div>
-		</aside>
-
-
-                <p><strong><em>Kurssi-taulun luominen sarakkeiden tyypeillä</em></strong></p>
-
-		<p>Luo taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>. Kurssitunnuksen tulee olla kokonaisluku, nimen merkkijono, ja kuvauksen merkkijono.</p>
-
-
-		<div ng-controller="noTablesSqlController">
-
-		  <query
-		     db="db"
-		     rows="3"
-		     done="tableCreated">
-		  </query>
-
-		  <div ng-show="tableCreated">
-
-
-		    <togglable content="taulut" db="db">
-		      <table-info></table-info>
-		    </togglable>
-
-		    <p>Varmista vielä PRAGMA-komennolla, että sarakkeiden tyypit ovat halutut.</p>
-
-		    <query
-		       db="db"
-		       rows="3">
-		    </query>
-		  </div>
-		</div>
-
-
-		<aside class="info">
-		  <br/>
-		  <h1>Tietokannanhallintajärjestelmien datatyyppejä</h1>
-
-		  <p>Eri tietokannanhallintajärjestelmät kuten <code>SQLite</code>, <code>MySQL</code> ja <code>PostgreSQL</code> tarjoavat hieman erilaisia datatyyppejä ohjelmoijan käyttöön. Tutustu seuraaviin dokumentteihin, missä näistä kerrotaan enemmän:</p>
-
-
-		  <ul>
-		    <li><a href="https://www.sqlite.org/datatype3.html" target="_blank">https://www.sqlite.org/datatype3.html</a></li>
-		    <li><a href="http://www.w3schools.com/sql/sql_datatypes.asp" target="_blank">http://www.w3schools.com/sql/sql_datatypes.asp</a></li>
-		  </ul>
-		</aside>
-
-
-		<h2>Rajoitteet ja avaimet</h2>
-
-		<p>Kun olemme aiemmin luoneet tietokantakaavioita käsitekaavioista, olemme määritelleet tietokantatauluille yksilöivän <em>pääavaimen</em>. Pääavain on taulukohtainen tunniste, joka on uniikki jokaiselle taulun riville, jonka lisäksi sen arvo ei saa olla tyhjä (<em>null</em>) millään rivillä. Pääavaimeksi valitaan joko olemassaoleva taulun sarake, tai tauluun luodaan uusi sarake.</p>
-
-		<p><strong><em>Pääavaimen määrittely</em></strong></p>
-
-		<p>Pääavain määritellään tietokantataulun luonnin yhteydessä lisäämällä sarakkeen tyypin perään rajoite <code>PRIMARY KEY</code>. Tämä tarkoittaa, että sarakkeen arvo on uniikki, ja että se ei saa koskaan olla tyhjä. Täydennetään aiempaa opiskelijan määrittelyä siten, että opiskelijanumerosta tehdään Opiskelija-taulun pääavain</p>
-
-
-<pre class="sh_sql">
-CREATE TABLE Opiskelija
-(
-    opiskelijanumero integer PRIMARY KEY,
-    nimi varchar(200),
-    syntymävuosi date,
-    pääaine varchar(50)
-)
-</pre>
-
-
-		<div ng-controller="noTablesSqlController">
-
-		  <p>Kokeillaan edelläolevaa komentoa käytännössä.</p>
-
-		  <query
-		     db="db"
-		     rows="7"
-		     done="tableCreated"
-		     editable="false"
-		     query="CREATE TABLE Opiskelija
-(
-    opiskelijanumero integer PRIMARY KEY,
-    nimi varchar(200),
-    syntymävuosi date,
-    pääaine varchar(50)
-)">
-		  </query>
-
-		  <div ng-show="tableCreated">
-
-		    <togglable content="taulut" db="db">
-		      <table-info></table-info>
-		    </togglable>
-
-		    <p>Lisätään seuraavaksi tietokantatauluun uusi opiskelija nimeltä <code>Ada Lovelace</code>. Seuraavalla komennolla vain tietokantataulun kenttään <code>nimi</code> asetetaan arvo.</p>
-
-		    <query
-		       db="db"
-		       rows="3"
-		       query="INSERT INTO Opiskelija (nimi) VALUES ('Ada Lovelace')"
-		       done="studentInserted">
-		    </query>
-		  </div>
-
-		  <div ng-show="studentInserted">
-		    <p>Listaa nyt taulussa olevat opiskelijat. Mitä huomaat jos opiskelijoita lisätään tietokantatauluun enemmän?</p>
-
-		    <query
-		       db="db"
-		       rows="3"
-		       query="SELECT * FROM Opiskelija"
-		       done="studentsListed">
-		    </query>
-		  </div>
-
-		  <div ng-show="studentsListed">
-		    <p>Koska tietokantatauluun on määritelty avain, joka on uniikki, ei taulun sarakkeessa <code>opiskelijanumero</code> voi olla kahta samaa arvoa. Kokeile tätä painamalla alla olevaa nappia ensin kerran -- jolloin opiskelija lisätään -- ja sitten vielä toisen kerran. Mitä virheviesti kertoo?</p>
-
-		    <query
-		       db="db"
-		       rows="3"
-		       query="INSERT INTO Opiskelija (opiskelijanumero, nimi)
-    VALUES (999, 'Beezow Doo-Doo Zopittybop-Bop-Bop')">
-		    </query>
-
-		  </div>
-
-		</div>
-
-
-		<aside class="info">
-
-		  <br/>
-
-		  <h1>Pääavaimen arvojen automaattinen luonti</h1>
-
-		  <p>Tietyt tietokannanhallintajärjestelmät tarjoavat tuen automaattiselle pääavaimen arvojen luomiselle. Esimerkiksi SQLite luo automaattisesti kokonaislukutyyppiselle sarakkeelle arvoja, jos sarake on määritelty pääavaimeksi, ja ohjelmoija ei tauluun tietoa lisätessään arvoja erikseen määrittele. Vastaava toiminnallisuus löytyy myös useista muista tietokannanhallintajärjestelmistä -- tutustu esimerkiksi <a href="https://mariadb.com/kb/en/mariadb/auto_increment/" target="_blank">MariaDB:n dokumentaatioon asiasta</a>.</p>
-
-		</aside>
-
-                <p><strong><em>Kurssi-taulun luominen sarakkeiden tyypeillä ja pääavaimella</em></strong></p>
-
-		<p>Luo taulu <code>Kurssi</code>, jolla on sarakkeet <code>kurssitunnus</code>, <code>nimi</code> ja <code>kuvaus</code>. Kurssitunnuksen tulee olla kokonaisluku, nimen merkkijono, ja kuvauksen merkkijono. Tämän lisäksi, kurssitunnuksen tulee olla pääavain.</p>
-
-
-		<div ng-controller="noTablesSqlController">
-
-		  <query
-		     db="db"
-		     rows="6"
-		     done="tableCreated">
-		  </query>
-
-		  <div ng-show="tableCreated">
-
-
-		    <togglable content="taulut" db="db">
-		      <table-info></table-info>
-		    </togglable>
-
-		    <p>Seuraavan kyselyn useampaan otteeseen suorittamisen pitäisi epäonnistua, sillä tietokantataulun kurssitunnus-sarakkeen pitäisi olla olla pääavain, ja sen takia uniikki. </p>
-
-		    <query
-		       db="db"
-		       rows="3"
-		       query="INSERT INTO Kurssi (kurssitunnus, nimi) VALUES (42, 'Meaning of Life')">
-		    </query>
-		  </div>
-		</div>
-
-
-                <p>Jokaisella taululla voi olla vain yksi määritelty pääavain. Joskus kuitenkin haluamme, että pääavain liittyy useampaan sarakkeeseen, jolloin sarakkeiden yhdistelmän tulee olla uniikki. Voimme esimerkiksi haluta rajoittaa opiskelijoiden kurssi-ilmoittautumisia siten, että jokainen opiskelija voi ilmoittautua vain kerran tietylle kurssille. Tämä onnistuisi kuvitteellisen <em>KurssiIlmoittautuminen</em>-taulun kautta siten, että taulun pääavaimena toimisi opiskelijanumeron ja kurssin yhdistelmä.</p>
-
-<pre class="sh_sql">
-CREATE TABLE KurssiIlmoittautuminen
-(
-    opiskelijanumero integer,
-    kurssi integer,
-    PRIMARY KEY (opiskelija, kurssi)
-)
-</pre>
-
-                <p>Nyt taulussa KurssiIlmoittautuminen voi olla vain yksi samanlainen <code>opiskelijanumero</code>-<code>kurssi</code> -arvopari, jolloin opiskelija voi ilmoittautua kurssille vain kerran.</p>
-
-
-
-		<aside class="info">
-		  <br/>
-		  <h1>Pääavaimen valinta.</h1>
-
-		  <p>Tietokantataulun pääavaimen valinta on herättänyt paljon keskustelua. Alla on muutamia linkkejä teemaan liittyen:</p>
-
-		  <ul>
-		    <li><a href="http://www.techrepublic.com/article/the-great-primary-key-debate/" target="_blank">The great primary key debate</a></li>
-		    <li><a href="http://www.agiledata.org/essays/keys.html" target="_blank">Choosing a primary key: Natural or surrogate?</a></li>
-		    <li><a href="http://dba.stackexchange.com/questions/10383/sql-server-primary-keys-advice-to-my-whitepaper-needed" target="_blank">Tips for explaining primary keys to junior developers?</a></li>
-		  </ul>
-		</aside>
-
-		<p><strong><em>Uniikkius ja arvon pakollinen määrittely</em></strong></em>
-
-                <p>Tietokantataulun sarakkeille voidaan määritellä myös muita rajoitteita, kuten se, että sarakkeen arvon tulee olla uniikki, tai että sarakkeessa on pakko olla arvo. Sarakkeen uniikkius määritellään komennolla <code>UNIQUE</code>, joka seuraa tyyppiä. Vastaavasti se, että sarakkeessa on pakko olla arvo määritellään komennolla <code>NOT NULL</code>.</p>
-
-		<p>Jos haluamme esimerkiksi lisätä Opiskelija-tauluun rajoitteet, missä määritellään se, että nimeä ja syntymäaikaa ei saa jättää määrittelemättä, lisätään niihin <code>NOT NULL</code> määreet.</p>
-
-<pre class="sh_sql">
-CREATE TABLE Opiskelija
-(
-    opiskelijanumero integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL,
-    syntymävuosi date NOT NULL,
-    pääaine varchar(50)
-)
-</pre>
-
-                <p>Toisaalta, jos määrittelisimme ylläolevan lisäksi säännöt, joiden mukaan nimen ja syntymävuoden tulisi olla uniikkeja, olisi määrittely seuraava.</p>
-
-<pre class="sh_sql">
-CREATE TABLE Opiskelija
-(
-    opiskelijanumero integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL UNIQUE,
-    syntymävuosi date NOT NULL UNIQUE,
-    pääaine varchar(50)
-)
-</pre>
-
-                <p>Tämä ei kuitenkaan olisi kovin fiksua, sillä yllä määriteltävässä taulussa yhdelläkään opiskelijalla ei saisi olla samaa nimeä jonkun toisen kanssa. Vastaavasti, sama syntymävuosi (tai aika) johtaisi virhetilanteeseen.</p>
-
-
-		<aside class="info">
-		  <br/>
-		  <h1>CHECK</h1>
-
-		  <p>Edellämainittujen rajoitteiden lisäksi käytössä on mm. rajoite <code>CHECK</code>, jonka avulla voidaan rajoittaa arvoja esimerkiksi tietylle arvovälille. Voimme esimerkiksi luoda Opiskelija-tauluun säännön, jonka mukaan jokaisen opiskelijanumeron tulee olla suurempi kuin 0.</p>
-
-<pre class="sh_sql">
-CREATE TABLE Opiskelija
-(
-    opiskelijanumero integer PRIMARY KEY CHECK (opiskelijanumero &gt; 0),
-    nimi varchar(200) NOT NULL,
-    syntymävuosi date NOT NULL,
-    pääaine varchar(50)
-)
-</pre>
-
-                  <p>Rajoitteet voidaan määritellä myös sarakemäärittelyiden jälkeen. Tämä on näppärää esimerkiksi silloin, jos rajoitteita on useampia. Tehdään erillinen tarkistus, joss varmistetaan, että jokainen nimi on yli 2 merkkiä pitkä, ja opiskelijanumero on aina suurempi kuin 0.</p>
-
-<pre class="sh_sql">
-CREATE TABLE Opiskelija
-(
-    opiskelijanumero integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL,
-    syntymävuosi date NOT NULL,
-    pääaine varchar(50),
-    CONSTRAINT <em>saannonNimi</em> CHECK (opiskelijanumero &gt; 0 AND LENGTH(nimi) &gt; 2)
-)
-</pre>
-
-		  <p><em>Funktion <code>LENGTH</code> kirjoitusasu riippuu järjestelmästä, esimerkiksi MySQL:ssä se kirjoitetaan muodossa <code>LEN</code>.</em></p>
-
-		</aside>
-
-
-
-		<p><strong><em>Viiteavainten määrittely</em></strong></p>
-
-		<aside class="info">
-		  <br/>
-		  <h1>SQLite ja viiteavaimet</h1>
-
-		  <p>Käytössämme olevan SQLiten kolmosversiossa viiteavaimiin liittyvät tarkistukset ovat oletuksena poissa päältä. Tarkastukset saadaan päälle seuraavalla komennolla:</p>
-
-		  <pre class="sh_sql">PRAGMA foreign_keys = ON;</pre>
-
-		  <p>Oletamme, että komento on suoritettu.</p>
-
-		</aside>
-
-                <p>Tietokantataulujen viiteavaimet ovat sarakkeita, joissa olevat arvot viittaavat toisissa tauluissa oleviin pääavaimiin. Tietokantataulua määriteltäessä viiteavaimet listataan sarakkeiden määrittelyn jälkeen. Jokaisen viiteavaimen yhteydessä kerrotaan sekä luotavan taulun sarake -- eli sarake, joka on viiteavain -- että taulu ja sarake, johon viiteavaimella viitataan. Viiteavaimen määrittely tapahtuu komennolla <code>FOREIGN KEY(<em>sarake</em>) REFERENCES <em>ViitattavaTaulu(viitattavaSarake)</em></code>.</p>
-
-		<p>Jos tietokantataulut Opiskelija ja Kurssi ovat määritelty seuraavasti:</p>
-
-<pre class="sh_sql">
-CREATE TABLE Opiskelija
-(
-    opiskelijanumero integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL,
-    syntymävuosi date NOT NULL,
-    pääaine varchar(50)
-);
-
-CREATE TABLE Kurssi
-(
-    kurssitunnus integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL,
-    kuvaus varchar(3000)
-);</pre>
-
-                <p>Voidaan taulu kurssisuoritus, joka viittaa sekä opiskelijaan, että kurssiin, määritellä seuraavasti.</p>
-
-<pre class="sh_sql">
-CREATE TABLE Kurssisuoritus
-(
-    opiskelija integer NOT NULL,
-    kurssi integer NOT NULL,
-    päivämäärä date NOT NULL,
-    arvosana integer NOT NULL,
-    opintopistemäärä integer NOT NULL,
-    FOREIGN KEY(opiskelija) REFERENCES Opiskelija(opiskelijanumero),
-    FOREIGN KEY(kurssi) REFERENCES Kurssi(kurssitunnus)
-);
-</pre>
-
- 		<p>Viiteavaimet ovat siis sarakkeita siinä missä muutkin sarakkeet, mutta niille määritellään eriseen rajoitteet, jotka kertovat, että ne ovat viiteavaimia. Taulussa käytettävien viiteavainten määrä ei käytännössä ole rajattu -- voi olla, että niitä ei ole yhtäkään, tai niitä voi olla useita. Yllä viiteavainsarakkeille <code>opiskelija</code> ja <code>kurssi</code> on lisäksi määritelty <code>NOT NULL</code>-rajoitteet, joiden avulla määritellään että sarakkeiden arvot eivät saa jäädä tyhjiksi.</p>
-
-		<div ng-controller="noTablesSqlController">
-
-		  <p>Kokeillaan edellä nähtyä käytännössä. Luodaan ensin tietokantataulut Opiskelija ja Kurssi, sekä lisätään niihin muutama rivi.</p>
-
-		  <query
-		     db="db"
-		     rows="20"
-		     editable="false"
-		     query="PRAGMA foreign_keys = ON;
-
-CREATE TABLE Opiskelija (
-    opiskelijanumero integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL,
-    syntymävuosi date NOT NULL,
-    pääaine varchar(50)
-);
-
-CREATE TABLE Kurssi (
-    kurssitunnus integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL,
-    kuvaus varchar(3000)
-);
-
-INSERT INTO Opiskelija (nimi, syntymävuosi) VALUES ('Ada', '1997');
-INSERT INTO Opiskelija (nimi, syntymävuosi) VALUES ('Pihla', '1998');
-INSERT INTO Kurssi (nimi) VALUES ('Ohpe');
-INSERT INTO Kurssi (nimi) VALUES ('Tikape');"
-		     done="tablesCreated">
-		  </query>
-
-		  <div ng-show="tablesCreated">
-
-		    <p>Nyt käytössämme on taulut Opiskelija ja Kurssi, jonka lisäksi niissä on kummassakin muutama rivi. Luodaan seuraavaksi taulu Kurssisuoritus, jossa on viiteavaimet kumpaankin edellä mainuttuun tauluun.</p>
-
-
-		    <togglable content="taulut" db="db">
-		      <table-info></table-info>
-		    </togglable>
-
-		    <query
-		       db="db"
-		       rows="10"
-		       editable="false"
-		       query="CREATE TABLE Kurssisuoritus
-(
-    opiskelija integer NOT NULL,
-    kurssi integer NOT NULL,
-    päivämäärä date NOT NULL,
-    arvosana integer NOT NULL,
-    opintopistemäärä integer NOT NULL,
-    FOREIGN KEY(opiskelija) REFERENCES Opiskelija(opiskelijanumero),
-    FOREIGN KEY(kurssi) REFERENCES Kurssi(kurssitunnus)
-);"
-
-		       done="kurssisuoritusCreated">
-		    </query>
-		  </div>
-
-
-		  <div ng-show="kurssisuoritusCreated">
-
-		    <p>Nyt käytössä on tietokantataulut Opiskelija, Kurssi, ja Kurssisuoritus. Kurssisuoritus-taulussa on kaksi viiteavainta -- toinen viittaa tauluun Opiskelija, ja toinen tauluun Kurssi. Tutki ensin taulujen Opiskelija ja Kurssi sisältöjä, ja lisää sen jälkeen tauluun Kurssisuoritus suoritusmerkintä kurssista Tikape opiskelijalle Ada. Voit kokeilla ensin mitä tapahtuu, jos et aseta viiteavaimia oikein.</p>
-
-		    <query
-		       db="db"
-		       rows="3">
-		    </query>
-		  </div>
-		</div>
-
-		<p><strong><em>Tehtävän ja Kurssitehtävän lisääminen.</em></strong></p>
-
-                <p>Harjoitellaan edellä nähtyjä asioita vielä hieman. Käytämme pohjana viikolta 3 tuttua tietokantakaaviota.</p>
-
-		<figure>
-		  <img src="img/viikko3/tietokantakaavio-tehtavasuorituksella.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]1-*[Kurssisuoritus|(fk) opiskelija: Opiskelija;(fk) kurssi: Kurssi;päivämäärä;arvosana;opintopistemäärä]
-[Kurssisuoritus]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]
-[Tehtävä|(pk) tunnus;nimi;kuvaus]1-*[Kurssitehtävä|(pk) tunnus; (fk) tehtävä: Tehtävä; (fk) kurssi: Kurssi]
-[Kurssitehtävä]*-1[Kurssi|(pk) kurssitunnus;nimi;kuvaus]
-[Tehtäväsuoritus|(fk) opiskelija: Opiskelija; (fk) tehtävä: Kurssitehtävä; suoritusaika]
-[Tehtäväsuoritus]*-1[Opiskelija]
-[Tehtäväsuoritus]*-1[Kurssitehtävä]"/>
-
-		</figure>
-
-                <p></p>
-
-		<hr/>
-
-                <p>Alla olevaan kyselylaatikkoon on määritelty kysely, minkä avulla luodaan tietokantataulu Kurssi sekä lisätään sinne kurssit Ohpe ja Tikape.</p>
-
-		<div ng-controller="noTablesSqlController">
-
-		  <query
-		     db="db"
-		     rows="11"
-		     editable="false"
-		     query="PRAGMA foreign_keys = ON;
-
-CREATE TABLE Kurssi (
-    kurssitunnus integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL,
-    kuvaus varchar(3000)
-);
-
-INSERT INTO Kurssi (nimi) VALUES ('Ohpe');
-INSERT INTO Kurssi (nimi) VALUES ('Tikape');"
-		     done="tablesCreated">
-		  </query>
-
-		  <div ng-show="tablesCreated">
-
-		    <p>Toteuta nyt taulut Kurssitehtävä ja Tehtävä siten, että niissä on määriteltynä sekä pääavaimet että viiteavaimet. Pohdi, missä järjestyksessä taulut tulee toteuttaa, jotta saat viiteavaimet määriteltyä oikein.</p>
-
-
-		    <togglable content="taulut" db="db">
-                      <table-info></table-info>
-		    </togglable>
-
-
-		    <query
-		       db="db"
-		       rows="9"
-		       query=""
-		       done="kurssiTehtavaAndTehtavaCreated">
-		    </query>
-		  </div>
-
-		  <div ng-show="kurssiTehtavaAndTehtavaCreated">
-
-		    <p>Lisää nyt Tehtävä-tauluun muutama rivi, ja määrittele olemassaoleville kursseille muutamia tehtäviä.</p>
-
-		    <query
-		       db="db"
-		       rows="4">
-		    </query>
-		  </div>
-		</div>
-
-
-		<h2>Hakuja nopeuttavat indeksirakenteet</h2>
-
-		<p>Tietokantatauluun kohdistuvissa kyselyissä hakua rajataan ehdoilla. Esimerkiksi kysely <code>SELECT * FROM <em>Taulu</em> WHERE <em>sarake</em> = 'haluttu'</code>, hakee kaikki taulussa olevat rivit, joissa annetun sarakkeen arvo on 'haluttu'. Oletuksena kysely tietokantamoottori käy läpi kaikki rivit, ja valitsee niistä vain ne, joissa rivin arvo on haluttu. Jos rivejä on vaikkapa 100 miljoonaa, käydään niistä jokainen yksitellen läpi, mikä ei ole kovin tehokasta.</p>
-
-		<p>Tietokantakyselyiden tehostamista on tutkittu paljon, ja tietokantamoottorit tarjoavat tyypillisesti erilaisia välineitä kyselyiden tehostamiseksi. Yksi väline on usein toistuvien hakujen tehostamiseen tarkoitettu <em>indeksi</em>, eli hakurakenne.</p>
-
-		<p>Pohditaan tilannetta, missä edellisen 100 miljoonaa riviä sisältävän taulun lisäksi tietokannalla on erillinen hakurakenne usein käytetylle sarakkeelle. Hakurakenteessa sarakkeen arvot ovat järjestettynä. Tällöin, tiettyä arvoa haettaessa, voimme aloittaa keskimmäisestä arvosta -- jos haettava arvo on pienempi, tutkitaan "vasemmalla" olevaa puolikasta. Jos taas haettava arvo on suurempi, tutkitaan "oikealla" olevaa puolikasta. Alueen rajaaminen jatkuu niin pitkään, kunnes haettava arvo löytyy, tai rajaus päätyy tilanteesee, missä tutkittavia arvoja ei enää ole. Tämä menetelmä -- <em>puolitushaku</em> tai <em>binäärihaku</em> saattaa olla tuttu kurssilta Ohjelmoinnin perusteet.</p>
-
-                <p>Jos rivejä on yhteensä 100 miljoonaa, voidaan ne jakaa kahteen osaan noin <em>log_2 100 000 000</em> kertaa, eli noin 27 kertaa. Jos oletamme, että arvoa ei löydy taulusta, tulee yhteensä tarkastella siis noin 27 riviä aiemman 100 miljoonan sijaan.</p>
-
-		<aside class="info">
-		  <br/>
-		  <h1>Häh?</h1>
-
-		  <p>Kurssilla <em>Tietorakenteet ja algoritmit</em> tutustutaan erilaisiin hakurakenteisiin tarkemmin. Tietokantakursseista esimerkiksi kurssilla <em>Tietovarastot</em> tutustutaan tähän myös syvemmin.</p>
-
-		</aside>
-
-		<p><strong><em>Indeksin määrittely</em></strong></p>
-
-                <p>Indeksin määrittely tietokantataulun sarakkeelle tapahtuu tietokantataulun luomisen jälkeen komennolla <code>CREATE INDEX</code>, jota seuraa uuden indeksin nimi, avainsana <code>ON</code>, ja sarakkeet, joille indeksi luodaan. Tietokantataulun pääavaimelle ja viiteavaimelle luodaan indeksit automaattisesti.</p>
-
-		<p>Oletetaan, että haluaisimme hakea opiskelijoita pääaineen perusteella melko usein, jolloin rajauksen tehokkuudella on hieman väliä. Tehdään siis tauluun Opiskelija erillinen indeksi pääaine-sarakkeelle.</p>
-
-<pre class="sh_sql">
-CREATE INDEX idx_paaaine ON Opiskelija (pääaine);
-</pre>
-
-                <p>Indeksien nimentä alkaa tyypillisesti sanalla <code>idx</code>, jatkuu alaviivalla sekä sarakkeita kuvaavalla sopivalla nimellä. Jos indeksin haluaa määritellä useammalle sarakkeelle samaan aikaan, voi indeksoitavat sarakkeet listata pilkuilla toisistaan erotettuna.</p>
-
-
-
-		<h2>Tietokantataulun muokkaaminen</h2>
-
-		<p>Valitettava totuus on se, että vaikka tekisimme kuinka hienon tietokantasuunnitelman, tulee se muuttumaan ajan myötä erilaisten asiakkailta ja muilta sidosryhmiltä tulevien toiveiden ja tarpeiden perusteella. Tietokantaa ei kannata luoda täysin uudestaan jokaisen muutoksen perusteella, vaan sitä voi muokata -- esimerkiksi uusien sarakkeiden lisääminen tauluun on melko suoraviivaista.</p>
-
-		<p>Harjoitellaan tässä välissä hieman tiedon hakua muualta. Sivusto <em>W3Schools</em> sisältää hyviä oppaita -- lue nyt heidän <a href="http://www.w3schools.com/sql/sql_alter.asp" target="_blank">ALTER TABLE</a> -opas.</p>
-
-
-
-		<h2>Väliaikaisten näkymien luominen</h2>
-
-		<p>Ohjelmia suunniteltaessa ja rakentessa ohjelmoija pilkkoo ohjelman toiminnallisuutta pienempiin osiin muunmuassa metodien ja luokkien avulla. Tietokantakyselyitä toteuttaessa ohjelmoija vastaavasti voi pilkkoa tehtäväänsä osiin väliaikaisten näkymien avulla. Väliaikaiset näkymät ovat tallennettuja SQL-kyselyitä, joiden suorituksesta saatuja tulostauluja voidaan käyttää osana muita kyselyitä.</p>
-
-		<p>Väliaikainen näkymä luodaan komennolla <code>CREATE VIEW <em>NäkymänNimi</em> AS <em>kysely</em></code>, missä <code>NäkymänNimi</code> on nimi, jonka perusteella väliaikaiseen näkymään pääsee käsiksi, ja <code>kysely</code> on <code>SELECT</code>-kysely, jonka suoritus tuottaa näkymän.</p>
-
-
-		<div ng-controller="noTablesSqlController">
-
-		  <p>Tutustutaan tähän pikaisesti. Luodaan ensin käyttöömme taulu <code>Kurssi</code>, jossa on kursseja.</p>
-
-		  <query
-		     db="db"
-		     rows="11"
-		     editable="false"
-		     query="CREATE TABLE Kurssi (
-    kurssitunnus integer PRIMARY KEY,
-    nimi varchar(200) NOT NULL,
-    kuvaus varchar(3000)
-);
-
-INSERT INTO Kurssi (nimi) VALUES ('Ohpe');
-INSERT INTO Kurssi (nimi) VALUES ('Tikape');
-INSERT INTO Kurssi (nimi) VALUES ('Otm');
-INSERT INTO Kurssi (nimi) VALUES ('Ohja');"
-		     done="tablesCreated">
-		  </query>
-
-		  <div ng-show="tablesCreated">
-
-		    <p>Luodaan tämän jälkeen näkymä nimeltä <code>Ohjelmointikurssit</code>, missä on vain ohjelmoinnin perusteet ja ohjelmoinnin jatkokurssi.</p>
-
-
-		    <togglable content="taulut" db="db">
-                      <table-info></table-info>
-		    </togglable>
-
-
-		    <query
-		       db="db"
-		       rows="3"
-                       editable="false"
-		       query="CREATE VIEW Ohjelmointikurssit AS
-    SELECT * FROM Kurssi WHERE nimi LIKE 'Oh%'"
-		       done="viewCreated">
-		    </query>
-		  </div>
-
-		  <div ng-show="viewCreated">
-
-		    <p>Valitse nyt kaikki kurssit näkymästä Ohjelmointikurssit -- haku tapahtuu samalla tavalla kuin taulusta haettaessa.</p>
-
-		    <query
-		       db="db"
-		       rows="4"
-		       done="viewSelected">
-		    </query>
-		  </div>
-
-		  <div ng-show="viewSelected">
-
-		    <p>Poista näkymä lopuksi komennolla <code>DROP VIEW <em>NäkymänNimi</em></code>.</p>
-
-		    <query
-		       db="db"
-		       rows="2">
-		    </query>
-		  </div>
-		</div>
-
-
-
-		<aside class="info">
-		  <br/>
-		  <h1>Näkymien luominen kyselyiden kautta</h1>
-
-		</aside>
-
- <p>TODO: hyödynnä dellin DVD-kauppaa: http://linux.dell.com/dvdstore/</p>
-
-		<h1>Tietokannan normalisointi</h1>
-
-		<p><em>Omenan (data) herkullisuudella, kuljetusvälineellä (tietokantasovellus ja palvelin), tai kaupassa tehtävällä asettelulla (sovelluksen käyttöliittymä) ei ole merkitystä jos omenoiden säilöntään (tietokantakaavio) ei ole kiinnitetty huomiota.</em> -- <a href="https://news.ycombinator.com/item?id=8839017" target="_blank">Anonyymi</a></p>
-
-
-
-		<p>Tutustuimme aiemmin tietokannan suunnitteluun käsiteanalyysin kautta. Tutustutaan nyt täydentävään lähestymistapaan nimeltä tietokannan normalisointi (<em>database normalization</em>).</p>
-
-		<p>Tietokannan normalisointi on askeleittainen lähestymistapa tiedon jakamiseen loogisiksi tietokantatauluiksi ja niiden sarakkeiksi. Pääpiirteittäin idea on sama kuin käsiteanalyysissä -- jokaisen taulun pitäisi liittyä tiettyyn aiheeseen, ja tauluun määritellään vain sarakkeita jotka liittyvät samaan aiheeseen. Lähestymistapa on hieman toisenlainen -- tietokannan normalisoinnissa tutkimme tiedon välisiä riippuvuuksia ja suhteita, ja etsimme sieltä epäkohtia. Epäkohdat tyypillisesti jaetaan useampaan osaan, esimerkiksi tauluiksi.</p>
-
-		<p>Lähtökohtana tietokannan normalisoinnille ovat seuraavat relaatiomalliin liittyvät oletukset:</p>
-
-		<ul>
-
-		  <li>Jokaisen tietokantataulun sarakkeen nimen tulee olla uniikki. Tietokantataulussa ei siis saa olla kahta saman nimistä saraketta.</li>
-
-		  <li>Jokaisen tietokantataulun sarakkeen tulee olla sellainen, että se sisältää korkeintaan yhden arvon. Yksittäisessä sarakkeen rivissä ei siis esimerkiksi saa säilöä listaa asioita.</li>
-
-		  <li>Jokaisen tietyssä tietokantataulun sarakkeessa olevan arvon tulee olla saman tyyppinen. Eri riveillä, mutta samassa sarakkeessa ei siis saa olla esimerkiksi kokonaislukutyyppisiä arvoja ja merkkijonotyyppisiä arvoja.</li>
-
-		  <li>Tietokantataulun sarakkeiden järjestyksen ei tule vaikuttaa tietoon. Sarakkeiden paikkaa tulee siis voida vaihtaa tarvittaessa.</li>
-		  <li>Tietokantataulussa ei tule olla kahta tai useampaa täsmälleen samat arvot sisältävää riviä. Jos rivi esiintyy kerran, ei sen toistamisesta ole hyötyä.</li>
-
-		  <li>Tietokantataulussa olevien rivien järjestyksellä ei tule olla merkitystä.</li>
-
-		</ul>
-
-
-		<p>Tietokannan normalisointiin liittyy useampia tavoitteita; (1) tiedon kopioiden minimointi, (2) tiedon muuttamiseen liittyvien ongelmien vähentäminen, ja (3) tietokantaan tehtävien kyselyiden yksinkertaistaminen. Käytetään esimerkkinä seuraavaa yhden taulun avulla määriteltyä asiakastietokantaa, joka kertoo asiakkaan tiedot, laskutusosoitteen, ja kuljetusosoitteen.</p>
-
-
-		<figure>
-
-		  <img src="img/viikko5/normalisoitava.png" alt="[Asiakas|(pk) asiakastunnus;etunimi;sukunimi;kayttajatunnus;ika;sukupuoli;yritys;puhelin_koti;puhelin_tyo;laskutusosoite_1;laskutusosoite_2;laskutusosoite_3;laskutus_kaupunki;laskutus_postinumero;kuljetusosoite_1;kuljetusosoite_2;kuljetusosoite_3;kuljetus_kaupunki;kuljetus_postinumero]">
-
-		</figure>
-
-		<p></p>
-
-		<p>Tietokannan normalisointiin liittyy useampia askeleita, joista tutustumme kolmeen.</p>
-
-
-		<h2>Ensimmäinen normaalimuoto</h2>
-
-		<p>Ensimmäisen normaalimuodon mukaan jokaisen sarakkeen arvojen tulee olla sellaisia, että niitä ei voi jakaa (järkeviin) osiin. Sarakkeen arvot eivät siis saa olla esimerkiksi listoja. Tämän lisäksi, tietokantataulun sarakkeista ei pitäisi olla mahdollista huomata toistuvia ryhmiä.</p>
-
-		<p>Edelläolevassa tietokantataulussa on toistuvia ryhmiä. Sekä puhelinnumero (kotipuhelin, työpuhelin) että osoite toistuu (kotiosoite, laskutusosoite). Emme tiedä sarakkeiden sisällöstä, joten emme tässä kohtaa osaa sanoa siitä, että onko sarakkeiden arvoissa jotain omituista -- jos tietokantataulussa olisi esimerkiksi sarakkeessa <em>yritys</em> useamman yrityksen nimi, tulisi se ottaa myös käsittelyyn.</p>
-
-		<p>Tietokannan saa ensimmäiseen normaalimuotoon eriyttämällä puhelinnumeron ja osoitteen omiksi tauluikseen, joista on viittaus Asiakas-tauluun. Uusissa tauluissa on myös sarake tyyppi, jonka avulla määritellään onko esimerkiksi puhelinnumero koti- vai työnumero.</p>
-
-
-		<figure>
-
-		  <img src="img/viikko5/1nf.png" alt="[Asiakas| (pk) asiakastunnus;etunimi;sukunimi;kayttajatunnus;ika;sukupuoli;yritys]
-[Puhelin| (fk) asiakas:Asiakas; puhelin_tyyppi; numero]
-[Osoite| (fk) asiakas:Asiakas; osoite_tyyppi; osoite_1; osoite_2; osoite_3; kaupunki; postinumero]
-[Asiakas]1-*[Puhelin]
-[Asiakas]1-*[Osoite]">
-
-		</figure>
-
-		<p></p>
-
-		<p>Jos tietokantataulun sarakkeiden arvoissa olisi esimerkiksi listoja -- vaikkapa yksittäisen rivin yritys-sarakkeessa useampia yrityksiä, tulisi siitä myös tehdä erillinen taulu.</p>
-
-
-		<h2>Toinen normaalimuoto</h2>
-
-		<p>Tietokanta on toisessa normaalimuodossa jos (1) se on ensimmäisessä normaalimuodossa ja (2) tietokantataulun sarakkeet (poislukien avaimet) ovat <em>funktionaalisesti riippuvaisia</em> tietokantataulun pääavaimesta.</p>
-
-
-		<aside class="info">
-		  <br/>
-
-		  <h1>Funktionaalinen riippuvuus</h1>
-
-		  <p>Sarake B on funktionaalisesti riippuvainen sarakkeesta A, jos sarakkeen A arvon perusteella voidaan yksikäsitteisesti selvittää sarakkeen B arvo. Tällöin kirjoitetaan <code>A -&gt; B</code>, ja sanotaan, että "sarake B on funktionaalisesti riippuvainen sarakkeesta A". Huom! A voi olla myös kokoelma sarakkeita!</p>
-
-		  <p>Selvittäminen voi tapahtua kyselyllä "SELECT DISTINCT b FROM Taulu WHERE a=tiedetty_arvo". Jos attribuutti <code>b</code> on funktionaalisesti riippuva <code>a</code>:sta, tuottaa ylläoleva kysely joko yhden tai ei yhtään tulosriviä, mutta ei koskaan enempää. Tämän ehdon on oltava voimassa aina, ei vain hetkellisesti.</p>
-
-		  <p>Esimerkki: <code>Henkilo( (pk) id, nimi, henkilötunnus)</code> -- mitkä arvot ovat funktionaalisesti riippuvaisia toisistaan?</p>
-		  <table class="table">
-
-		    <thead>
-		      <tr>
-			<th>Henkilo</th>
-			<th>A: id</th>
-			<th>A: nimi</th>
-			<th>A: henkilötunnus</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-			<td>B: id</td>
-			<td>?</td>
-			<td>?</td>
-			<td>?</td>
-		      </tr>
-		      <tr>
- 			<td>B: nimi</td>
-			<td>?</td>
-			<td>?</td>
-			<td>?</td>
-		      </tr>
-		      <tr>
-			<td>B: henkilötunnus</td>
-			<td>?</td>
-			<td>?</td>
-			<td>?</td>
-		      </tr>
-		    </tbody>
-		  </table>
-
-		  <p>Sarakkeen perusteella voi aina määritellä itsensä. Esimerkiksi <code>id -&gt; id</code> on aina totta.</p>
-
-		  <table class="table">
-
-		    <thead>
-		      <tr>
-			<th>Henkilo</th>
-			<th>A: id</th>
-			<th>A: nimi</th>
-			<th>A: henkilötunnus</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-			<td>B: id</td>
-			<td>kyllä</td>
-			<td>?</td>
-			<td>?</td>
-		      </tr>
-		      <tr>
- 			<td>B: nimi</td>
-			<td>?</td>
-			<td>kyllä</td>
-			<td>?</td>
-		      </tr>
-		      <tr>
-			<td>B: henkilötunnus</td>
-			<td>?</td>
-			<td>?</td>
-			<td>kyllä</td>
-		      </tr>
-		    </tbody>
-		  </table>
-
-		  <p>Voimmeko tunnistaa nimen perusteella henkilön yksilöivän tunnisteen? Useammalla henkilöllä voi olla sama nimi, joten tämä ei pidä paikkansa. Voimmeko tunnistaa henkilötunnuksen perusteella henkilön yksilöivän tunnisteen? Henkilötunnus on uniikki, joten oletetaan että kyllä (tämä pätee tosin vain Suomessa..).</p>
-
-		  <table class="table">
-
-		    <thead>
-		      <tr>
-			<th>Henkilo</th>
-			<th>A: id</th>
-			<th>A: nimi</th>
-			<th>A: henkilötunnus</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-			<td>B: id</td>
-			<td>kyllä</td>
-			<td>ei</td>
-			<td>kyllä</td>
-		      </tr>
-		      <tr>
- 			<td>B: nimi</td>
-			<td>?</td>
-			<td>kyllä</td>
-			<td>?</td>
-		      </tr>
-		      <tr>
-			<td>B: henkilötunnus</td>
-			<td>?</td>
-			<td>?</td>
-			<td>kyllä</td>
-		      </tr>
-		    </tbody>
-		  </table>
-
-		  <p>Voiko yksilöivän avaimen perusteella tunnistaa henkilön nimen? Kyllä. </p>
-
-		  <table class="table">
-
-		    <thead>
-		      <tr>
-			<th>Henkilo</th>
-			<th>A: id</th>
-			<th>A: nimi</th>
-			<th>A: henkilötunnus</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-			<td>B: id</td>
-			<td>kyllä</td>
-			<td>ei</td>
-			<td>kyllä</td>
-		      </tr>
-		      <tr>
- 			<td>B: nimi</td>
-			<td>kyllä</td>
-			<td>kyllä</td>
-			<td>?</td>
-		      </tr>
-		      <tr>
-			<td>B: henkilötunnus</td>
-			<td>?</td>
-			<td>?</td>
-			<td>kyllä</td>
-		      </tr>
-		    </tbody>
-		  </table>
-
-		  <p>Loput jäävät harjoitustehtäväksi.</p>
-		</aside>
-
-
-		<p>Jos tietokantataulun pääavain on määritelty yhden sarakkeen avulla, ovat kaikki sen sen sarakkeet automaattisesti funktionaalisesti riippuvaisia pääavaimesta. Käytännössä siis, jos taulu on ensimmäisessä normaalimuodossa ja sillä on yhden tai useamman sarakkeen kautta määritelty pääavain, on se automaattisesti toisessa normaalimuodossa.</p>
-
-
-		<h2>Kolmas normaalimuoto</h2>
-
-		<p>Tietokantataulu on kolmannessa normaalimuodossa jos (1) se on toisessa normaalimuodossa ja (2) siinä on vain sarakkeita, jotka eivät ole transitiivisesti riippuvaisia taulun pääavaimesta. </p>
-
-		<aside class="info">
-		  <br/>
-
-		  <h1>Transitiivinen riippuvuus</h1>
-
-		  <p>Transitiivisella riippuvuudella tarkoitetaan sitä, että sarake A on riippuvainen sarakkeesta B jonkun toisen sarakkeen kautta. Käytännössä sarake A on transitiivisesti riippuvainen sarakkeesta B, jos sarake A on riippuvainen sarakkeesta C, joka on riippuvainen sarakkeesta B. Tässä A, B ja C voivat sisältää myös useampia sarakkeita.</p>
-
-		</aside>
-
-		<p>Kaikkien tietokantataulun sarakkeiden tulee olla itsenäisiä ja riippumattomia muista pääavaimeen kuulumattomista kentistä. Jos tietokantataulusta tunnistetaan sarakkeita, jotka ovat transitiivisesti riippuvaisia pääavaimesta, eriytetään ne omaksi taulukseen.</p>
-
-		<p>Esimerkiksi Osoite-taulussa oleva sarake kaupunki on transitiivisesti riippuvainen asiakkaasta postinumeron kautta. Voimme tällöin luoda uuden tietokantataulun <em>Postinumero</em>, joka sisältää jokaiseen postinumeroon liittyvät kaupungit.</p>
-
-
-		<aside class="info">
-		  <br/>
-		  <h1>Normalisoida vaiko eikö normalisoida?</h1>
-
-		  <p>Lue CodingHorror.com-blogista kirjoitus <a href="http://blog.codinghorror.com/maybe-normalizing-isnt-normal/" target="_blank">Maybe Normalizing Isn't Normal</a>. Milloin tietokannan normalisointi kannattaa, ja milloin ei?</p>
-
-		  <p>Tutki myös seuraavaa Asiakas-taulun rakennetta. Mitkä edellämainituista normaalimuodoista taulu täyttää?</p>
-
-		  <table class="table">
-		    <thead>
-		      <tr>
-			<th>asiakastunnus</th>
-			<th>etunimi</th>
-			<th>sukunimi</th>
-			<th>kayttajatunnus</th>
-			<th>ika</th>
-			<th>sukupuoli</th>
-			<th>yritys</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-			<td>1</td>
-			<td>arto</td>
-			<td>vainee</td>
-			<td>avi</td>
-			<td>30</td>
-			<td>M</td>
-			<td>yliopisto</td>
-		      </tr>
-		      <tr>
-			<td>2</td>
-			<td>arto</td>
-			<td>vainee</td>
-			<td>avi</td>
-			<td>30</td>
-			<td>M</td>
-			<td>rage-research</td>
-		      </tr>
-		    </tbody>
-		  </table>
-
-		</aside>
-
-
-
-
-
-		<header>
-		  <h1 id="viikko6">Viikko 6</h1>
-		</header>
-
-
 		<h1>Tietokannat osana muita sovelluksia</h1>
 
-		<p>Viimeisen 20 vuoden aikana selaimen kautta käytettävät sovellukset ovat kiihtyvää tahtia syrjäyttäneet perinteisiä työpöytäsovelluksia. Tietokannan käyttöön toisen sovelluksen osana liittyvät perusajatukset eivät kuitenkaan ole juurikaan muuttuneet. Työpöytäsovellusten aikana työpöytäsovellus käytti joko paikallisella koneella olevaa tietokannanhallintajärjestelmää, tai otti etäyhteyden toisella koneella käynnissä olevaan tietokannanhallintajärjestelmään. Selaimessa toimivia sovelluksia käytettäessä tietokannanhallintajärjestelmä toimii palvelinohjelmiston -- eli sovelluksen, johon selain ottaa yhteyttä -- kanssa samalla koneella, tai erillisellä koneella, johon palvelinohjelmisto ottaa yhteyden tarvittaessa.</p>
+		<p>Viimeisen 20 vuoden aikana selaimen -- ja nykyään kännykän -- kautta käytettävät sovellukset ovat kiihtyvää tahtia syrjäyttäneet perinteisiä työpöytäsovelluksia. Tietokannan käyttöön toisen sovelluksen osana liittyvät perusajatukset eivät kuitenkaan ole juurikaan muuttuneet. Työpöytäsovellusten aikana työpöytäsovellus käytti joko paikallisella koneella olevaa tietokannanhallintajärjestelmää, tai otti etäyhteyden toisella koneella käynnissä olevaan tietokannanhallintajärjestelmään. Selaimessa toimivia sovelluksia käytettäessä tietokannanhallintajärjestelmä toimii palvelinohjelmiston -- eli sovelluksen, johon selain ottaa yhteyttä -- kanssa samalla koneella, tai erillisellä koneella, johon palvelinohjelmisto ottaa yhteyden tarvittaessa.</p>
 
 		<p>Tutustutaan tässä kappaleessa tietokantaa käyttävän palvelinohjelmiston toimintaan, sekä toteutetaan sellainen itse.</p>
 
@@ -6226,7 +4893,7 @@ INSERT INTO Kurssi (nimi) VALUES ('Ohja');"
 
 		<h2>Spark ja ensimmäinen web-sovellus</h2>
 
-		<p><a href="http://sparkjava.com/" target="_blank">Spark</a>-sovelluskehyksen käyttöönotto toimii luvun 3.2 osassa "<em>Maven-projektin luominen NetBeansissa</em>" esitetyllä tavalla. Toisin kuin oppaassa, Maven-projektin riippuvuudeksi halutaan lisätä Spark. Tiedosto <code>pom.xml</code> näyttää lopuksi esimerkiksi seuraavalta:</p>
+		<p><a href="http://sparkjava.com/" target="_blank">Spark</a>-sovelluskehyksen käyttöönotto toimii luvun 8.2 osassa "<em>Maven-projektin luominen NetBeansissa</em>" esitetyllä tavalla. Toisin kuin oppaassa, Maven-projektin riippuvuudeksi halutaan lisätä Spark. Tiedosto <code>pom.xml</code> näyttää lopuksi esimerkiksi seuraavalta:</p>
 
 <pre class="sh_xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -6360,9 +5027,9 @@ public class Main {
 
 <pre class="sh_html">
 &lt;form method="POST" action="/opiskelijat"&gt;
-Nimi:&lt;br/&gt;
-&lt;input type="text" name="nimi"/&gt;&lt;br/&gt;
-&lt;input type="submit" value="Lisää opiskelija"/&gt;
+  Nimi:&lt;br/&gt;
+  &lt;input type="text" name="nimi"/&gt;&lt;br/&gt;
+  &lt;input type="submit" value="Lisää opiskelija"/&gt;
 &lt;/form&gt;
 </pre>
 
@@ -6675,6 +5342,7 @@ get("/sivu", (req, res) -> {
     return new ModelAndView(map, "index");
 }, new ThymeleafTemplateEngine());
 </pre>
+
 		<p>Tämän jälkeen html-sivua <code>index.html</code> muokataan siten, että sinne lisätään "paikka" tiedolle. Tiedon lisääminen tapahtuu lisäämällä sivulle html-elementti, jossa on <em>attribuutti</em> <code>th:text</code>, jolle annetaan HashMap-olioon lisätyn arvon nimi aaltosulkujen sisällä siten, että aaltosulkuja edeltää dollarimerkki -- eli <code>th:text="${teksti}"</code>. Elementti voi olla vaikka <code>h2</code>-elementti, jolloin kokonaisuus voisi olla vaikkapa seuraava <code>&lt;h2 th:text="${teksti}"&gt;testi&lt;/h2&gt;</code>.</p>
 
 <pre class="sh_xml">
@@ -6713,9 +5381,10 @@ get("/sivu", (req, res) -> {
 		  <p>Tässä oikeastaan tulee kaksi uutta ja mielenkiintoista asiaa.</p>
 
 		  <p><strong>HashMap</strong> on ohjelmoinnissa käytettävä lokerikko, missä jokaisella lokerolla on nimi, mihin arvon voi asettaa. Alla olevassa esimerkissä luomme ensin HashMap-olion, jonka jälkeen asetamme lokeroon nimeltä <code>teksti</code> arvon <code>"Hei mualima!"</code>.</p>
+
 <pre class="sh_java">
-    HashMap map = new HashMap&lt;&gt;();
-    map.put("teksti", "Hei mualima!");
+HashMap map = new HashMap&lt;&gt;();
+map.put("teksti", "Hei mualima!");
 </pre>
 
 		  <p>Kun HashMap-olio <em>palautetaan</em> pyynnön käsittelyn jälkeen -- <code>return new ModelAndView(map, "index");</code> -- annetaan lokerikko Thymeleafin käyttöön.</p>
@@ -6759,7 +5428,6 @@ public class Opiskelija {
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
-
 }
 </pre>
 
@@ -6894,7 +5562,7 @@ Hei mualima!
 
 		<h2>Tietokannan käyttöönotto</h2>
 
-		<p>Tietokannan käyttöönotto onnistuu lukua 3 mukaillen. Tällä kertaa tosin -- sen sijaan, että käyttäisimme tietokantaa komentoriviltä -- hyödynnämme tietokantaa osana web-sovellusta. Opiskelijoiden noutaminen tietokannasta tapahtuisi esimerkiksi seuraavasti:</p>
+		<p>Tietokannan käyttöönotto onnistuu lukua 8 mukaillen. Tällä kertaa tosin hyödynnämme tietokantaa osana web-sovellusta. Opiskelijoiden noutaminen tietokannasta tapahtuisi esimerkiksi seuraavasti:</p>
 
 <pre class="sh_java">
 package tikape;
@@ -6909,7 +5577,7 @@ import tikape.database.OpiskelijaDao;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:opiskelijat.db");
+        Database database = new Database("jdbc:sqlite:opiskelijat.db");
         database.setDebugMode(true);
 
         OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
@@ -6920,10 +5588,11 @@ public class Main {
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
-
     }
 }
 </pre>
+
+<!--
 
                  <p>Harjoitellaan tätä lisää kotitehtävissä.</p>
 
@@ -6989,10 +5658,6 @@ public class Main {
 
 		</aside>
 
-
-    <header>
-      <h1 id="viikko7">Viikko 7</h1>
-    </header>
 
 
     <h1>Tietokantatransaktiot ja ACID</h1>
