@@ -3104,7 +3104,7 @@ INSERT INTO Kurssi (nimi) VALUES ('Ohja');"
 
 		  <p>Sarake B on funktionaalisesti riippuvainen sarakkeesta A, jos sarakkeen A arvon perusteella voidaan yksikäsitteisesti selvittää sarakkeen B arvo. Tällöin kirjoitetaan <code>A -&gt; B</code>, ja sanotaan, että "sarake B on funktionaalisesti riippuvainen sarakkeesta A". Huom! A voi olla myös kokoelma sarakkeita!</p>
 
-		  <p><em>Esimerkiksi taulun Henkilo sarakkeen henkilötunnus on funktionaalisesti riippuvainen sarakkeesta nimi, sillä henkilötunnuksen perusteella voidaan yksikäsitteisesti selvittää nimi.</em></p>
+		  <p><em>Esimerkiksi taulun Henkilo sarake nimi on funktionaalisesti riippuvainen sarakkeesta henkilötunnus, sillä henkilötunnuksen perusteella voidaan yksikäsitteisesti selvittää nimi.</em></p>
 
 		  <p>Selvittäminen voi tapahtua kyselyllä "SELECT DISTINCT b FROM Taulu WHERE a=tiedetty_arvo". Jos attribuutti <code>b</code> on funktionaalisesti riippuva <code>a</code>:sta, tuottaa ylläoleva kysely joko yhden tai ei yhtään tulosriviä, mutta ei koskaan enempää. Tämän ehdon on oltava voimassa aina, ei vain hetkellisesti.</p>
 
