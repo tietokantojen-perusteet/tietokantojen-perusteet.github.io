@@ -6456,7 +6456,302 @@ Eräs viime aikoina melko paljon huomiota saanut NewSQL-tietokanta on <a href="h
 		  <h1 id="viikko7">Viikko 7</h1>
 		</header>
 
-		<p>Kesken -- tänne tulee lähinnä ohjeet siihen, että miten tietokantaa käyttävä sovellus voidaan siirtää verkkoon.</p>
+		<h1>Sovelluksen siirtäminen verkkoon</h1>
+
+		<p>Web-sovelluksemme on tähän mennessä toiminut paikallisella koneella, mikä on hieman tylsää, sillä sovellusta olisi kiva päästä näyttämään myös kavereille. Tutustutaan tässä Heroku-nimisen pilvipalvelun käyttöön, ja siirretään kehittämämme Web-sovellus verkkoon kaikkien nähtäväksi.</p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>Opas verkossa</h1>
+		  <p>Herokulla on myös oma opas, johon kannattaa tutustua <a href="https://devcenter.heroku.com/articles/getting-started-with-java" target="_blank">täällä</a>.</p>
+		</aside>
+
+		<p>Tarvitset sovelluksen siirtoon (1) <a href="https://signup.heroku.com/dc" target="_blank">tunnuksen Heroku-palveluun</a> sekä (2) <a href="https://toolbelt.heroku.com/" target="_blank">Heroku Toolbeltin</a>.</p>
+
+
+		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: alkutoimet</h2>
+
+		<p>Herokuun siirrettävät sovellukset tarvitsevat muutamia muutoksia:</p>
+
+		<ol>
+
+		  <li><p><strong>Procfile-tiedoston lisääminen</strong>. Sovelluksen juuripolkuun tulee lisätä tiedosto <code>Procfile</code>, jonka sisällä on sovelluksen käynnistämisessä käytettävä komento.</p>
+
+<pre>
+web:    java -cp target/classes:target/dependency/* tikape.Main
+</pre>
+
+		    <p>Komennon osa <code>tikape.Main</code> kuvaa pääohjelmaluokkaa, jonka kautta sovellus tulee käynnistää. Jos pääohjelmaluokkasi on toisessa pakkauksessa (ei tikape) tai pääohjelmaluokan nimi on jotain muuta (ei Main), tulee tätä muokata. Heroku käyttää tätä komentoa sovelluksen käynnistykseen.</p></li>
+
+		  <li><p><strong>Maven-liitännäiset ohjelman kääntöprosessin automatisointiin</strong>. Sovelluksen <code>pom.xml</code>-tiedostoon tulee lisätä seuraavat rivit. Rivit lisätään esimerkiksi <code>&lt;/properties&gt;</code>-rivin jälkeen.</p>
+
+<pre class="sh_xml">
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.5.1&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;1.8&lt;/source&gt;
+                    &lt;target&gt;1.8&lt;/target&gt;
+                    &lt;optimize&gt;true&lt;/optimize&gt;
+                    &lt;debug&gt;true&lt;/debug&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.4&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;copy-dependencies&lt;/id&gt;
+                        &lt;phase&gt;package&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;copy-dependencies&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+</pre></li>
+
+		  <li><p><strong>Sovelluksen käynnistäminen Herokun määräämässä portissa</strong>. Jokainen web-sovellus käynnistettään tiettyyn porttiin, jonka se varaa käyttöönsä. Heroku pyörittää useampia sovelluksia samalla palvelinkoneella, joten sille pitää antaa mahdollisuus portin asetukseen.</p>
+
+		    <p>Portin asetus tapahtuu <em>ympäristömuuttujan</em> avulla, jonka Heroku antaa sovellukselle sovellusta käynnistettäessä. Käytännössä pääohjelmaluokkaan, joka käynnistää web-palvelimen, tulee lisätä seuraavat rivit -- lisää ne main-metodin alkuun.</p>
+
+<pre class="sh_java">
+        // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
+        if (System.getenv("PORT") != null) {
+            port(Integer.valueOf(System.getenv("PORT")));
+        }
+</pre></li>
+</ol>
+
+		<p>Ylläolevien muutosten avulla sovelluksen siirtäminen verkkoon onnistuu.</p>
+
+
+		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: heroku toolbeltin asennus</h2>
+
+		<p>Asenna <a href="https://toolbelt.heroku.com/" target="_blank">heroku toolbelt</a>. Ohjeita löytyy esimerkiksi osoitteessa <a href="https://devcenter.heroku.com/articles/heroku-command" target="_blank">https://devcenter.heroku.com/articles/heroku-command</a>.</p>
+
+		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: sovelluksen luominen herokuun</h2>
+
+		<p>Sovelluksen luomiseen herokuun tarvitaan kansi askelta. Ensimmäisessä askeleessa luodaan projektista git-repositorio (tätä ei tarvitse tehdä jos sovellus on jo git-versionhallinnassa), jonka jälkeen luodaan herokuun sijainti johon sovellus kopioidaan.</p>
+
+		<ol>
+		  <li><p><strong>Projekti git-repositorioksi</strong> -- projektin luominen git-repositorioksi tapahtuu ajamalla komento <code>git init</code> projektin juurikansiossa (kansio, jossa löytyy tiedosto <code>pom.xml</code>). Jos sovellus on jo esimerkiksi githubissa, ei tätä tarvitse tehdä.</p></li>
+
+		  <li><p><strong>Heroku-projektin luominen</strong> -- suorita juurikansiossa komento <code>heroku create</code>. Tämä luo sovellukselle sijainnin herokuun, johon sovelluksen voi lähettää.</p></li>
+
+		</ol>
+
+		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: sovelluksen lähetys herokuun</h2>
+
+		<p>Sovelluksen lähetys herokuun sisältää tyypillisesti neljä askelta. Ensin poistamme turhat käännetyt lähdekooditiedostot, jotta ne eivät häiritse herokun toimintaa. Tämän jälkeen lisäämme tiedostot versionhallintaan, sitoudumme niiden lähettämiseen, ja siirrämme ne herokuun.</p>
+
+		<ol>
+		  <li><p><strong>Turhien lähdekooditiedostojen poistaminen</strong> -- suorita projektin juurikansiossa komento <code>mvn clean</code>, joka poistaa projektista käännetyt lähdekooditiedostot (kansio target).</p></li>
+		  <li><p><strong>Tiedostojen lisääminen versionhallintaan</strong> -- suorita projektin juurikansiossa komento <code>git add .</code>, joka lisää kaikki projektin tiedostot versionhallintaan.</p></li>
+		  <li><p><strong>Tiedostojen lähettämiseen sitoutuminen</strong> -- suorita projektin juurikansiossa komento <code>git commit -m "viesti"</code>, joka sitouttaa lähetykseen juuri lisätyt tiedostot.</p></li>
+		  <li><p><strong>Tiedostojen siirtäminen herokuun</strong> -- suorita projektin juurikansiossa komento <code>git push heroku master</code>, joka lähettää tiedostot herokuun.</p></li>
+		</ol>
+
+		<p>Nyt sovelluksesi on Herokussa.</p>
+
+		
+		<h2>Tietokannan käyttö: riippuvuudet</h2>
+
+		<p>Sovellukseen lisätään pääsy kahteen tietokantaan. Yksi on paikallisessa testauksessa ja kehitystyössä käyttämämme <a href="https://www.sqlite.org/" target="_blank"><code>SQLite</code></a>, ja toinen on Herokun käyttämä <a href="http://www.postgresql.org/" target="_blank"><code>PostgreSQL</code></a>. Niiden käyttämiseen tarvitaan JDBC-ajurit, jotka tulee lisätä sovelluksen <code>pom.xml</code>-tiedostoon.</p>
+
+<pre class="sh_xml">
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.xerial&lt;/groupId&gt;
+            &lt;artifactId&gt;sqlite-jdbc&lt;/artifactId&gt;
+            &lt;version&gt;3.8.11.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.postgresql&lt;/groupId&gt;
+            &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
+            &lt;version&gt;9.4-1201-jdbc4&lt;/version&gt;
+        &lt;/dependency&gt;
+</pre>
+
+		
+		<h2>Tietokannan käyttö: tietokannan osoitteen lukeminen ja käyttö</h2>
+
+		<p>Heroku tarjoaa sovelluksen portin lisäksi myös JDBC-osoitteen ympäristömuuttujana. Kun luomme käyttöömme Database-oliota sovelluksen alussa, tulee tietokantaosoite valita sen mukaan, että onko ympäristömuuttujaa olemassa.</p>
+
+<pre class="sh_java">
+        // käytetään oletuksena paikallista sqlite-tietokantaa
+        String jdbcOsoite = "jdbc:sqlite:kanta.db";
+        // jos heroku antaa käyttöömme tietokantaosoitteen, otetaan se käyttöön
+        if (System.getenv("DATABASE_URL") != null) {
+            jdbcOsoite = System.getenv("DATABASE_URL");
+        } 
+
+        Database db = new Database(jdbcOsoite);
+</pre>
+
+                <p>Nyt käytössämme on tietokantaosoite. Paikallisella koneella voimme jatkossakin käyttää SQLite-tietokantamoottoria, mutta Herokussa käytämme herokun määräämää tietokannanhallintajärjestelmää.</p>
+
+		
+		<h2>Tietokannan käyttö: tietokannan luominen sijaintikohtaisesti</h2>
+
+                <p>Muokataan tämän jälkeen Database-luokkaa siten, että se sisältää tietokantataulujen luomiseen tarvittavat komennot, jotka suoritetaan sovelluksen käynnistyessä. PostgreSQL-komennot poikkeavat hieman SQLitestä, joten tehdään nämä erillisinä. Tiedämme, että käytössä on PostgreSQL-tietokanta, jos tietokannan osoitteessa on sana "postgre".</p>
+
+		<p>Alla on kuvattuna tietokantaluokan toiminnallisuus, joka toimii sekä Herokussa että paikallisesti. Luokassa luodaan tasan yksi tietokantataulu.</p>
+
+<pre class="sh_java">
+package tikape.db;
+
+import java.sql.*;
+import java.util.*;
+import java.net.*;
+
+public class Database {
+
+    private String databaseAddress;
+
+    public Database(String databaseAddress) throws Exception {
+        this.databaseAddress = databaseAddress;
+
+        init();
+    }
+
+    private void init() {
+        List&lt;String&gt; lauseet = null;
+        if (this.databaseAddress.contains("postgres")) {
+            lauseet = postgreLauseet();
+        } else {
+            lauseet = sqliteLauseet();
+        }
+
+        // "try with resources" sulkee resurssin automaattisesti lopuksi
+        try (Connection conn = getConnection()) {
+            Statement st = conn.createStatement();
+
+            // suoritetaan komennot
+            for (String lause : lauseet) {
+                System.out.println("Running command &gt;&gt; " + lause);
+                st.executeUpdate(lause);
+            }
+
+        } catch (Throwable t) {
+            // jos tietokantataulu on jo olemassa, ei komentoja suoriteta
+            System.out.println("Error &gt;&gt; " + t.getMessage());
+        }
+    }
+
+    public Connection getConnection() throws SQLException {
+        if (this.databaseAddress.contains("postgres")) {
+            try {
+                URI dbUri = new URI(databaseAddress);
+
+                String username = dbUri.getUserInfo().split(":")[0];
+                String password = dbUri.getUserInfo().split(":")[1];
+                String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+                return DriverManager.getConnection(dbUrl, username, password);
+            } catch (Throwable t) {
+                System.out.println("Error: " + t.getMessage());
+                t.printStackTrace();
+            }
+        }
+
+        return DriverManager.getConnection(databaseAddress);
+    }
+
+    private List&lt;String&gt; postgreLauseet() {
+        ArrayList&lt;String&gt; lista = new ArrayList&lt;&gt;();
+
+        // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
+        lista.add("DROP TABLE Tuote;");
+        // heroku käyttää SERIAL-avainsanaa uuden tunnuksen automaattiseen luomiseen
+        lista.add("CREATE TABLE Tuote (id SERIAL PRIMARY KEY, nimi varchar(255));");
+        lista.add("INSERT INTO Tuote (nimi) VALUES ('postgresql-tuote');");
+
+        return lista;
+    }
+
+    private List&lt;String&gt; sqliteLauseet() {
+        ArrayList&lt;String&gt; lista = new ArrayList&lt;&gt;();
+
+        // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
+        lista.add("CREATE TABLE Tuote (id integer PRIMARY KEY, nimi varchar(255));");
+        lista.add("INSERT INTO Tuote (nimi) VALUES ('sqlite-tuote');");
+
+        return lista;
+    }
+}
+</pre>
+
+                <p>Ylläolevassa esimerkissä tarjotaan yhteyden muodostaminen joko PostgreSQL-tietokantaan tai SQLite-tietokantaan riippuen yhteydestä. Tämän lisäksi komento yrittää myös luoda tietokantataulua -- sekä PostgreSQL:n tapauksessa myös poistaa sen. Metodeja <code>postgreLauseet</code> ja <code>sqliteLauseet</code> kannattanee muokata omaan tarkoitukseen sopivaksi.</p>
+
+
+		<h2>Tietokannan käyttö: tietokanta osana DAO-toiminnallisuutta</h2>
+
+		<p>Nyt tietokannan voi ottaa osaksi tietokantaa abstrahoivaa Dao-luokkaa.</p>
+
+<pre class="sh_java">
+// pakkausmäärittely ja importit
+
+import java.sql.*;
+import java.util.*;
+import tikape.db.Database;
+import tikape.dom.Tuote;
+
+public class TuoteDao implements Dao&lt;Tuote, Integer&gt; {
+
+    private Database database;
+
+    public TuoteDao(Database database) {
+        this.database = database;
+    }
+
+    @Override
+    public Tuote findOne(Integer key) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement s = conn.prepareStatement("SELECT * FROM Tuote WHERE id = ?");
+            s.setInt(1, key);
+            ResultSet rs = s.executeQuery();
+            
+            // tee jotain tuloslistalla
+            
+        }
+        
+        return null;
+    }
+
+    //    ....
+</pre>
+
+
+<p>Lopulta pääohjelmassa toiminnallisuus näyttää esimerkiksi seuraavanlaiselta:</p>
+
+<pre class="sh_java">
+        if (System.getenv("PORT") != null) {
+            port(Integer.valueOf(System.getenv("PORT")));
+        }
+
+        String jdbcOsoite = "jdbc:sqlite:kanta.db";
+        if (System.getenv("DATABASE_URL") != null) {
+            jdbcOsoite = System.getenv("DATABASE_URL");
+        }
+        
+        Database db = new Database(jdbcOsoite);
+        TuoteDao tuoteDao = new TuoteDao(db);
+        
+        
+        get("/tuote/:id", (req, res) -&gt; {
+            HashMap map = new HashMap&lt;&gt;();
+            
+            map.put("tuote", tuoteDao.findOne(Integer.parseInt(req.params("id"))));
+
+            return new ModelAndView(map, "sivu");
+        }, new ThymeleafTemplateEngine());
+</pre>
 
 
 <h1>Koeasiaa</h1>
