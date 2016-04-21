@@ -332,7 +332,7 @@
 	  
 	  <p>Pohdi, kuinka moneen palveluun olet syöttänyt sähköpostiosoitteesi? Entä nimesi tai syntymäpäiväsi? Tyypillisesti moni näistä palveluista on erillinen, mutta, tulevaisuudessa tätä tietoa tullaan yhdistämään yhä enemmän ja enemmän paremman yleiskuvan saamiseksi, sekä tilastoihin perustuvien päätösten tekemiseksi.</p>
 
-	  <p>Esimerkiksi sekä sähkö- että peliyhtiöt kummatkin hyötyvät merkittävästi saadessaan tietoa palvelun käyttöasteesta. Sähköyhtiöt voivat käyttää tätä tietoa sähkön tarpeen ennustamiseen, jonka avulla sähkön tuottoa voidaan säännöstellä -- peliyhtiöt taas voivat muunmuassa hyödyntää käyttötilastoja pelin toimivien ja ei-toimivien osa-alueiden kehittämiseen.</p>
+	  <p>Esimerkiksi sekä sähkö- että peliyhtiöt kummatkin hyötyvät merkittävästi saadessaan tietoa palvelun käyttöasteesta. Sähköyhtiöt voivat käyttää tätä tietoa sähkön tarpeen ennustamiseen, jonka avulla sähkön tuotantoa voidaan säännöstellä -- peliyhtiöt taas voivat muunmuassa hyödyntää käyttötilastoja pelin toimivien ja ei-toimivien osa-alueiden kehittämiseen.</p>
 
 	</aside>
 	
@@ -833,7 +833,7 @@
 	
 	<p>Huomaamme, että käsite Kurssisuoritus oikeastaan liittyy kahteen eri asiaan; kurssiin ja kurssin suoritukseen. Eriytetään nämä kaksi käsitettä toisistaan.</p>
 	
-	<p>Kurssiin liittyy kurssin yleiset tiedot kuten kurssin nimi, kurssikoodi, sekä kurssin kuvaus. Kurssisuoritus taas liittyy tiettyyn kurssiin, opikelijaan, päivämäärään, arvosanaan, sekä opintopistemäärään. Opintopistemäärä pidetään osana kurssisuoritusta, sillä joillain kursseilla opintopistemäärä vaihtelee työmäärästä riippuen. Käsite Opiskelija säilyy sellaisenaan.</p>
+	<p>Kurssiin liittyy kurssin yleiset tiedot kuten kurssin nimi, kurssikoodi, sekä kurssin kuvaus. Kurssisuoritus taas liittyy tiettyyn kurssiin, opiskelijaan, päivämäärään, arvosanaan, sekä opintopistemäärään. Opintopistemäärä pidetään osana kurssisuoritusta, sillä joillain kursseilla opintopistemäärä vaihtelee työmäärästä riippuen. Käsite Opiskelija säilyy sellaisenaan.</p>
 
 	<p>Yhteen kurssisuoritukseen liittyy aina yksi kurssi, mutta yhteen kurssiin voi liittyä monta kurssisuoritusta. Käsitekaaviona tämä näyttää seuraavalta:</p>
 
@@ -949,7 +949,7 @@
 	  <img src="img/johdanto/opiskelija-ja-opiskelijanumero.png" alt="[Opiskelija|(pk) opiskelijanumero;nimi;syntymävuosi;pääaine]">
 	</figure>
 	
-	<p>Keskitytään tämän jälkeen viivan toiseen päähän, eli tässä tapauksessa käsitteeseen Kurssisuoritus. Koska yhteen kurssisuoritukseen liittyy tasan yksi opiskelija, lisätään Tauluun Kurssisuoritus viiteavain <em>opiskelija</em>, joka viittaa opiskelijaan. Muuten taulu pysyy samana kuten aiemminkin.</p>
+	<p>Keskitytään tämän jälkeen viivan toiseen päähän, eli tässä tapauksessa käsitteeseen Kurssisuoritus. Koska yhteen kurssisuoritukseen liittyy tasan yksi opiskelija, lisätään tauluun Kurssisuoritus viiteavain <em>opiskelija</em>, joka viittaa opiskelijaan. Muuten taulu pysyy samana kuten aiemminkin.</p>
 	
 	<p>Voimme nyt yhdistää kaikki taulut yhteen, jolloin tietokantakaavio on seuraavanlainen:</p>
 	
@@ -1827,7 +1827,7 @@ INSERT INTO Kurssi (kurssitunnus, nimi, kuvaus)
 	
 	<p>Kun yhteydet on määritelty, määritellään niille seuraavaksi osallistumisrajoitteet. Osallistumisrajoitteilla tarkoitetaan "viivojen päissä" olevia rajoitteita, joilla kerrotaan esimerkiksi tieto, että yhteen tietyn käsitteen ilmentymään liittyy korkeintaan yksi toinen tietyn käsitteen ilmentymä.</p>
 	
-	<p>Uimari voi osallistua yhteen tai useampaan lajiin, eli uimariin voi liittyä monta lajia. Toisaalta, yhtä lajia voi harrastaa useampi uuimari. Kilpailussa voi olla monta lajia, ja lajia voidaan todennäköisesti uida monessa kilpailussa. Kilpailussa voi olla monta uimaria, ja uimari voi uida useammassa kilpailussa. Yksittäiseen tulokseen taas liittyy yksi uimari, yksi laji, ja yksi kilpailu -- mutta, yhteen uimariin voi liittyä monta tulosta, yhteen lajiin voi liittyä monta tulosta, ja yhteen kilpailuun voi liittyä monta tulosta.</p>
+	<p>Uimari voi osallistua yhteen tai useampaan lajiin, eli uimariin voi liittyä monta lajia. Toisaalta, yhtä lajia voi harrastaa useampi uimari. Kilpailussa voi olla monta lajia, ja lajia voidaan todennäköisesti uida monessa kilpailussa. Kilpailussa voi olla monta uimaria, ja uimari voi uida useammassa kilpailussa. Yksittäiseen tulokseen taas liittyy yksi uimari, yksi laji, ja yksi kilpailu -- mutta, yhteen uimariin voi liittyä monta tulosta, yhteen lajiin voi liittyä monta tulosta, ja yhteen kilpailuun voi liittyä monta tulosta.</p>
 	
 	<p>Ehdotus käsitekaavioksi osallistumisrajoitteiden kanssa on seuraavanlainen:</p>
 	
@@ -1873,7 +1873,7 @@ INSERT INTO Kurssi (kurssitunnus, nimi, kuvaus)
 		  <p>Olemme -- tarkoituksella -- käyttäneet SQL-kyselykielestä verboosia kirjoitusasua, missä myös ei-pakollisia komentoja on kirjoitettu kyselyihin niiden selkeyttämiseksi. Jos olet tykästynyt aiemmin käytettyyn verboosiin kirjoitusasuun, ei siitä tarvitse vaihtaa pois. Alla on kuitenkin esitelty vinkkejä SQL-kyselyiden lyhentämiseksi:</p>
 
 		  <ul>
-		    <li><p>Taulujen nimeäminen SQL-kyselyissä.</p> <p>Kirjoittaessamme tauluja yhdisteleviä kysejä kuten <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> taulujen nimet toistuvat. Tauluja voidaan uudelleennimetä SQL-kyselyissä asettamalla taulun nimen jälkeen kyselyn aikana käytettävän nimi. Seuraavassa esimerkissä taulu Opiskelija on uudelleennimetty <code>o</code>:ksi, ja taulu Kurssisuoritus on uudelleennimetty <code>k</code>:ksi.</p>
+		    <li><p>Taulujen nimeäminen SQL-kyselyissä.</p> <p>Kirjoittaessamme tauluja yhdisteleviä kyselyjä kuten <code>SELECT * FROM Opiskelija, Kurssisuoritus WHERE Opiskelija.opiskelijanumero = Kurssisuoritus.opiskelija</code> taulujen nimet toistuvat. Tauluja voidaan uudelleennimetä SQL-kyselyissä asettamalla taulun nimen jälkeen kyselyn aikana käytettävän nimi. Seuraavassa esimerkissä taulu Opiskelija on uudelleennimetty <code>o</code>:ksi, ja taulu Kurssisuoritus on uudelleennimetty <code>k</code>:ksi.</p>
 
 <pre class="sh_sql">
 SELECT * FROM Opiskelija o, Kurssisuoritus k WHERE o.opiskelijanumero = k.opiskelija</pre></li>
@@ -1920,7 +1920,7 @@ SELECT o.nimi opiskelija, k.arvosana
 
 		</div>
 
-		<p>Toinen vaihehtoehto edellisen kyselyn toteuttamiseen on toteuttaa kysely, joka hakee kaikki ne opiskelijat, jotka eivät ole kurssisuorituksia saaneiden opiskelijoiden joukossa. Tässä on oleellisesti kaksi kyselyä: (1) hae opiskelijat, joilla on kurssisuoritus, ja (2) hae opiskelijat, jotka eivät ole edellisen kyselyn palauttamassa joukossa.</p>
+		<p>Toinen vaihtoehto edellisen kyselyn toteuttamiseen on toteuttaa kysely, joka hakee kaikki ne opiskelijat, jotka eivät ole kurssisuorituksia saaneiden opiskelijoiden joukossa. Tässä on oleellisesti kaksi kyselyä: (1) hae opiskelijat, joilla on kurssisuoritus, ja (2) hae opiskelijat, jotka eivät ole edellisen kyselyn palauttamassa joukossa.</p>
 
 		<p><strong><em>Alikyselyn toteuttaminen</em></strong></p>
 
@@ -2754,7 +2754,7 @@ INSERT INTO Kurssi (nimi) VALUES ('Tikape');"
 
 		  <div ng-show="tablesCreated">
 
-		    <p>Nyt käytössämme on taulut Opiskelija ja Kurssi, jonka lisäksi niissä on kummassakin muutama rivi. Luodaan seuraavaksi taulu Kurssisuoritus, jossa on viiteavaimet kumpaankin edellä mainuttuun tauluun.</p>
+		    <p>Nyt käytössämme on taulut Opiskelija ja Kurssi, jonka lisäksi niissä on kummassakin muutama rivi. Luodaan seuraavaksi taulu Kurssisuoritus, jossa on viiteavaimet kumpaankin edellä mainittuun tauluun.</p>
 
 
 		    <togglable content="taulut" db="db">
@@ -4025,7 +4025,7 @@ for (Pyora pyora : pyorat) {
 
 		<p><strong><em>Päivityskyselyiden lisääminen</em></strong></p>
 
-		<p>Edellä luotu tietokantaluokkamme ei vielä kuitenkaan osaa thedä päivityskyselyitä. Lisätään mahdollisuus päivityskyselyiden tekemiseen.</p>
+		<p>Edellä luotu tietokantaluokkamme ei vielä kuitenkaan osaa tehdä päivityskyselyitä. Lisätään mahdollisuus päivityskyselyiden tekemiseen.</p>
 
 <pre class="sh_java">
 package tikape;
@@ -4567,7 +4567,7 @@ HAB-4 2015-07-17 16:00:00.0 - 2015-07-18 10:00:00.0</pre>
 
 		<p><strong><em>Kokoelmien hakeminen</em></strong></p>
 
-		<p>Voisimme nyt jo toteuttaa kaikkien varausten hakemisen siten, että kävisimme jokaisen varaus-taulussa olevan varaustunnuksen läpi yksitellen, ja lisäisimme siihen halutun pyörän. Tämä ei kuitenkaan ole haluttua. Kaikken varausten hakeminen kannattanee toteuttaa siten, että haemme ensin kaikki varaukset, jonka jälkeen haemme pyörät, jotka lisäämme varauksiin. Kaikkien pyörien hakeminen -- jos emme toteuta erikseen pyöriin liittyvien varausten listausta -- tapahtuu esimerkiksi seuraavasti.</p>
+		<p>Voisimme nyt jo toteuttaa kaikkien varausten hakemisen siten, että kävisimme jokaisen varaus-taulussa olevan varaustunnuksen läpi yksitellen, ja lisäisimme siihen halutun pyörän. Tämä ei kuitenkaan ole haluttua. Kaikkien varausten hakeminen kannattanee toteuttaa siten, että haemme ensin kaikki varaukset, jonka jälkeen haemme pyörät, jotka lisäämme varauksiin. Kaikkien pyörien hakeminen -- jos emme toteuta erikseen pyöriin liittyvien varausten listausta -- tapahtuu esimerkiksi seuraavasti.</p>
 
 <pre class="sh_java">
 @Override
@@ -5113,7 +5113,7 @@ public class Main {
 
 		<p><strong><em>Tiedon säilöminen palvelimelle hetkellisesti</em></strong></p>
 
-		<p>Voimme tallentaa vastaanotettu tieto palvelimelle palvelimen käynnissäoloajaksi säilömällä tieto esimerkiksi <code>ArrayList</code>-tyyppiseen listaan. Muokataan ylläolevaa aiempaa koodia siten, että hakupyyntö osoitteeseen <code>/opiskelijat</code> palauttaa sekä lomakkeen että tallennetut opiskelijat. Tämän lisäksi, lisätään osoitteeseen <code>/opiskelijat</code> tehtävän lähetyspyynnön käsittelyyn lomakkeelta saatavan nimi-kentän lisääminen ohjelmassa olevaan listaan.</p>
+		<p>Voimme tallentaa vastaanotetun tiedon palvelimelle palvelimen käynnissäoloajaksi säilömällä sen esimerkiksi <code>ArrayList</code>-tyyppiseen listaan. Muokataan ylläolevaa aiempaa koodia siten, että hakupyyntö osoitteeseen <code>/opiskelijat</code> palauttaa sekä lomakkeen että tallennetut opiskelijat. Tämän lisäksi, lisätään osoitteeseen <code>/opiskelijat</code> tehtävän lähetyspyynnön käsittelyyn lomakkeelta saatavan nimi-kentän lisääminen ohjelmassa olevaan listaan.</p>
 
 <pre class="sh_java">
 package tikape;
@@ -5705,7 +5705,7 @@ COMMIT;
 
     <p><strong><em>Tietokantatransaktiot ja rajoitteet</em></strong></p>
 
-    <p>Koska tietokannanhallintajärjestelmä näkee transaktioiden sisällä suoritettavat käskyt atomisina, eli yksittäisenä kokonaisuutena, voi tietokantatauluun määritellyt rajoitteet olla hetkellisesti rikki, kunhan ne transaktion suorituksen jälkeen ovat kunnossa.</p>
+    <p>Koska tietokannanhallintajärjestelmä näkee transaktioiden sisällä suoritettavat käskyt atomisina, eli yksittäisenä kokonaisuutena, voivat tietokantatauluun määritellyt rajoitteet olla hetkellisesti rikki, kunhan ne transaktion suorituksen jälkeen ovat kunnossa.</p>
 
     <p>Esimerkiksi suomen kirjanpitosääntöjen mukaan jokaisessa yrityksessä tulee olla kaksinkertainen kirjanpito. Tässä jokaisen tilitapahtuman yhteydessä tulee merkitä sekä mistä raha on otettu (debit), että mihin raha on laitettu (credit). Tällaisessa järjestelmässä tulee olla (esimerkiksi) tietokantataulu <code>Kirjanpitotapahtuma</code>, johon muutokset merkitään.</p>
 
@@ -5824,7 +5824,7 @@ OK
 </pre>
 
 <p>
-Redis on siis erittäin yksinkertainen ja toimii oikeastaan hyvin samaan tapaan kuin Javan <code>HashMap</code> sillä erotuksella, että Redisiin ei voi helposti tallentaa normaaleja oliota, ja että Redisiin tallennetut arvot säilyvät vaikka ohjelma uudelleenkäynistettäisiin.
+Redis on siis erittäin yksinkertainen ja toimii oikeastaan hyvin samaan tapaan kuin Javan <code>HashMap</code> sillä erotuksella, että Redisiin ei voi helposti tallentaa normaaleja oliota, ja että Redisiin tallennetut arvot säilyvät vaikka ohjelma uudelleenkäynnistettäisiin.
 </p>
 
 <p>
@@ -5855,7 +5855,7 @@ kaupunki:
 </pre>
 
 <p>
-Jokaisen kaupungin kohdalla ohjelma hakee kaupungin säätiedot internetistä. Tiedon haku verkosta on kuitenkin hidas ja resurssien kulutuksen suhteen "kallis" operaatio (asialla voisi olla merkitystä jos ohjelmallamme olisi satoja tai tuhansia yhtäaikaisia käyttäjiä). Koska säätiedot pysyvät suunilleen samana useiden minuuttien ajan, ohjelmaa voi optimoida siten, että kun käydään kerran hakemassa jonkun kaupungin säätiedot, talletetaan tieto joksikin aikaa Redisiin. Jos kaupungin säätä kysytään pian uudelleen, saadaan vastaus nopeasti ilman kallista internetoperaatiota. Noudatetaan siis näytettävien säätietojen suhteen eventual consistency -mallia.
+Jokaisen kaupungin kohdalla ohjelma hakee kaupungin säätiedot internetistä. Tiedon haku verkosta on kuitenkin hidas ja resurssien kulutuksen suhteen "kallis" operaatio (asialla voisi olla merkitystä jos ohjelmallamme olisi satoja tai tuhansia yhtäaikaisia käyttäjiä). Koska säätiedot pysyvät suunnilleen samana useiden minuuttien ajan, ohjelmaa voi optimoida siten, että kun käydään kerran hakemassa jonkun kaupungin säätiedot, talletetaan tieto joksikin aikaa Redisiin. Jos kaupungin säätä kysytään pian uudelleen, saadaan vastaus nopeasti ilman kallista internetoperaatiota. Noudatetaan siis näytettävien säätietojen suhteen eventual consistency -mallia.
 </p>
 
 <p>
@@ -5950,7 +5950,7 @@ tämän jälkeet data palautetaan kutsujalle.
 </p>
 
 <p>
-Jos Helsingin säätietoja haetaan 600 sekunnin sisällä uudelleen, löytyvät tiedot suoraan Redististä. 600 sekunnin kuluttua hakuoperaatio <code>jedis.get('Helsinki')</code> palauttaa jälleen <code>null</code> ja tuore säätilanne haetaan internetistä.
+Jos Helsingin säätietoja haetaan 600 sekunnin sisällä uudelleen, löytyvät tiedot suoraan Redisistä. 600 sekunnin kuluttua hakuoperaatio <code>jedis.get('Helsinki')</code> palauttaa jälleen <code>null</code> ja tuore säätilanne haetaan internetistä.
 </p>
 
 <p>
@@ -5965,7 +5965,7 @@ Ohjelman koodi kokonaisuudessan löytyy
 <h3>Dokumenttitietokannat, MongoDB</h3>
 
 <p>
-Dokumeenttitietokantojen voi ajatella sijoittuvan jonnekin relaatiotietokantojen ja avain-arvotietokantojen puolen välin tienoille. Dokumenttikannat perustuvat avain-arvotietokantojen tapaan arvojen tallettamiseen avaimen perusteella. Arvot tai <em>dokumentit</em> kuten niitä dokumenttikantojen kontekstissa nimitetään voivat kuitenkin olla itsessään hyvin monimutkaisia oliota, jotka sisältävät kenttiä, joiden arvona voi olla joko normaaleja arvoja kuten lukuja ja merkkijonoja tai muita olioita. Toisin kuin avain-arvotietokannoissa, dokeumenttikannat "näkevät" tietokantaan talletettujen dokumenttien sisään, ja mahdollistavat talletettujen dokumenttien sisällön suhteen tehdyt kyselyt.
+Dokumeenttitietokantojen voi ajatella sijoittuvan jonnekin relaatiotietokantojen ja avain-arvotietokantojen puolen välin tienoille. Dokumenttikannat perustuvat avain-arvotietokantojen tapaan arvojen tallettamiseen avaimen perusteella. Arvot tai <em>dokumentit</em> kuten niitä dokumenttikantojen kontekstissa nimitetään voivat kuitenkin olla itsessään hyvin monimutkaisia oliota, jotka sisältävät kenttiä, joiden arvona voi olla joko normaaleja arvoja kuten lukuja ja merkkijonoja tai muita olioita. Toisin kuin avain-arvotietokannoissa, dokumenttikannat "näkevät" tietokantaan talletettujen dokumenttien sisään, ja mahdollistavat talletettujen dokumenttien sisällön suhteen tehdyt kyselyt.
 </p>
 
 <p>
@@ -5990,7 +5990,7 @@ JSON-dokumentti koostuu avain-arvo-pareista. Avainta vastaava arvo merkitään k
 </p>
 
 <p>
-Kurssi-dokumentissa on siis neljä avain-arvo-paria. Voidaankin ajatella että kurssilla on neljä kenttää. Näistä kentistä erikoisasemassa on MongoDB:n dokumentille automaattisesti keneroima avainkenttä <code>id</code> jonka arvo on tyypiltään <code>ObjectId</code>.
+Kurssi-dokumentissa on siis neljä avain-arvo-paria. Voidaankin ajatella että kurssilla on neljä kenttää. Näistä kentistä erikoisasemassa on MongoDB:n dokumentille automaattisesti generoima avainkenttä <code>id</code> jonka arvo on tyypiltään <code>ObjectId</code>.
 Poikkeavaa relaatiotietokantoihin nähden on se, että kentän arvona voi olla taulukko.
 </p>
 
@@ -6102,7 +6102,7 @@ Kokoelma kurssi:
 </pre>
 
 <p>
-Suoritus olisi nyt "liitostaulumaien" kokoelma:
+Suoritus olisi nyt "liitostaulumainen" kokoelma:
 </p>
 
 <pre class="sh_js">
@@ -6242,7 +6242,7 @@ Relaatiomalli sopii suhteellisen hyvin tilanteisiin, joissa tietoa käsitellää
 </p>
 
 <p>
-Tietokanntojen käyttö on aivan erilaista silloin kun tavoitteena on luoda raportteja tai analysoida dataa eri tavoin, esim. selvittää pankin asiakkaiden keskimääräinen saldo tietyllä aikavälillä. Tällöin kyselyt kohdistuvat lähes koko tauluun, mutta usein vain pieneen osaan taulun sarakkeissa
+Tietokantojen käyttö on aivan erilaista silloin kun tavoitteena on luoda raportteja tai analysoida dataa eri tavoin, esim. selvittää pankin asiakkaiden keskimääräinen saldo tietyllä aikavälillä. Tällöin kyselyt kohdistuvat lähes koko tauluun, mutta usein vain pieneen osaan taulun sarakkeissa
 (englanniksi tälläisestä tiedonkäsittelystä käytetään nimitystä <em>online analytical processing, OLAP</em>).
 Analyysitietokannoissa tilanne on usein se, että tieto ei ole normalisoidussa muodossa, yksittäiset taulut saattavat sisältää satojakin sarakkeita, mutta toisaalta läheskään kaikilla sarakkeilla ei ole kannassa arvoja. Näissä tilanteissa relaatiotietokantojen suorituskyky saattaa olla huono, ja <em>saraketietokannat</em> (engl. columnar databases) voivat tarjota huomattavasti paremman vaihtoehdon.
 </p>
@@ -6428,7 +6428,7 @@ Eli ensin etsitään solmut joiden nimenä on Arto ja Barack, ja sen jälkeen Ne
 <h2>NOSQL ja NewSQL</h2>
 
 <p>
-NoSQL-tietokannat löivät läpi suuren kohun saattamina ja erityisesti startupeissa oli muodikasta ottaa käyttöön helpommin suurille käyttäjämäärille skaalautuivia NoSQL-kantoja kuten MongoDB. Pikkuhiljaa kohu on laantunut, ja enenevissä määrin ollaan menossa jo aiemmin mainittuun
+NoSQL-tietokannat löivät läpi suuren kohun saattamina ja erityisesti startupeissa oli muodikasta ottaa käyttöön helpommin suurille käyttäjämäärille skaalautuvia NoSQL-kantoja kuten MongoDB. Pikkuhiljaa kohu on laantunut, ja enenevissä määrin ollaan menossa jo aiemmin mainittuun
 <a href="http://martinfowler.com/bliki/PolyglotPersistence.html">polyglot persistancen</a> nimellä kulkevaan suuntaan, eli valitaan oikea työkalu kuhunkin käyttötarkoitukseen, ja erittäin tyypillistä onkin että jo hieman suuremmissa sovelluksissa on käytössä dokumentti-, avain-arvo- ja relaatiotietokanta. Uusimpana kehityssuuntana on ollut myös se, että vanhat relaatiotietokannat ovat ottaneet vaikutteita muista tietokantatyypeistä. Esim. tämän hetken suosituin Open Source -relaatiotietokanta PostgeSQL sisältää paljon <a href="http://www.postgresql.org/docs/9.4/static/datatype-json.html">dokumenttitietokantoja vastaavaa toiminnallisuutta</a>. Kehitystä on tapahtunut myös toiseen suuntaan, jotkut dokumenttitietokannat ovat mahdollistaneet <a href="https://azure.microsoft.com/en-us/documentation/articles/documentdb-sql-query/">SQL:n käytön kyselykielenä.</a>
 </p>
 
@@ -6537,7 +6537,7 @@ web:    java -cp target/classes:target/dependency/* tikape.Main
 
 		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: sovelluksen luominen herokuun</h2>
 
-		<p>Sovelluksen luomiseen herokuun tarvitaan kansi askelta. Ensimmäisessä askeleessa luodaan projektista git-repositorio (tätä ei tarvitse tehdä jos sovellus on jo git-versionhallinnassa), jonka jälkeen luodaan herokuun sijainti johon sovellus kopioidaan.</p>
+		<p>Sovelluksen luomiseen herokuun tarvitaan kaksi askelta. Ensimmäisessä askeleessa luodaan projektista git-repositorio (tätä ei tarvitse tehdä jos sovellus on jo git-versionhallinnassa), jonka jälkeen luodaan herokuun sijainti johon sovellus kopioidaan.</p>
 
 		<ol>
 		  <li><p><strong>Projekti git-repositorioksi</strong> -- projektin luominen git-repositorioksi tapahtuu ajamalla komento <code>git init</code> projektin juurikansiossa (kansio, jossa löytyy tiedosto <code>pom.xml</code>). Jos sovellus on jo esimerkiksi githubissa, ei tätä tarvitse tehdä.</p></li>
