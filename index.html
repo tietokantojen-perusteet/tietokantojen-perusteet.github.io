@@ -3709,6 +3709,26 @@ Mom: And I hope you've learned to sanitize your database inputs."/>
 
 		</aside>
 
+		<aside class="info">
+		  <br/>
+
+		  <h1>Salasanan talletus tietokantaan</h1>
+
+		  <p>Joskus luotavalla sovelluksella on käyttäjiä, joiden kirjautumistiedot halutaan tallentaa tietokantaan. Tällä kurssilla tähän ei paneuduta sen tarkemmin, mutta on hyvä tietää että hyviin tapoihin kuuluu olla tallentamatta itse salasanoja tietokantaan. Sen sijaan, suositeltavaa on:</p>
+
+		  <ol>
+		    <li>Lisätä salasanaan niin sanottu <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)">suola</a> (pitkä satunnainen merkkijono).</li>
+		    <li>Ajaa yhdistetty salasana ja suola kryptografisesti turvallisen tiivistefunktion läpi.</li>
+		    <li>Tallettaa suola ja saatu tulos tietokantaan.</li>
+		  </ol>
+
+		  <p>Näin talletettua merkkijonoa ei enää saa helposti palautettua alkuperäiseen salasanaan.</p>
+
+		  <p>Kirjautumisvaiheessa annettu salasana koodataan samalla tavalla ja tulosta verrataan tietokantaan talletettuun merkkijonoon.</p>
+
+		</aside>
+
+
 
                 <h2>Vastuiden eriyttäminen ja debug-viestien tulostaminen</h2>
 
