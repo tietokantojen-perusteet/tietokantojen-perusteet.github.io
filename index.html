@@ -6479,7 +6479,7 @@ Eräs viime aikoina melko paljon huomiota saanut NewSQL-tietokanta on <a href="h
 		<p>Tarvitset sovelluksen siirtoon (1) <a href="https://signup.heroku.com/dc" target="_blank">tunnuksen Heroku-palveluun</a> sekä (2) <a href="https://toolbelt.heroku.com/" target="_blank">Heroku Toolbeltin</a>.</p>
 
 
-		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: alkutoimet</h2>
+		<h2>Sovelluksen siirtäminen verkkoon: alkutoimet</h2>
 
 		<p>Herokuun siirrettävät sovellukset tarvitsevat muutamia muutoksia:</p>
 
@@ -6542,13 +6542,15 @@ web:    java -cp target/classes:target/dependency/* tikape.Main
 		<p>Ylläolevien muutosten avulla sovelluksen siirtäminen verkkoon onnistuu.</p>
 
 
-		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: heroku toolbeltin asennus</h2>
+		<h2>Heroku toolbeltin asennus</h2>
 
 		<p>Asenna <a href="https://toolbelt.heroku.com/" target="_blank">heroku toolbelt</a>. Ohjeita löytyy esimerkiksi osoitteessa <a href="https://devcenter.heroku.com/articles/heroku-command" target="_blank">https://devcenter.heroku.com/articles/heroku-command</a>.</p>
 
-		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: sovelluksen luominen herokuun</h2>
+		<p>Jos sinulla ei ole koneeseen pääkäyttäjän oikeuksia (root), asennuksen pitäisi silti olla mahdollista jos koneelle on ennestään asennettu muutama Herokun vaatima ohjelmapaketti. Joudut kuitenkin tekemään <a href="http://geek.co.il/2015/06/19/fix-another-curlsh-bogus-installation-heroku">asennuksen hieman toisin</a>.</p>
 
-		<p>Sovelluksen luomiseen herokuun tarvitaan kaksi askelta. Ensimmäisessä askeleessa luodaan projektista git-repositorio (tätä ei tarvitse tehdä jos sovellus on jo git-versionhallinnassa), jonka jälkeen luodaan herokuun sijainti johon sovellus kopioidaan.</p>
+		<h2>Sovelluksen luominen Herokuun</h2>
+
+		<p>Sovelluksen luomiseen Herokuun tarvitaan kaksi askelta. Ensimmäisessä askeleessa luodaan projektista git-repositorio (tätä ei tarvitse tehdä jos sovellus on jo git-versionhallinnassa), jonka jälkeen luodaan herokuun sijainti johon sovellus kopioidaan.</p>
 
 		<ol>
 		  <li><p><strong>Projekti git-repositorioksi</strong> -- projektin luominen git-repositorioksi tapahtuu ajamalla komento <code>git init</code> projektin juurikansiossa (kansio, jossa löytyy tiedosto <code>pom.xml</code>). Jos sovellus on jo esimerkiksi githubissa, ei tätä tarvitse tehdä.</p></li>
@@ -6557,7 +6559,9 @@ web:    java -cp target/classes:target/dependency/* tikape.Main
 
 		</ol>
 
-		<h2>Tietokantaa käyttämättömän sovelluksen siirtäminen verkkoon: sovelluksen lähetys herokuun</h2>
+		<p>Mahdollisissa ongelmatilanteissa kannattaa ensimmäiseksi katsoa mitä viestejä Herokun <a href="https://devcenter.heroku.com/articles/logging">lokitiedostoon</a> on päätynyt.</p>
+
+		<h2>Tietokantaa käyttämättömän sovelluksen lähetys Herokuun</h2>
 
 		<p>Sovelluksen lähetys herokuun sisältää tyypillisesti neljä askelta. Ensin poistamme turhat käännetyt lähdekooditiedostot, jotta ne eivät häiritse herokun toimintaa. Tämän jälkeen lisäämme tiedostot versionhallintaan, sitoudumme niiden lähettämiseen, ja siirrämme ne herokuun.</p>
 
@@ -6571,7 +6575,7 @@ web:    java -cp target/classes:target/dependency/* tikape.Main
 		<p>Nyt sovelluksesi on Herokussa.</p>
 
 		
-		<h2>Tietokannan käyttö: riippuvuudet</h2>
+		<h2>Tietokannan riippuvuudet</h2>
 
 		<p>Sovellukseen lisätään pääsy kahteen tietokantaan. Yksi on paikallisessa testauksessa ja kehitystyössä käyttämämme <a href="https://www.sqlite.org/" target="_blank"><code>SQLite</code></a>, ja toinen on Herokun käyttämä <a href="http://www.postgresql.org/" target="_blank"><code>PostgreSQL</code></a>. Niiden käyttämiseen tarvitaan JDBC-ajurit, jotka tulee lisätä sovelluksen <code>pom.xml</code>-tiedostoon.</p>
 
@@ -6589,7 +6593,7 @@ web:    java -cp target/classes:target/dependency/* tikape.Main
 </pre>
 
 		
-		<h2>Tietokannan käyttö: tietokannan osoitteen lukeminen ja käyttö</h2>
+		<h2>Tietokannan osoitteen lukeminen ja käyttö Herokussa</h2>
 
 		<p>Heroku tarjoaa sovelluksen portin lisäksi myös JDBC-osoitteen ympäristömuuttujana. Kun luomme käyttöömme Database-oliota sovelluksen alussa, tulee tietokantaosoite valita sen mukaan, että onko ympäristömuuttujaa olemassa.</p>
 
@@ -6607,7 +6611,7 @@ web:    java -cp target/classes:target/dependency/* tikape.Main
                 <p>Nyt käytössämme on tietokantaosoite. Paikallisella koneella voimme jatkossakin käyttää SQLite-tietokantamoottoria, mutta Herokussa käytämme herokun määräämää tietokannanhallintajärjestelmää.</p>
 
 		
-		<h2>Tietokannan käyttö: tietokannan luominen sijaintikohtaisesti</h2>
+		<h2>Tietokannan luominen sijaintikohtaisesti</h2>
 
                 <p>Muokataan tämän jälkeen Database-luokkaa siten, että se sisältää tietokantataulujen luomiseen tarvittavat komennot, jotka suoritetaan sovelluksen käynnistyessä. PostgreSQL-komennot poikkeavat hieman SQLitestä, joten tehdään nämä erillisinä. Tiedämme, että käytössä on PostgreSQL-tietokanta, jos tietokannan osoitteessa on sana "postgre".</p>
 
@@ -6700,7 +6704,7 @@ public class Database {
                 <p>Ylläolevassa esimerkissä tarjotaan yhteyden muodostaminen joko PostgreSQL-tietokantaan tai SQLite-tietokantaan riippuen yhteydestä. Tämän lisäksi komento yrittää myös luoda tietokantataulua -- sekä PostgreSQL:n tapauksessa myös poistaa sen. Metodeja <code>postgreLauseet</code> ja <code>sqliteLauseet</code> kannattanee muokata omaan tarkoitukseen sopivaksi.</p>
 
 
-		<h2>Tietokannan käyttö: tietokanta osana DAO-toiminnallisuutta</h2>
+		<h2>Tietokanta osana DAO-toiminnallisuutta</h2>
 
 		<p>Nyt tietokannan voi ottaa osaksi tietokantaa abstrahoivaa Dao-luokkaa.</p>
 
