@@ -6468,6 +6468,22 @@ Although NewSQL systems vary greatly in their internal architectures, the two di
 Eräs viime aikoina melko paljon huomiota saanut NewSQL-tietokanta on <a href="https://foundationdb.com/">FoundationDB</a>, joka sisäiseltä organisoinniltaan on avain-arvotietokanta, mutta se tarjoaa kyselykieleksi (myös) SQL:n ja ACID-ominaisuudet takaavat transaktiot eli käyttäytyy sovellusohjelmien kannalta kuten normaali relaatiotietokanta mutta tarjoaa perinteistä relaatiotietokantaa skaalautuvamman ratkaisun.
 </p>
 
+		<h1>SQL-tietokannanhallintajärjestelmien eroista</h1>
+
+		<p>Kuten jo aiemmin tuli ilmi, eri SQL-toteutukset eivät toimi täysin samoin...
+Joiltain löytyy sivu joissa standardin mukaisuudesta kerrotaan, jotkut eivät edes mainitse standardia.</p>
+
+		<p>Olemme tällä kurssilla tähän asti käyttäneet SQLite-tietokannanhallintajärjestelmää (koska?). SQLiten käyttöä kurssilla helpottavina piirteinä ovat mm käyttäjähallinnan puuttuminen ja tietokannan kokoaminen yhteen tiedostoon, joten opiskelijat ovat voineet itse ladata tiedoston ja käyttää tietokantaa välittömästi. SQLiten kotisivulla on <a href="http://www.sqlite.org/whentouse.html">kuvaus</a> sille soveltuvista käyttökohteista</p>
+
+		<p>Toisin kuin SQLite, useat muut (SQL-)tietokannanhallintajärjestelmät on jaettu niin sanotun <a href="https://en.wikipedia.org/wiki/Client%E2%80%93server_model">client-server -mallin</a> mukaisesti erilliseen palvelinosaan, jossa varsinainen tietokanta on, ja asiakasosaan joka tarjoaa käyttöliittymän palvelinosan tarjoamaan tietokannan.</p>
+
+		<p>Yksi näistä on PostgreSQL, joka tulee meille vastaan seuraavassa luvussa.</p>
+
+		<h2>SQLiten ja PostgreSQL:n eroista</h2>
+
+		<p>...</p>
+
+
 
 		<h1>Sovelluksen siirtäminen verkkoon</h1>
 
