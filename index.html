@@ -91,7 +91,9 @@
 	  <li>42p -> 5</li>
 	</ul>
 	
+	<!--
         <p><a class="jump" href="#viikoittaiset-teemat" role="button">Viikoittaiset teemat &raquo;</a></p>
+-->
 	
 	
 	<h2>Lisämateriaali</h2>
@@ -909,7 +911,7 @@
 	</figure>
 	
 	
-	<p>Ensimmäinen askel on tietokantataulun Kurssi luominen sekä sen pääavaimen määrittely. Kurssin nimi ei ole hyvä avain, sillä esimerkiksi kurssi "Tietokone työvälineenä" toistuu eri tiedekunnissa ja laitoksissa. Toisaalta, avaimen on hyvä olla sellainen, että se ei muutu -- (jos avain muuttuisi, kaikki viiteavaimet tulisi myös päivittää) -- kuvauskaan ei ole hyvä avain. Luodaan avainta varten uusi attribuutti, <em>kurssitunnus</em>, ja lisätään se tauluun muiden kurssikäsitteeseen liittyvien attribuuttien kanssa.</p>
+	<p>Ensimmäinen askel on tietokantataulun Kurssi luominen sekä sen pääavaimen määrittely. Kurssin nimi ei ole hyvä avain, sillä esimerkiksi kurssin nimi "Tietokone työvälineenä" toistuu eri tiedekunnissa ja laitoksissa useiden erilaisten kurssien nimenä. Toisaalta, avaimen on hyvä olla sellainen, että se ei muutu -- (jos avain muuttuisi, kaikki viiteavaimet tulisi myös päivittää) -- kuvauskaan ei ole hyvä avain. Luodaan avainta varten uusi attribuutti, <em>kurssitunnus</em>, ja lisätään se tauluun muiden kurssikäsitteeseen liittyvien attribuuttien kanssa.</p>
 	
 	
 	<figure>
@@ -4983,7 +4985,7 @@ public class Main {
 
 		  <h1>NetBeans ja palvelimen sammuttaminen</h1>
 
-		  <p>Palvelimen sammuttaminen tapahtuu NetBeansissa punaista neliötä klikkaamalla. Joissakin käyttöjärjestelmissä tämä on kuitenkin bugista, jolloin palvelin tulee sammuttaa komentoriviltä.</p>
+		  <p>Palvelimen sammuttaminen tapahtuu NetBeansissa punaista neliötä klikkaamalla. Joissakin käyttöjärjestelmissä tämä ei kuitenkin toimi oikein, jolloin palvelin tulee sammuttaa komentoriviltä.</p>
 
 		  <p>Saat portissa <code>4567</code> käynnissä olevan prosessin tunnuksen tietoon terminaalissa komennolla <code>lsof -i :4567</code>. Etsi komennon palauttamasta tulosteesta prosessin tunnus, jonka jälkeen voit sammuttaa prosessin komennolla <code>kill -9 prosessin-tunnus</code>.</p>
 
@@ -5856,7 +5858,7 @@ Mitä järkeä avain-arvotietokannoissa on? Ne vaikuttavat ominaisuuksiltaan eri
 </p>
 
 <p>
-Eräs hyvin yleinen käyttötarkoitus avain-arvotietokannoille on raskaiden operaatioiden tulosten <em>cacheaminen</em>, eli väliaikainen talletus mahdollisia uusia saman operaatioiden suorituksia varten.
+Eräs hyvin yleinen käyttötarkoitus avain-arvotietokannoille on raskaiden operaatioiden tulosten väliaikainen talletus (engl. caching) mahdollisia uusia saman operaatioiden suorituksia varten.
 </p>
 
 <p>
