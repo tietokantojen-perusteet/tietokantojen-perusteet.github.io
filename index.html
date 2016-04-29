@@ -2718,7 +2718,7 @@ CREATE TABLE Kurssisuoritus
 );
 </pre>
 
- 		<p>Viiteavaimet ovat siis sarakkeita siinä missä muutkin sarakkeet, mutta niille määritellään eriseen rajoitteet, jotka kertovat, että ne ovat viiteavaimia. Taulussa käytettävien viiteavainten määrä ei käytännössä ole rajattu -- voi olla, että niitä ei ole yhtäkään, tai niitä voi olla useita. Yllä viiteavainsarakkeille <code>opiskelija</code> ja <code>kurssi</code> on lisäksi määritelty <code>NOT NULL</code>-rajoitteet, joiden avulla määritellään että sarakkeiden arvot eivät saa jäädä tyhjiksi.</p>
+ 		<p>Viiteavaimet ovat siis sarakkeita siinä missä muutkin sarakkeet, mutta niille määritellään erikseen rajoitteet, jotka kertovat, että ne ovat viiteavaimia. Taulussa käytettävien viiteavainten määrä ei käytännössä ole rajattu -- voi olla, että niitä ei ole yhtäkään, tai niitä voi olla useita. Yllä viiteavainsarakkeille <code>opiskelija</code> ja <code>kurssi</code> on lisäksi määritelty <code>NOT NULL</code>-rajoitteet, joiden avulla määritellään että sarakkeiden arvot eivät saa jäädä tyhjiksi.</p>
 
 		<div ng-controller="noTablesSqlController">
 
@@ -5984,7 +5984,7 @@ Ohjelman koodi kokonaisuudessan löytyy
 <h3>Dokumenttitietokannat, MongoDB</h3>
 
 <p>
-Dokumeenttitietokantojen voi ajatella sijoittuvan jonnekin relaatiotietokantojen ja avain-arvotietokantojen puolen välin tienoille. Dokumenttikannat perustuvat avain-arvotietokantojen tapaan arvojen tallettamiseen avaimen perusteella. Arvot tai <em>dokumentit</em> kuten niitä dokumenttikantojen kontekstissa nimitetään voivat kuitenkin olla itsessään hyvin monimutkaisia oliota, jotka sisältävät kenttiä, joiden arvona voi olla joko normaaleja arvoja kuten lukuja ja merkkijonoja tai muita olioita. Toisin kuin avain-arvotietokannoissa, dokumenttikannat "näkevät" tietokantaan talletettujen dokumenttien sisään, ja mahdollistavat talletettujen dokumenttien sisällön suhteen tehdyt kyselyt.
+Dokumenttitietokantojen voi ajatella sijoittuvan jonnekin relaatiotietokantojen ja avain-arvotietokantojen puolen välin tienoille. Dokumenttikannat perustuvat avain-arvotietokantojen tapaan arvojen tallettamiseen avaimen perusteella. Arvot tai <em>dokumentit</em> kuten niitä dokumenttikantojen kontekstissa nimitetään voivat kuitenkin olla itsessään hyvin monimutkaisia oliota, jotka sisältävät kenttiä, joiden arvona voi olla joko normaaleja arvoja kuten lukuja ja merkkijonoja tai muita olioita. Toisin kuin avain-arvotietokannoissa, dokumenttikannat "näkevät" tietokantaan talletettujen dokumenttien sisään, ja mahdollistavat talletettujen dokumenttien sisällön suhteen tehdyt kyselyt.
 </p>
 
 <p>
@@ -6035,7 +6035,7 @@ Nyt kentän osoite arvona on <em>olio</em>, jolla on itsellään omat kenttäns�
 </p>
 
 <p>
-Dokumenttitietokannassa dokumentit on lajiteltu <em>kokoelmiin</em> (engl. collection). Kokoelman merkitys on suunilleen sama kuin taulun relaatiotietokannassa. Yhdessä kokoelmassa olevien dokumenttien ei kuitenkaa tarvitse olla kentiltään samanlaisia. Kenttiä voi olla vaihteleva määrä ja saman nimiset kentät voivat sisältää eri dokumenteilla eri tyyppisen arvon. Kokoelmille ei määritellä dokumenttikannoissa minkäänlaista skeemaa, eli on täysin sovellusten vastuulla, että kantaan talletetaan järkevää dataa, ja että kannasta luettava data tutkitaan oikein.
+Dokumenttitietokannassa dokumentit on lajiteltu <em>kokoelmiin</em> (engl. collection). Kokoelman merkitys on suunnilleen sama kuin taulun relaatiotietokannassa. Yhdessä kokoelmassa olevien dokumenttien ei kuitenkaa tarvitse olla kentiltään samanlaisia. Kenttiä voi olla vaihteleva määrä ja saman nimiset kentät voivat sisältää eri dokumenteilla eri tyyppisen arvon. Kokoelmille ei määritellä dokumenttikannoissa minkäänlaista skeemaa, eli on täysin sovellusten vastuulla, että kantaan talletetaan järkevää dataa, ja että kannasta luettava data tutkitaan oikein.
 </p>
 
 <p>
@@ -6332,7 +6332,7 @@ Vanhemmman sukupolven saraketietokannoissa data on organisoitu relaatiotietokant
 <h3>Verkkotietokannat</h3>
 
 <p>
-Relaatiotietokannat ja esittelemämme NoSQL-kantatyypit keskittyvä<em>dataentiteettien</em> esittämiseen. Relaatiotietokannat esittävät entiteetit taulujen riveinä, esim. Henkilö-taulussa jokainen ihminen esitettään omana rivinään. Yhteydet ja suhteet eri entiteettien välillä esitetään epäsuorasti vierasavaimien ja liitostaulujen avulla. Itse yhteys, esim. <em>missä henkilö Arto on töissä</em> saadaan selville vasta kyselyn aikana tapahtuvan liitosoperaation avulla.
+Relaatiotietokannat ja esittelemämme NoSQL-kantatyypit keskittyvä <em>dataentiteettien</em> esittämiseen. Relaatiotietokannat esittävät entiteetit taulujen riveinä, esim. Henkilö-taulussa jokainen ihminen esitettään omana rivinään. Yhteydet ja suhteet eri entiteettien välillä esitetään epäsuorasti vierasavaimien ja liitostaulujen avulla. Itse yhteys, esim. <em>missä henkilö Arto on töissä</em> saadaan selville vasta kyselyn aikana tapahtuvan liitosoperaation avulla.
 </p>
 <p>
 Joissain tilanteissa entiteettien suhteiden selvittäminen relaatiotietokannassa saattaa olla erittäin hankalaa. Oletetaan, että meillä on Henkilöitä kuvaava taulu:
