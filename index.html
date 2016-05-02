@@ -2904,7 +2904,13 @@ CREATE INDEX idx_paaaine ON Opiskelija (pääaine);
 
 		<p>Valitettava totuus on se, että vaikka tekisimme kuinka hienon tietokantasuunnitelman, tulee se muuttumaan ajan myötä erilaisten asiakkailta ja muilta sidosryhmiltä tulevien toiveiden ja tarpeiden perusteella. Tietokantaa ei kannata luoda täysin uudestaan jokaisen muutoksen perusteella, vaan sitä voi muokata -- esimerkiksi uusien sarakkeiden lisääminen tauluun on melko suoraviivaista.</p>
 
-		<p>Harjoitellaan tässä välissä hieman tiedon hakua muualta. Sivusto <em>W3Schools</em> sisältää hyviä oppaita -- lue nyt heidän <a href="http://www.w3schools.com/sql/sql_alter.asp" target="_blank">ALTER TABLE</a> -opas.</p>
+		<p>Tässä materiaalissa toistaiseksi käyttämämme tietokannanhallintajärjestelmä, SQLite, tukee <a href="http://sqlite.org/lang_altertable.html">vain muutamia</a> muokkausoperaatiota. Näistä kannattaa varmaan tuntea ainakin <code>ADD COLUMN</code>, joka lisää tietokantatauluun uuden sarakkeen. <code>ADD COLUMN</code>ia käytetään seuraavasti:</p>
+
+<pre class="sh_sql">
+ALTER TABLE Opiskelija ADD kutsumanimi varchar(50);
+</pre>
+
+		<p>Muiden tietokannanhallintajärjestämien tarjoamia <code>ALTER TABLE</code>-vaihtoehtoja voit nähdä esimerkiksi <em>W3Schools</em>-sivustolla -- lue nyt heidän <a href="http://www.w3schools.com/sql/sql_alter.asp" target="_blank">ALTER TABLE</a> -oppaansa.</p>
 
 
 
