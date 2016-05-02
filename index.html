@@ -2907,7 +2907,7 @@ CREATE INDEX idx_paaaine ON Opiskelija (pääaine);
 		<p>Tässä materiaalissa toistaiseksi käyttämämme tietokannanhallintajärjestelmä, SQLite, tukee <a href="http://sqlite.org/lang_altertable.html" target="_blank">vain muutamia</a> muokkausoperaatiota. Näistä kannattaa varmaan tuntea ainakin <code>ADD COLUMN</code>, joka lisää tietokantatauluun uuden sarakkeen. Tämä tehdään SQLitessä seuraavasti:</p>
 
 <pre class="sh_sql">
-ALTER TABLE Opiskelija ADD kutsumanimi varchar(50);
+ALTER TABLE Opiskelija ADD COLUMN kutsumanimi varchar(50);
 </pre>
 
 		<p><code>ALTER TABLE</code> -lausekkeiden kanssa voi käyttää myös rajoitteita suunnilleen vastaavasti kuten tietokantataulua luotaessa.</p>
