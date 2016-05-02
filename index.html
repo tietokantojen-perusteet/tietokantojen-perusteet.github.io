@@ -775,7 +775,7 @@
 	    
 	    <p>SQL on "case insensitive", eli sillä, että onko kysely kirjoitettu isolla vai pienellä ei ole kyselyn suorituksen kannalta merkitystä. Voimme kirjoittaa komennon <code>SELECT</code> yhtä hyvin muodossa <code>select</code> tai <code>Select</code> -- sama pätee myös taulujen nimille ja attribuuteille.</p>
 	    
-	    <p>Taulussa olevaa dataa tarkasteltaessa kirjainkoolla on kuitenkin merkitystä. Kun teemme esimerkiksi vertailuoperaatioita merkkijonoille, on merkkijonon kirjoitusasu tärkeä. Kysely <code>SELECT * FROM Opiskelija WHERE nimi = 'Joni'</code> palauttaa vain ne opiskelijat, joiden nimi-kentän arvo on <em>täsmälleen</em> 'Joni'. Jos rivillä olevan nimi-kentän arvo olisi vaikkapa 'joni', ei edellinen kysely valitsisi kyseistä riviä.</p>
+	    <p>Taulussa olevaa dataa tarkasteltaessa kirjainkoolla on yleensä kuitenkin merkitystä. Kun teemme esimerkiksi vertailuoperaatioita merkkijonoille, on merkkijonon kirjoitusasu tärkeä. Kysely <code>SELECT * FROM Opiskelija WHERE nimi = 'Joni'</code> palauttaa vain ne opiskelijat, joiden nimi-kentän arvo on <em>täsmälleen</em> 'Joni'. Jos rivillä olevan nimi-kentän arvo olisi vaikkapa 'joni', ei edellinen kysely valitsisi kyseistä riviä.</p>
 	    
 	    <p>Noudatamme tällä kurssilla seuraavaa käytäntöä:</p>
 	    
@@ -784,7 +784,9 @@
 	      <li>Taulujen nimet kirjoitetaan isolla alkukirjaimella. Esimerkiksi <code>Opiskelija</code> ja <code>Kurssisuoritus</code>.</li>
 	      <li>Taulujen sarakkeet eli attribuutit kirjoitetaan pienellä. Esimerkiksi <code>nimi</code> ja <code>kurssikoodi</code>.</li>
 	    </ol>
-	    
+
+	    <p>Jos haluat tehdä kyselyitä joissa kirjainten koolla ei ole merkitystä, voit yrittää käyttää LOWER() tai UPPER() -funktioita muuttamaan kaikki kirjaimet saman kokoiseksi. Huomioi kuitenkin että käyttämämme SQLite ei oletuksena tue näitä funktioita ei-ascii -merkistöille.</p>
+
 	  </aside>
 	  
 	  
