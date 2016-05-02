@@ -2902,15 +2902,17 @@ CREATE INDEX idx_paaaine ON Opiskelija (pääaine);
 
 		<h2>Tietokantataulun muokkaaminen</h2>
 
-		<p>Valitettava totuus on se, että vaikka tekisimme kuinka hienon tietokantasuunnitelman, tulee se muuttumaan ajan myötä erilaisten asiakkailta ja muilta sidosryhmiltä tulevien toiveiden ja tarpeiden perusteella. Tietokantaa ei kannata luoda täysin uudestaan jokaisen muutoksen perusteella, vaan sitä voi muokata -- esimerkiksi uusien sarakkeiden lisääminen tauluun on melko suoraviivaista.</p>
+		<p>Valitettava totuus on se, että vaikka tekisimme kuinka hienon tietokantasuunnitelman, tulee se muuttumaan ajan myötä erilaisten asiakkailta ja muilta sidosryhmiltä tulevien toiveiden ja tarpeiden perusteella. Tietokantaa ei kannata luoda täysin uudestaan jokaisen muutoksen perusteella, vaan sitä voi muokata <code>ALTER TABLE</code> -lausekkeilla -- esimerkiksi uusien sarakkeiden lisääminen tauluun on melko suoraviivaista.</p>
 
-		<p>Tässä materiaalissa toistaiseksi käyttämämme tietokannanhallintajärjestelmä, SQLite, tukee <a href="http://sqlite.org/lang_altertable.html">vain muutamia</a> muokkausoperaatiota. Näistä kannattaa varmaan tuntea ainakin <code>ADD COLUMN</code>, joka lisää tietokantatauluun uuden sarakkeen. <code>ADD COLUMN</code>ia käytetään seuraavasti:</p>
+		<p>Tässä materiaalissa toistaiseksi käyttämämme tietokannanhallintajärjestelmä, SQLite, tukee <a href="http://sqlite.org/lang_altertable.html" target="_blank">vain muutamia</a> muokkausoperaatiota. Näistä kannattaa varmaan tuntea ainakin <code>ADD COLUMN</code>, joka lisää tietokantatauluun uuden sarakkeen. Tämä tehdään SQLitessä seuraavasti:</p>
 
 <pre class="sh_sql">
 ALTER TABLE Opiskelija ADD kutsumanimi varchar(50);
 </pre>
 
-		<p>Muiden tietokannanhallintajärjestämien tarjoamia <code>ALTER TABLE</code>-vaihtoehtoja voit nähdä esimerkiksi <em>W3Schools</em>-sivustolla -- lue nyt heidän <a href="http://www.w3schools.com/sql/sql_alter.asp" target="_blank">ALTER TABLE</a> -oppaansa.</p>
+		<p><code>ALTER TABLE</code> -lausekkeiden kanssa voi käyttää myös rajoitteita suunnilleen vastaavasti kuten tietokantataulua luotaessa.</p>
+
+		<p>Muiden tietokannanhallintajärjestelmien tarjoamia monipuolisempia vaihtoehtoja voit nähdä esimerkiksi <em>W3Schools</em>-sivustolla -- lue nyt heidän <a href="http://www.w3schools.com/sql/sql_alter.asp" target="_blank">ALTER TABLE</a> -oppaansa.</p>
 
 
 
@@ -6474,12 +6476,12 @@ Although NewSQL systems vary greatly in their internal architectures, the two di
 </blockquote>
 
 <p>
-Eräs viime aikoina melko paljon huomiota saanut NewSQL-tietokanta on <a href="https://foundationdb.com/">FoundationDB</a>, joka sisäiseltä organisoinniltaan on avain-arvotietokanta, mutta se tarjoaa kyselykieleksi (myös) SQL:n ja ACID-ominaisuudet takaavat transaktiot eli käyttäytyy sovellusohjelmien kannalta kuten normaali relaatiotietokanta mutta tarjoaa perinteistä relaatiotietokantaa skaalautuvamman ratkaisun.
+Eräs aikanaan melko paljon huomiota saanut NewSQL-tietokanta on FoundationDB, joka sisäiseltä organisoinniltaan on avain-arvotietokanta, mutta se tarjoaa kyselykieleksi (myös) SQL:n ja ACID-ominaisuudet takaavat transaktiot eli käyttäytyy sovellusohjelmien kannalta kuten normaali relaatiotietokanta, mutta tarjoaa perinteistä relaatiotietokantaa skaalautuvamman ratkaisun. Vuonna 2015 Apple osti FoundationDB:n.
 </p>
 
 		<h1>SQL-tietokannanhallintajärjestelmien eroista</h1>
 
-		<p>Kuten jo aiemmin tuli ilmi, eri SQL-toteutukset eivät toimi täysin samoin...
+		<p>Kuten jo aiemmin tuli ilmi, eri SQL-toteutukset eivät toimi täysin samoin.
 Joiltain löytyy sivu joissa standardin mukaisuudesta kerrotaan, jotkut eivät edes mainitse standardia.</p>
 
 		<p>Olemme tällä kurssilla tähän asti käyttäneet SQLite-tietokannanhallintajärjestelmää. SQLiten käyttöä kurssilla helpottavina piirteinä ovat mm käyttäjähallinnan puuttuminen ja tietokannan kokoaminen yhteen tiedostoon, joten opiskelijat ovat voineet itse ladata tiedoston ja käyttää tietokantaa välittömästi. Opetuskäyttö onkin mainittu yhtenä <a href="http://www.sqlite.org/whentouse.html">hyvin soveltuvana käyttökohteena SQLitelle SQLiten kotisivulla</a>.</p>
