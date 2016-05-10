@@ -6488,72 +6488,26 @@ Eräs melko paljon huomiota saanut NewSQL-tietokanta on vuonna 2015 Applen ostam
 
 		<h1>SQL-tietokannanhallintajärjestelmien eroista</h1>
 
-		<p>Olemme tällä kurssilla tähän asti käyttäneet enimmäkseen SQLite-tietokannanhallintajärjestelmää. SQLiten käyttöä kurssilla helpottavina piirteinä ovat mm käyttäjähallinnan puuttuminen ja tietokannan kokoaminen yhteen tiedostoon, joten opiskelijat ovat voineet itse ladata tiedoston ja käyttää tietokantaa välittömästi. Opetuskäyttö onkin mainittu yhtenä <a href="http://www.sqlite.org/whentouse.html">hyvin soveltuvana käyttökohteena SQLitelle</a> SQLiten kotisivulla.</p>
+		<p>Olemme tällä kurssilla tähän asti käyttäneet enimmäkseen SQLite-tietokannanhallintajärjestelmää. SQLiten käyttöä kurssilla helpottavina piirteinä ovat muun muassa käyttäjähallinnan puuttuminen ja tietokannan kokoaminen yhteen tiedostoon, joten opiskelijat ovat voineet itse ladata tiedoston ja käyttää tietokantaa välittömästi. Opetuskäyttö onkin mainittu yhtenä SQLitelle <a href="http://www.sqlite.org/whentouse.html">hyvin soveltuvana käyttökohteena</a> SQLiten kotisivulla.</p>
 
-		<p>Kuten jo aiemmin tuli ilmi, eri SQL-toteutukset noudattelevat kielen standardia vaihtelevissa määrin, eivätkä aina toimi täysin samoin. SQLite tarjoaa <a href="https://www.sqlite.org/lang.html">jotain tietoa standardin noudattamisestaan</a>, ja vielä selkeämpi on <a href="http://www.postgresql.org/docs/9.4/static/features.html">Postgres</a>. Toisaalta jotkut toiset tietokannanhallintajärjestelmät eivät juurikaan tuo selkeästi esille missä määrin ne noudattavat standardia.</p>
+		<p>Kuten jo aiemmin tuli ilmi, eri SQL-toteutukset noudattelevat kielen standardia vaihtelevissa määrin, eivätkä aina toimi täysin samoin. SQLite tarjoaa <a href="https://www.sqlite.org/lang.html">jotain tietoa standardin noudattamisestaan</a>, ja vielä selkeämpi tämän suhteen on <a href="http://www.postgresql.org/docs/9.4/static/features.html">Postgres</a>. Toisaalta jotkut toiset tietokannanhallintajärjestelmät eivät juurikaan tuo esille missä määrin ne noudattavat standardia.</p>
 
 		<p>Toisin kuin SQLite, useat muut (SQL-)tietokannanhallintajärjestelmät on jaettu niin sanotun <a href="https://en.wikipedia.org/wiki/Client%E2%80%93server_model">client-server -mallin</a> mukaisesti erilliseen palvelinosaan, jossa varsinainen tietokanta on, ja asiakasosaan joka tarjoaa käyttöliittymän palvelinosan tarjoamaan tietokannan. Yksi tälläisistä tietokannanhallintajärjestelmistä on jo yllä mainittu PostgreSQL, joka tulee meille vastaan seuraavassa luvussa kun siirrämme sovellusta verkkoon.</p>
 
+		<p>Eroista huolimatta SQL-tietokannanhallintajärjestelmien SQL-toteutukset toimivat enimmäkseen toisiaan vastaavasti. Valitettavasti muutamatkin pienet erot saattavat aiheuttaa paljon vaivaa järjestelmästä toiseen siirryttäessä.</p>
 
-		<h2>SQLiten ja PostgreSQL:n eroista</h2>
 
-		<p>...</p>
+		<h2>SQLite ja PostgreSQL</h2>
 
-		<table border=2>
-			<tr>
-				<td>
-				</td>
-				<td>
-				SQLite
-				</td>
-				<td>
-				Postgres
-				</td>
-			</tr>
-			<tr>
-				<td>
-					data types
-				</td>
-				<td>
-					<a href="https://www.sqlite.org/datatype3.html" target="_blank">sqlite</a>
-				</td>
-				<td>
-					<a href="http://www.postgresql.org/docs/9.4/static/datatype.html" target="_blank">pg</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					keywords
-				</td>
-				<td>
-					<a href="https://www.sqlite.org/lang_keywords.html" target="_blank">SQLite</a>
-				</td>
-				<td>
-					<a href="http://www.postgresql.org/docs/9.4/static/sql-keywords-appendix.html target="_blank"">Postgres</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					pvm
-				</td>
-				<td>
-					<a href="https://www.sqlite.org/lang_datefunc.html" target="_blank">sqlite</a>
-				</td>
-				<td>
-					<a href="http://www.postgresql.org/docs/9.4/static/functions-datetime.html" target="_blank">pg</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				</td>
-				<td>
-					<a href=""></a>
-				</td>
-				<td>
-					<a href=""></a>
-				</td>
-			</tr>
-		</table>
+		<p>Siirryttäessä käyttämään SQLiten sijaan PostgreSQL-järjestelmää, joudumme mahdollisesti muokkaamaan käytettyjä SQL-kyselyitä. Varsinaisten erojen lisäksi Postgres on muutenkin tarkempi syntaksin noudattamisesta, eikä välttämättä hyväksy suunnilleen oikein muotoiltuja kyselyitä jotka SQLite saattaa joskus hyväksyä.</p>
+
+		<p>Ongelmatilanteissa voisi tarkistaa mm seuraavia asioita:</p>
+		<ul>
+		<li>SQL-kielelle varatut avainsanat eivät ole <a href="http://www.postgresql.org/docs/9.4/static/sql-keywords-appendix.html" target="_blank">Postgresissa</a> täysin samat kuin <a href="https://www.sqlite.org/lang_keywords.html" target="_blank">SQLitessa</a>. (On syytä mm huomioida USER)</li>
+		<li>Tarjolla olevat tietotyypit saattavat poiketa (<a href="http://www.postgresql.org/docs/9.4/static/datatype.html" target="_blank">Postgres</a>, <a href="https://www.sqlite.org/datatype3.html" target="_blank">SQLite</a>)</li>
+		<li>Ajan käsittely saattaa olla hieman erilaista (<a href="http://www.postgresql.org/docs/9.4/static/functions-datetime.html" target="_blank">Postgres</a>, <a href="https://www.sqlite.org/lang_datefunc.html" target="_blank">SQLite</a>)</li>
+		<li>Yksityiskohtana mainittakoon lisäksi Postgresin SERIAL, jonka tapaamme seuraavassa kappaleessa.</li>
+		</ul>
 
 
 		<h1>Sovelluksen siirtäminen verkkoon</h1>
