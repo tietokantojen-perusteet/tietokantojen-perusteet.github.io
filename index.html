@@ -819,11 +819,11 @@
 	  
 	  <h1>Loogiset operaatiot 'ja' ja 'tai'</h1>
 	  
-	  <p>Rajausehtoihin voi myös lisätä loogisia operaatioita kyselyjen tulosten tajaamiseksi. Operaatio 'ja', eli kahden rajausehdon yhdistäminen, toimii avainsanalla <code>AND</code>. Esimerkiksi kysely <code>SELECT * FROM Kurssisuoritus WHERE Kurssi = 'Ohjelmoinnin perusteet' AND Arvosana = 5</code> listaisi vain ne Ohjelmoinnnin perusteet -kurssin suoritukset, missä arvosana on 5.</p>
+	  <p>Rajausehtoihin voi myös lisätä loogisia operaatioita kyselyjen tulosten tajaamiseksi. Operaatio 'ja', eli kahden rajausehdon yhdistäminen, toimii avainsanalla <code>AND</code>. Esimerkiksi kysely <code>SELECT * FROM Kurssisuoritus WHERE kurssi = 'Ohjelmoinnin perusteet' AND arvosana = 5</code> listaisi vain ne Ohjelmoinnnin perusteet -kurssin suoritukset, missä arvosana on 5.</p>
 	  
-	  <p>Operaation 'tai' lisääminen on myös mahdollista. Esimerkiksi kysely <code>SELECT * FROM Kurssisuoritus WHERE Kurssi = 'Ohjelmoinnin perusteet' OR Kurssi = 'Ohjelmoinnin jatkokurssi'</code> listaisi kaikki ne kurssisuoritukset, joissa kurssi on joko ohjelmoinnin perusteet tai ohjelmoinnin jatkokurssi.</p>
+	  <p>Operaation 'tai' lisääminen on myös mahdollista. Esimerkiksi kysely <code>SELECT * FROM Kurssisuoritus WHERE kurssi = 'Ohjelmoinnin perusteet' OR kurssi = 'Ohjelmoinnin jatkokurssi'</code> listaisi kaikki ne kurssisuoritukset, joissa kurssi on joko ohjelmoinnin perusteet tai ohjelmoinnin jatkokurssi.</p>
 	  
-	  <p>Ehtoja voi myös yhdistää, jonka lisäksi suluilla voi rajata suoritusjärjestystä. Ota selvää mitä kysely <code>SELECT * FROM Kurssisuoritus WHERE (Kurssi = 'Ohjelmoinnin perusteet' OR Kurssi = 'Ohjelmoinnin jatkokurssi') AND Arvosana = 3</code> tekee.</p>
+	  <p>Ehtoja voi myös yhdistää, jonka lisäksi suluilla voi rajata suoritusjärjestystä. Ota selvää mitä kysely <code>SELECT * FROM Kurssisuoritus WHERE (kurssi = 'Ohjelmoinnin perusteet' OR kurssi = 'Ohjelmoinnin jatkokurssi') AND arvosana = 3</code> tekee.</p>
 	  
 	</aside>
 	
