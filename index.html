@@ -4099,7 +4099,7 @@ for (Pyora pyora : pyorat) {
 
 		<h2>Parameterisoidut kyselyt (Prepared Statement)</h2>
  
-                <p>Tietokannan käyttämiseen tarkoitetut rajapinnat -- kuten tällä sivulla käytettävä <a href="https://github.com/kripken/sql.js/" target="_blank">sql.js</a> -- tyypillisesti rajoittavat tietokantaan tehtäviä kyselyitä. Suoran kyselyn tekeminen muodossa <code>DELETE FROM Opiskelija WHERE nimi = 'Gandhi'</code> ei ole aina mahdollista, vaan kysely määritellään parametrin avulla -- esimerkiksi <code>DELETE FROM Opiskelija WHERE nimi = '?'</code>, missä parametri annetaan kyselylle erikseen.</p>
+                <p>Tietokannan käyttämiseen tarkoitetut rajapinnat -- kuten tällä sivulla käytettävä <a href="https://github.com/kripken/sql.js/" target="_blank">sql.js</a> -- tyypillisesti rajoittavat tietokantaan tehtäviä kyselyitä. Suoran kyselyn tekeminen muodossa <code>DELETE FROM Opiskelija WHERE nimi = 'Gandhi'</code> ei ole aina mahdollista, vaan kysely määritellään parametrin avulla -- esimerkiksi <code>DELETE FROM Opiskelija WHERE nimi = ?</code>, missä parametri annetaan kyselylle erikseen.</p>
 
 		<p>Prepared Statement-kyselyt ovat valmiiksi määriteltyjä kyselyitä, joissa kyselyissä käytettävät arvot annetaan parametreina. Valmiita kyselyitä käyttämällä estetään merkittävä osa SQL-injektioista, sillä parametreja käytettäessä varmistetaan että parametrien arvot käsitellään tiettyyn kenttään liittyvänä datana -- parametrit eivät siis "vuoda yli".</p>
 
