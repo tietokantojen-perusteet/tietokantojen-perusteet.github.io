@@ -5736,7 +5736,27 @@ public class Main {
 
 
     <h1>Tietokantatransaktiot ja ACID</h1>
-
+    
+    <p><strong><em>Pohjustusta</em></strong></p>
+    
+    <p>Tietokantatransaktioiden ymmärtämiseksi on hyvä hieman tuntea tietokannan toimintaa rautatasolla. Tietokanta käyttää kovalevyä/ssd-levyjä tiedon tallentamiseen, mutta rivien käsittely tapahtuu (keskus)muistissa. Kun riviä halutaan päivittää, se haetaan ensin kovalevyltä muistiin, päivitetään ja viedään takaisin levylle.</p>
+    
+    <p>Keskusmuistin ongelma on se, että sen sisältö häviää esimerkiksi sähkökatkoksen sattuessa tai palvelimen kaatuessa. Havainnollistetaan ongelmallisuutta esimerkeillä:</p>
+    
+    <ul>
+    <li>Annetaan kaikille yrityksen 1000000 kuukausipalkkaiselle työntekijälle 5% palkan korotus. <code>UPDATE Palkat SET kkpalkka = kkpalkka * 1,05</code> Mitä jos tietokantapalvelin kaatuu, kun vasta 10000 muutettua riviä on tallennettu levylle? 990000 vihaista työntekijää jää ilman palkankorotusta? Tarvitaan jokin keino varmistaa, että päivitys tehdään kokonaan tai ei lainkaan.</li>
+    <li>Entä jos toinen prosessi lukee palkkatietoja juuri samalla kun niitä ollaan päivittämässä? Lukuoperaatio voi lukea esimerkiksi vain tietyn toimipaikan työntekijöiden palkat - 100 riviä. Jos päivitys on yhtäaikaa kesken, voi käydä niin, että osaan luetuista riveistä on ehditty jo tehdä päivitys ja osaan ei. Nyt osa työntekijöistä saa syyskuun palkkansa korotettuna ja osa ei? Tarvitaan jokin keino hallita yhtäaikaisia prosesseja.
+    </ul>
+    
+    <p><strong><em>Tietokantatransaktiot</em></strong></p>
+    
+    <p>Tietokantatransaktiot ratkaisevat edellä mainitut ongelmat. Ongelmat voidaan jakaa kahteen kategoriaan:<p>
+    
+    <ul>
+    <li>Operaatioden keskeytymiset järjestelmän kaatuessa, häiriötilanteissa tai hallituissa keskeytyksissä</li>
+    <li>Samanaikaset prosessit</li>
+    </ul>
+    
     <p>Tietokantatransaktio sisältää yhden tai useamman tietokantaan kohdistuvan operaation, jotka suoritetaan (järjestyksessä) kokonaisuutena. Jos yksikin operaatio epäonnistuu, kaikki operaatiot perutaan, ja tietokanta palautetaan tilaan, missä se oli ennen transaktion aloitusta. Klassinen esimerkki tietokantatransaktiosta on tilisiirto, missä nostetaan rahaa yhdeltä tililtä, ja siirretään rahaa toiselle tilille. Jos tilisiirron suoritus ei onnistu -- esimerkiksi rahan lisääminen toiselle tilille epäonnistuu -- tulee myös rahan nostaminen toiselta tililtä perua.</p>
 
     <p>Jokainen tietokantakysely suoritetaan omassa transaktiossaan, mutta, käyttäjä voi myös määritellä useamman kyselyn saman transaktion sisälle. Transaktio aloitetaan komennolla <code>BEGIN TRANSACTION</code>, jota seuraa kyselyt, ja lopulta komento <code>COMMIT</code>. Oletetaan, että käytössämme on taulu <code>Tili(id, saldo)</code>.</p>
@@ -5812,6 +5832,8 @@ CREATE TABLE Kirjanpitotapahtuma
       <li>Pysyvyydellä (<code>Durability</code>) varmistetaan, että transaktion suorituksessa tapahtuvat muutokset ovat pysyviä. Kun käyttäjä lisää tietoa tietokantaan, tietokannanhallintajärjestelmän tulee varmistaa että tieto säilyy myös virhetilanteissa (jos transaktion suoritus onnistuu).</li> 
 
    </ul>
+
+   <p>DBMS:t toteuttavat ACID-ominaisuudet käyttäen write-ahead-lokia (WAL). Se tarkoittaa sitä, että suoritettavaksi tuleva tietokantaoperaatio tallennetaan lokina levylle ennen rivien varsinaista päivitystä. Tällöin operaatiot voidaan suorittaa uudelleen, jos tietokantapalvelin kaatuu ennen kuin muistissa päivitetyt rivit ehditään tallentaa levylle. Tämä nopeuttaa tietokannan toimintaa merkittävästi, sillä pitkien operaatioden suorituksen valmistumista ei tarvitse odottaa ennen kuin sovellukselle voidaan vastata operaation onnistuneen. Kurssilla <em>Transaktioiden hallinta</em> tutustutaan tarkemmin transaktioiden toimintaan.</p>
    
 
 
